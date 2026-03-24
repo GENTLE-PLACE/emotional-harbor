@@ -18,6 +18,5 @@
 - Руководство по Дневнику настроения:  
   [https://gentle-place.github.io/emotional-harbor/onboarding-diary.html](https://gentle-place.github.io/emotional-harbor/onboarding-diary.html)
 
-
 - Руководство Как читать отчеты:
-[https://gentle-place.github.io/emotional-harbor/onboarding-diary.html](https://gentle-place.github.io/emotional-harbor/onboarding-reports.html)
+  [https://gentle-place.github.io/emotional-harbor/onboarding-diary.html](https://gentle-place.github.io/emotional-harbor/onboarding-reports.html)
