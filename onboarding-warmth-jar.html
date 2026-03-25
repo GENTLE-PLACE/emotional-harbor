@@ -132,7 +132,7 @@
         .section-2 .section-num { background: #F8B4C0; }
         .section-3 .section-num { background: #b8e0d2; }
         .section-4 .section-num { background: #A5C2F1; }
-        .section-5 .section-num { background: #e0c8f0; }
+
 
         /* ——— ЗАГОЛОВОК КАРТОЧКИ ——— */
         .section-header {
@@ -260,6 +260,61 @@
             line-height: 1.8;
         }
 
+        /* ——— РОЗОВЫЕ СТРЕЛКИ ——— */
+        .pink-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 4px;
+        }
+
+        .pink-arrow-item {
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a3f38;
+            line-height: 1.65;
+        }
+
+        .pink-arrow-item::first-letter {
+            color: #e87a9c;
+            font-weight: 600;
+        }
+
+        /* ——— РОЗОВЫЕ СТРЕЛКИ ——— */
+        .pink-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 4px;
+        }
+
+        .pink-arrow-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a3f38;
+            line-height: 1.65;
+        }
+
+        .pink-arrow-item .arrow {
+            color: #e87a9c;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        /* ——— ПОДЗАГОЛОВОК ВИДА ——— */
+        .view-subheader {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 8px;
+        }
+
         /* ——— МАРКЕРНОЕ ВЫДЕЛЕНИЕ ——— */
         .marker-highlight { position: relative; display: inline-block; z-index: 1; }
         .marker-highlight::before {
@@ -349,7 +404,14 @@
                 <span class="section-title">Зачем это место</span>
             </div>
             <div class="section-text">
-                <p>Это может быть голосовое от подруги, которое Вы переслушиваете в плохой день. Скриншот смешного твита, который заставил выдохнуть носом. Комментарий от клиента, после которого Вы расправили плечи. Письмо от мамы. Чат с коллегой, где она сказала то самое важное.</p>
+                <p>Сюда попадает всё, что однажды согрело. Большое и маленькое, громкое и тихое.</p>
+                <div class="pink-arrows">
+                    <div class="pink-arrow-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> Голосовое от подруги, которое Вы переслушиваете в плохой день.</div>
+                    <div class="pink-arrow-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> Скриншот смешного твита, который заставил выдохнуть носом.</div>
+                    <div class="pink-arrow-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> Комментарий от клиента, после которого Вы расправили плечи.</div>
+                    <div class="pink-arrow-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> Письмо от мамы.</div>
+                    <div class="pink-arrow-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> Чат с коллегой, где она сказала то самое важное.</div>
+                </div>
                 <p><span class="marker-highlight">Одно место, куда можно прийти в любой «день в домике»</span> — открыть и буквально почувствовать, как Вас обнимают десятки людей одновременно.</p>
                 <p><b>Чтобы выстроить объективный образ себя.</b><br>
                 Мы сами — строгие судьи. Копилка помогает увидеть себя глазами тех, кто нас любит, ценит и восхищается нами. Это доказательство того, что Вы важны для мира.</p>
@@ -379,56 +441,48 @@
             </div>
         </div>
 
-        <!-- 3. ВИД ПО ВИДУ -->
+        <!-- 3. ВИДЫ — КАК ПЕРЕКЛЮЧАТЬСЯ -->
         <div class="section-card section-3">
             <div class="section-num">3</div>
             <div class="section-header">
-                <span class="section-emoji">☀️</span>
-                <span class="section-title">Смотрим по Виду — за конкретной опорой</span>
+                <span class="section-emoji">🔄</span>
+                <span class="section-title">Переключайтесь между видами</span>
             </div>
             <div class="section-text">
-                <p>Когда записей накопится несколько — переключитесь на этот вид. Сразу станет заметно, <b>какого тепла в Вашей жизни больше всего</b>. Одни чаще получают поддержку в трудный момент, другие — восхищение. Это Ваш личный язык любви, который Вы получаете.</p>
-                <p>Используйте его, когда знаете, какой именно «витамин» Вам сейчас нужен:</p>
+                <p>Когда записей накопится несколько — попробуйте переключиться между видами. Каждый показывает Копилку по-своему.</p>
+
+                <div class="view-subheader">☀️ По виду</div>
+                <p>Здесь всё разложено по «смыслам»: где Вами гордятся, где в Вас верят, а где просто обнимают словами. Используйте, когда знаете, какой именно «витамин» Вам сейчас нужен:</p>
                 <div class="nav-block">
                     <div class="nav-item">
                         <div class="nav-item-trigger">Чувствуете неуверенность в себе как специалисте</div>
-                        <div class="nav-item-action">→ идите в «Оценка моей работы»</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> идите в «Оценка моей работы»</div>
                     </div>
                     <div class="nav-item">
                         <div class="nav-item-trigger">Кажется, что Вас никто не понимает</div>
-                        <div class="nav-item-action">→ загляните в «Видит во мне то, чего я сам(а) не вижу»</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> загляните в «Видит во мне то, чего я сам(а) не вижу»</div>
                     </div>
                     <div class="nav-item">
                         <div class="nav-item-trigger">Нужно почувствовать, что Вы не одни</div>
-                        <div class="nav-item-action">→ открывайте «Поддержка в трудный момент»</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> открывайте «Поддержка в трудный момент»</div>
                     </div>
                 </div>
                 <p>Это навигатор за конкретной поддержкой — не просто архив, а аптечка с подписанными баночками.</p>
-            </div>
-        </div>
 
-        <!-- 4. ВИД ПО КАНАЛУ -->
-        <div class="section-card section-4">
-            <div class="section-num">4</div>
-            <div class="section-header">
-                <span class="section-emoji">📮</span>
-                <span class="section-title">Смотрим по Каналу — откуда течёт любовь</span>
-            </div>
-            <div class="section-text">
-                <p>Этот вид показывает другое: <b>откуда чаще всего приходит тепло</b>. Иногда оказывается, что самое важное приходит не оттуда, откуда его ждёшь.</p>
-                <p>Используйте его, когда хочется почувствовать связь с миром:</p>
+                <div class="view-subheader">📮 По каналу</div>
+                <p>Этот вид показывает другое: откуда чаще всего приходит тепло. Переключитесь на него, чтобы увидеть «географию» своей поддержки. Иногда оказывается, что самое важное приходит не оттуда, откуда его ждёшь.</p>
                 <div class="nav-block">
                     <div class="nav-item">
                         <div class="nav-item-trigger">Хочется почувствовать близость с родными</div>
-                        <div class="nav-item-action">→ откройте «Семейные чаты»</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> откройте «Семейные чаты»</div>
                     </div>
                     <div class="nav-item">
                         <div class="nav-item-trigger">Нужно напомнить себе, что Вы важная часть команды</div>
-                        <div class="nav-item-action">→ загляните в «Рабочие чаты / почта»</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> загляните в «Рабочие чаты / почта»</div>
                     </div>
                     <div class="nav-item">
                         <div class="nav-item-trigger">Хочется вспомнить живое тепло человеческого голоса</div>
-                        <div class="nav-item-action">→ идите в «Личные встречи / разговоры»</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> идите в «Личные встречи / разговоры»</div>
                     </div>
                 </div>
                 <div class="insight-block">
@@ -437,9 +491,9 @@
             </div>
         </div>
 
-        <!-- 5. СВЯЗЬ С ДНЕВНИКОМ -->
-        <div class="section-card section-5">
-            <div class="section-num">5</div>
+        <!-- 4. СВЯЗЬ С ДНЕВНИКОМ -->
+        <div class="section-card section-4">
+            <div class="section-num">4</div>
             <div class="section-header">
                 <span class="section-emoji">📓</span>
                 <span class="section-title">Связь с Дневником настроения</span>
