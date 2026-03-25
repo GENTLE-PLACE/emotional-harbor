@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Копилка тепла · Руководство</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Forum&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            max-width: 100%;
+            min-height: 900px;
+            background: #f7efe0;
+            font-family: 'Jost', sans-serif;
+            color: #3a3228;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(201,169,122,0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(201,169,122,0.08) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .corner-wear { position: absolute; pointer-events: none; z-index: 1; }
+
+        .page {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 64px 48px 80px 64px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* ——— ШАПКА ——— */
+        .header {
+            margin-bottom: 0;
+            padding-bottom: 28px;
+            border-bottom: 1.5px solid rgba(201,169,122,0.3);
+        }
+
+        .header-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c9a97a;
+            margin-bottom: 14px;
+        }
+
+        .header-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: 48px;
+            line-height: 1;
+            color: #3a3228;
+            letter-spacing: -2px;
+            margin-bottom: 14px;
+        }
+
+        .header-title span { color: #e87a9c; }
+
+        .header-sub {
+            font-size: 16px;
+            font-weight: 300;
+            color: #7a5840;
+            line-height: 1.6;
+        }
+
+        /* ——— ЦИТАТА ПОД ЧЕРТОЙ ——— */
+        .header-quote {
+            border-left: 3px solid #e87a9c;
+            padding-left: 18px;
+            margin: 24px 0 40px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+            font-style: italic;
+        }
+
+        /* ——— КАРТОЧКИ ——— */
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+            padding-top: 20px;
+        }
+
+        .section-card {
+            border-radius: 20px;
+            padding: 40px 36px 46px 52px;
+            border: 1.5px solid rgba(201,169,122,0.4);
+            box-shadow: 7px 9px 0 rgba(120,80,40,0.08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(255,248,235,0.65);
+        }
+
+        /* ——— ЦИФРА-БЕЙДЖ ——— */
+        .section-num {
+            position: absolute;
+            top: -14px;
+            left: -14px;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: 34px;
+            font-weight: 700;
+            color: #1a1a1a;
+            z-index: 2;
+            opacity: 0.75;
+        }
+        .section-1 .section-num { background: #F7D08A; }
+        .section-2 .section-num { background: #F8B4C0; }
+        .section-3 .section-num { background: #b8e0d2; }
+        .section-4 .section-num { background: #A5C2F1; }
+        .section-5 .section-num { background: #e0c8f0; }
+
+        /* ——— ЗАГОЛОВОК КАРТОЧКИ ——— */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-emoji {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .section-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+
+        /* ——— ТЕКСТ ——— */
+        .section-text {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: #4a3f38;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-text p { margin: 0; }
+        .section-text b { font-weight: 600; color: #1a1a1a; }
+
+        /* ——— CALLOUT ЖЁЛТЫЙ ——— */
+        .callout {
+            background: rgba(247,208,138,0.18);
+            border-left: 3px solid #c9a97a;
+            border-radius: 0 12px 12px 0;
+            padding: 12px 18px;
+            font-size: 14.5px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+            font-style: italic;
+        }
+        .callout::before { content: '💛 '; font-style: normal; }
+
+        /* ——— CALLOUT РОЗОВЫЙ ——— */
+        .callout-pink {
+            background: rgba(248,180,192,0.15);
+            border-left: 3px solid #d97787;
+            border-radius: 0 12px 12px 0;
+            padding: 12px 18px;
+            font-size: 14.5px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+        }
+
+        /* ——— INSIGHT розовый ——— */
+        .insight-block {
+            background: rgba(248,180,192,0.1);
+            border-radius: 10px;
+            padding: 14px 18px;
+            border-left: 3px solid #F8B4C0;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #5a4a3a;
+        }
+
+        /* ——— НАУЧНЫЙ БЛОК ——— */
+        .science-block {
+            background: rgba(165,194,241,0.1);
+            border-left: 3px solid #A5C2F1;
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .science-name {
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #5a7ab0;
+            margin-bottom: 4px;
+        }
+
+        .science-text {
+            font-size: 14.5px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #3a4a6a;
+        }
+
+        /* ——— СПИСОК С МАРКЕРАМИ ——— */
+        .golden-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 4px;
+        }
+
+        .golden-list span {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a3f38;
+            line-height: 1.65;
+        }
+
+        .golden-list span::before {
+            content: '●';
+            color: #d97787;
+            font-size: 11px;
+            flex-shrink: 0;
+            line-height: 1.8;
+        }
+
+        /* ——— МАРКЕРНОЕ ВЫДЕЛЕНИЕ ——— */
+        .marker-highlight { position: relative; display: inline-block; z-index: 1; }
+        .marker-highlight::before {
+            content: ''; position: absolute; bottom: 2px; left: -5px; right: -4px; height: 32px;
+            background: #F8B4C0; opacity: 0.45; z-index: -1; transform: rotate(0.6deg); border-radius: 4px;
+        }
+
+        /* ——— БЛОК НАВИГАТОРА ——— */
+        .nav-block {
+            background: rgba(247,208,138,0.1);
+            border-left: 3px solid #F7D08A;
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .nav-block-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7a5840;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(201,169,122,0.3);
+        }
+
+        .nav-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .nav-item-trigger {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #3a3228;
+        }
+
+        .nav-item-action {
+            font-size: 14px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<svg class="corner-wear" style="top:0;left:0;width:220px;height:220px;" viewBox="0 0 220 220">
+    <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="220" height="220" fill="url(#cw1)"/>
+</svg>
+<svg class="corner-wear" style="bottom:0;right:0;width:200px;height:200px;" viewBox="0 0 200 200">
+    <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.25"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="200" height="200" fill="url(#cw2)"/>
+</svg>
+
+<div class="page">
+
+    <!-- ШАПКА -->
+    <div class="header">
+        <div class="header-eyebrow">Эмоциональная Гавань · Руководство</div>
+        <div class="header-title">Копилка <span>тепла</span></div>
+        <div class="header-sub">Самое нежное место во всей Гавани</div>
+    </div>
+
+    <div class="header-quote">
+        Сюда Вы приносите не свои мысли, а чужие слова.<br>
+        Те, что однажды попали точно в грудь — и оставили там тепло.
+    </div>
+
+    <!-- КАРТОЧКИ -->
+    <div class="sections">
+
+        <!-- 1. ЗАЧЕМ ЭТО МЕСТО -->
+        <div class="section-card section-1">
+            <div class="section-num">1</div>
+            <div class="section-header">
+                <span class="section-emoji">💌</span>
+                <span class="section-title">Зачем это место</span>
+            </div>
+            <div class="section-text">
+                <p>Это может быть голосовое от подруги, которое Вы переслушиваете в плохой день. Скриншот смешного твита, который заставил выдохнуть носом. Комментарий от клиента, после которого Вы расправили плечи. Письмо от мамы. Чат с коллегой, где она сказала то самое важное.</p>
+                <p><span class="marker-highlight">Одно место, куда можно прийти в любой «день в домике»</span> — открыть и буквально почувствовать, как Вас обнимают десятки людей одновременно.</p>
+                <p><b>Чтобы выстроить объективный образ себя.</b><br>
+                Мы сами — строгие судьи. Копилка помогает увидеть себя глазами тех, кто нас любит, ценит и восхищается нами. Это доказательство того, что Вы важны для мира.</p>
+                <p><b>Чтобы создать эмоциональную аптечку.</b><br>
+                Когда внутри пусто или холодно — это быстрый способ согреться чужим теплом. Не ждать, пока кто-то напишет. Просто открыть и взять.</p>
+                <div class="callout">
+                    Открывайте её всякий раз, когда нужно напомнить себе, как много в Вашей жизни любви и признания.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ПОЛЕ КАК Я СЕБЯ ЧУВСТВОВАЛА -->
+        <div class="section-card section-2">
+            <div class="section-num">2</div>
+            <div class="section-header">
+                <span class="section-emoji">🐦‍🔥</span>
+                <span class="section-title">Поле «Как я себя при этом чувствовала»</span>
+            </div>
+            <div class="section-text">
+                <p>Это поле — ключ к тому, чтобы магия Копилки работала долго.</p>
+                <p>Обычно мы фиксируем факт: «Мне сказали, что я молодец». Но <b>мозг лучше запоминает состояние</b>, а не событие.</p>
+                <p>Когда Вы записываете: «Почувствовала, как внутри разливается тепло и хочется выпрямить спину» — Вы создаёте нейронную связь между внешним комплиментом и физическим ощущением.</p>
+                <p>В следующий раз, когда Вы будете перечитывать эту запись, Вы вспомните не просто текст сообщения, а то самое чувство опоры и радости. <b>Это превращает сухую цитату в живое воспоминание, которое лечит.</b></p>
+                <div class="callout-pink">
+                    Прожить момент — а не просто сохранить его.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ВИД ПО ВИДУ -->
+        <div class="section-card section-3">
+            <div class="section-num">3</div>
+            <div class="section-header">
+                <span class="section-emoji">☀️</span>
+                <span class="section-title">Смотрим по Виду — за конкретной опорой</span>
+            </div>
+            <div class="section-text">
+                <p>Когда записей накопится несколько — переключитесь на этот вид. Сразу станет заметно, <b>какого тепла в Вашей жизни больше всего</b>. Одни чаще получают поддержку в трудный момент, другие — восхищение. Это Ваш личный язык любви, который Вы получаете.</p>
+                <p>Используйте его, когда знаете, какой именно «витамин» Вам сейчас нужен:</p>
+                <div class="nav-block">
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Чувствуете неуверенность в себе как специалисте</div>
+                        <div class="nav-item-action">→ идите в «Оценка моей работы»</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Кажется, что Вас никто не понимает</div>
+                        <div class="nav-item-action">→ загляните в «Видит во мне то, чего я сам(а) не вижу»</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Нужно почувствовать, что Вы не одни</div>
+                        <div class="nav-item-action">→ открывайте «Поддержка в трудный момент»</div>
+                    </div>
+                </div>
+                <p>Это навигатор за конкретной поддержкой — не просто архив, а аптечка с подписанными баночками.</p>
+            </div>
+        </div>
+
+        <!-- 4. ВИД ПО КАНАЛУ -->
+        <div class="section-card section-4">
+            <div class="section-num">4</div>
+            <div class="section-header">
+                <span class="section-emoji">📮</span>
+                <span class="section-title">Смотрим по Каналу — откуда течёт любовь</span>
+            </div>
+            <div class="section-text">
+                <p>Этот вид показывает другое: <b>откуда чаще всего приходит тепло</b>. Иногда оказывается, что самое важное приходит не оттуда, откуда его ждёшь.</p>
+                <p>Используйте его, когда хочется почувствовать связь с миром:</p>
+                <div class="nav-block">
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Хочется почувствовать близость с родными</div>
+                        <div class="nav-item-action">→ откройте «Семейные чаты»</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Нужно напомнить себе, что Вы важная часть команды</div>
+                        <div class="nav-item-action">→ загляните в «Рабочие чаты / почта»</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Хочется вспомнить живое тепло человеческого голоса</div>
+                        <div class="nav-item-action">→ идите в «Личные встречи / разговоры»</div>
+                    </div>
+                </div>
+                <div class="insight-block">
+                    Мир со мной разговаривает — и он говорит добрые вещи.
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. СВЯЗЬ С ДНЕВНИКОМ -->
+        <div class="section-card section-5">
+            <div class="section-num">5</div>
+            <div class="section-header">
+                <span class="section-emoji">📓</span>
+                <span class="section-title">Связь с Дневником настроения</span>
+            </div>
+            <div class="section-text">
+                <p>Из любой записи в Дневнике можно напрямую добавить момент в Копилку — через поле <b>«В копилочку тепла»</b>.</p>
+                <p>Иногда тепло приходит прямо посреди дня — кто-то сказал что-то важное, произошло что-то маленькое, но настоящее. Зафиксируйте в Дневнике сразу — и тепло не потеряется.</p>
+                <div class="callout">
+                    Не нужно ждать вечера или специального момента. Поймали — сохраните.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
