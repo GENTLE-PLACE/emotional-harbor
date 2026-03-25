@@ -1,4 +1,4 @@
-# 🌊 Эмоциональная Гавань
+🌊 **Эмоциональная Гавань**
 
 Твоё нежное пространство для внутренней жизни — честной, тёплой и без давления «быть продуктивной» или «всегда позитивной».
 
@@ -6,17 +6,19 @@
 
 ### 🎯 Что здесь есть
 
-- **onboarding-home.html** — главное руководство: письмо от автора, знакомство с проводником Есенией, карта Гавани и первый шаг за 15 минут.
-- **onboarding-diary.html** — подробное руководство, как вести Дневник настроения (настроение, энергия, эмоции, три радости дня и многое другое).
-- Шрифты, стили и другие файлы для корректной работы страниц.
+- `onboarding-home.html` — главное руководство: письмо от автора, знакомство с проводником Есенией, карта Гавани и первый шаг за 15 минут.
+- `onboarding-diary.html` — подробное руководство, как вести Дневник настроения (настроение, энергия, эмоции, три радости дня и многое другое).
+- Шрифты, стили и другие вспомогательные файлы.
 
 ### 🚀 Как открыть
 
-- Главное руководство:  
-  [https://gentle-place.github.io/emotional-harbor/onboarding-home.html](https://gentle-place.github.io/emotional-harbor/onboarding-home.html)
+**Главное руководство** — письмо от автора, карта Гавани и первый шаг за 15 минут:  
+    [Открыть onboarding-home.html](https://gentle-place.github.io/emotional-harbor/onboarding-home.html)
 
-- Руководство по Дневнику настроения:  
-  [https://gentle-place.github.io/emotional-harbor/onboarding-diary.html](https://gentle-place.github.io/emotional-harbor/onboarding-diary.html)
+**Руководство по Дневнику настроения** — как правильно вести дневник с настроением, энергией, эмоциями и радостями:  
+    [Открыть onboarding-diary.html](https://gentle-place.github.io/emotional-harbor/onboarding-diary.html)
 
-- Руководство Как читать отчеты:
-  [https://gentle-place.github.io/emotional-harbor/onboarding-diary.html](https://gentle-place.github.io/emotional-harbor/onboarding-reports.html)
+---
+
+💛 Это пространство создано для тебя.  
+Открывай в любой момент, когда захочется немного тепла, честности или просто побыть с собой.
