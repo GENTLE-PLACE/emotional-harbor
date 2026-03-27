@@ -1,1 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои опоры · Руководство</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Forum&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        body {
+            max-width: 100%;
+            min-height: 900px;
+            background: #f7efe0;
+            font-family: 'Jost', sans-serif;
+            color: #3a3228;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(201,169,122,0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(201,169,122,0.08) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .corner-wear { position: absolute; pointer-events: none; z-index: 1; }
+
+        .page {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 64px 48px 80px 64px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* ——— ШАПКА ——— */
+        .header {
+            margin-bottom: 0;
+            padding-bottom: 28px;
+            border-bottom: 1.5px solid rgba(201,169,122,0.3);
+        }
+
+        .header-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #c9a97a;
+            margin-bottom: 14px;
+        }
+
+        .header-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: 48px;
+            line-height: 1;
+            color: #3a3228;
+            letter-spacing: -2px;
+            margin-bottom: 14px;
+        }
+
+        .header-title span { color: #e87a9c; }
+
+        .header-sub {
+            font-size: 16px;
+            font-weight: 300;
+            color: #7a5840;
+            line-height: 1.6;
+        }
+
+        /* ——— ЦИТАТА ПОД ЧЕРТОЙ ——— */
+        .header-quote {
+            border-left: 3px solid #e87a9c;
+            padding-left: 18px;
+            margin: 24px 0 40px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+            font-style: italic;
+        }
+
+        /* ——— КАРТОЧКИ ——— */
+        .sections {
+            display: flex;
+            flex-direction: column;
+            gap: 64px;
+            padding-top: 20px;
+        }
+
+        .section-card {
+            border-radius: 20px;
+            padding: 40px 36px 46px 52px;
+            border: 1.5px solid rgba(201,169,122,0.4);
+            box-shadow: 7px 9px 0 rgba(120,80,40,0.08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(255,248,235,0.65);
+        }
+
+        /* ——— ЦИФРА-БЕЙДЖ ——— */
+        .section-num {
+            position: absolute;
+            top: -14px;
+            left: -14px;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: 34px;
+            font-weight: 700;
+            color: #1a1a1a;
+            z-index: 2;
+            opacity: 0.75;
+        }
+        .section-1 .section-num { background: #F7D08A; }
+        .section-2 .section-num { background: #F8B4C0; }
+        .section-3 .section-num { background: #b8e0d2; }
+        .section-4 .section-num { background: #A5C2F1; }
+        .section-5 .section-num { background: #e0c8f0; }
+        .section-6 .section-num { background: #F7F0A0; }
+        .section-7 .section-num { background: #E87A9C; }
+
+        /* ——— ЗАГОЛОВОК КАРТОЧКИ ——— */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-emoji {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .section-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+
+        /* ——— ТЕКСТ ——— */
+        .section-text {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: #4a3f38;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-text p { margin: 0; }
+        .section-text b { font-weight: 600; color: #1a1a1a; }
+
+        /* ——— CALLOUT ЖЁЛТЫЙ ——— */
+        .callout {
+            background: rgba(247,208,138,0.18);
+            border-left: 3px solid #c9a97a;
+            border-radius: 0 12px 12px 0;
+            padding: 12px 18px;
+            font-size: 14.5px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+            font-style: italic;
+        }
+        .callout::before { content: '💛 '; font-style: normal; }
+
+        /* ——— CALLOUT РОЗОВЫЙ ——— */
+        .callout-pink {
+            background: rgba(248,180,192,0.15);
+            border-left: 3px solid #d97787;
+            border-radius: 0 12px 12px 0;
+            padding: 12px 18px;
+            font-size: 14.5px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+        }
+
+        /* ——— INSIGHT розовый ——— */
+        .insight-block {
+            background: rgba(248,180,192,0.1);
+            border-radius: 10px;
+            padding: 14px 18px;
+            border-left: 3px solid #F8B4C0;
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: #5a4a3a;
+        }
+
+        /* ——— НАУЧНЫЙ БЛОК (синий) ——— */
+        .science-block {
+            background: rgba(165,194,241,0.1);
+            border-left: 3px solid #A5C2F1;
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .science-name {
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #5a7ab0;
+            margin-bottom: 4px;
+        }
+        .science-text {
+            font-size: 14.5px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #3a4a6a;
+        }
+
+        /* ——— РОЗОВЫЕ СТРЕЛКИ ——— */
+        .pink-arrows {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 4px;
+        }
+
+        .pink-arrow-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a3f38;
+            line-height: 1.65;
+        }
+
+        /* ——— МАРКЕРНОЕ ВЫДЕЛЕНИЕ ——— */
+        .marker-highlight { position: relative; display: inline-block; z-index: 1; }
+        .marker-highlight::before {
+            content: ''; position: absolute; bottom: 2px; left: -5px; right: -4px; height: 32px;
+            background: #F8B4C0; opacity: 0.45; z-index: -1; transform: rotate(0.6deg); border-radius: 4px;
+        }
+
+        /* ——— ПОДЗАГОЛОВОК ВИДА ——— */
+        .view-subheader {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 8px;
+        }
+
+        /* ——— БЛОК НАВИГАТОРА ——— */
+        .nav-block {
+            background: rgba(247,208,138,0.1);
+            border-left: 3px solid #F7D08A;
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(201,169,122,0.3);
+        }
+
+        .nav-item:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .nav-item-trigger {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #3a3228;
+        }
+
+        .nav-item-action {
+            font-size: 14px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.6;
+        }
+
+        /* ——— СПИСОК С МАРКЕРАМИ ——— */
+        .golden-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 4px;
+        }
+
+        .golden-list span {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a3f38;
+            line-height: 1.65;
+        }
+
+        .golden-list span::before {
+            content: '●';
+            color: #d97787;
+            font-size: 11px;
+            flex-shrink: 0;
+            line-height: 1.8;
+        }
+
+        /* ——— КАПСУЛЫ ——— */
+        .capsules {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        .capsule-warm {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5a4a3a;
+            background: rgba(201,169,122,0.12);
+            border: 1px solid rgba(201,169,122,0.35);
+            border-radius: 30px;
+            padding: 6px 14px;
+            line-height: 1;
+        }
+        .capsule-pink {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5a4a3a;
+            background: rgba(248,180,192,0.12);
+            border: 1px solid rgba(248,180,192,0.4);
+            border-radius: 30px;
+            padding: 6px 14px;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+
+<svg class="corner-wear" style="top:0;left:0;width:220px;height:220px;" viewBox="0 0 220 220">
+    <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="220" height="220" fill="url(#cw1)"/>
+</svg>
+<svg class="corner-wear" style="bottom:0;right:0;width:200px;height:200px;" viewBox="0 0 200 200">
+    <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.25"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="200" height="200" fill="url(#cw2)"/>
+</svg>
+
+<div class="page">
+
+    <!-- ШАПКА -->
+    <div class="header">
+        <div class="header-eyebrow">Эмоциональная Гавань · Руководство</div>
+        <div class="header-title">Мои <span>опоры</span></div>
+        <div class="header-sub">Самое устойчивое место в Гавани</div>
+    </div>
+
+    <div class="header-quote">
+        Это Ваша личная система поддержки, собранная заранее.<br>
+        Как тёплая одежда, которую Вы не ищете в метель — она уже в шкафу.
+    </div>
+
+    <!-- ВАЖНОЕ РАЗЛИЧИЕ — до всех карточек -->
+
+    <!-- КАРТОЧКИ -->
+    <div class="sections">
+
+        <!-- 1. ЗАЧЕМ ЭТОТ РАЗДЕЛ -->
+        <div class="section-card section-1">
+            <div class="section-num">1</div>
+            <div class="section-header">
+                <span class="section-emoji">🧱</span>
+                <span class="section-title">Зачем этот раздел</span>
+            </div>
+            <div class="section-text">
+                <p>Это инвентаризация вашей внутренней силы.</p>
+                <p>Если «Источники энергии» — это топливо, которое даёт радость и движение, то «Опоры» — это несущий каркас, который даёт стабильность и не позволяет сломаться под давлением.</p>
+                <p>Здесь живёт всё то, что возвращает вас к себе.</p>
+                <p>Контрастный душ, который вы ненавидите, но делаете каждое утро. Граница, которую вы держите, даже когда неудобно. Человек, который не жалеет — а возвращает вас к фактам.</p>
+                <div class="insight-block">
+                    Опора не обязана быть тёплой. Она обязана держать.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. НАУКА — СТРУМПФЕР -->
+        <div class="section-card section-2">
+            <div class="section-num">2</div>
+            <div class="section-header">
+                <span class="section-emoji">🔬</span>
+                <span class="section-title">Наука · Дерек Струмпфер · Фортигенез</span>
+            </div>
+            <div class="section-text">
+                <div class="science-block">
+                    <div class="science-name">✦ Fortigenesis и Psychofortology · Deodandus J.W. Strümpfer · 1990–2010-е</div>
+                    <div class="science-text">Южноафриканский психолог Део Струмпфер задал вопрос, который до него почти никто не задавал: «Откуда берётся психологическая сила?»<br><br>
+                    До него наука в основном искала ответ на вопрос: «Почему люди ломаются?» Струмпфер перевернул логику. Он предложил изучать не поломки, а источники устойчивости: что позволяет человеку не просто выстоять в кризисе, а выйти из него сильнее?<br><br>
+                    Он назвал этот процесс фортигенезом — от латинского fortis, «сильный». А всю область знаний, которая этим занимается, — психофортологией.<br><br>
+					Исследования Strümpfer и его коллег показывают, что люди, которые умеют идентифицировать и использовать свои личные опоры, демонстрируют:<br>
+					●  более высокий уровень психологического благополучия<br>
+					●  лучшую устойчивость (resilience)<br>
+					●  способность превращать стресс и страдания в рост</div>
+                </div>
+                <p><em>Простая аналогия: представьте плавание по морю. Традиционная психология учит, как вычерпывать воду, если в лодке появилась пробоина. Фортигенез учит тому, как строить крепкую лодку, запасаться провизией и уверенно держать штурвал, зная, что штормы всё равно будут.</em></p>
+                <p>Струмпфер доказал несколько важных вещей, которые идеально объясняют смысл этого раздела:</p>
+                <div class="golden-list">
+                    <div class="view-subheader" style="margin-top: 8px;">Два независимых пути</div>
+                <p>Психическое здоровье и нездоровье — это не две стороны одной медали, а разные оси.<br>
+				Вы можете переживать глубокий кризис, но при этом сохранять высокий уровень внутренней силы.</p>
+
+                <div class="view-subheader" style="margin-top: 8px;">Страдание — это норма</div>
+                <p>Вызовы и борьба — неотъемлемая часть жизни. <br>
+				Опоры нужны не для того, чтобы избежать боли, а для того, чтобы пройти через неё.</p>
+
+                <div class="view-subheader" style="margin-top: 8px;">Сила через преодоление</div>
+                <p>У нас есть ресурсы, чтобы «отскочить» от испытаний и использовать их как трамплин.br>
+				Эта сила складывается из осмысленности, качества отношений и способности процветать.</p>
+                </div>
+                <p>Это не «позитивное мышление по-детски», а научно обоснованный strengths-based подход: фокус не на том, что сломано, а на том, что уже работает — и может работать ещё лучше.</p>
+                <div class="callout">
+                    То, что вы сейчас будете заполнять в этой таблице — это и есть ваш личный фортигенез. Это ваш осознанный выбор исследовать и накапливать свою силу.
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. НАУКА — СТРУМПФЕР + АНТОНОВСКИ -->
+        <div class="section-card section-3">
+            <div class="section-num">3</div>
+            <div class="section-header">
+                <span class="section-emoji">🔬</span>
+                <span class="section-title">Почему опоры работают</span>
+            </div>
+            <div class="section-text">
+                <p>Раз уж Вы здесь — это стоит знать.</p>
+                <div class="science-block">
+                    <div class="science-name">✦ Фортигенез · Дитрих Струмпфер · 1990-е</div>
+                    <div class="science-text">Южноафриканский психолог Струмпфер предложил перевернуть вопрос. До него наука спрашивала: «Почему люди ломаются?» — и искала дефициты, травмы, уязвимости.<br><br>
+                    Струмпфер спросил иначе: «А что позволяет людям не просто устоять, но и выйти из кризиса сильнее, чем они были?»<br><br>
+                    Он назвал это фортигенезом — от латинского fortis, «сильный». Процесс становления сильным. Не «отсутствие слабости» — а наличие источников силы, которые позволяют не просто выживать, но и расти из трудностей.</div>
+                </div>
+                <p>Раздел «Мои опоры» — это Ваш личный ответ на вопрос Струмпфера.<br>
+                Не список того, чего Вам не хватает. А карта того, что у Вас уже есть.</p>
+                <div class="header-quote" style="margin: 4px 0 0;">Деревья с самыми глубокими корнями растут там, где сильнее всего ветер. Этот раздел — про Ваши корни.</div>
+            </div>
+        </div>
+
+        <!-- 4. ПОЛЕ «ПОЧЕМУ ЭТО ОПОРА» -->
+        <div class="section-card section-4">
+            <div class="section-num">4</div>
+            <div class="section-header">
+                <span class="section-emoji">💎</span>
+                <span class="section-title">Поле «Почему это опора?»</span>
+            </div>
+            <div class="section-text">
+                <p>Это самое важное поле во всём разделе.</p>
+                <p>Не «что это», а <b>почему именно это поддерживает</b>. Разница огромная.</p>
+                <p>Есения написала о подруге: «С ней я могу быть любой: сильной и уязвимой, весёлой и ревущей. Она — мой редкий безопасный свидетель». Это уже не просто запись контакта. Это понимание себя.</p>
+                <div class="callout-pink">
+                    Просто написать «Парк у реки» — мало. Важно зафиксировать, почему он помогает именно Вам. Например: «Там всегда дует ветер, который как будто выдувает лишние мысли».
+                </div>
+                <p>В моменты сильного стресса мозг «глупеет» и забывает, как себе помочь. Когда Вы видите чёткое объяснение — <b>мозгу проще согласиться на это действие</b>. Это работает как записка себе-будущему в плохой день.</p>
+                <p>Ещё одна ценность этого поля — оно помогает отличать <b>истинные опоры от навязанных</b>. «Все бегают, и я должна» — это не опора. «Вышивание выключает тревогу лучше любого успокоительного» — вот это опора.</p>
+
+                <div class="view-subheader">🔖 Поле «Заметка»</div>
+                <p>Здесь живёт то, что делает опору живой, а не просто записью в списке. Как именно это работает для Вас, в какой момент особенно помогает, что важно не забыть.</p>
+                <div class="golden-list">
+                    <span>не просто «Парк у реки», а «Особенно помогает в сумерки, когда никого нет»</span>
+                    <span>не просто «Психолог», а «Непредвзятый взгляд — он не знает моих близких»</span>
+                    <span>не просто «Утренний чай», а «Сознательное время только для себя, до того как начнётся день»</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. ВИДЫ — КАК ПЕРЕКЛЮЧАТЬСЯ -->
+        <div class="section-card section-5">
+            <div class="section-num">5</div>
+            <div class="section-header">
+                <span class="section-emoji">🔄</span>
+                <span class="section-title">Переключайтесь между видами</span>
+            </div>
+            <div class="section-text">
+                <p>Опоры разложены по двум разным «полкам» — чтобы Вы могли найти помощь в зависимости от того, что именно сейчас нужно.</p>
+
+                <div class="view-subheader">💖 По виду опоры</div>
+                <div class="capsules">
+                    <span class="capsule-warm">🫂 Социальная опора</span>
+                    <span class="capsule-warm">📍 Место</span>
+                    <span class="capsule-warm">🎨 Хобби</span>
+                    <span class="capsule-warm">🏓 Активность</span>
+                    <span class="capsule-warm">🫖 Ритуал/Привычка</span>
+                    <span class="capsule-warm">🧱 Граница</span>
+                    <span class="capsule-warm">💰 Ресурс</span>
+                    <span class="capsule-warm">📖 Смысл</span>
+                    <span class="capsule-warm">🌌 Соприкосновение</span>
+                </div>
+                <p>Отвечает на вопрос: <b>«К чему или к кому мне сейчас проще всего обратиться?»</b><br>
+                Используйте, когда понимаете, что именно сейчас доступно — человек, место, привычка или час в тишине с хобби.</p>
+
+                <div class="view-subheader">🧁 По эффекту</div>
+                <div class="capsules">
+                    <span class="capsule-pink">Автономия</span>
+                    <span class="capsule-pink">Благоговение</span>
+                    <span class="capsule-pink">Безопасность</span>
+                    <span class="capsule-pink">Вдохновение</span>
+                    <span class="capsule-pink">Заземление</span>
+                    <span class="capsule-pink">Осмысленность</span>
+                    <span class="capsule-pink">Поддержка</span>
+                    <span class="capsule-pink">Принятие</span>
+                    <span class="capsule-pink">Присутствие</span>
+                    <span class="capsule-pink">Радость</span>
+                    <span class="capsule-pink">Решимость</span>
+                    <span class="capsule-pink">Свобода</span>
+                    <span class="capsule-pink">Собранность</span>
+                    <span class="capsule-pink">Спокойствие</span>
+                    <span class="capsule-pink">Тепло</span>
+                    <span class="capsule-pink">Целостность</span>
+                    <span class="capsule-pink">Энергия</span>
+                </div>
+                <p>Самый важный вид в моменты острого дефицита. Отвечает на вопрос: <b>«Какого чувства мне сейчас не хватает?»</b><br>
+                Заземление, Безопасность, Тепло, Энергия — просто зайдите в нужную колонку и возьмите первое, что есть.</p>
+                <div class="insight-block">
+                    Это работает как кнопка быстрого доступа к нужному состоянию. Без анализа, без решений.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
