@@ -159,7 +159,7 @@
             color: #4a3f38;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 24px;
         }
 
         .section-text p { margin: 0; }
@@ -405,6 +405,13 @@
 
         .question-text b { font-weight: 600; color: #1a1a1a; }
 
+        /* ——— МАРКЕРНОЕ ВЫДЕЛЕНИЕ ——— */
+        .marker-highlight-yellow { position: relative; display: inline; z-index: 1; }
+        .marker-highlight-yellow::before {
+            content: ''; position: absolute; bottom: 2px; left: -5px; right: -4px; height: 32px;
+            background: #F7D08A; opacity: 0.55; z-index: -1; transform: rotate(-0.6deg); border-radius: 4px;
+        }
+
         /* ——— ШАГИ ——— */
         .steps-block {
             display: flex;
@@ -602,7 +609,7 @@
                     <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; font-weight: 300; color: #4a3f38; line-height: 1.65;">
                         <div style="padding: 10px 14px; background: rgba(76,175,80,0.07); border-radius: 8px;"><b>ДА</b>, и это первое, за что я хватаюсь → <b>ОПОРА</b></div>
                         <div style="padding: 10px 14px; background: rgba(247,208,138,0.25); border-radius: 8px;"><b>НЕТ</b>, в плохой день мне не до этого / это не помогает → <b>Источник энергии</b></div>
-                        <div style="padding: 10px 14px; background: rgba(160,120,80,0.1); border-radius: 8px;"><b>ДА, но потом хуже</b> — бокал вина, сериал до 3 ночи, бездумный скроллинг → это <b>не опора, а Анестезия</b>. Боль выключается на время, но не уходит. Без осуждения — просто важно различать.</div>
+                        <div style="padding: 10px 14px; background: rgba(160,120,80,0.1); border-radius: 8px;"><b>ДА, но потом хуже</b> — бокал вина, сериал до 3 ночи, бездумный скроллинг → это <b>не опора, а Анестезия</b>. Анестезия — не враг. Иногда она нужна, чтобы пережить самый острый момент. Просто это не та вещь, на которой стоит строить долгосрочную устойчивость. И без осуждения, честно. Просто чтобы вы могли <b>выбирать осознанно</b>.</div>
                    </div>
                     <div style="border-top: 1px dashed rgba(201,169,122,0.4); padding-top: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; line-height: 1.65;">
                         <div><mark style="background: linear-gradient(120deg, rgba(247,208,138,0.55) 0%, rgba(247,208,138,0.55) 90%, rgba(247,208,138,0) 100%); padding: 1px 4px; border-radius: 3px;"><b>🥤 Тыквенный латте</b> — Источник энергии</mark> <span style="color:#9a7050;">(в плохой день не пойдёшь)</span></div>
@@ -716,7 +723,11 @@
                 </div>
                 <p>В моменты сильного стресса мозг «забывает», как себе помочь. Когда Вы видите живое, честное объяснение — мозгу проще с ним согласиться.</p>
 
-                <p>Вот как это выглядит в жизни:</p>
+                <p>Пишите медленно и с удовольствием.<br>
+                Психологи называют это «смакованием».<br>
+                Когда Вы не просто вспоминаете приятное, а <span style="background: linear-gradient(120deg, rgba(247,208,138,0) 0%, rgba(247,208,138,0.55) 10%, rgba(247,208,138,0.55) 90%, rgba(247,208,138,0) 100%); padding: 1px 4px; border-radius: 3px;">медленно, с любовью описываете, что именно происходило внутри</span> — как внутри стало чуть просторнее, как плечи мягко опустились, как появилась тихая твёрдость или тёплое спокойствие — Вы делаете что-то по-настоящему ценное.</p>
+                <p><b>Это не информация. Это портал.</b><br>
+                Если Вы запомнили эмоцию, запах, телесное ощущение — Вы можете вернуть состояние в любой момент. Прочитав свою же запись.</p>
                 <div class="nav-block">
                     <div class="nav-item">
                         <div class="nav-item-trigger">не просто «Подруга Катя»</div>
