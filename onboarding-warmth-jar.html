@@ -366,6 +366,24 @@
             color: #5a4a3a;
             line-height: 1.6;
         }
+        /* ——— ПИЛЮЛИ ——— */
+        .capsules {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .capsule-warm {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5a4a3a;
+            background: rgba(201,169,122,0.12);
+            border: 1px solid rgba(201,169,122,0.35);
+            border-radius: 30px;
+            padding: 6px 14px;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
@@ -452,6 +470,16 @@
                 <p>Когда записей накопится несколько — попробуйте переключиться между видами. Каждый показывает Копилку по-своему.</p>
 
                 <div class="view-subheader">☀️ По виду</div>
+                <div class="capsules">
+                    <span class="capsule-warm">🎁 Просто так от души</span>
+                    <span class="capsule-warm">💌 Неожиданный комплимент</span>
+                    <span class="capsule-warm">🎯 Верит в мои способности</span>
+                    <span class="capsule-warm">🪶 Видит во мне то, чего я сам(а) не вижу</span>
+                    <span class="capsule-warm">🌟 Гордится мной</span>
+                    <span class="capsule-warm">🫂 Поддержка в трудный момент</span>
+                    <span class="capsule-warm">🙏 Благодарность за помощь</span>
+                    <span class="capsule-warm">🚀 Оценка моей работы/творчества</span>
+                </div>
                 <p>Здесь всё разложено по «смыслам»: где Вами гордятся, где в Вас верят, а где просто обнимают словами. Используйте, когда знаете, какой именно «витамин» Вам сейчас нужен:</p>
                 <div class="nav-block">
                     <div class="nav-item">
@@ -470,6 +498,15 @@
                 <p>Это навигатор за конкретной поддержкой — не просто архив, а аптечка с подписанными баночками.</p>
 
                 <div class="view-subheader">📮 По каналу</div>
+                <div class="capsules">
+                    <span class="capsule-warm">👨‍👩‍👧 Семейные чаты</span>
+                    <span class="capsule-warm">💬 Диалоги с друзьями</span>
+                    <span class="capsule-warm">💼 Отзывы о работе</span>
+                    <span class="capsule-warm">📱 Соцсети</span>
+                    <span class="capsule-warm">🗣️ Голосовые сообщения</span>
+                    <span class="capsule-warm">👤 Личные встречи / разговоры</span>
+                    <span class="capsule-warm">📧 Рабочие чаты / почта</span>
+                </div>
                 <p>Этот вид показывает другое: откуда чаще всего приходит тепло. Переключитесь на него, чтобы увидеть «географию» своей поддержки. Иногда оказывается, что самое важное приходит не оттуда, откуда его ждёшь.</p>
                 <div class="nav-block">
                     <div class="nav-item">
@@ -488,6 +525,27 @@
                 <div class="insight-block">
                     Мир со мной разговаривает — и он говорит добрые вещи.
                 </div>
+
+                <div class="view-subheader" style="margin-top: 8px;">🕰️ Хроники тепла</div>
+                <p>Это живая лента того, как тепло приходило к Вам в настоящей жизни. Здесь Копилка соединяется с записями из Дневника настроения — и каждый момент обретает свой день, своё настроение, свой контекст.</p>
+                <p>Не просто «Бабушка в кафе сказала что-то тёплое», а <span style="background: linear-gradient(120deg, rgba(248,180,192,0) 0%, rgba(248,180,192,0.5) 10%, rgba(248,180,192,0.5) 90%, rgba(248,180,192,0) 100%); padding: 1px 4px; border-radius: 3px;">«Бабушка в кафе — в тот самый день, когда батарея была на нуле и сил не было даже на чувства».</span> Именно так случайная фраза незнакомого человека превращается в якорь.</p>
+                <div class="nav-block">
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Хочется найти доказательство, что Вас любят даже в самые тёмные дни</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> прокрутите ленту — там будут именно такие дни</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Нужно вспомнить, что жизнь бывает разной</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> просто пролистайте — тепло было разным и приходило неожиданно</div>
+                    </div>
+                    <div class="nav-item">
+                        <div class="nav-item-trigger">Хочется увидеть, кто чаще всего был рядом</div>
+                        <div class="nav-item-action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#d97787" stroke-width="3" stroke-linecap="square"/></svg> обратите внимание на имена, которые встречаются снова и снова</div>
+                    </div>
+                </div>
+                <div class="insight-block">
+                    Копилка тепла — не архив. Это доказательная база того, что Вас видят.
+                </div>
             </div>
         </div>
 
@@ -501,9 +559,11 @@
             <div class="section-text">
                 <p>Из любой записи в Дневнике можно напрямую добавить момент в Копилку — через поле <b>«В копилочку тепла»</b>.</p>
                 <p>Иногда тепло приходит прямо посреди дня — кто-то сказал что-то важное, произошло что-то маленькое, но настоящее. Зафиксируйте в Дневнике сразу — и тепло не потеряется.</p>
+                <p>Или зайдите с другой стороны: прямо из карточки Копилки добавьте связь с тем днём, когда это случилось. Неважно, с какого конца начинать.</p>
                 <div class="callout">
                     Не нужно ждать вечера или специального момента. Поймали — сохраните.
                 </div>
+                <p>Именно так Копилка перестаёт быть просто архивом добрых слов. Она становится хроникой: тепло вплетается в реальные дни, с реальным настроением и энергией того момента. Однажды Вы откроете запись из Дневника — и увидите, что именно в тот день, когда было «батарея на нуле», кто-то всё равно согрел.</p>
             </div>
         </div>
 
