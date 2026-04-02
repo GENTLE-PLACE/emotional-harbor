@@ -303,6 +303,35 @@
             flex-shrink: 0;
             line-height: 1.8;
         }
+        /* ——— ПИЛЮЛИ ——— */
+        .capsules {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .capsule-warm {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5a4a3a;
+            background: rgba(201,169,122,0.12);
+            border: 1px solid rgba(201,169,122,0.35);
+            border-radius: 30px;
+            padding: 6px 14px;
+            line-height: 1;
+        }
+
+        .capsule-brown {
+            font-size: 13px;
+            font-weight: 400;
+            color: #5a4a3a;
+            background: rgba(160,120,80,0.1);
+            border: 1px solid rgba(160,120,80,0.3);
+            border-radius: 30px;
+            padding: 6px 14px;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
@@ -386,6 +415,16 @@
                 <p>Три вида — три разных вопроса, с которыми Вы можете прийти в этот раздел.</p>
 
                 <div class="view-subheader">🎞️ По типу</div>
+                <div class="capsules">
+                    <span class="capsule-warm">🎧 Подкаст</span>
+                    <span class="capsule-warm">📋 Статья</span>
+                    <span class="capsule-warm">📙 Книга</span>
+                    <span class="capsule-warm">🎬 Видео</span>
+                    <span class="capsule-warm">🎵 Плейлист</span>
+                    <span class="capsule-warm">🎓 Лекция</span>
+                    <span class="capsule-warm">👩🏻‍💻 Виртуальный тур</span>
+                    <span class="capsule-warm">📑 Блог</span>
+                </div>
                 <p>Когда знаете формат — сегодня хочется слушать, а не читать, или смотреть, а не думать. Выбираете нужную колонку и находите сразу.</p>
                 <div class="nav-block">
                     <div class="nav-item">
@@ -403,6 +442,14 @@
                 </div>
 
                 <div class="view-subheader">🧁 По эффекту</div>
+                <div class="capsules">
+                    <span class="capsule-brown">Вдохновение</span>
+                    <span class="capsule-brown">Опора</span>
+                    <span class="capsule-brown">Принятие</span>
+                    <span class="capsule-brown">Радость / Лёгкость</span>
+                    <span class="capsule-brown">Расширение кругозора</span>
+                    <span class="capsule-brown">Успокоение</span>
+                </div>
                 <p>Главный фильтр. Когда знаете не формат, а <b>какого состояния не хватает</b> — заходите сюда и находите за считаные секунды, не перебирая всё подряд.</p>
                 <div class="nav-block">
                     <div class="nav-item">
