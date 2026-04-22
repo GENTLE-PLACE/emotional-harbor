@@ -135,14 +135,27 @@
             z-index: 2;
             opacity: 0.75;
         }
+        /* section-1 = Как называть (без бейджа) */
         .section-1 .section-num { background: #F7D08A; }
+        /* section-2 = блок 1 Настроение/Энергия/Эмоции */
         .section-2 .section-num { background: #F8B4C0; }
+        /* section-3 = блок 2 Три радости + бонус Календари */
         .section-3 .section-num { background: #b8e0d2; }
+        /* section-4 не используется в HTML */
         .section-4 .section-num { background: #A5C2F1; }
+        /* section-5 = блок 3 Отношение к людям */
         .section-5 .section-num { background: #e0c8f0; }
-        .section-6 .section-num { background: #F7F0A0; }
-        .section-7 { background: rgba(255,248,235,0.65); }
-        .section-7 .section-num { background: #FFCBA4; }
+        /* section-6 = блок 4 Что давало/забирало */
+        .section-6 .section-num { background: #A5C2F1; }
+        /* section-7 = В этот день (без числа, только эмодзи) */
+        .section-7 { background: rgba(255,248,235,0.65); box-shadow: 0 0 0 1px rgba(201,169,122,0.3), 0 0 40px 8px rgba(247,208,138,0.4), 7px 9px 0 rgba(120,80,40,0.06); }
+        .section-7 .section-num { background: rgba(200, 171, 131, 0.55); font-size: 28px; }
+        /* section-8 = блок 5 Глубже */
+        .section-8 { background: rgba(255,248,235,0.65); }
+        .section-8 .section-num { background: #F7F0A0; }
+        /* section-9 = блок 6 Фото дня */
+        .section-9 { background: rgba(255,248,235,0.65); }
+        .section-9 .section-num { background: #FFCBA4; }
 
         /* ——— ЗАГОЛОВОК КАРТОЧКИ ——— */
         .section-header {
@@ -516,6 +529,97 @@
             content: ''; position: absolute; bottom: 2px; left: -5px; right: -4px; height: 32px;
             background: #F8B4C0; opacity: 0.45; z-index: -1; transform: rotate(0.6deg); border-radius: 4px;
         }
+
+        /* ——— НАВИГАТОР ВИДОВ ——— */
+        .nav-block {
+            background: rgba(247,208,138,0.1);
+            border-left: 3px solid #F7D08A;
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed rgba(201,169,122,0.3);
+        }
+        .nav-item:last-child { padding-bottom: 0; border-bottom: none; }
+        .nav-item-trigger {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #3a3228;
+        }
+        .nav-item-action {
+            font-size: 14px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.6;
+        }
+
+        /* ——— МАШИНА ВРЕМЕНИ — особый блок ——— */
+        .time-machine-block {
+            background: rgba(247, 208, 138, 0.13);
+            border: 1.5px solid rgba(201, 169, 122, 0.4);
+            border-radius: 14px;
+            padding: 22px 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .time-machine-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .time-machine-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #7a4a9a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .time-machine-text {
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #4a3f38;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.time-machine-text p {
+    margin: 0;
+}
+        .time-machine-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 4px;
+        }
+        .time-machine-example {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.65;
+            font-style: italic;
+        }
+        .time-machine-example::before {
+            content: '◆';
+            color: #b87ac8;
+            font-size: 8px;
+            flex-shrink: 0;
+            position: relative;
+            top: -1px;
+        }
     </style>
 </head>
 <body>
@@ -704,9 +808,8 @@
             </div>
         </div>
 
-        <!-- 3. ЭНЕРГИЯ -->
         <!-- 3. ОТНОШЕНИЕ К ЛЮДЯМ -->
-        <div class="section-card section-4">
+        <div class="section-card section-5">
             <div class="section-num">3</div>
             <div class="section-header">
                 <span class="section-emoji">🪐</span>
@@ -729,7 +832,7 @@
         </div>
 
         <!-- 4. ЧТО ДАВАЛО/ЗАБИРАЛО ЭНЕРГИЮ -->
-        <div class="section-card section-5">
+        <div class="section-card section-6">
             <div class="section-num">4</div>
             <div class="section-header">
                 <span class="section-emoji">🔥</span>
@@ -762,8 +865,32 @@
             </div>
         </div>
 
+<!-- В ЭТОТ ДЕНЬ -->
+        <div class="section-card section-7">
+            <div class="section-num">🕰️</div>
+            <div class="section-header">
+                <span class="section-emoji">🔄</span>
+                <span class="section-title">В этот день · Привет из прошлого</span>
+            </div>
+            <div class="section-text">
+                <p>В Дневнике есть один очень интересный вид, <b>🔄 В этот день</b>, про который стоит рассказать отдельно.</p>
+
+                <div class="time-machine-block">
+                    <div class="time-machine-text">
+                        <p>Это — как маленькая <b>машина времени.</b><br>
+                        Он бережно находит записи, сделанные в этот же день, но в другие годы.<br>
+                        Открываете его — и вдруг встречаете себя из прошлого: с теми мыслями, настроением, вопросами.<br>
+                        Какой Вы были год назад, два года назад, три года назад…<br>
+						Что для Вас было важно тогда, какие эмоции были внутри...
+                        <p style="font-style: italic; color: #7a5840; font-weight: 500; margin-top: 14px;">Иногда Вы будете улыбаться. Иногда — выдыхать с облегчением. Иногда — плакать, но светлыми слезами.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- 5. ГЛУБЖЕ -->
-        <div class="section-card section-6">
+        <div class="section-card section-8">
             <div class="section-num">5</div>
             <div class="section-header">
                 <span class="section-emoji">📝</span>
@@ -799,7 +926,7 @@
         </div>
 
         <!-- 6. ФОТО ДНЯ -->
-        <div class="section-card section-7">
+        <div class="section-card section-9">
             <div class="section-num">6</div>
             <div class="section-header">
                 <span class="section-emoji">📷</span>
