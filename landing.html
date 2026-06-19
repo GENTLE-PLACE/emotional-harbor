@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Эмоциональная Гавань · Notion-пространство для глубокого контакта с собой</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --beige: #f7efe0;
+            --brown-dark: #3a3228;
+            --brown-mid: #7a5840;
+            --brown-light: #9a7050;
+            --gold: #c9a97a;
+            --pink: #e87a9c;
+            --pink-soft: #F8B4C0;
+            --pink-bg: rgba(248,180,192,0.12);
+            --yellow: #F7D08A;
+            --green: #b8e0d2;
+            --blue: #A5C2F1;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--beige);
+            font-family: 'Jost', sans-serif;
+            color: var(--brown-dark);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(201,169,122,0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(201,169,122,0.07) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ФОНОВЫЕ ВОЛНЫ */
+        .bg-waves {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0.07;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* CORNER WEAR */
+        .corner-wear { position: fixed; pointer-events: none; z-index: 1; }
+
+        /* ОБЁРТКА */
+        .page {
+            position: relative;
+            z-index: 2;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 48px 120px;
+        }
+
+        /* ——— HERO ——— */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 28px;
+        }
+
+        .hero-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: clamp(52px, 8vw, 96px);
+            line-height: 0.92;
+            letter-spacing: -4px;
+            color: var(--brown-dark);
+            margin-bottom: 32px;
+        }
+
+        .hero-title span { color: var(--pink); }
+
+        .hero-sub {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--brown-mid);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 48px;
+            border-left: 3px solid var(--pink);
+            padding-left: 20px;
+        }
+
+        /* Кнопка */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--brown-dark);
+            color: var(--beige);
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 20px 36px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 5px 6px 0 rgba(58,50,40,0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 8px 0 rgba(58,50,40,0.2);
+        }
+
+        .cta-button.pink {
+            background: var(--pink);
+            box-shadow: 5px 6px 0 rgba(232,122,156,0.3);
+        }
+
+        .cta-button.pink:hover {
+            box-shadow: 7px 8px 0 rgba(232,122,156,0.3);
+        }
+
+        .cta-price {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--brown-light);
+            font-weight: 400;
+        }
+
+        /* Скролл-хинт */
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(201,169,122,0.6);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scroll-hint::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: rgba(201,169,122,0.4);
+        }
+
+        /* ——— РАЗДЕЛИТЕЛЬ ——— */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,169,122,0.35) 20%, rgba(201,169,122,0.35) 80%, transparent);
+            margin: 72px 0;
+        }
+
+        /* ——— СЕКЦИЯ ——— */
+        .section { padding: 0; }
+
+        .section-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: clamp(28px, 4vw, 42px);
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+            color: var(--brown-dark);
+            margin-bottom: 32px;
+        }
+
+        .section-title span { color: var(--pink); }
+
+        /* ——— INTRO ——— */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .intro-text {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #4a3f38;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .intro-text p { margin: 0; }
+        .intro-text b { font-weight: 600; color: var(--brown-dark); }
+
+        .intro-quote-card {
+            background: rgba(255,248,235,0.65);
+            border: 1.5px solid rgba(201,169,122,0.4);
+            border-radius: 20px;
+            padding: 40px 36px;
+            box-shadow: 7px 9px 0 rgba(120,80,40,0.08);
+            transform: rotate(0.8deg);
+            position: relative;
+        }
+
+        .intro-quote-card::before {
+            content: '❝';
+            font-family: 'Lora', serif;
+            font-size: 70px;
+            color: rgba(232,122,156,0.12);
+            position: absolute;
+            top: 10px;
+            left: 24px;
+            line-height: 1;
+        }
+
+        .intro-quote-text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 18px;
+            line-height: 1.65;
+            color: var(--brown-dark);
+            padding-top: 28px;
+            margin-bottom: 20px;
+        }
+
+        .intro-quote-author {
+            font-family: 'Caveat', cursive;
+            font-size: 16px;
+            color: var(--brown-light);
+            border-top: 1px dashed rgba(201,169,122,0.4);
+            padding-top: 14px;
+        }
+
+        /* ——— МОДУЛИ ——— */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .module-card {
+            background: rgba(255,248,235,0.65);
+            border: 1.5px solid rgba(201,169,122,0.35);
+            border-radius: 20px;
+            padding: 32px 28px 28px;
+            box-shadow: 7px 9px 0 rgba(120,80,40,0.07);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+        }
+        .mc-1::after { background: var(--yellow); }
+        .mc-2::after { background: var(--pink-soft); }
+        .mc-3::after { background: var(--green); }
+        .mc-4::after { background: var(--blue); }
+        .mc-5::after { background: #e0c8f0; }
+        .mc-6::after { background: var(--yellow); }
+
+        .mc-1 { transform: rotate(-0.3deg); }
+        .mc-2 { transform: rotate(0.4deg); }
+        .mc-3 { transform: rotate(-0.2deg); }
+        .mc-4 { transform: rotate(0.3deg); }
+        .mc-5 { transform: rotate(-0.4deg); }
+        .mc-6 { transform: rotate(0.2deg); }
+
+        .module-card-wide { grid-column: span 2; }
+
+        .module-icon { font-size: 22px; line-height: 1; }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .module-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--brown-dark);
+            line-height: 1.3;
+        }
+
+        .module-text {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: #4a3f38;
+        }
+
+        .module-note {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--brown-light);
+            line-height: 1.6;
+            border-top: 1px dashed rgba(201,169,122,0.35);
+            padding-top: 12px;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* ——— ЕСЕНИЯ ——— */
+        .esenia-card {
+            background: rgba(255,248,235,0.75);
+            border: 1.5px solid rgba(201,169,122,0.4);
+            border-radius: 20px;
+            padding: 40px 40px 44px;
+            box-shadow: 7px 9px 0 rgba(120,80,40,0.08);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        .esenia-left {}
+
+        .esenia-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .esenia-text {
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #4a3f38;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .esenia-italic {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 14.5px;
+            color: #6a5040;
+            line-height: 1.7;
+            border-left: 3px solid rgba(232,122,156,0.4);
+            padding-left: 14px;
+        }
+
+        /* Дневниковые плашки */
+        .diary-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .diary-entry {
+            background: white;
+            border: 1px solid rgba(201,169,122,0.25);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diary-entry::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+        }
+
+        .diary-entry-1::before { background: var(--pink-soft); }
+        .diary-entry-2::before { background: var(--yellow); }
+        .diary-entry-3::before { background: var(--green); }
+
+        .diary-entry-date {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .diary-entry-name {
+            font-family: 'Caveat', cursive;
+            font-size: 18px;
+            color: var(--brown-dark);
+        }
+
+        /* ——— НАУКА ——— */
+        .science-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .science-card {
+            background: rgba(165,194,241,0.08);
+            border: 1px solid rgba(165,194,241,0.3);
+            border-radius: 16px;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .science-author {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--brown-dark);
+        }
+
+        .science-concept {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #5a7ab0;
+        }
+
+        .science-text {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: #4a3f38;
+        }
+
+        .science-text b { font-weight: 600; color: var(--brown-dark); }
+
+        /* ——— FAQ ——— */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .faq-item {
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(201,169,122,0.2);
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .faq-item:last-child { border-bottom: none; }
+
+        .faq-q {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            line-height: 1.4;
+            padding-top: 2px;
+        }
+
+        .faq-a {
+            font-size: 14.5px;
+            font-weight: 300;
+            line-height: 1.75;
+            color: #4a3f38;
+        }
+
+        /* ——— ЧТО ВНУТРИ ——— */
+        .inside-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .inside-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            font-size: 15px;
+            font-weight: 300;
+            color: #4a3f38;
+            line-height: 1.65;
+        }
+
+        .inside-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+            margin-top: 7px;
+        }
+
+        /* ——— ФИНАЛ / CTA ——— */
+        .final-section {
+            background: rgba(232,122,156,0.06);
+            border: 1.5px solid rgba(232,122,156,0.2);
+            border-radius: 24px;
+            padding: 64px 52px;
+            text-align: center;
+            box-shadow: 7px 9px 0 rgba(120,80,40,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .final-wave {
+            font-size: 40px;
+        }
+
+        .final-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: clamp(32px, 5vw, 52px);
+            letter-spacing: -2px;
+            line-height: 1.05;
+            color: var(--brown-dark);
+        }
+
+        .final-title span { color: var(--pink); }
+
+        .final-quote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 17px;
+            line-height: 1.65;
+            color: #5a4a3a;
+            max-width: 480px;
+        }
+
+        .final-price-block {
+            background: rgba(255,248,235,0.8);
+            border: 1.5px solid rgba(201,169,122,0.4);
+            border-radius: 16px;
+            padding: 28px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .final-price-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .final-price {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: 52px;
+            letter-spacing: -2px;
+            color: var(--brown-dark);
+            line-height: 1;
+        }
+
+        .final-price span {
+            font-size: 28px;
+            color: var(--pink);
+            vertical-align: super;
+        }
+
+        .final-price-note {
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--brown-light);
+        }
+
+        /* ——— FAQ АККОРДЕОН ——— */
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .faq-accordion-item {
+            border-bottom: 1px solid rgba(201,169,122,0.22);
+        }
+
+        .faq-accordion-item:first-child {
+            border-top: 1px solid rgba(201,169,122,0.22);
+        }
+
+        .faq-trigger {
+            width: 100%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 22px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            text-align: left;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            line-height: 1.4;
+            transition: color 0.2s;
+        }
+
+        .faq-trigger:hover { color: var(--pink); }
+
+        .faq-trigger.open { color: var(--pink); }
+
+        .faq-arrow {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(201,169,122,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.3s, background 0.2s, border-color 0.2s;
+        }
+
+        .faq-trigger.open .faq-arrow {
+            transform: rotate(45deg);
+            background: var(--pink);
+            border-color: var(--pink);
+        }
+
+        .faq-arrow svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--brown-dark);
+            transition: stroke 0.2s;
+        }
+
+        .faq-trigger.open .faq-arrow svg { stroke: white; }
+
+        .faq-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.32s ease;
+        }
+
+        .faq-body.open {
+            grid-template-rows: 1fr;
+        }
+
+        .faq-body-inner {
+            overflow: hidden;
+        }
+
+        .faq-answer {
+            padding: 0 0 24px;
+            font-size: 15px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #4a3f38;
+            max-width: 700px;
+        }
+
+        /* ——— АВТОР ——— */
+        .author-block {
+            background: rgba(255,248,235,0.65);
+            border: 1.5px solid rgba(201,169,122,0.35);
+            border-radius: 16px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .author-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink-soft), var(--yellow));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .author-info {}
+
+        .author-name {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            margin-bottom: 2px;
+        }
+
+        .author-role {
+            font-size: 12px;
+            font-weight: 300;
+            color: var(--brown-light);
+            letter-spacing: 0.5px;
+        }
+
+        .author-contact {
+            margin-left: auto;
+            font-size: 13px;
+            font-weight: 400;
+            color: #5a7ab0;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(90,122,176,0.3);
+            padding-bottom: 1px;
+        }
+
+        /* ——— CALLOUT РОЗОВЫЙ ——— */
+        .callout-pink {
+            background: rgba(248,180,192,0.15);
+            border-left: 3px solid #d97787;
+            border-radius: 0 12px 12px 0;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 300;
+            color: #5a4a3a;
+            line-height: 1.7;
+        }
+
+        /* ——— МАРКЕР ——— */
+        .mark-pink {
+            background: linear-gradient(120deg, rgba(248,180,192,0) 0%, rgba(248,180,192,0.5) 10%, rgba(248,180,192,0.5) 90%, rgba(248,180,192,0) 100%);
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        /* ——— АДАПТИВ ——— */
+        @media (max-width: 700px) {
+            .page { padding: 0 24px 80px; }
+            .hero-title { font-size: 48px; letter-spacing: -2px; }
+            .intro-grid, .esenia-card, .science-grid, .modules-grid { grid-template-columns: 1fr; }
+            .module-card-wide { grid-column: span 1; }
+            .faq-item { grid-template-columns: 1fr; gap: 8px; }
+            .final-section { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Фоновые волны -->
+<svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <path d="M0,200 Q300,120 600,220 T1200,160" fill="none" stroke="#c9a97a" stroke-width="3" stroke-dasharray="14 8"/>
+    <path d="M0,480 Q400,380 800,500 T1200,440" fill="none" stroke="#d97787" stroke-width="2"/>
+    <path d="M0,720 Q350,640 700,740 T1200,680" fill="none" stroke="#A5C2F1" stroke-width="2"/>
+</svg>
+
+<!-- Углы -->
+<svg class="corner-wear" style="top:0;left:0;width:200px;height:200px;" viewBox="0 0 200 200">
+    <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="200" height="200" fill="url(#cw1)"/>
+</svg>
+<svg class="corner-wear" style="bottom:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180">
+    <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.22"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="180" height="180" fill="url(#cw2)"/>
+</svg>
+
+<div class="page">
+
+    <!-- ——— HERO ——— -->
+    <div class="hero">
+        <div class="hero-eyebrow">Notion-пространство · цифровой продукт</div>
+        <h1 class="hero-title">
+            Эмоцио<br>нальная<br><span>Гавань</span>
+        </h1>
+        <p class="hero-sub">
+            Место, где можно снять тяжёлое пальто ожиданий.<br>
+            Прийти с любым днём — и просто быть.
+        </p>
+        <div>
+            <a href="#buy" class="cta-button pink">Войти в Гавань · 2 490 ₽</a>
+            <div class="cta-price">Единоразовая покупка · Notion бесплатный тариф · Ваши данные только у Вас</div>
+        </div>
+        <div class="scroll-hint">узнать больше</div>
+    </div>
+
+    <!-- ——— INTRO ——— -->
+    <div class="divider"></div>
+
+    <section class="section">
+        <div class="section-eyebrow">Зачем это нужно</div>
+        <h2 class="section-title">Что такое<br><span>Эмоциональная Гавань</span></h2>
+
+        <div class="intro-grid">
+            <div class="intro-text">
+                <p>Наш мозг — не объективный летописец, а эмоциональный рассказчик. Одна хмурая пятница способна закрасить серой краской всю неделю, заставляя нас забыть о моментах тепла. В психологии это называют <span class="mark-pink">«ловушкой финала»</span>.</p>
+                <p>Обычный дневник — это отдельные островки. Сегодняшняя запись не помнит вчерашнюю.</p>
+                <p><b>Гавань — это архитектура.</b> Здесь Копилка тепла помнит, в какой день тебя поддержали. Источники энергии показывают, что сработало, когда батарея была на нуле. А нежная аналитика собирает всё в одну честную карту — которую не видно в моменте.</p>
+                <p>Трекеры сфокусированы на «делать». Гавань — на «быть».</p>
+            </div>
+
+            <div class="intro-quote-card">
+                <div class="intro-quote-text">
+                    «Через месяц Вы увидите себя с расстояния, которого не бывает в моменте — и поймёте, что были богаче, чем казалось.»
+                </div>
+                <div class="intro-quote-author">из письма автора ✦</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ——— МОДУЛИ ——— -->
+    <div class="divider"></div>
+
+    <section class="section">
+        <div class="section-eyebrow">Карта Гавани</div>
+        <h2 class="section-title">Шесть пространств,<br>по которым хочется <span>ходить босиком</span></h2>
+
+        <div class="modules-grid">
+
+            <div class="module-card mc-1">
+                <div class="module-header">
+                    <div class="module-icon">📔</div>
+                    <div class="module-title">Дневник настроения</div>
+                </div>
+                <div class="module-text">Место, куда приходят не за фактами, а за оттенками чувств. Давайте дням имена: «Благодарность и мокрый снег» — не «22 января». Замечайте, как в самый хмурый вторник рядом с тревогой робко цветёт нежность.</div>
+                <div class="module-note">Здесь рождается вся Ваша статистика.</div>
+            </div>
+
+            <div class="module-card mc-2">
+                <div class="module-header">
+                    <div class="module-icon">📊</div>
+                    <div class="module-title">Статистика эмоций</div>
+                </div>
+                <div class="module-text">Самая нежная аналитика в Вашей жизни. Сюда не нужно ничего вносить — блок сам собирает то, чем Вы делились, и показывает Вас же: объёмно, честно, красиво. Облако эмоций, энергетический ландшафт, паттерны и связи.</div>
+                <div class="module-note">Иногда показывает то, что не видно в моменте.</div>
+            </div>
+
+            <div class="module-card mc-3">
+                <div class="module-header">
+                    <div class="module-icon">💌</div>
+                    <div class="module-title">Копилка тепла</div>
+                </div>
+                <div class="module-text">Голосовое от подруги, которое Вы переслушиваете в плохой день. Комментарий, после которого расправляются плечи. Письмо от мамы. Сюда попадает всё, что однажды попало точно в грудь.</div>
+                <div class="module-note">Аптечка с подписанными баночками.</div>
+            </div>
+
+            <div class="module-card mc-4">
+                <div class="module-header">
+                    <div class="module-icon">🔋</div>
+                    <div class="module-title">Источники энергии</div>
+                </div>
+                <div class="module-text">Запахи, от которых разливается тепло. Ритуалы-перезагрузка. Еда, возвращающая в детство. Тишина, которая наполняет, а не давит. Когда сил на исходе — открываете и выбираете, что откликается прямо сейчас.</div>
+            </div>
+
+            <div class="module-card mc-5">
+                <div class="module-header">
+                    <div class="module-icon">🛟</div>
+                    <div class="module-title">Мои опоры</div>
+                </div>
+                <div class="module-text">Самое устойчивое место в Гавани. Здесь не то, что случилось однажды, а то, что работает всегда. Люди, места, ритуалы — всё, на что можно опереться, когда всё вокруг качается.</div>
+                <div class="module-note">Когда всё качает — здесь не качает.</div>
+            </div>
+
+            <div class="module-card mc-6">
+                <div class="module-header">
+                    <div class="module-icon">🎬</div>
+                    <div class="module-title">Уютный контент</div>
+                </div>
+                <div class="module-text">Подкаст, когда внутри слишком шумно. Книга, когда нужно вспомнить, что ценность не нужно заслуживать. Фильм, после которого дышится глубже. Собирается не по жанрам, а по состоянию.</div>
+                <div class="module-note">Comfort food для мозга.</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ——— ЕСЕНИЯ ——— -->
+    <div class="divider"></div>
+
+    <section class="section">
+        <div class="section-eyebrow">Ваш проводник</div>
+        <h2 class="section-title">Познакомьтесь<br>с <span>Есенией</span></h2>
+
+        <div class="esenia-card">
+            <div class="esenia-left">
+                <div class="esenia-title">Чтобы не начинать с пустого листа</div>
+                <div class="esenia-text">
+                    <p>В Гавани живёт персонаж — Есения. Её записи настоящие: там есть «Батарея на нуле», «Ревность и три чашки кофе», «Розовый рассвет».</p>
+                    <p>Она не причёсывает свои дни. В ужасном настроении она замечает, как кот ловит тень на стене — и записывает это в Три радости.</p>
+                    <div class="esenia-italic">
+                        Она не делает вид, что всё хорошо. И именно это самое важное.
+                    </div>
+                    <p>Когда почувствуете, что нашли свой голос — Есения тихо уйдёт на второй план.</p>
+                </div>
+            </div>
+
+            <div class="diary-entries">
+                <div style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:4px;">из дневника Есении</div>
+                <div class="diary-entry diary-entry-1">
+                    <div class="diary-entry-date">14 янв</div>
+                    <div class="diary-entry-name">Батарея на нуле</div>
+                </div>
+                <div class="diary-entry diary-entry-2">
+                    <div class="diary-entry-date">22 янв</div>
+                    <div class="diary-entry-name">Благодарность и мокрый снег</div>
+                </div>
+                <div class="diary-entry diary-entry-3">
+                    <div class="diary-entry-date">31 янв</div>
+                    <div class="diary-entry-name">Розовый рассвет</div>
+                </div>
+                <div class="diary-entry diary-entry-1">
+                    <div class="diary-entry-date">7 фев</div>
+                    <div class="diary-entry-name">Ревность и три чашки кофе</div>
+                </div>
+                <div class="diary-entry diary-entry-2">
+                    <div class="diary-entry-date">12 фев</div>
+                    <div class="diary-entry-name">День в любви</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ——— НАУКА ——— -->
+    <div class="divider"></div>
+
+    <section class="section">
+        <div class="section-eyebrow">На чём это стоит</div>
+        <h2 class="section-title">Реальная наука<br>в <span>тёплой упаковке</span></h2>
+
+        <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:32px;">За каждым блоком стоит реальное исследование. Просто упакованное так, чтобы хотелось открывать каждый день.</p>
+
+        <div class="science-grid">
+            <div class="science-card">
+                <div class="science-author">Martin Seligman</div>
+                <div class="science-concept">Позитивная психология</div>
+                <div class="science-text"><b>Три радости дня.</b> Через месяц Вы начнёте замечать хорошее прямо в моменте — просто потому что внутренний взгляд научился смотреть иначе.</div>
+            </div>
+            <div class="science-card">
+                <div class="science-author">Lisa Feldman Barrett</div>
+                <div class="science-concept">Эмоциональная гранулярность</div>
+                <div class="science-text"><b>Называние эмоций.</b> Чем точнее Вы называете то, что чувствуете, тем легче с этим справляться. Названная эмоция обретает форму.</div>
+            </div>
+            <div class="science-card">
+                <div class="science-author">Jordi Quoidbach</div>
+                <div class="science-concept">Emodiversity</div>
+                <div class="science-text"><b>Разнообразие эмоций.</b> Не радость вместо грусти — а радость рядом с грустью. Люди, которые проживают широкий спектр, психологически устойчивее.</div>
+            </div>
+            <div class="science-card">
+                <div class="science-author">Shannon & Pearson</div>
+                <div class="science-concept">Математика чувств</div>
+                <div class="science-text"><b>Статистика.</b> Настоящие формулы. Но Вам не нужно в этом разбираться — Гавань переводит всё в понятный язык сама.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ——— ЧТО ВНУТРИ ——— -->
+    <div class="divider"></div>
+
+    <section class="section">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items:start;">
+            <div>
+                <div class="section-eyebrow">Состав</div>
+                <h2 class="section-title" style="font-size:32px;">Что Вас <span>ждёт</span></h2>
+                <div class="inside-list">
+                    <div class="inside-item"><div class="inside-dot"></div><div>Полностью готовое Notion-пространство — открываете и начинаете</div></div>
+                    <div class="inside-item"><div class="inside-dot"></div><div>Шесть модулей, которые работают и по отдельности, и в связке</div></div>
+                    <div class="inside-item"><div class="inside-dot"></div><div>Живые отчёты на основе реальной математики — собираются сами</div></div>
+                    <div class="inside-item"><div class="inside-dot"></div><div>Персонаж Есения с настоящими записями — чтобы не начинать с пустого листа</div></div>
+                    <div class="inside-item"><div class="inside-dot"></div><div>Онбординг для каждого модуля — тёплое руководство голосом проекта</div></div>
+                    <div class="inside-item"><div class="inside-dot"></div><div>Совместим с бесплатным тарифом Notion</div></div>
+                    <div class="inside-item"><div class="inside-dot"></div><div>Работает в браузере и приложении — записи прямо на ходу</div></div>
+                </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:16px; padding-top:48px;">
+                <div class="callout-pink">
+                    От открытия шаблона до первой записи — <strong>15 минут</strong>. И Вы уже дома.
+                </div>
+                <div style="background:rgba(255,248,235,0.8); border:1.5px solid rgba(201,169,122,0.35); border-radius:14px; padding:24px; display:flex; flex-direction:column; gap:10px;">
+                    <div style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold);">Вопрос и ответ</div>
+                    <div style="font-family:'Unbounded',sans-serif; font-size:12px; font-weight:700; color:var(--brown-dark);">А если нет сил вести каждый день?</div>
+                    <div style="font-size:13.5px; font-weight:300; color:#4a3f38; line-height:1.7;">Самая быстрая запись — 90 секунд. Не чтобы починить себя, а чтобы зафиксировать: это было. Я это пережила. Я здесь.</div>
+                </div>
+                <div style="background:rgba(255,248,235,0.8); border:1.5px solid rgba(201,169,122,0.35); border-radius:14px; padding:24px; display:flex; flex-direction:column; gap:10px;">
+                    <div style="font-family:'Unbounded',sans-serif; font-size:12px; font-weight:700; color:var(--brown-dark);">А разбираться в Notion нужно?</div>
+                    <div style="font-size:13.5px; font-weight:300; color:#4a3f38; line-height:1.7;">Абсолютно нет. Вся магия и формулы уже готовы и работают сами.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ——— FAQ ——— -->
+    <div class="divider"></div>
+
+    <section class="section">
+        <div class="section-eyebrow">Частые вопросы</div>
+        <h2 class="section-title" style="font-size:32px; margin-bottom:40px;">Если что-то<br>не ясно</h2>
+
+        <div class="faq-accordion">
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Нет сил вести дневник каждый день — это подойдёт?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Гавань создана именно для таких дней. Самая быстрая запись — 90 секунд: отметить настроение, энергию, три радости. Не чтобы починить себя, а чтобы зафиксировать: это было. Я это пережила. Я здесь.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Что если я буду пропускать дни?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Гавань — не школа, здесь нет прогулов. Если Вы не заходили неделю — значит, жизнь была слишком громкой. Возвращайтесь в любой момент, с пустыми страницами или с одной фразой «я устала». История не прервётся — она просто станет честнее.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Я не умею красиво называть эмоции
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Именно для этого Гавань и создана. Внутри уже есть подсказки, которые помогут перевести «какое-то странное чувство» на человеческий язык. А Есения покажет, что «Батарея на нуле» — это уже отличное название для дня.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Кто увидит мои записи?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Никто. Вы дублируете шаблон в своё личное пространство Notion — и с этого момента всё остаётся только между Вами и Вашим экраном. У автора проекта нет доступа к Вашим записям.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Нужна платная подписка Notion?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Нет. Для личного использования Гавани достаточно бесплатного тарифа Notion.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Чем это отличается от обычного дневника?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Трекеры сфокусированы на «делать». Гавань — на «быть». Блокнот принимает текст, но не умеет строить связи. Гавань сама собирает из Ваших отметок картину — и возвращает её Вам в виде живых отчётов. Разрозненные мысли превращаются в систему самопознания.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Нужно ли разбираться в Notion?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">Абсолютно нет. Вся магия, формулы и настройки уже готовы и работают сами. От открытия шаблона до первой записи — 15 минут. И Вы уже дома.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ——— ФИНАЛ / CTA ——— -->
+    <div class="divider"></div>
+
+    <section id="buy" class="final-section">
+        <div class="final-wave">🌊</div>
+        <div class="final-title">Добро<br>пожаловать<br><span>домой</span></div>
+        <div class="final-quote">
+            «Если Вы чувствуете, что Вам пора домой — заходите. Ключи уже оставлены.»
+        </div>
+        <div class="final-price-block">
+            <div class="final-price-label">Цена</div>
+            <div class="final-price"><span>₽</span>2 490</div>
+            <div class="final-price-note">Единоразовая оплата · бессрочный доступ</div>
+        </div>
+        <a href="#" class="cta-button pink" style="font-size:14px; padding:22px 48px;">Купить Эмоциональную Гавань</a>
+        <div style="font-size:13px; font-weight:300; color:var(--brown-light); text-align:center; line-height:1.6;">
+            После оплаты Вы получите ссылку на Notion-шаблон<br>и доступ к онбордингу — сразу на почту
+        </div>
+    </section>
+
+    <!-- ——— АВТОР ——— -->
+    <div class="divider"></div>
+
+    <div class="author-block">
+        <div class="author-avatar">🌿</div>
+        <div class="author-info">
+            <div class="author-name">Патрикеева Елена Александровна</div>
+            <div class="author-role">Автор · ИНН 503505258709 · Самозанятый</div>
+        </div>
+        <a href="https://t.me/GENTLE_HARBOR" class="author-contact" target="_blank">Telegram @GENTLE_HARBOR</a>
+    </div>
+
+</div>
+
+<script>
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const item = trigger.closest('.faq-accordion-item');
+            const body = item.querySelector('.faq-body');
+            const isOpen = trigger.classList.contains('open');
+
+            // Закрыть все
+            document.querySelectorAll('.faq-trigger').forEach(t => {
+                t.classList.remove('open');
+                t.setAttribute('aria-expanded', 'false');
+            });
+            document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+
+            // Открыть текущий, если был закрыт
+            if (!isOpen) {
+                trigger.classList.add('open');
+                trigger.setAttribute('aria-expanded', 'true');
+                body.classList.add('open');
+            }
+        });
+    });
+</script>
+</body>
+</html>
