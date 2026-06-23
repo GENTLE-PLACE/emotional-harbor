@@ -1134,7 +1134,6 @@ async function startPayment(btn) {
     btn.style.opacity = '0.7';
     btn.style.pointerEvents = 'none';
 
-    // Также блокируем вторую кнопку
     const btns = document.querySelectorAll('[onclick="startPayment(this)"]');
     btns.forEach(b => {
         b.style.opacity = '0.7';
@@ -1150,12 +1149,25 @@ async function startPayment(btn) {
         const data = await response.json();
 
         if (data.payment_url) {
-            window.location.href = data.payment_url;
+            // Создаём ссылку и кликаем — работает на мобильных
+            const a = document.createElement('a');
+            a.href = data.payment_url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            // Восстанавливаем кнопки
+            btns.forEach(b => {
+                b.style.opacity = '';
+                b.style.pointerEvents = '';
+            });
+            btn.textContent = original;
         } else {
             throw new Error('Нет ссылки на оплату');
         }
     } catch (e) {
-        // Восстанавливаем кнопки при ошибке
         btns.forEach(b => {
             b.style.opacity = '';
             b.style.pointerEvents = '';
