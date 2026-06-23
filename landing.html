@@ -1140,11 +1140,18 @@
 
 
 <script>
-async function startPayment(btn) {
-    const original = btn.textContent;
-    btn.textContent = 'Подождите...';
-    btn.style.opacity = '0.7';
-    btn.style.pointerEvents = 'none';
+// ——— Модальное окно выбора способа оплаты ———
+function startPayment(btn) {
+    // Показываем модалку выбора
+    document.getElementById('payment-modal').style.display = 'flex';
+}
+
+function closePaymentModal() {
+    document.getElementById('payment-modal').style.display = 'none';
+}
+
+async function pay(provider) {
+    closePaymentModal();
 
     const btns = document.querySelectorAll('[onclick="startPayment(this)"]');
     btns.forEach(b => {
@@ -1152,8 +1159,12 @@ async function startPayment(btn) {
         b.style.pointerEvents = 'none';
     });
 
+    const endpoint = provider === 'yukassa'
+        ? 'https://harbor-auth.gentle-place.workers.dev/create-payment'
+        : 'https://harbor-auth.gentle-place.workers.dev/create-payment-robokassa';
+
     try {
-        const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
+        const response = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }
         });
@@ -1161,7 +1172,6 @@ async function startPayment(btn) {
         const data = await response.json();
 
         if (data.payment_url) {
-            // Создаём ссылку и кликаем — работает на мобильных
             const a = document.createElement('a');
             a.href = data.payment_url;
             a.target = '_blank';
@@ -1169,25 +1179,52 @@ async function startPayment(btn) {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-
-            // Восстанавливаем кнопки
-            btns.forEach(b => {
-                b.style.opacity = '';
-                b.style.pointerEvents = '';
-            });
-            btn.textContent = original;
         } else {
-            throw new Error('Нет ссылки на оплату');
+            throw new Error('Нет ссылки');
         }
     } catch (e) {
+        alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
+    } finally {
         btns.forEach(b => {
             b.style.opacity = '';
             b.style.pointerEvents = '';
         });
-        btn.textContent = original;
-        alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
     }
 }
+
+// Закрываем по клику вне модалки
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('payment-modal');
+    if (e.target === modal) closePaymentModal();
+});
 </script>
+
+<!-- Модалка выбора способа оплаты -->
+<div id="payment-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fffdf5; border-radius:24px; padding:40px 36px; max-width:400px; width:100%; box-shadow:8px 10px 0 rgba(120,80,40,0.12); position:relative;">
+        <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:20px; background:none; border:none; font-size:20px; cursor:pointer; color:#c9a97a;">✕</button>
+        <div style="font-family:'Unbounded',sans-serif; font-size:13px; font-weight:700; color:#3a3228; margin-bottom:8px; letter-spacing:0.5px;">Способ оплаты</div>
+        <div style="font-family:'Lora',serif; font-style:italic; font-size:14px; color:#9a7050; margin-bottom:28px; line-height:1.6;">Выберите удобный способ — оба безопасны</div>
+
+        <div style="display:flex; flex-direction:column; gap:12px;">
+            <button onclick="pay('yukassa')" style="width:100%; padding:16px 20px; background:#fff; border:1.5px solid rgba(201,169,122,0.4); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color 0.2s; font-family:'Jost',sans-serif;">
+                <span style="font-size:24px;">💳</span>
+                <div style="text-align:left;">
+                    <div style="font-size:14px; font-weight:600; color:#3a3228;">ЮKassa</div>
+                    <div style="font-size:12px; color:#9a7050; margin-top:2px;">Карта, СБП, T-Pay, ЮMoney</div>
+                </div>
+            </button>
+
+            <button onclick="pay('robokassa')" style="width:100%; padding:16px 20px; background:#fff; border:1.5px solid rgba(201,169,122,0.4); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color 0.2s; font-family:'Jost',sans-serif;">
+                <span style="font-size:24px;">🏦</span>
+                <div style="text-align:left;">
+                    <div style="font-size:14px; font-weight:600; color:#3a3228;">Робокасса</div>
+                    <div style="font-size:12px; color:#9a7050; margin-top:2px;">Карта, СБП, электронные кошельки</div>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
