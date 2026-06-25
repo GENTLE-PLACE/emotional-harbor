@@ -745,6 +745,59 @@
             height: 18px;
             flex-shrink: 0;
         }
+		
+		        /* ——— КАСТОМНЫЕ ЧЕКБОКСЫ ——— */
+        .custom-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            color: #3a3228;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
+
+        .custom-checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+        .custom-checkbox .checkmark {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
+            border-radius: 5px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .custom-checkbox input:checked + .checkmark {
+            background: #e87a9c;
+            border-color: #e87a9c;
+        }
+
+        .custom-checkbox .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .custom-checkbox input:checked + .checkmark::after {
+            opacity: 1;
+        }
 
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
@@ -1160,29 +1213,49 @@
 
 <!-- Модалка согласия -->
 <div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#fffdf5; border-radius:24px; padding:40px 36px; max-width:440px; width:100%; box-shadow:8px 10px 0 rgba(120,80,40,0.12); text-align:center;">
-        <div style="font-family:'Unbounded',sans-serif; font-size:15px; font-weight:700; color:#3a3228; margin-bottom:8px;">Остался один шаг ✨</div>
-        <p style="font-family:'Jost',sans-serif; font-size:14px; color:#7a5840; margin-bottom:24px; line-height:1.6;">Перед оплатой необходимо подтвердить согласие с документами.</p>
+    <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
+        
+        <!-- Розовая полоска сверху -->
+        <div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
+        
+        <!-- Свечение -->
+        <div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
 
-        <label style="display:flex; align-items:flex-start; gap:10px; font-family:'Jost',sans-serif; font-size:14px; color:#3a3228; margin-bottom:14px; text-align:left; cursor:pointer;">
-            <input type="checkbox" id="agree-oferta" style="margin-top:3px; accent-color:#e87a9c; flex-shrink:0;">
+        <!-- Заголовок -->
+        <div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
+       Остался один <span style="color:#e87a9c;">шаг</span>
+    </div>
+
+        <!-- Подзаголовок -->
+        <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:12px;">
+            Подтвердите согласие перед оплатой
+        </div>
+
+                       <!-- Чекбоксы -->
+        <label class="custom-checkbox">
+            <input type="checkbox" id="agree-oferta">
+            <span class="checkmark"></span>
             <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
         </label>
 
-        <label style="display:flex; align-items:flex-start; gap:10px; font-family:'Jost',sans-serif; font-size:14px; color:#3a3228; margin-bottom:24px; text-align:left; cursor:pointer;">
-            <input type="checkbox" id="agree-privacy" style="margin-top:3px; accent-color:#e87a9c; flex-shrink:0;">
+        <label class="custom-checkbox" style="margin-bottom:8px;">
+            <input type="checkbox" id="agree-privacy">
+            <span class="checkmark"></span>
             <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
         </label>
 
+        <!-- Кнопка -->
         <button id="pay-button" disabled onclick="goToPayment()"
-            style="width:100%; padding:18px; background:#e87a9c; color:#fff; border:none; border-radius:4px;
-                   font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px; letter-spacing:1px;
-                   cursor:pointer; opacity:0.4; transition:opacity 0.2s;
-                   box-shadow:5px 6px 0 rgba(232,122,156,0.3);">
+            style="width:100%; padding:16px 20px; font-family:'Jost',sans-serif; font-size:13px; font-weight:600;
+                   letter-spacing:3px; text-transform:uppercase; color:#f7efe0; background:#3a3228;
+                   border:none; border-radius:12px; cursor:pointer; opacity:0.4;
+                   transition:opacity 0.2s ease, background-color 0.2s ease;
+                   box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
             Создать свою Гавань
         </button>
 
-        <button onclick="closeConsentModal()" style="margin-top:16px; background:none; border:none; color:#c9a97a; font-family:'Jost',sans-serif; font-size:13px; cursor:pointer; text-decoration:underline;">Отмена</button>
+        <!-- Отмена -->
+        <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
     </div>
 </div>
 
