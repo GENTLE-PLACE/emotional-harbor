@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <!-- SEO -->
+    <meta name="description" content="Эмоциональная Гавань — Notion-шаблон для ведения дневника, рефлексии и планирования. Шесть модулей, персонаж Есения, живая статистика эмоций.">
+    <meta name="keywords" content="Notion шаблон, дневник, рефлексия, планирование, эмоциональный дневник, саморазвитие, Notion template, Эмоциональная гавань">
+    <meta name="author" content="Елена Патрикеева">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Эмоциональная Гавань — Notion-пространство для глубокого контакта с собой">
+    <meta property="og:description" content="Интерактивный дневник, который умеет считать и бережно заботится о Вас.">
+    <meta property="og:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
+    <meta property="og:url" content="https://gentle-place.github.io/emotional-harbor/landing.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Эмоциональная Гавань">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Эмоциональная Гавань — Notion-шаблон для души">
+    <meta name="twitter:description" content="Дневник, который умеет считать и бережно заботится о Вас.">
+    <meta name="twitter:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
     <title>Эмоциональная Гавань · Notion-пространство для глубокого контакта с собой</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1138,66 +1157,6 @@
     });
 </script>
 
-
-<script>
-// ——— Модальное окно выбора способа оплаты ———
-function startPayment(btn) {
-    // Показываем модалку выбора
-    document.getElementById('payment-modal').style.display = 'flex';
-}
-
-function closePaymentModal() {
-    document.getElementById('payment-modal').style.display = 'none';
-}
-
-async function pay(provider) {
-    closePaymentModal();
-
-    const btns = document.querySelectorAll('[onclick="startPayment(this)"]');
-    btns.forEach(b => {
-        b.style.opacity = '0.7';
-        b.style.pointerEvents = 'none';
-    });
-
-    const endpoint = provider === 'yukassa'
-        ? 'https://harbor-auth.gentle-place.workers.dev/create-payment'
-        : 'https://harbor-auth.gentle-place.workers.dev/create-payment-robokassa';
-
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-        const data = await response.json();
-
-        if (data.payment_url) {
-            const a = document.createElement('a');
-            a.href = data.payment_url;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        } else {
-            throw new Error('Нет ссылки');
-        }
-    } catch (e) {
-        alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
-    } finally {
-        btns.forEach(b => {
-            b.style.opacity = '';
-            b.style.pointerEvents = '';
-        });
-    }
-}
-
-// Закрываем по клику вне модалки
-document.addEventListener('click', function(e) {
-    const modal = document.getElementById('payment-modal');
-    if (e.target === modal) closePaymentModal();
-});
-</script>
 
 <!-- Модалка согласия -->
 <div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
