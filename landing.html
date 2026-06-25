@@ -3,31 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <!-- SEO -->
-    <meta name="description" content="Эмоциональная Гавань — Notion-шаблон для ведения дневника, рефлексии и планирования. Шесть модулей, персонаж Есения, живая статистика эмоций.">
-    <meta name="keywords" content="Notion шаблон, дневник, рефлексия, планирование, эмоциональный дневник, саморазвитие, Notion template, Эмоциональная гавань">
-    <meta name="author" content="Елена Патрикеева">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Эмоциональная Гавань — Notion-пространство для глубокого контакта с собой">
-    <meta property="og:description" content="Интерактивный дневник, который умеет считать и бережно заботится о Вас.">
-    <meta property="og:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
-    <meta property="og:url" content="https://gentle-place.github.io/emotional-harbor/landing.html">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Эмоциональная Гавань">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Эмоциональная Гавань — Notion-шаблон для души">
-    <meta name="twitter:description" content="Дневник, который умеет считать и бережно заботится о Вас.">
-    <meta name="twitter:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
-    <title>Эмоциональная Гавань · Notion-пространство для глубокого контакта с собой</title>
+    <title>Политика обработки персональных данных · Эмоциональная Гавань</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --beige: #f7efe0;
             --brown-dark: #3a3228;
@@ -35,1287 +14,201 @@
             --brown-light: #9a7050;
             --gold: #c9a97a;
             --pink: #e87a9c;
-            --pink-soft: #F8B4C0;
-            --yellow: #F7D08A;
-            --green: #b8e0d2;
-            --blue: #A5C2F1;
         }
 
-        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: var(--beige);
             font-family: 'Jost', sans-serif;
             color: var(--brown-dark);
-            position: relative;
-            overflow-x: hidden;
         }
-
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(to right, rgba(201,169,122,0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(201,169,122,0.07) 1px, transparent 1px);
-            background-size: 30px 30px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .bg-waves {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            opacity: 0.07;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .corner-wear { position: fixed; pointer-events: none; z-index: 1; }
 
         .page {
-            position: relative;
-            z-index: 2;
-            max-width: 960px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 0 48px 120px;
+            padding: 64px 32px 100px;
         }
 
-        /* ——— HERO ——— */
-        .hero {
-            min-height: auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px 0 0;
-            position: relative;
-        }
-
-        .hero-eyebrow {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 28px;
-        }
-
-        .hero-title {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 900;
-            font-size: clamp(44px, 6vw, 80px);
-            line-height: 0.92;
-            letter-spacing: -3px;
-            color: var(--brown-dark);
-            margin-bottom: 32px;
-            white-space: nowrap;
-        }
-
-        .hero-title span { color: var(--pink); display: block; }
-
-        .hero-sub {
-            font-size: 17px;
-            font-weight: 300;
-            color: var(--brown-mid);
-            line-height: 1.7;
-            max-width: 560px;
-            margin-bottom: 48px;
-            border-left: 3px solid var(--pink);
-            padding-left: 20px;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--brown-dark);
-            color: var(--beige);
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
+        .back-link {
+            display: inline-block;
             font-size: 13px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 20px 36px;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 5px 6px 0 rgba(58,50,40,0.2);
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 8px 0 rgba(58,50,40,0.2);
-        }
-
-        .cta-button.pink {
-            background: var(--pink);
-            box-shadow: 5px 6px 0 rgba(232,122,156,0.3);
-        }
-
-        .cta-button.pink:hover {
-            box-shadow: 7px 8px 0 rgba(232,122,156,0.3);
-        }
-
-        .cta-price {
-            margin-top: 16px;
-            font-size: 13px;
+            font-weight: 500;
             color: var(--brown-light);
-            font-weight: 400;
+            text-decoration: none;
+            margin-bottom: 32px;
+            border-bottom: 1px dashed rgba(201,169,122,0.5);
+            padding-bottom: 2px;
         }
+        .back-link:hover { color: var(--pink); }
 
-        /* ——— РАЗДЕЛИТЕЛЬ ——— */
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,169,122,0.35) 20%, rgba(201,169,122,0.35) 80%, transparent);
-            margin: 72px 0;
-        }
-
-        .section { padding: 0; }
-
-        .section-eyebrow {
+        .header-eyebrow {
             font-size: 11px;
             font-weight: 600;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
-        .section-title {
+        .header-title {
             font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: clamp(26px, 3.8vw, 40px);
+            font-weight: 900;
+            font-size: 34px;
             letter-spacing: -1.5px;
-            line-height: 1.05;
-            color: var(--brown-dark);
-            margin-bottom: 32px;
+            line-height: 1.15;
+            margin-bottom: 28px;
         }
 
-        .section-title span { color: var(--pink); }
+        .header-title span { color: var(--pink); }
 
-        /* ——— INTRO ——— */
-        .intro-lead {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.85;
+        .meta-line {
+            font-size: 13px;
+            color: var(--brown-light);
+            margin-bottom: 48px;
+            padding-bottom: 28px;
+            border-bottom: 1.5px solid rgba(201,169,122,0.3);
+        }
+
+        .content {
+            font-size: 15px;
+            line-height: 1.75;
             color: #4a3f38;
-            margin-bottom: 36px;
-            max-width: 740px;
-            white-space: pre-line;
         }
 
-        /* Плашки сравнения */
-        .compare-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .compare-card {
-            border-radius: 18px;
-            padding: 28px 28px 32px;
-            border: 1.5px solid rgba(201,169,122,0.35);
-            box-shadow: 6px 8px 0 rgba(120,80,40,0.07);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .compare-card.plain {
-            background: rgba(255,255,255,0.5);
-        }
-
-        .compare-card.harbor {
-            background: rgba(255,248,235,0.8);
-            border-color: rgba(232,122,156,0.25);
-        }
-
-        .compare-label {
+        .content h2 {
             font-family: 'Unbounded', sans-serif;
-            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
-        .compare-card.harbor .compare-label { color: var(--pink); }
-
-        .compare-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 17px;
             color: var(--brown-dark);
             letter-spacing: -0.3px;
+            margin: 44px 0 16px;
         }
 
-        .compare-text {
-            font-size: 14.5px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            white-space: pre-line;
-        }
+        .content h2:first-child { margin-top: 0; }
 
-        /* ——— ДЛЯ ВАС ——— */
-        .for-you-block {
-            background: rgba(248,180,192,0.1);
-            border: 1.5px solid rgba(248,180,192,0.3);
-            border-radius: 18px;
-            padding: 32px 36px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .content p { margin-bottom: 14px; }
 
-        .for-you-eyebrow {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--pink);
-            margin-bottom: 6px;
-        }
+        .content ul { margin: 0 0 14px 20px; }
+        .content li { margin-bottom: 6px; }
 
-        .for-you-item {
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 1.75;
-            color: #4a3f38;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .for-you-item::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--pink);
-            font-weight: 400;
-        }
-
-        /* ——— МОДУЛИ ——— */
-        .modules-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .module-card {
-            background: rgba(255,248,235,0.65);
-            border: 1.5px solid rgba(201,169,122,0.35);
-            border-radius: 20px;
-            padding: 28px 24px 28px;
-            box-shadow: 7px 9px 0 rgba(120,80,40,0.07);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .module-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            border-radius: 20px 20px 0 0;
-        }
-        .mc-1::after { background: var(--yellow); }
-        .mc-2::after { background: var(--pink-soft); }
-        .mc-3::after { background: var(--green); }
-        .mc-4::after { background: var(--blue); }
-        .mc-5::after { background: #e0c8f0; }
-        .mc-6::after { background: var(--yellow); }
-
-        .mc-1 { transform: rotate(-0.3deg); }
-        .mc-2 { transform: rotate(0.4deg); }
-        .mc-3 { transform: rotate(-0.2deg); }
-        .mc-4 { transform: rotate(0.3deg); }
-        .mc-5 { transform: rotate(-0.4deg); }
-        .mc-6 { transform: rotate(0.2deg); }
-
-        .module-header { display: flex; align-items: center; gap: 10px; }
-        .module-icon { font-size: 20px; line-height: 1; }
-
-        .module-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            color: var(--brown-dark);
-            line-height: 1.3;
-        }
-
-        .module-text {
-            font-size: 13.5px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            white-space: pre-line;
-        }
-
-        .module-note {
-            font-size: 12.5px;
-            font-style: italic;
-            font-weight: 300;
-            color: var(--brown-light);
-            line-height: 1.6;
-            border-top: 1px dashed rgba(201,169,122,0.35);
-            padding-top: 10px;
-            margin-top: 2px;
-        }
-
-        /* ——— ЕСЕНИЯ ——— */
-        .esenia-card {
-            background: rgba(255,248,235,0.75);
-            border: 1.5px solid rgba(201,169,122,0.4);
-            border-radius: 20px;
-            padding: 40px 40px 44px;
-            box-shadow: 7px 9px 0 rgba(120,80,40,0.08);
-        }
-
-        .esenia-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--brown-dark);
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .esenia-text {
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 1.85;
-            color: #4a3f38;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .esenia-italic {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-size: 14.5px;
-            color: #6a5040;
-            line-height: 1.7;
-            border-left: 3px solid rgba(232,122,156,0.4);
-            padding-left: 14px;
-        }
-
-        /* ——— НАУКА ——— */
-        .science-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .science-card {
-            background: rgba(165,194,241,0.08);
-            border: 1px solid rgba(165,194,241,0.3);
-            border-radius: 16px;
-            padding: 28px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .science-card::before {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0;
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            opacity: 0.07;
-        }
-        .sc-1::before { background: var(--yellow); }
-        .sc-2::before { background: var(--pink-soft); }
-        .sc-3::before { background: var(--green); }
-        .sc-4::before { background: var(--blue); }
-
-        .science-card-1 { transform: rotate(-0.3deg); }
-        .science-card-2 { transform: rotate(0.4deg); }
-        .science-card-3 { transform: rotate(-0.2deg); }
-        .science-card-4 { transform: rotate(0.3deg); }
-
-        .science-author {
-            font-family: 'Caveat', cursive;
-            font-size: 22px; display:none;
-            font-weight: 700;
-            color: var(--brown-dark);
-        }
-
-        .science-concept {
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #5a7ab0;
-        }
-
-        .science-text {
-            font-size: 14px;
-            font-weight: 300;
-            line-height: 1.75;
-            color: #4a3f38;
-        }
-
-        .science-text b { font-weight: 600; color: var(--brown-dark); }
-
-        .science-feature {
-            font-size: 13px;
-            font-weight: 400;
-            color: #5a4a3a;
-            border-left: 3px solid rgba(201,169,122,0.5);
-            padding-left: 12px;
-            line-height: 1.65;
-        }
-
-        /* ——— ПУТЕВОДИТЕЛЬ ——— */
-        .guide-block {
-            background: rgba(255,248,235,0.75);
-            border: 1.5px solid rgba(201,169,122,0.35);
-            border-radius: 20px;
-            padding: 40px 40px;
-            box-shadow: 7px 9px 0 rgba(120,80,40,0.07);
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .guide-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--brown-dark);
-            letter-spacing: -0.5px;
-        }
-
-        .guide-text {
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-        }
-
-        /* ——— ЧТО ВНУТРИ ——— */
-        .inside-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .inside-item {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-            font-size: 15px;
-            font-weight: 300;
-            color: #4a3f38;
-            line-height: 1.65;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(201,169,122,0.15);
-        }
-
-        .inside-item:last-child { border-bottom: none; }
-
-        .inside-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--gold);
-            flex-shrink: 0;
-            margin-top: 7px;
-        }
-
-        /* ——— FAQ АККОРДЕОН ——— */
-        .faq-accordion {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .faq-accordion-item {
-            border-bottom: 1px solid rgba(201,169,122,0.22);
-        }
-
-        .faq-accordion-item:first-child {
-            border-top: 1px solid rgba(201,169,122,0.22);
-        }
-
-        .faq-trigger {
-            width: 100%;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 22px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-            text-align: left;
-            font-family: 'Unbounded', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--brown-dark);
-            line-height: 1.4;
-            transition: color 0.2s;
-        }
-
-        .faq-trigger:hover { color: var(--pink); }
-        .faq-trigger.open { color: var(--pink); }
-
-        .faq-arrow {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(201,169,122,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.3s, background 0.2s, border-color 0.2s;
-        }
-
-        .faq-trigger.open .faq-arrow {
-            transform: rotate(45deg);
-            background: var(--pink);
-            border-color: var(--pink);
-        }
-
-        .faq-arrow svg { width: 12px; height: 12px; stroke: var(--brown-dark); transition: stroke 0.2s; }
-        .faq-trigger.open .faq-arrow svg { stroke: white; }
-
-        .faq-body {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.32s ease;
-        }
-
-        .faq-body.open { grid-template-rows: 1fr; }
-        .faq-body-inner { overflow: hidden; }
-
-        .faq-answer {
-            padding: 0 0 24px;
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            max-width: 700px;
-        }
-
-        /* ——— ФИНАЛ ——— */
-        .final-section {
+        .highlight-box {
             background: rgba(232,122,156,0.06);
-            border: 1.5px solid rgba(232,122,156,0.2);
-            border-radius: 24px;
-            padding: 64px 52px;
+            border-left: 3px solid var(--pink);
+            border-radius: 0 10px 10px 0;
+            padding: 14px 18px;
+            margin: 16px 0;
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            font-size: 13px;
+            color: var(--brown-light);
             text-align: center;
-            box-shadow: 7px 9px 0 rgba(120,80,40,0.06);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .final-wave { font-size: 40px; }
-
-        .final-title {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 900;
-            font-size: clamp(32px, 5vw, 52px);
-            letter-spacing: -2px;
-            line-height: 1.05;
-            color: var(--brown-dark);
-        }
-
-        .final-title span { color: var(--pink); }
-
-        .final-quote {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-size: 17px;
-            line-height: 1.65;
-            color: #5a4a3a;
-            max-width: 480px;
-        }
-
-        .final-price-block {
-            background: rgba(255,248,235,0.8);
-            border: 1.5px solid rgba(201,169,122,0.4);
-            border-radius: 16px;
-            padding: 28px 48px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .final-price-label {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
-        .final-price {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 900;
-            font-size: 52px;
-            letter-spacing: -2px;
-            color: var(--brown-dark);
-            line-height: 1;
-        }
-
-        .final-price span {
-            font-size: 28px;
-            color: var(--pink);
-            vertical-align: super;
-        }
-
-        .final-price-note {
-            font-size: 13px;
-            font-weight: 300;
-            color: var(--brown-light);
-        }
-
-        /* ——— АВТОР ——— */
-        .author-block {
-            background: rgba(255,248,235,0.65);
-            border: 1.5px solid rgba(201,169,122,0.35);
-            border-radius: 16px;
-            padding: 28px 32px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .author-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--pink-soft), var(--yellow));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px; display:none;
-            flex-shrink: 0;
-        }
-
-        .author-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--brown-light);
-            margin-bottom: 2px;
-        }
-
-        .author-inn {
-            font-size: 12px;
-            font-weight: 300;
-            color: var(--brown-light);
-            letter-spacing: 0.3px;
-        }
-
-        .author-contact {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 400;
-            color: #9a7050;
-            text-decoration: none;
-            padding-bottom: 1px;
-            flex-shrink: 0;
-        }
-
-        .tg-icon {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
-		
-		        /* ——— КАСТОМНЫЕ ЧЕКБОКСЫ ——— */
-        .custom-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-family: 'Jost', sans-serif;
-            font-size: 14px;
-            color: #3a3228;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-        }
-
-        .custom-checkbox input[type="checkbox"] {
-            display: none;
-        }
-
-        .custom-checkbox .checkmark {
-            width: 18px;
-            height: 18px;
-            border: 1.5px solid rgba(201, 169, 122, 0.5);
-            border-radius: 5px;
-            flex-shrink: 0;
-            position: relative;
-            transition: all 0.2s ease;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .custom-checkbox input:checked + .checkmark {
-            background: #e87a9c;
-            border-color: #e87a9c;
-        }
-
-        .custom-checkbox .checkmark::after {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 2px;
-            width: 5px;
-            height: 9px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-            opacity: 0;
-            transition: opacity 0.15s ease;
-        }
-
-        .custom-checkbox input:checked + .checkmark::after {
-            opacity: 1;
-        }
-
-        /* ——— АДАПТИВ ——— */
-        @media (max-width: 680px) {
-            .page { padding: 0 24px 80px; }
-            .hero-title { font-size: 38px; letter-spacing: -1.5px; white-space: normal; }
-            .compare-grid, .science-grid, .modules-grid { grid-template-columns: 1fr; }
-            .final-section { padding: 40px 24px; }
-            .author-block { flex-wrap: wrap; }
-            .author-contact { margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
-<svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
-    <path d="M0,200 Q300,120 600,220 T1200,160" fill="none" stroke="#c9a97a" stroke-width="3" stroke-dasharray="14 8"/>
-    <path d="M0,480 Q400,380 800,500 T1200,440" fill="none" stroke="#d97787" stroke-width="2"/>
-    <path d="M0,720 Q350,640 700,740 T1200,680" fill="none" stroke="#A5C2F1" stroke-width="2"/>
-</svg>
-
-<svg class="corner-wear" style="top:0;left:0;width:200px;height:200px;" viewBox="0 0 200 200">
-    <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
-    <rect width="200" height="200" fill="url(#cw1)"/>
-</svg>
-<svg class="corner-wear" style="bottom:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180">
-    <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.22"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
-    <rect width="180" height="180" fill="url(#cw2)"/>
-</svg>
-
 <div class="page">
 
-    <!-- HERO -->
-    <div class="hero">
-        <div class="hero-eyebrow">Notion-пространство для глубокого контакта с собой</div>
-        <h1 class="hero-title">
-            Эмоциональная<span>Гавань</span>
-        </h1>
-        <p class="hero-sub">Интерактивный Дневник, который умеет считать.</p>
-        <div>
-            <span class="cta-button pink" id="btn-pay-hero" onclick="openConsentModal()">Войти в Гавань · 2 490 ₽</span>
-            <div class="cta-price">Единоразовая покупка · Notion бесплатный тариф · Ваши данные только у Вас</div>
+    <a href="landing.html" class="back-link">← Вернуться в Эмоциональную Гавань</a>
+
+    <div class="header-eyebrow">Эмоциональная Гавань</div>
+    <div class="header-title">Политика обработки <span>персональных данных</span></div>
+    <div class="meta-line">в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных»</div>
+
+    <div class="content">
+
+        <h2>1. Общие положения</h2>
+        <p>Настоящая Политика обработки персональных данных (далее — «Политика») определяет порядок обработки и защиты персональных данных пользователей (далее — «Пользователь», «Покупатель») сайта <b>https://gentle-place.github.io/emotional-harbor/</b> (далее — «Сайт»), принадлежащего Патрикеевой Елене Александровне (далее — «Оператор»).</p>
+        <p>Настоящая Политика разработана в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и действует в отношении всех персональных данных, которые Оператор может получить от Пользователя во время использования Сайта, оформления заказа и в ходе исполнения Договора купли-продажи.</p>
+       <p>Приобретая Цифровой продукт, Пользователь подтверждает согласие с условиями настоящей Политики путём проставления отметки в чекбоксе «Я согласен(а) с Политикой обработки персональных данных» перед переходом к оплате. Без данного согласия оплата и предоставление доступа к Цифровому продукту невозможны.</p>
+
+        <h2>2. Основные термины</h2>
+        <p><b>Персональные данные</b> — любая информация, относящаяся к прямо или косвенно определённому или определяемому физическому лицу (субъекту персональных данных).</p>
+        <p><b>Оператор</b> — Патрикеева Елена Александровна (ИНН 503505258709, плательщик НПД), самостоятельно организующая обработку персональных данных.</p>
+        <p><b>Обработка персональных данных</b> — любое действие или совокупность действий с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение, извлечение, использование, передачу, обезличивание, блокирование, удаление, уничтожение.</p>
+
+        <h2>3. Какие данные собираются и зачем</h2>
+        <p>Оператор собирает и обрабатывает следующие категории персональных данных Пользователей:</p>
+        <ul>
+            <li><b>Email-адрес</b> — для направления ссылки на Цифровой продукт после оплаты, отправки чека (в соответствии с требованиями ФЗ-54 для плательщиков НПД), а также для информационных сообщений, связанных с исполнением Договора;</li>
+            <li><b>Имя</b> (при предоставлении Пользователем) — для персонализации обращений;</li>
+            <li><b>Данные о факте оплаты</b> (сумма, время, идентификатор транзакции) — для целей бухгалтерского учёта и исполнения обязательств перед Покупателем. Полные платёжные данные (номер карты, CVC-код) Оператору не передаются — их обработку осуществляет платёжный сервис;</li>
+            <li><b>Данные, автоматически собираемые при посещении Сайта</b> (IP-адрес, тип браузера, информация о cookies, время доступа) — для обеспечения функционирования Сайта и аналитики.</li>
+        </ul>
+        <p>Оператор <b>не собирает и не обрабатывает</b> специальные категории персональных данных (раса, национальность, политические взгляды, религиозные убеждения, состояние здоровья, биометрические данные).</p>
+
+        <h2>4. Цели обработки персональных данных</h2>
+        <p>Обработка персональных данных осуществляется исключительно в следующих целях:</p>
+        <ul>
+            <li>заключение и исполнение Договора купли-продажи Цифрового продукта (публичная оферта размещена на Сайте);</li>
+            <li>направление Покупателю ссылки для доступа к оплаченному Цифровому продукту;</li>
+            <li>направление фискального чека в соответствии с законодательством РФ о применении контрольно-кассовой техники;</li>
+            <li>связь с Покупателем по вопросам, связанным с исполнением Договора;</li>
+            <li>улучшение работы Сайта.</li>
+        </ul>
+        <p>Персональные данные не используются для маркетинговых рассылок без отдельного явного согласия Пользователя.</p>
+
+        <h2>5. Правовые основания обработки</h2>
+        <p>Обработка персональных данных осуществляется на следующих правовых основаниях:</p>
+        <ul>
+            <li>Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»;</li>
+            <li>Гражданский кодекс РФ;</li>
+            <li>Федеральный закон от 07.02.1992 № 2300-1 «О защите прав потребителей»;</li>
+            <li>Федеральный закон от 27.11.2018 № 422-ФЗ «О проведении эксперимента по установлению специального налогового режима „Налог на профессиональный доход“»;</li>
+            <li>согласие Пользователя, выраженное путём акцепта публичной оферты (совершения конклюдентных действий — оплаты Цифрового продукта).</li>
+        </ul>
+
+        <h2>6. Порядок обработки и хранения</h2>
+        <p>Обработка персональных данных осуществляется с использованием средств автоматизации и/или без их использования.</p>
+        <p>Оператор принимает необходимые организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования, распространения.</p>
+        <p>Срок хранения персональных данных определяется целями их обработки: данные хранятся в течение срока действия Договора и 3 (трёх) лет после его исполнения (в соответствии с требованиями бухгалтерского и налогового учёта), после чего подлежат уничтожению или обезличиванию, если иное не предусмотрено законодательством РФ.</p>
+        <p>Оператор до начала осуществления трансграничной передачи персональных данных обязан убедиться в том, что иностранным государством, на территорию которого предполагается осуществлять передачу персональных данных, обеспечивается надёжная защита прав субъектов персональных данных.</p>
+<p>Техническое размещение Сайта на серверах провайдера GitHub Pages может влечь за собой трансграничную передачу обезличенных данных (IP-адрес, файлы cookies) в целях обеспечения работоспособности Сайта. Пользователь, соглашаясь с настоящей Политикой, подтверждает, что ознакомлен с данными условиями технической реализации Сайта.</p>
+
+        <h2>7. Передача данных третьим лицам</h2>
+        <p>Оператор вправе передавать персональные данные Пользователя третьим лицам исключительно в следующих случаях:</p>
+        <ul>
+            <li>платёжным сервисам — в объёме, необходимом для проведения оплаты (при этом полные данные банковских карт обрабатываются платёжным сервисом и Оператору не передаются);</li>
+            <li>уполномоченным государственным органам — по основаниям, предусмотренным законодательством РФ.</li>
+        </ul>
+        <p>Передача персональных данных иным третьим лицам без согласия Пользователя не допускается.</p>
+
+        <h2>8. Права Пользователя</h2>
+        <p>Пользователь имеет право:</p>
+        <ul>
+            <li>получать информацию, касающуюся обработки его персональных данных;</li>
+            <li>требовать уточнения, блокирования или уничтожения неполных, устаревших, недостоверных или незаконно полученных персональных данных;</li>
+            <li>отозвать согласие на обработку персональных данных, направив соответствующее уведомление на email Оператора. В этом случае Оператор прекращает обработку, за исключением случаев, когда обработка необходима для исполнения обязательств, установленных законодательством РФ;</li>
+            <li>обжаловать действия или бездействие Оператора в уполномоченный орган по защите прав субъектов персональных данных (Роскомнадзор) или в судебном порядке.</li>
+        </ul>
+
+        <h2>9. Cookies и автоматически собираемые данные</h2>
+        <p>Сайт может использовать файлы cookies — небольшие текстовые файлы, сохраняемые браузером Пользователя. Cookies используются для обеспечения корректной работы Сайта и сбора обезличенной статистики. Пользователь может отключить cookies в настройках браузера, однако это может повлиять на работу некоторых функций Сайта.</p>
+
+        <h2>10. Реквизиты Оператора</h2>
+        <div class="highlight-box">
+            <p style="margin-bottom:8px;"><b>Оператор персональных данных:</b></p>
+            <p style="margin-bottom:4px;">Патрикеева Елена Александровна</p>
+            <p style="margin-bottom:4px;">ИНН: 503505258709</p>
+            <p style="margin-bottom:4px;">Статус: самозанятая (плательщик налога на профессиональный доход)</p>
+            <p style="margin-bottom:4px;">Email: patrikeeva.elena@gmail.com</p>
+            <p style="margin-bottom:4px;">Телефон: +7 916 480-10-12</p>
+            <p style="margin-bottom:0;">Сайт: https://gentle-place.github.io/emotional-harbor/</p>
         </div>
+
+        <h2>11. Заключительные положения</h2>
+        <p>Настоящая Политика вступает в силу с момента её размещения на Сайте. Оператор вправе вносить изменения в Политику; новая редакция вступает в силу с момента её публикации на Сайте, если иное не предусмотрено новой редакцией.</p>
+        <p>Актуальная редакция Политики всегда доступна по адресу: <b>https://gentle-place.github.io/emotional-harbor/Privacy.html</b></p>
+        <p>По всем вопросам, связанным с обработкой персональных данных, Пользователь может обратиться к Оператору по электронной почте: <b>patrikeeva.elena@gmail.com</b></p>
+
     </div>
 
-    <!-- INTRO -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="section-eyebrow">Зачем это нужно</div>
-        <h2 class="section-title">Что такое<br><span>Эмоциональная Гавань</span></h2>
-
-        <div class="intro-lead">Это место, где можно выговорить то, что нельзя сказать вслух — то, о чём не расскажешь подруге.
-Пережить застрявшие эмоции заново, до самого катарсиса, без страха оценки.
-Понять свои истинные чувства и скрытые мотивы.
-И ещё «историческая личная память» — зафиксировать детали жизни, чтобы не потерять ни одного важного штриха.</div>
-
-        <div class="intro-lead">Обычный дневник — это отдельные островки. Сегодняшняя запись не помнит вчерашнюю.
-
-Гавань — это архитектура.
-Здесь Копилка тепла помнит, в какой день и в каком состоянии Вас поддержали.
-Источники энергии показывают, что именно сработало, когда батарея была на нуле.
-Опоры соединяются с конкретными днями, когда они Вас удержали.
-А нежная аналитика собирает всё это в одну карту. Через месяц Вы увидите себя с расстояния, которого не бывает в моменте — и поймёте, что были богаче, чем казалось.</div>
-
-        <div class="for-you-block">
-            <div class="for-you-eyebrow">Это для Вас, если</div>
-            <div class="for-you-item">Вы часто бежите сквозь дни, не замечая, какими они были на вкус.</div>
-            <div class="for-you-item">Вам не хватало места, где можно быть честной, а не продуктивной.</div>
-            <div class="for-you-item">Где грусть не нужно «прорабатывать», а злость не нужно оправдывать.</div>
-            <div class="for-you-item">Куда можно просто прийти — с любым днём.</div>
-        </div>
-    </section>
-
-    <!-- МОДУЛИ -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="section-eyebrow">Карта Гавани</div>
-        <h2 class="section-title">Шесть пространств,<br>по которым хочется <span>ходить босиком</span></h2>
-
-        <div class="modules-grid">
-
-            <div class="module-card mc-1">
-                <div class="module-header">
-                    <div class="module-icon">📔</div>
-                    <div class="module-title">Дневник настроения</div>
-                </div>
-                <div class="module-text">Место, куда Вы приходите не за фактами, а за оттенками чувств.
-Здесь не нужно писать красиво или «правильно». Можно просто шепотом рассказать себе, что на самом деле происходит внутри.
-
-Давайте дням имена — не по датам, а по ощущениям. «Благодарность и мокрый снег» вместо «22 января» и находите микро-сокровища в самых обычных буднях.
-Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
-                <div class="module-note">Здесь рождается вся Ваша статистика.</div>
-            </div>
-
-            <div class="module-card mc-2">
-                <div class="module-header">
-                    <div class="module-icon">📊</div>
-                    <div class="module-title">Статистика эмоций</div>
-                </div>
-                <div class="module-text">Самая нежная аналитика в Вашей жизни.
-
-Сюда не нужно ничего записывать отдельно — этот блок сам собирает то, чем Вы делились, и показывает Вас же: объёмно, честно, красиво. Облако эмоций, энергетический ландшафт, паттерны и связи — всё это появляется само.
-
-Иногда он показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.
-
-Здесь живут и маленькие эксперименты: заказать в кафе «то, что сегодня самое красивое» по выбору официанта, или спеть оперу в пробке. Лёгкие, почти игровые действия — чтобы мягко встряхнуть внутренний барометр и вернуться к себе.</div>
-                <div class="module-note">Иногда показывает то, что не видно в моменте.</div>
-            </div>
-
-            <div class="module-card mc-3">
-                <div class="module-header">
-                    <div class="module-icon">💌</div>
-                    <div class="module-title">Копилка тепла</div>
-                </div>
-                <div class="module-text">Самое нежное место во всей Гавани.
-
-Голосовое от подруги, которое Вы переслушиваете в плохой день. Комментарий от клиента, после которого расправляются плечи. Письмо от мамы. Сюда попадает всё, что однажды попало точно в грудь — и оставило там свет.
-
-Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходите сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
-                <div class="module-note">Аптечка с подписанными баночками.</div>
-            </div>
-
-            <div class="module-card mc-4">
-                <div class="module-header">
-                    <div class="module-icon">🔋</div>
-                    <div class="module-title">Источники энергии</div>
-                </div>
-                <div class="module-text">Ваш личный каталог топлива.
-
-Запахи, от которых внутри разливается тепло.
-Ритуалы, которые работают как кнопка перезагрузки.
-Еда, которая возвращает в детство. Тишина, которая наполняет, а не давит.
-
-Когда силы на исходе — Вы не думаете, что делать. Просто открываете и выбираете, что откликается прямо сейчас.</div>
-            </div>
-
-            <div class="module-card mc-5">
-                <div class="module-header">
-                    <div class="module-icon">🛟</div>
-                    <div class="module-title">Мои опоры</div>
-                </div>
-                <div class="module-text">Самое устойчивое место в Гавани.
-
-Здесь не то, что случилось однажды, а то, что работает всегда.
-Люди, места, ритуалы, занятия — всё, на что можно опереться, когда всё вокруг качается.
-Со временем здесь появится Ваша личная хроника: живое доказательство того, что именно помогло Вам выпрямиться, когда наклонило почти до земли.</div>
-                <div class="module-note">Когда всё качает — здесь не качает.</div>
-            </div>
-
-            <div class="module-card mc-6">
-                <div class="module-header">
-                    <div class="module-icon">🎬</div>
-                    <div class="module-title">Уютный контент</div>
-                </div>
-                <div class="module-text">Подкаст, когда внутри слишком шумно. Книга, когда нужно вспомнить, что ценность не нужно заслуживать. Фильм, после которого дышится глубже.
-
-Контент здесь собирается не по жанрам, а по состоянию. Comfort food для мозга — только для Ваших настроений и Вашей чувствительности.</div>
-                <div class="module-note">Comfort food для мозга.</div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ЕСЕНИЯ -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="section-eyebrow">Ваш проводник</div>
-        <h2 class="section-title">Познакомьтесь<br>с <span>Есенией</span></h2>
-
-        <div class="esenia-card">
-            <div class="esenia-title">Вы не останетесь один на один с чистым листом.</div>
-            <div class="esenia-text">
-                <p>В Гавани живёт персонаж — Есения. Её записи настоящие: там есть «Батарея на нуле», «Ревность», «Розовый рассвет». Она не делает вид, что всё хорошо — и именно это самое важное.</p>
-                <p>Есения не «учит жить», она показывает, как можно замечать красоту в любом настроении — даже когда «батарея на нуле».</p>
-                <div class="esenia-italic">
-                    Можно подглядывать, как она описывает эмоцию, как называет день, что кладёт в Копилку тепла.
-                </div>
-                <p>Когда почувствуете, что нашли свой голос — Есения тихо уйдёт на второй план.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- НАУКА -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="section-eyebrow">На чём это стоит</div>
-        <h2 class="section-title">Реальная наука<br>в <span>тёплой упаковке</span></h2>
-        <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:16px;">Гавань — это не просто красивый шаблон. За каждым блоком стоит реальное исследование. Просто упакованное так, чтобы хотелось открывать каждый день.</p>
-        <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:32px; font-style:italic;">Писать в красивом пространстве — это как пить кофе из тонкого фарфора вместо пластикового стаканчика. Смысл тот же, а самоощущение — совершенно другое.</p>
-
-        <div class="science-grid">
-            <div class="science-card sc-1 science-card-1">
-                <div class="science-author">Martin Seligman</div>
-                <div class="science-concept">Позитивная психология</div>
-                <div class="science-text"><b>Три радости дня.</b> Доказано: регулярная фиксация хорошего снижает тревогу и повышает удовлетворённость жизнью. Это не «позитивное мышление», а мягкая перенастройка фильтров внимания.</div>
-                <div class="science-feature">Через месяц Вы начнёте замечать хорошее прямо в моменте — просто потому что Ваш внутренний взгляд научился смотреть иначе.</div>
-            </div>
-            <div class="science-card sc-2 science-card-2">
-                <div class="science-author">Lisa Feldman Barrett</div>
-                <div class="science-concept">Эмоциональная гранулярность</div>
-                <div class="science-text"><b>Называние эмоций.</b> Чем точнее Вы называете то, что чувствуете, тем легче с этим справляться. Названная эмоция обретает форму — из размытого облака превращается во что-то, что можно рассмотреть.</div>
-                <div class="science-feature">Чем выше «разрешение» внутренней картинки — тем понятнее причины состояний и тем устойчивее Вы становитесь.</div>
-            </div>
-            <div class="science-card sc-3 science-card-3">
-                <div class="science-author">Jordi Quoidbach</div>
-                <div class="science-concept">Emodiversity</div>
-                <div class="science-text"><b>Разнообразие эмоций.</b> Люди, которые переживают широкий спектр эмоций — и позитивных, и негативных — психологически устойчивее. У них нет «запрещённых» чувств.</div>
-                <div class="science-feature">Не радость вместо грусти — а радость рядом с грустью. Это и есть эмоциональная насыщенность.</div>
-            </div>
-            <div class="science-card sc-4 science-card-4">
-                <div class="science-author">James Pennebaker</div>
-                <div class="science-concept">Expressive writing</div>
-                <div class="science-text"><b>Дневник как освобождение.</b> Когда мы облекаем хаос эмоций в слова — мозг перестаёт тратить энергию на их «пережёвывание». Внутри освобождается место.</div>
-                <div class="science-feature">Сильнее всего работает сочетание: что произошло и что я при этом чувствовала. Когда опыт получает и форму, и эмоцию — мозг может его отпустить.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ПУТЕВОДИТЕЛЬ -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="guide-block">
-            <div class="guide-title">🗺️ Путеводитель</div>
-            <div class="guide-text">Вас встретит не сухое руководство, а тёплое пространство, где каждому модулю посвящён отдельный «остров» с атмосферой, смыслом и бережным объяснением.</div>
-            <div class="guide-text">Они помогут не просто «вести дневник», а почувствовать его смысл и вашу собственную глубину.</div>
-        </div>
-    </section>
-
-    <!-- ЧТО ВНУТРИ -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="section-eyebrow">Состав</div>
-        <h2 class="section-title">Внутри Вас <span>ждут</span></h2>
-
-        <div class="inside-list">
-            <div class="inside-item"><div class="inside-dot"></div><div>Полностью готовое Notion-пространство — открываете и начинаете</div></div>
-            <div class="inside-item"><div class="inside-dot"></div><div>Шесть модулей, которые работают и по отдельности, и в связке</div></div>
-            <div class="inside-item"><div class="inside-dot"></div><div>Живые отчёты на основе реальной математики — собираются сами</div></div>
-            <div class="inside-item"><div class="inside-dot"></div><div>Персонаж Есения с её искренними записями — чтобы не начинать с пустого листа</div></div>
-            <div class="inside-item"><div class="inside-dot"></div><div>Совместимость с бесплатным тарифом Notion</div></div>
-            <div class="inside-item"><div class="inside-dot"></div><div>Работает в браузере и в приложении — можно делать записи прямо на ходу</div></div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <div class="divider"></div>
-
-    <section class="section">
-        <div class="section-eyebrow">Частые вопросы</div>
-
-        <div class="faq-accordion">
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    А если у меня нет сил вести дневник каждый день?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Гавань создана именно для таких дней. Самая быстрая запись — 90 секунд: отметить настроение, энергию, три радости. Не чтобы починить себя, а чтобы зафиксировать: это было. Я это пережила. Я здесь.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    Что если я буду пропускать дни?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Гавань — не школа, здесь нет прогулов. Если Вы не заходили неделю — значит, жизнь была слишком громкой. Возвращайтесь в любой момент, с пустыми страницами или с одной фразой «я устала». История не прервётся — она просто станет честнее.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    Я не умею красиво писать и называть эмоции. Мне это подойдёт?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Именно для этого Гавань и создана. Внутри уже есть подсказки, которые помогут перевести «какое-то странное чувство» на человеческий язык. А Есения в своих записях покажет, что «Батарея на нуле» — это уже отличное название для дня.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    Нужно ли разбираться в Notion?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Абсолютно нет. Вся магия, формулы и настройки уже готовы и работают сами. От открытия шаблона до первой записи — 15 минут. И Вы уже дома.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    Нужна ли платная подписка на Notion?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Нет. Для личного использования Гавани достаточно бесплатного тарифа.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    А это безопасно? Кто увидит мои записи?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Никто. Ваши данные в Гавани — это Ваш личный остров в Notion. Вы дублируете шаблон в своё личное пространство, и с этого момента всё, что написано в Гавани, остаётся только между Вами и Вашим экраном. У автора проекта нет доступа к Вашим записям.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    Чем это отличается от обычного дневника или трекера привычек?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">Трекеры сфокусированы на «делать». Гавань сфокусирована на «быть». Блокнот принимает текст, но не умеет строить связи. Гавань сама собирает из Ваших отметок картину — и возвращает её Вам в виде живых отчётов. Разрозненные мысли превращаются в систему самопознания.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-accordion-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    Как получить доступ к Гавани после оплаты?
-                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-                </button>
-                <div class="faq-body">
-                    <div class="faq-body-inner">
-                        <div class="faq-answer">После оплаты Вы автоматически попадёте на страницу с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты.</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ФИНАЛ -->
-    <div class="divider"></div>
-
-    <section id="buy" class="final-section">
-        <div class="final-wave">🌊</div>
-        <div class="final-title">Добро<br>пожаловать<br><span>домой</span></div>
-        <div class="final-quote">«Если Вы чувствуете, что Вам пора домой — заходите. Ключи уже оставлены.»</div>
-        <div class="final-price-block">
-            <div class="final-price-label">Цена</div>
-            <div class="final-price"><span>₽</span>2 490</div>
-            <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
-        </div>
-        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Купить Эмоциональную Гавань</span>
-    </section>
-
-    <!-- АВТОР -->
-    <div class="divider"></div>
-
-    <div class="author-block">
-        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Avtor.png" alt="Логотип" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid rgba(201,169,122,0.3);">
-        <div>
-            <div class="author-name">Патрикеева Елена Александровна</div>
-            <div class="author-inn">ИНН 503505258709</div>
-        </div>
-        <a href="https://t.me/e_lena_patrikeeva" class="author-contact" target="_blank">
-            <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <circle cx="12" cy="12" r="12" fill="#9a7050"/>
-                <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
-            </svg>
-            @e_lena_patrikeeva
-        </a>
-        <a href="https://gentle-place.github.io/emotional-harbor/Oferta.html" class="author-contact" target="_blank" style="margin-left: 20px; border-bottom: 1px dashed rgba(154,112,80,0.4);">Публичная оферта</a>
-    </div>
+    <div class="footer-note">Эмоциональная Гавань · политика обработки персональных данных</div>
 
 </div>
-
-<script>
-    document.querySelectorAll('.faq-trigger').forEach(trigger => {
-        trigger.addEventListener('click', () => {
-            const item = trigger.closest('.faq-accordion-item');
-            const body = item.querySelector('.faq-body');
-            const isOpen = trigger.classList.contains('open');
-            document.querySelectorAll('.faq-trigger').forEach(t => {
-                t.classList.remove('open');
-                t.setAttribute('aria-expanded', 'false');
-            });
-            document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
-            if (!isOpen) {
-                trigger.classList.add('open');
-                trigger.setAttribute('aria-expanded', 'true');
-                body.classList.add('open');
-            }
-        });
-    });
-</script>
-
-
-<!-- Модалка согласия -->
-<div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
-    <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
-        
-        <!-- Розовая полоска сверху -->
-        <div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
-        
-        <!-- Свечение -->
-        <div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
-
-        <!-- Заголовок -->
-        <div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
-       Остался один <span style="color:#e87a9c;">шаг</span>
-    </div>
-
-        <!-- Подзаголовок -->
-        <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:12px;">
-            Подтвердите согласие перед оплатой
-        </div>
-
-                       <!-- Чекбоксы -->
-        <label class="custom-checkbox">
-            <input type="checkbox" id="agree-oferta">
-            <span class="checkmark"></span>
-            <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
-        </label>
-
-        <label class="custom-checkbox" style="margin-bottom:8px;">
-            <input type="checkbox" id="agree-privacy">
-            <span class="checkmark"></span>
-            <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
-        </label>
-
-        <!-- Кнопка -->
-        <button id="pay-button" disabled onclick="goToPayment()"
-            style="width:100%; padding:16px 20px; font-family:'Jost',sans-serif; font-size:13px; font-weight:600;
-                   letter-spacing:3px; text-transform:uppercase; color:#f7efe0; background:#3a3228;
-                   border:none; border-radius:12px; cursor:pointer; opacity:0.4;
-                   transition:opacity 0.2s ease, background-color 0.2s ease;
-                   box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
-            Создать свою Гавань
-        </button>
-
-        <!-- Отмена -->
-        <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
-    </div>
-</div>
-
-<script>
-(function() {
-    const modal = document.getElementById('consent-modal');
-    const agreeOferta = document.getElementById('agree-oferta');
-    const agreePrivacy = document.getElementById('agree-privacy');
-    const payButton = document.getElementById('pay-button');
-
-    function updateButton() {
-        if (agreeOferta.checked && agreePrivacy.checked) {
-            payButton.disabled = false;
-            payButton.style.opacity = '1';
-        } else {
-            payButton.disabled = true;
-            payButton.style.opacity = '0.4';
-        }
-    }
-
-    agreeOferta.addEventListener('change', updateButton);
-    agreePrivacy.addEventListener('change', updateButton);
-
-    window.openConsentModal = function() {
-        modal.style.display = 'flex';
-    };
-
-    window.closeConsentModal = function() {
-        modal.style.display = 'none';
-    };
-
-    window.goToPayment = async function() {
-        payButton.disabled = true;
-        payButton.textContent = 'Подождите...';
-
-        try {
-            const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const data = await response.json();
-
-            if (data.payment_url) {
-                window.open(data.payment_url, '_blank');
-            } else {
-                throw new Error('Нет ссылки');
-            }
-        } catch (e) {
-            alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
-            payButton.disabled = false;
-            payButton.textContent = 'Создать свою Гавань';
-        }
-    };
-
-    // Закрытие по клику на фон
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeConsentModal();
-    });
-})();
-</script>
 
 </body>
 </html>
