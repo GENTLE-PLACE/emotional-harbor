@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /onboarding/
+Sitemap: https://gentle-place.github.io/emotional-harbor/sitemap.xml
