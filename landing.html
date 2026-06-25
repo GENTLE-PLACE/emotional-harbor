@@ -765,7 +765,7 @@
         </h1>
         <p class="hero-sub">Интерактивный Дневник, который умеет считать.</p>
         <div>
-            <span class="cta-button pink" id="btn-pay-hero" onclick="startPayment(this)">Войти в Гавань · 2 490 ₽</span>
+            <span class="cta-button pink" id="btn-pay-hero" onclick="openConsentModal()">Войти в Гавань · 2 490 ₽</span>
             <div class="cta-price">Единоразовая покупка · Notion бесплатный тариф · Ваши данные только у Вас</div>
         </div>
     </div>
@@ -1094,7 +1094,7 @@
             <div class="final-price"><span>₽</span>2 490</div>
             <div class="final-price-note">Единоразовая оплата · бессрочный доступ</div>
         </div>
-        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="startPayment(this)">Купить Эмоциональную Гавань</span>
+        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Купить Эмоциональную Гавань</span>
     </section>
 
     <!-- АВТОР -->
@@ -1199,32 +1199,91 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<!-- Модалка выбора способа оплаты -->
-<div id="payment-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#fffdf5; border-radius:24px; padding:40px 36px; max-width:400px; width:100%; box-shadow:8px 10px 0 rgba(120,80,40,0.12); position:relative;">
-        <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:20px; background:none; border:none; font-size:20px; cursor:pointer; color:#c9a97a;">✕</button>
-        <div style="font-family:'Unbounded',sans-serif; font-size:13px; font-weight:700; color:#3a3228; margin-bottom:8px; letter-spacing:0.5px;">Способ оплаты</div>
-        <div style="font-family:'Lora',serif; font-style:italic; font-size:14px; color:#9a7050; margin-bottom:28px; line-height:1.6;">Выберите удобный способ — оба безопасны</div>
+<!-- Модалка согласия -->
+<div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+    <div style="background:#fffdf5; border-radius:24px; padding:40px 36px; max-width:440px; width:100%; box-shadow:8px 10px 0 rgba(120,80,40,0.12); text-align:center;">
+        <div style="font-family:'Unbounded',sans-serif; font-size:15px; font-weight:700; color:#3a3228; margin-bottom:8px;">Остался один шаг ✨</div>
+        <p style="font-family:'Jost',sans-serif; font-size:14px; color:#7a5840; margin-bottom:24px; line-height:1.6;">Перед оплатой необходимо подтвердить согласие с документами.</p>
 
-        <div style="display:flex; flex-direction:column; gap:12px;">
-            <button onclick="pay('yukassa')" style="width:100%; padding:16px 20px; background:#fff; border:1.5px solid rgba(201,169,122,0.4); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color 0.2s; font-family:'Jost',sans-serif;">
-                <span style="font-size:24px;">💳</span>
-                <div style="text-align:left;">
-                    <div style="font-size:14px; font-weight:600; color:#3a3228;">ЮKassa</div>
-                    <div style="font-size:12px; color:#9a7050; margin-top:2px;">Карта, СБП, T-Pay, ЮMoney</div>
-                </div>
-            </button>
+        <label style="display:flex; align-items:flex-start; gap:10px; font-family:'Jost',sans-serif; font-size:14px; color:#3a3228; margin-bottom:14px; text-align:left; cursor:pointer;">
+            <input type="checkbox" id="agree-oferta" style="margin-top:3px; accent-color:#e87a9c; flex-shrink:0;">
+            <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
+        </label>
 
-            <button onclick="pay('robokassa')" style="width:100%; padding:16px 20px; background:#fff; border:1.5px solid rgba(201,169,122,0.4); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color 0.2s; font-family:'Jost',sans-serif;">
-                <span style="font-size:24px;">🏦</span>
-                <div style="text-align:left;">
-                    <div style="font-size:14px; font-weight:600; color:#3a3228;">Робокасса</div>
-                    <div style="font-size:12px; color:#9a7050; margin-top:2px;">Карта, СБП, электронные кошельки</div>
-                </div>
-            </button>
-        </div>
+        <label style="display:flex; align-items:flex-start; gap:10px; font-family:'Jost',sans-serif; font-size:14px; color:#3a3228; margin-bottom:24px; text-align:left; cursor:pointer;">
+            <input type="checkbox" id="agree-privacy" style="margin-top:3px; accent-color:#e87a9c; flex-shrink:0;">
+            <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
+        </label>
+
+        <button id="pay-button" disabled onclick="goToPayment()"
+            style="width:100%; padding:18px; background:#e87a9c; color:#fff; border:none; border-radius:4px;
+                   font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px; letter-spacing:1px;
+                   cursor:pointer; opacity:0.4; transition:opacity 0.2s;
+                   box-shadow:5px 6px 0 rgba(232,122,156,0.3);">
+            Создать свою Гавань
+        </button>
+
+        <button onclick="closeConsentModal()" style="margin-top:16px; background:none; border:none; color:#c9a97a; font-family:'Jost',sans-serif; font-size:13px; cursor:pointer; text-decoration:underline;">Отмена</button>
     </div>
 </div>
+
+<script>
+(function() {
+    const modal = document.getElementById('consent-modal');
+    const agreeOferta = document.getElementById('agree-oferta');
+    const agreePrivacy = document.getElementById('agree-privacy');
+    const payButton = document.getElementById('pay-button');
+
+    function updateButton() {
+        if (agreeOferta.checked && agreePrivacy.checked) {
+            payButton.disabled = false;
+            payButton.style.opacity = '1';
+        } else {
+            payButton.disabled = true;
+            payButton.style.opacity = '0.4';
+        }
+    }
+
+    agreeOferta.addEventListener('change', updateButton);
+    agreePrivacy.addEventListener('change', updateButton);
+
+    window.openConsentModal = function() {
+        modal.style.display = 'flex';
+    };
+
+    window.closeConsentModal = function() {
+        modal.style.display = 'none';
+    };
+
+    window.goToPayment = async function() {
+        payButton.disabled = true;
+        payButton.textContent = 'Подождите...';
+
+        try {
+            const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+
+            if (data.payment_url) {
+                window.location.href = data.payment_url;
+            } else {
+                throw new Error('Нет ссылки');
+            }
+        } catch (e) {
+            alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
+            payButton.disabled = false;
+            payButton.textContent = 'Создать свою Гавань';
+        }
+    };
+
+    // Закрытие по клику на фон
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeConsentModal();
+    });
+})();
+</script>
 
 </body>
 </html>
