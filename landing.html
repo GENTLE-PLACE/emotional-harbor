@@ -802,6 +802,14 @@
             opacity: 1;
         }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 248, 235, 0.9) inset !important;
+    -webkit-text-fill-color: #3a3228 !important;
+    border-color: rgba(201, 169, 122, 0.5) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -1220,50 +1228,53 @@
 <div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
     <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
         
-        <!-- Розовая полоска сверху -->
-        <div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
-        
-        <!-- Свечение -->
-        <div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
+<!-- Розовая полоска сверху -->
+<div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
 
-        <!-- Заголовок -->
-        <div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
-       Остался один <span style="color:#e87a9c;">шаг</span>
+<!-- Свечение -->
+<div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
+
+<!-- Заголовок -->
+<div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
+    Остался один <span style="color:#e87a9c;">шаг</span>
+</div>
+
+<!-- Email -->
+<div style="width:100%; text-align:left; margin-top:14px; position:relative; z-index:2;">
+    <label style="font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:#7a5840; display:block; margin-bottom:6px;">
+        💌 Укажите Ваш e-mail
+    </label>
+    <input type="email" id="user-email" placeholder="your@email.ru" 
+        style="width:100%; padding:14px 18px; border:1.5px solid rgba(201,169,122,0.5); border-radius:14px; 
+               background:rgba(255,255,255,0.6); font-family:'Jost',sans-serif; font-size:15px; color:#3a3228;
+               outline:none; transition:border-color 0.2s, background 0.2s; box-sizing:border-box;"
+        onfocus="this.style.borderColor='#e87a9c'; this.style.background='#fff';" 
+        onblur="this.style.borderColor='rgba(201,169,122,0.5)'; this.style.background='rgba(255,255,255,0.6)';">
+    <div id="email-error" style="font-family:'Jost',sans-serif; font-size:11px; color:#e87a9c; margin-top:6px; display:none;">
+        Укажите Ваш e-mail — он нужен для отправки чека
     </div>
+</div>
 
-        <!-- Подзаголовок -->
+<!-- Разделительная волна -->
+<div style="width:100%; height:1px; background:linear-gradient(90deg, transparent, rgba(201,169,122,0.3) 20%, rgba(201,169,122,0.3) 80%, transparent); margin:20px 0;"></div>
+
+       <!-- Подзаголовок -->
         <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:12px;">
             Подтвердите согласие перед оплатой
         </div>
 
-                       <!-- Чекбоксы -->
-        <label class="custom-checkbox">
-            <input type="checkbox" id="agree-oferta">
-            <span class="checkmark"></span>
-            <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
-        </label>
+<!-- Чекбоксы -->
+<label class="custom-checkbox" style="margin-bottom:10px;">
+    <input type="checkbox" id="agree-oferta">
+    <span class="checkmark"></span>
+    <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
+</label>
 
-        <label class="custom-checkbox" style="margin-bottom:8px;">
-            <input type="checkbox" id="agree-privacy">
-            <span class="checkmark"></span>
-            <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
-        </label>
-		
-		<!-- 👇 e-mail -->
-<div style="width:100%; text-align:left; margin-bottom:16px; position:relative; z-index:1;">
-    <label style="font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:#7a5840; display:block; margin-bottom:6px;">
-        📧 Email
-    </label>
-    <input type="email" id="user-email" placeholder="your@email.ru" 
-        style="width:100%; padding:12px 16px; border:1.5px solid rgba(201,169,122,0.5); border-radius:12px; 
-               background:rgba(255,255,255,0.7); font-family:'Jost',sans-serif; font-size:14px; color:#3a3228;
-               outline:none; transition:border-color 0.2s; box-sizing:border-box;"
-        onfocus="this.style.borderColor='#e87a9c'" 
-        onblur="this.style.borderColor='rgba(201,169,122,0.5)'">
-    <div id="email-error" style="font-family:'Jost',sans-serif; font-size:11px; color:#e87a9c; margin-top:6px; display:none;">
-        Укажите email — он нужен для отправки чека
-    </div>
-</div>
+<label class="custom-checkbox" style="margin-bottom:8px;">
+    <input type="checkbox" id="agree-privacy">
+    <span class="checkmark"></span>
+    <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
+</label>
 
         <!-- Кнопка -->
         <button id="pay-button" disabled onclick="goToPayment()"
@@ -1340,7 +1351,7 @@
             const data = await response.json();
 
             if (data.payment_url) {
-                window.open(data.payment_url, '_self');
+                window.open(data.payment_url, '_blank');
             } else {
                 throw new Error('Нет ссылки');
             }
