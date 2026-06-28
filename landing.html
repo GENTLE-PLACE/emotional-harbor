@@ -3,6 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="https://gentle-place.github.io/emotional-harbor/favicon.png">
+	
+	    <!-- SEO -->
+   <meta name="description" content="Эмоциональная Гавань — эстетичный дневник настроения в Notion. Ваше безопасное пространство для рефлексии, отслеживания ресурса и бережной аналитики состояний. Добро пожаловать домой.">
+   <meta name="keywords" content="Notion шаблон, Notion template, дневник в Notion, эмоциональный дневник, дневник состояний, личный архив, рефлексия, эмоциональные паттерны, статистика состояний, визуализация данных, Notion базы данных, личная статистика,  эмоциональная гранулярность, разнообразие эмоций, expressive writing, Эмоциональная Гавань">
+    <meta name="author" content="Елена Патрикеева">
+    <meta name="robots" content="index, follow">
+	<meta name="yandex-verification" content="25dc673af74de0b9" />
+
+    <!-- Open Graph -->
+<meta property="og:title" content="⚓️ Эмоциональная Гавань • Интерактивный дневник в Notion">
+<meta property="og:description" content="Умная система в мягкой обертке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
+<meta property="og:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
+<meta property="og:url" content="https://gentle-place.github.io/emotional-harbor/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Эмоциональная Гавань">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="⚓️ Эмоциональная Гавань • Интерактивный дневник в Notion"">
+<meta name="twitter:description" content="Умная система в мягкой обертке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
+<meta name="twitter:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
     <title>Эмоциональная Гавань · Notion-пространство для глубокого контакта с собой</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -726,7 +748,68 @@
             height: 18px;
             flex-shrink: 0;
         }
+		
+		        /* ——— КАСТОМНЫЕ ЧЕКБОКСЫ ——— */
+        .custom-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-family: 'Jost', sans-serif;
+            font-size: 14px;
+            color: #3a3228;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
 
+        .custom-checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+        .custom-checkbox .checkmark {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
+            border-radius: 5px;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .custom-checkbox input:checked + .checkmark {
+            background: #e87a9c;
+            border-color: #e87a9c;
+        }
+
+        .custom-checkbox .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+
+        .custom-checkbox input:checked + .checkmark::after {
+            opacity: 1;
+        }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px rgba(255, 248, 235, 0.9) inset !important;
+    -webkit-text-fill-color: #3a3228 !important;
+    border-color: rgba(201, 169, 122, 0.5) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -765,7 +848,7 @@
         </h1>
         <p class="hero-sub">Интерактивный Дневник, который умеет считать.</p>
         <div>
-            <span class="cta-button pink" id="btn-pay-hero" onclick="startPayment(this)">Войти в Гавань · 2 490 ₽</span>
+            <span class="cta-button pink" id="btn-pay-hero" onclick="openConsentModal()">Войти в Гавань · 2 490 ₽</span>
             <div class="cta-price">Единоразовая покупка · Notion бесплатный тариф · Ваши данные только у Вас</div>
         </div>
     </div>
@@ -1092,12 +1175,12 @@
         <div class="final-price-block">
             <div class="final-price-label">Цена</div>
             <div class="final-price"><span>₽</span>2 490</div>
-            <div class="final-price-note">Единоразовая оплата · бессрочный доступ</div>
+            <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
         </div>
-        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="startPayment(this)">Купить Эмоциональную Гавань</span>
+        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Купить Эмоциональную Гавань</span>
     </section>
 
-    <!-- АВТОР -->
+       <!-- АВТОР -->
     <div class="divider"></div>
 
     <div class="author-block">
@@ -1105,6 +1188,10 @@
         <div>
             <div class="author-name">Патрикеева Елена Александровна</div>
             <div class="author-inn">ИНН 503505258709</div>
+            <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(201,169,122,0.25); display:flex; gap:16px;">
+    <a href="https://gentle-place.github.io/emotional-harbor/Oferta.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Публичная оферта</a>
+    <a href="https://gentle-place.github.io/emotional-harbor/Privacy.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Политика конфиденциальности</a>
+</div>
         </div>
         <a href="https://t.me/e_lena_patrikeeva" class="author-contact" target="_blank">
             <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1113,9 +1200,7 @@
             </svg>
             @e_lena_patrikeeva
         </a>
-        <a href="https://gentle-place.github.io/emotional-harbor/Oferta.html" class="author-contact" target="_blank" style="margin-left: 20px; border-bottom: 1px dashed rgba(154,112,80,0.4);">Публичная оферта</a>
     </div>
-
 </div>
 
 <script>
@@ -1139,92 +1224,150 @@
 </script>
 
 
-<script>
-// ——— Модальное окно выбора способа оплаты ———
-function startPayment(btn) {
-    // Показываем модалку выбора
-    document.getElementById('payment-modal').style.display = 'flex';
-}
+<!-- Модалка согласия -->
+<div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
+    <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
+        
+<!-- Розовая полоска сверху -->
+<div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
 
-function closePaymentModal() {
-    document.getElementById('payment-modal').style.display = 'none';
-}
+<!-- Свечение -->
+<div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
 
-async function pay(provider) {
-    closePaymentModal();
+<!-- Заголовок -->
+<div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
+    Остался один <span style="color:#e87a9c;">шаг</span>
+</div>
 
-    const btns = document.querySelectorAll('[onclick="startPayment(this)"]');
-    btns.forEach(b => {
-        b.style.opacity = '0.7';
-        b.style.pointerEvents = 'none';
-    });
-
-    const endpoint = provider === 'yukassa'
-        ? 'https://harbor-auth.gentle-place.workers.dev/create-payment'
-        : 'https://harbor-auth.gentle-place.workers.dev/create-payment-robokassa';
-
-    try {
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-        const data = await response.json();
-
-        if (data.payment_url) {
-            const a = document.createElement('a');
-            a.href = data.payment_url;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        } else {
-            throw new Error('Нет ссылки');
-        }
-    } catch (e) {
-        alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
-    } finally {
-        btns.forEach(b => {
-            b.style.opacity = '';
-            b.style.pointerEvents = '';
-        });
-    }
-}
-
-// Закрываем по клику вне модалки
-document.addEventListener('click', function(e) {
-    const modal = document.getElementById('payment-modal');
-    if (e.target === modal) closePaymentModal();
-});
-</script>
-
-<!-- Модалка выбора способа оплаты -->
-<div id="payment-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:#fffdf5; border-radius:24px; padding:40px 36px; max-width:400px; width:100%; box-shadow:8px 10px 0 rgba(120,80,40,0.12); position:relative;">
-        <button onclick="closePaymentModal()" style="position:absolute; top:16px; right:20px; background:none; border:none; font-size:20px; cursor:pointer; color:#c9a97a;">✕</button>
-        <div style="font-family:'Unbounded',sans-serif; font-size:13px; font-weight:700; color:#3a3228; margin-bottom:8px; letter-spacing:0.5px;">Способ оплаты</div>
-        <div style="font-family:'Lora',serif; font-style:italic; font-size:14px; color:#9a7050; margin-bottom:28px; line-height:1.6;">Выберите удобный способ — оба безопасны</div>
-
-        <div style="display:flex; flex-direction:column; gap:12px;">
-            <button onclick="pay('yukassa')" style="width:100%; padding:16px 20px; background:#fff; border:1.5px solid rgba(201,169,122,0.4); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color 0.2s; font-family:'Jost',sans-serif;">
-                <span style="font-size:24px;">💳</span>
-                <div style="text-align:left;">
-                    <div style="font-size:14px; font-weight:600; color:#3a3228;">ЮKassa</div>
-                    <div style="font-size:12px; color:#9a7050; margin-top:2px;">Карта, СБП, T-Pay, ЮMoney</div>
-                </div>
-            </button>
-
-            <button onclick="pay('robokassa')" style="width:100%; padding:16px 20px; background:#fff; border:1.5px solid rgba(201,169,122,0.4); border-radius:14px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color 0.2s; font-family:'Jost',sans-serif;">
-                <span style="font-size:24px;">🏦</span>
-                <div style="text-align:left;">
-                    <div style="font-size:14px; font-weight:600; color:#3a3228;">Робокасса</div>
-                    <div style="font-size:12px; color:#9a7050; margin-top:2px;">Карта, СБП, электронные кошельки</div>
-                </div>
-            </button>
-        </div>
+<!-- Email -->
+<div style="width:100%; text-align:left; margin-top:14px; position:relative; z-index:2;">
+    <label style="font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:#7a5840; display:block; margin-bottom:6px;">
+        💌 Укажите Ваш e-mail
+    </label>
+    <input type="email" id="user-email" placeholder="your@email.ru" 
+        style="width:100%; padding:14px 18px; border:1.5px solid rgba(201,169,122,0.5); border-radius:14px; 
+               background:rgba(255,255,255,0.6); font-family:'Jost',sans-serif; font-size:15px; color:#3a3228;
+               outline:none; transition:border-color 0.2s, background 0.2s; box-sizing:border-box;"
+        onfocus="this.style.borderColor='#e87a9c'; this.style.background='#fff';" 
+        onblur="this.style.borderColor='rgba(201,169,122,0.5)'; this.style.background='rgba(255,255,255,0.6)';">
+    <div id="email-error" style="font-family:'Jost',sans-serif; font-size:11px; color:#e87a9c; margin-top:6px; display:none;">
+        Укажите Ваш e-mail — он нужен для отправки чека
     </div>
 </div>
+
+<!-- Разделительная волна -->
+<div style="width:100%; height:1px; background:linear-gradient(90deg, transparent, rgba(201,169,122,0.3) 20%, rgba(201,169,122,0.3) 80%, transparent); margin:20px 0;"></div>
+
+       <!-- Подзаголовок -->
+        <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:12px;">
+            Подтвердите согласие перед оплатой
+        </div>
+
+<!-- Чекбоксы -->
+<label class="custom-checkbox" style="margin-bottom:10px;">
+    <input type="checkbox" id="agree-oferta">
+    <span class="checkmark"></span>
+    <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
+</label>
+
+<label class="custom-checkbox" style="margin-bottom:8px;">
+    <input type="checkbox" id="agree-privacy">
+    <span class="checkmark"></span>
+    <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
+</label>
+
+        <!-- Кнопка -->
+        <button id="pay-button" disabled onclick="goToPayment()"
+            style="width:100%; padding:16px 20px; font-family:'Jost',sans-serif; font-size:13px; font-weight:600;
+                   letter-spacing:3px; text-transform:uppercase; color:#f7efe0; background:#3a3228;
+                   border:none; border-radius:12px; cursor:pointer; opacity:0.4;
+                   transition:opacity 0.2s ease, background-color 0.2s ease;
+                   box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
+            Создать свою Гавань
+        </button>
+
+        <!-- Отмена -->
+        <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
+    </div>
+</div>
+
+<script>
+(function() {
+    const modal = document.getElementById('consent-modal');
+    const agreeOferta = document.getElementById('agree-oferta');
+    const agreePrivacy = document.getElementById('agree-privacy');
+    const payButton = document.getElementById('pay-button');
+    const emailInput = document.getElementById('user-email');
+    const emailError = document.getElementById('email-error');
+
+    function isValidEmail(email) {
+        return email.includes('@') && email.includes('.') && email.length > 5;
+    }
+
+    function updateButton() {
+        const email = emailInput.value.trim();
+        const emailValid = isValidEmail(email);
+        
+        if (agreeOferta.checked && agreePrivacy.checked && emailValid) {
+            payButton.disabled = false;
+            payButton.style.opacity = '1';
+            emailError.style.display = 'none';
+        } else {
+            payButton.disabled = true;
+            payButton.style.opacity = '0.4';
+        }
+    }
+
+    agreeOferta.addEventListener('change', updateButton);
+    agreePrivacy.addEventListener('change', updateButton);
+    emailInput.addEventListener('input', updateButton);
+
+    window.openConsentModal = function() {
+        modal.style.display = 'flex';
+    };
+
+    window.closeConsentModal = function() {
+        modal.style.display = 'none';
+    };
+
+    window.goToPayment = async function() {
+        const email = emailInput.value.trim();
+        
+        if (!isValidEmail(email)) {
+            emailError.style.display = 'block';
+            return;
+        }
+        
+        emailError.style.display = 'none';
+        payButton.disabled = true;
+        payButton.textContent = 'Подождите...';
+
+        try {
+            const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            });
+            const data = await response.json();
+
+            if (data.payment_url) {
+                window.open(data.payment_url, '_blank');
+            } else {
+                throw new Error('Нет ссылки');
+            }
+        } catch (e) {
+            alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
+            payButton.disabled = false;
+            payButton.textContent = 'Создать свою Гавань';
+        }
+    };
+
+    // Закрытие по клику на фон
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeConsentModal();
+    });
+})();
+</script>
 
 </body>
 </html>
