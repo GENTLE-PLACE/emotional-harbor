@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" href="https://gentle-place.github.io/emotional-harbor/favicon.png">
+	<link rel="icon" type="image/png" href="https://emotional-harbor.ru/favicon.png">
 	
 	    <!-- SEO -->
    <meta name="description" content="Эмоциональная Гавань — эстетичный дневник настроения в Notion. Ваше безопасное пространство для рефлексии, отслеживания ресурса и бережной аналитики состояний. Добро пожаловать домой.">
@@ -15,8 +15,8 @@
     <!-- Open Graph -->
 <meta property="og:title" content="⚓️ Эмоциональная Гавань • Интерактивный дневник в Notion">
 <meta property="og:description" content="Умная система в мягкой обертке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
-<meta property="og:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
-<meta property="og:url" content="https://gentle-place.github.io/emotional-harbor/">
+<meta property="og:image" content="https://emotional-harbor.ru/preview.png">
+<meta property="og:url" content="https://emotional-harbor.ru/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Эмоциональная Гавань">
 
@@ -24,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="⚓️ Эмоциональная Гавань • Интерактивный дневник в Notion"">
 <meta name="twitter:description" content="Умная система в мягкой обертке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
-<meta name="twitter:image" content="https://gentle-place.github.io/emotional-harbor/preview.png">
+<meta name="twitter:image" content="https://emotional-harbor.ru/preview.png">
     <title>Эмоциональная Гавань · Notion-пространство для глубокого контакта с собой</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -810,6 +810,43 @@ input:-webkit-autofill:focus {
     border-color: rgba(201, 169, 122, 0.5) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
+
+/* ——— СПИННЕР ЗАГРУЗКИ КНОПКИ ——— */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.button-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(247,239,224,0.35);
+    border-top-color: #f7efe0;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* ——— ПОДСКАЗКА ПОСЛЕ ОТКРЫТИЯ ОПЛАТЫ ——— */
+.payment-redirect-hint {
+    width: 100%;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #7a5840;
+    line-height: 1.6;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(201,169,122,0.35);
+    animation: fadeIn 0.4s ease both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -1189,8 +1226,8 @@ input:-webkit-autofill:focus {
             <div class="author-name">Патрикеева Елена Александровна</div>
             <div class="author-inn">ИНН 503505258709</div>
             <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(201,169,122,0.25); display:flex; gap:16px;">
-    <a href="https://gentle-place.github.io/emotional-harbor/Oferta.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Публичная оферта</a>
-    <a href="https://gentle-place.github.io/emotional-harbor/Privacy.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Политика конфиденциальности</a>
+    <a href="https://emotional-harbor.ru/Oferta.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Публичная оферта</a>
+    <a href="https://emotional-harbor.ru/Privacy.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Политика конфиденциальности</a>
 </div>
         </div>
         <a href="https://t.me/e_lena_patrikeeva" class="author-contact" target="_blank">
@@ -1251,7 +1288,7 @@ input:-webkit-autofill:focus {
         onfocus="this.style.borderColor='#e87a9c'; this.style.background='#fff';" 
         onblur="this.style.borderColor='rgba(201,169,122,0.5)'; this.style.background='rgba(255,255,255,0.6)';">
     <div id="email-error" style="font-family:'Jost',sans-serif; font-size:11px; color:#e87a9c; margin-top:6px; display:none;">
-        Укажите Ваш e-mail — он нужен для отправки чека
+        Кажется, в адресе опечатка — проверьте, пожалуйста
     </div>
 </div>
 
@@ -1259,21 +1296,15 @@ input:-webkit-autofill:focus {
 <div style="width:100%; height:1px; background:linear-gradient(90deg, transparent, rgba(201,169,122,0.3) 20%, rgba(201,169,122,0.3) 80%, transparent); margin:20px 0;"></div>
 
        <!-- Подзаголовок -->
-        <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:12px;">
-            Подтвердите согласие перед оплатой
+        <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:14px;">
+            Формальности — и сразу домой
         </div>
 
-<!-- Чекбоксы -->
-<label class="custom-checkbox" style="margin-bottom:10px;">
-    <input type="checkbox" id="agree-oferta">
-    <span class="checkmark"></span>
-    <span>Я согласен(а) с <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной офертой</a></span>
-</label>
-
-<label class="custom-checkbox" style="margin-bottom:8px;">
-    <input type="checkbox" id="agree-privacy">
-    <span class="checkmark"></span>
-    <span>Я согласен(а) с <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политикой обработки персональных данных</a></span>
+<!-- Чекбокс: единое согласие -->
+<label class="custom-checkbox" style="margin-bottom:8px; align-items:flex-start;">
+    <input type="checkbox" id="agree-all">
+    <span class="checkmark" style="margin-top:1px;"></span>
+    <span style="line-height:1.55;">Я принимаю условия <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">оферты</a> и <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">обработки данных</a></span>
 </label>
 
         <!-- Кнопка -->
@@ -1286,6 +1317,10 @@ input:-webkit-autofill:focus {
             Создать свою Гавань
         </button>
 
+        <div id="redirect-hint" class="payment-redirect-hint" style="display:none;">
+            Открыли страницу оплаты в новой вкладке.<br>Это окно можно закрыть позже — просто завершите оплату там.
+        </div>
+
         <!-- Отмена -->
         <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
     </div>
@@ -1294,11 +1329,11 @@ input:-webkit-autofill:focus {
 <script>
 (function() {
     const modal = document.getElementById('consent-modal');
-    const agreeOferta = document.getElementById('agree-oferta');
-    const agreePrivacy = document.getElementById('agree-privacy');
+    const agreeAll = document.getElementById('agree-all');
     const payButton = document.getElementById('pay-button');
     const emailInput = document.getElementById('user-email');
     const emailError = document.getElementById('email-error');
+    const redirectHint = document.getElementById('redirect-hint');
 
     function isValidEmail(email) {
         return email.includes('@') && email.includes('.') && email.length > 5;
@@ -1307,8 +1342,8 @@ input:-webkit-autofill:focus {
     function updateButton() {
         const email = emailInput.value.trim();
         const emailValid = isValidEmail(email);
-        
-        if (agreeOferta.checked && agreePrivacy.checked && emailValid) {
+
+        if (agreeAll.checked && emailValid) {
             payButton.disabled = false;
             payButton.style.opacity = '1';
             emailError.style.display = 'none';
@@ -1318,8 +1353,7 @@ input:-webkit-autofill:focus {
         }
     }
 
-    agreeOferta.addEventListener('change', updateButton);
-    agreePrivacy.addEventListener('change', updateButton);
+    agreeAll.addEventListener('change', updateButton);
     emailInput.addEventListener('input', updateButton);
 
     window.openConsentModal = function() {
@@ -1332,15 +1366,16 @@ input:-webkit-autofill:focus {
 
     window.goToPayment = async function() {
         const email = emailInput.value.trim();
-        
+
         if (!isValidEmail(email)) {
             emailError.style.display = 'block';
             return;
         }
-        
+
         emailError.style.display = 'none';
+        redirectHint.style.display = 'none';
         payButton.disabled = true;
-        payButton.textContent = 'Подождите...';
+        payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
 
         try {
             const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
@@ -1352,13 +1387,17 @@ input:-webkit-autofill:focus {
 
             if (data.payment_url) {
                 window.open(data.payment_url, '_blank');
+                payButton.innerHTML = 'Страница оплаты открыта ✓';
+                redirectHint.style.display = 'block';
             } else {
                 throw new Error('Нет ссылки');
             }
         } catch (e) {
-            alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram @e_lena_patrikeeva');
             payButton.disabled = false;
             payButton.textContent = 'Создать свою Гавань';
+            redirectHint.style.display = 'block';
+            redirectHint.style.color = '#c0506a';
+            redirectHint.innerHTML = 'Что-то не сработало. Попробуйте ещё раз, или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank" style="color:#c0506a; text-decoration:underline;">Telegram</a> — отвечу быстро.';
         }
     };
 
