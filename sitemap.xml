@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://gentle-place.github.io/emotional-harbor/landing.html</loc>
-        <lastmod>2026-06-25</lastmod>
+        <loc>https://emotional-harbor.ru/landing.html</loc>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://gentle-place.github.io/emotional-harbor/Oferta.html</loc>
-        <lastmod>2026-06-25</lastmod>
+        <loc>https://emotional-harbor.ru/Oferta.html</loc>
+        <lastmod>2026-06-28</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://emotional-harbor.ru/Privacy.html</loc>
+        <lastmod>2026-06-28</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
