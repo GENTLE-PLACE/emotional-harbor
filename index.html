@@ -1487,9 +1487,10 @@
     emailInput.addEventListener('input', updateButton);
 
     window.openConsentModal = function() {
-        ym(110240785, 'reachGoal', 'click_pay');
-        modal.style.display = 'flex';
-    };
+    ym(110240785, 'reachGoal', 'click_pay');
+    gtag('event', 'click_pay');
+    modal.style.display = 'flex';
+};
 
     window.closeConsentModal = function() {
         modal.style.display = 'none';
@@ -1504,6 +1505,7 @@
         }
 
         ym(110240785, 'reachGoal', 'start_payment');
+        gtag('event', 'start_payment');
 
         emailError.style.display = 'none';
         redirectHint.style.display = 'none';
