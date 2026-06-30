@@ -3,32 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" href="https://emotional-harbor.ru/favicon.png">
-	
-	    <!-- SEO -->
-   <meta name="description" content="Эмоциональная Гавань — эстетичный дневник настроения в Notion. Ваше безопасное пространство для рефлексии, отслеживания ресурса и бережной аналитики состояний. Добро пожаловать домой.">
-   <meta name="keywords" content="Notion шаблон, Notion template, дневник в Notion, эмоциональный дневник, дневник состояний, личный архив, рефлексия, эмоциональные паттерны, статистика состояний, визуализация данных, Notion базы данных, личная статистика,  эмоциональная гранулярность, разнообразие эмоций, expressive writing, Эмоциональная Гавань">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://emotional-harbor.ru/favicon.png">
+    <link rel="icon" type="image/x-icon" href="https://emotional-harbor.ru/favicon.ico">
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110240785', 'ym');
+
+        ym(110240785, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/110240785" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BRPZE6BSR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2BRPZE6BSR');
+    </script>
+
+    <!-- SEO -->
+    <meta name="description" content="Эмоциональная Гавань — эстетичный дневник настроения в Notion. Ваше безопасное пространство для рефлексии, отслеживания ресурса и бережной аналитики состояний. Добро пожаловать домой.">
+    <meta name="keywords" content="Notion шаблон, Notion template, дневник в Notion, дневник настроения, трекер эмоций, саморефлексия, копилка тепла, отчёты Notion, визуализация данных, эмоциональный интеллект, Эмоциональная Гавань">
     <meta name="author" content="Елена Патрикеева">
     <meta name="robots" content="index, follow">
-	<meta name="yandex-verification" content="25dc673af74de0b9" />
+    <meta name="yandex-verification" content="25dc673af74de0b9">
 
     <!-- Open Graph -->
-<meta property="og:title" content="⚓️ Эмоциональная Гавань • Интерактивный дневник в Notion">
-<meta property="og:description" content="Умная система в мягкой обертке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
-<meta property="og:image" content="https://emotional-harbor.ru/preview.png">
-<meta property="og:url" content="https://emotional-harbor.ru/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Эмоциональная Гавань">
+    <meta property="og:title" content="⚓️ Эмоциональная Гавань • Дневник настроения в Notion">
+    <meta property="og:description" content="Умная система в мягкой обёртке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
+    <meta property="og:image" content="https://emotional-harbor.ru/preview.png">
+    <meta property="og:url" content="https://emotional-harbor.ru/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Эмоциональная Гавань">
+    <meta property="og:locale" content="ru_RU">
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="⚓️ Эмоциональная Гавань • Интерактивный дневник в Notion"">
-<meta name="twitter:description" content="Умная система в мягкой обертке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
-<meta name="twitter:image" content="https://emotional-harbor.ru/preview.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="⚓️ Эмоциональная Гавань • Дневник настроения в Notion">
+    <meta name="twitter:description" content="Умная система в мягкой обёртке. Бережный трекер эмоций, копилка тепла и личный анализ состояний без токсичной продуктивности.">
+    <meta name="twitter:image" content="https://emotional-harbor.ru/preview.png">
+
+    <!-- JSON-LD: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Эмоциональная Гавань",
+      "description": "Notion-шаблон для бережной рефлексии и отслеживания эмоционального состояния. Дневник настроения, копилка тепла, авто-отчёты и аналитика.",
+      "operatingSystem": "Web, iOS, Android",
+      "applicationCategory": "LifestyleApplication",
+      "applicationSubCategory": "Self-Reflection",
+      "author": {
+        "@type": "Person",
+        "name": "Елена Патрикеева",
+        "url": "https://t.me/e_lena_patrikeeva"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "2490",
+        "priceCurrency": "RUB",
+        "availability": "https://schema.org/InStock",
+        "url": "https://emotional-harbor.ru/"
+      },
+      "image": "https://emotional-harbor.ru/preview.png",
+      "url": "https://emotional-harbor.ru/"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "А если у меня нет сил вести дневник каждый день?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Гавань создана именно для таких дней. Самая быстрая запись — 90 секунд: отметить настроение, энергию, три радости. Не чтобы починить себя, а чтобы зафиксировать: это было. Я это пережила. Я здесь."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Что если я буду пропускать дни?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Гавань — не школа, здесь нет прогулов. Если Вы не заходили неделю — значит, жизнь была слишком громкой. Возвращайтесь в любой момент, с пустыми страницами или с одной фразой «я устала». История не прервётся — она просто станет честнее."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Я не умею красиво писать и называть эмоции. Мне это подойдёт?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Именно для этого Гавань и создана. Внутри уже есть подсказки, которые помогут перевести «какое-то странное чувство» на человеческий язык. А Есения в своих записях покажет, что «Батарея на нуле» — это уже отличное название для дня."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужно ли разбираться в Notion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Абсолютно нет. Вся магия, формулы и настройки уже готовы и работают сами. От открытия шаблона до первой записи — 15 минут. И Вы уже дома."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Нужна ли платная подписка на Notion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Нет. Для личного использования Гавани достаточно бесплатного тарифа."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "А это безопасно? Кто увидит мои записи?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Никто. Ваши данные в Гавани — это Ваш личный остров в Notion. Вы дублируете шаблон в своё личное пространство, и с этого момента всё, что написано в Гавани, остаётся только между Вами и Вашим экраном. У автора проекта нет доступа к Вашим записям."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Чем это отличается от обычного дневника или трекера привычек?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Трекеры сфокусированы на «делать». Гавань сфокусирована на «быть». Блокнот принимает текст, но не умеет строить связи. Гавань сама собирает из Ваших отметок картину — и возвращает её Вам в виде живых отчётов. Разрозненные мысли превращаются в систему самопознания."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Как получить доступ к Гавани после оплаты?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "После оплаты Вы автоматически попадёте на страницу с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты."
+          }
+        }
+      ]
+    }
+    </script>
+
     <title>Эмоциональная Гавань · Notion-пространство для глубокого контакта с собой</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
+    
+	
+	<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -858,50 +990,6 @@ input:-webkit-autofill:focus {
         }
     </style>
 	
-	<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110240785', 'ym');
-
-    ym(110240785, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/110240785" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2BRPZE6BSR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2BRPZE6BSR');
-</script>
-
-</head>
-<body>
-
-<svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
-    <path d="M0,200 Q300,120 600,220 T1200,160" fill="none" stroke="#c9a97a" stroke-width="3" stroke-dasharray="14 8"/>
-    <path d="M0,480 Q400,380 800,500 T1200,440" fill="none" stroke="#d97787" stroke-width="2"/>
-    <path d="M0,720 Q350,640 700,740 T1200,680" fill="none" stroke="#A5C2F1" stroke-width="2"/>
-</svg>
-
-<svg class="corner-wear" style="top:0;left:0;width:200px;height:200px;" viewBox="0 0 200 200">
-    <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
-    <rect width="200" height="200" fill="url(#cw1)"/>
-</svg>
-<svg class="corner-wear" style="bottom:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180">
-    <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.22"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
-    <rect width="180" height="180" fill="url(#cw2)"/>
-</svg>
-
-<div class="page">
-
     <!-- HERO -->
     <div class="hero">
         <div class="hero-eyebrow">Notion-пространство для глубокого контакта с собой</div>
@@ -1034,7 +1122,7 @@ input:-webkit-autofill:focus {
 
         </div>
     </section>
-
+	
     <!-- ЕСЕНИЯ -->
     <div class="divider"></div>
 
@@ -1239,7 +1327,7 @@ input:-webkit-autofill:focus {
             <div class="final-price"><span>₽</span>2 490</div>
             <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
         </div>
-        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Купить Эмоциональную Гавань</span>
+        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Войти в Гавань</span>
     </section>
 
        <!-- АВТОР -->
@@ -1322,14 +1410,14 @@ input:-webkit-autofill:focus {
 
        <!-- Подзаголовок -->
         <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:14px;">
-            Формальности — и сразу домой
+            Подтвердите согласие перед оплатой
         </div>
 
 <!-- Чекбокс: единое согласие -->
 <label class="custom-checkbox" style="margin-bottom:8px; align-items:flex-start;">
     <input type="checkbox" id="agree-all">
     <span class="checkmark" style="margin-top:1px;"></span>
-    <span style="line-height:1.55;">Я принимаю условия <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">оферты</a> и <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">обработки данных</a></span>
+    <span style="line-height:1.55;">Я принимаю условия <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной оферты</a> и <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политики обработки персональных данных</a></span>
 </label>
 
         <!-- Кнопка -->
@@ -1382,8 +1470,9 @@ input:-webkit-autofill:focus {
     emailInput.addEventListener('input', updateButton);
 
     window.openConsentModal = function() {
-        modal.style.display = 'flex';
-    };
+    ym(110240785, 'reachGoal', 'click_pay');
+    modal.style.display = 'flex';
+};
 
     window.closeConsentModal = function() {
         modal.style.display = 'none';
@@ -1396,6 +1485,8 @@ input:-webkit-autofill:focus {
             emailError.style.display = 'block';
             return;
         }
+		
+		ym(110240785, 'reachGoal', 'start_payment'); 
 
         emailError.style.display = 'none';
         redirectHint.style.display = 'none';
@@ -1421,8 +1512,8 @@ input:-webkit-autofill:focus {
             payButton.disabled = false;
             payButton.textContent = 'Создать свою Гавань';
             redirectHint.style.display = 'block';
-            redirectHint.style.color = '#c0506a';
-            redirectHint.innerHTML = 'Что-то не сработало. Попробуйте ещё раз, или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank" style="color:#c0506a; text-decoration:underline;">Telegram</a> — отвечу быстро.';
+            redirectHint.style.color = '#e87a9c';
+            redirectHint.innerHTML = 'Что-то не сработало. Попробуйте ещё раз, или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank" style="color:#e87a9c; text-decoration:underline;">Telegram</a> — отвечу быстро.';
         }
     };
 
