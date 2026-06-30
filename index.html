@@ -62,7 +62,6 @@
       "description": "Notion-шаблон для бережной рефлексии и отслеживания эмоционального состояния. Дневник настроения, копилка тепла, авто-отчёты и аналитика.",
       "operatingSystem": "Web, iOS, Android",
       "applicationCategory": "LifestyleApplication",
-      "applicationSubCategory": "Self-Reflection",
       "author": {
         "@type": "Person",
         "name": "Елена Патрикеева",
@@ -158,9 +157,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-	
-	<style>
+
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
@@ -880,8 +878,8 @@
             height: 18px;
             flex-shrink: 0;
         }
-		
-		        /* ——— КАСТОМНЫЕ ЧЕКБОКСЫ ——— */
+
+        /* ——— КАСТОМНЫЕ ЧЕКБОКСЫ ——— */
         .custom-checkbox {
             display: flex;
             align-items: flex-start;
@@ -934,51 +932,52 @@
             opacity: 1;
         }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 30px rgba(255, 248, 235, 0.9) inset !important;
-    -webkit-text-fill-color: #3a3228 !important;
-    border-color: rgba(201, 169, 122, 0.5) !important;
-    transition: background-color 5000s ease-in-out 0s;
-}
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-box-shadow: 0 0 0 30px rgba(255, 248, 235, 0.9) inset !important;
+            -webkit-text-fill-color: #3a3228 !important;
+            border-color: rgba(201, 169, 122, 0.5) !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
 
-/* ——— СПИННЕР ЗАГРУЗКИ КНОПКИ ——— */
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
+        /* ——— СПИННЕР ЗАГРУЗКИ КНОПКИ ——— */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-.button-spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(247,239,224,0.35);
-    border-top-color: #f7efe0;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle;
-    margin-right: 8px;
-}
+        .button-spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(247,239,224,0.35);
+            border-top-color: #f7efe0;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
 
-/* ——— ПОДСКАЗКА ПОСЛЕ ОТКРЫТИЯ ОПЛАТЫ ——— */
-.payment-redirect-hint {
-    width: 100%;
-    text-align: center;
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: #7a5840;
-    line-height: 1.6;
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px dashed rgba(201,169,122,0.35);
-    animation: fadeIn 0.4s ease both;
-}
+        /* ——— ПОДСКАЗКА ПОСЛЕ ОТКРЫТИЯ ОПЛАТЫ ——— */
+        .payment-redirect-hint {
+            width: 100%;
+            text-align: center;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #7a5840;
+            line-height: 1.6;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(201,169,122,0.35);
+            animation: fadeIn 0.4s ease both;
+        }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -989,7 +988,26 @@ input:-webkit-autofill:focus {
             .author-contact { margin-left: 0; }
         }
     </style>
-	
+</head>
+<body>
+
+<svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+    <path d="M0,200 Q300,120 600,220 T1200,160" fill="none" stroke="#c9a97a" stroke-width="3" stroke-dasharray="14 8"/>
+    <path d="M0,480 Q400,380 800,500 T1200,440" fill="none" stroke="#d97787" stroke-width="2"/>
+    <path d="M0,720 Q350,640 700,740 T1200,680" fill="none" stroke="#A5C2F1" stroke-width="2"/>
+</svg>
+
+<svg class="corner-wear" style="top:0;left:0;width:200px;height:200px;" viewBox="0 0 200 200">
+    <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="200" height="200" fill="url(#cw1)"/>
+</svg>
+<svg class="corner-wear" style="bottom:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180">
+    <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.22"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
+    <rect width="180" height="180" fill="url(#cw2)"/>
+</svg>
+
+<div class="page">
+
     <!-- HERO -->
     <div class="hero">
         <div class="hero-eyebrow">Notion-пространство для глубокого контакта с собой</div>
@@ -1122,7 +1140,7 @@ input:-webkit-autofill:focus {
 
         </div>
     </section>
-	
+
     <!-- ЕСЕНИЯ -->
     <div class="divider"></div>
 
@@ -1330,7 +1348,7 @@ input:-webkit-autofill:focus {
         <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Войти в Гавань</span>
     </section>
 
-       <!-- АВТОР -->
+    <!-- АВТОР -->
     <div class="divider"></div>
 
     <div class="author-block">
@@ -1373,11 +1391,10 @@ input:-webkit-autofill:focus {
     });
 </script>
 
-
 <!-- Модалка согласия -->
 <div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
     <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
-        
+
 <!-- Розовая полоска сверху -->
 <div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
 
@@ -1394,11 +1411,11 @@ input:-webkit-autofill:focus {
     <label style="font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:#7a5840; display:block; margin-bottom:6px;">
         💌 Введите Ваш e-mail для отправки чека
     </label>
-    <input type="email" id="user-email" placeholder="your@email.ru" 
-        style="width:100%; padding:14px 18px; border:1.5px solid rgba(201,169,122,0.5); border-radius:14px; 
+    <input type="email" id="user-email" placeholder="your@email.ru"
+        style="width:100%; padding:14px 18px; border:1.5px solid rgba(201,169,122,0.5); border-radius:14px;
                background:rgba(255,255,255,0.6); font-family:'Jost',sans-serif; font-size:15px; color:#3a3228;
                outline:none; transition:border-color 0.2s, background 0.2s; box-sizing:border-box;"
-        onfocus="this.style.borderColor='#e87a9c'; this.style.background='#fff';" 
+        onfocus="this.style.borderColor='#e87a9c'; this.style.background='#fff';"
         onblur="this.style.borderColor='rgba(201,169,122,0.5)'; this.style.background='rgba(255,255,255,0.6)';">
     <div id="email-error" style="font-family:'Jost',sans-serif; font-size:11px; color:#e87a9c; margin-top:6px; display:none;">
         Кажется, в адресе опечатка — проверьте, пожалуйста
@@ -1470,9 +1487,9 @@ input:-webkit-autofill:focus {
     emailInput.addEventListener('input', updateButton);
 
     window.openConsentModal = function() {
-    ym(110240785, 'reachGoal', 'click_pay');
-    modal.style.display = 'flex';
-};
+        ym(110240785, 'reachGoal', 'click_pay');
+        modal.style.display = 'flex';
+    };
 
     window.closeConsentModal = function() {
         modal.style.display = 'none';
@@ -1485,8 +1502,8 @@ input:-webkit-autofill:focus {
             emailError.style.display = 'block';
             return;
         }
-		
-		ym(110240785, 'reachGoal', 'start_payment'); 
+
+        ym(110240785, 'reachGoal', 'start_payment');
 
         emailError.style.display = 'none';
         redirectHint.style.display = 'none';
