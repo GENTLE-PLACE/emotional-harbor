@@ -81,6 +81,38 @@
     }
     </script>
 
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Эмоциональная Гавань",
+      "url": "https://emotional-harbor.ru/",
+      "logo": "https://emotional-harbor.ru/favicon.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://t.me/e_lena_patrikeeva"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Эмоциональная Гавань",
+          "item": "https://emotional-harbor.ru/"
+        }
+      ]
+    }
+    </script>
+
     <!-- JSON-LD: FAQ -->
     <script type="application/ld+json">
     {
@@ -219,6 +251,38 @@
             padding: 0 48px 120px;
         }
 
+        /* ——— MICRO-ANIMATIONS: FADE UP ——— */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up-stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .fade-up-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+        .fade-up-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .fade-up-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+        .fade-up-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+        .fade-up-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
+        .fade-up-stagger.visible > *:nth-child(6) { transition-delay: 0.5s; }
+
+        .fade-up-stagger.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* ——— HERO ——— */
         .hero {
             min-height: auto;
@@ -345,60 +409,6 @@
             white-space: pre-line;
         }
 
-        /* Плашки сравнения */
-        .compare-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .compare-card {
-            border-radius: 18px;
-            padding: 28px 28px 32px;
-            border: 1.5px solid rgba(201,169,122,0.35);
-            box-shadow: 6px 8px 0 rgba(120,80,40,0.07);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .compare-card.plain {
-            background: rgba(255,255,255,0.5);
-        }
-
-        .compare-card.harbor {
-            background: rgba(255,248,235,0.8);
-            border-color: rgba(232,122,156,0.25);
-        }
-
-        .compare-label {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
-        .compare-card.harbor .compare-label { color: var(--pink); }
-
-        .compare-title {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--brown-dark);
-            letter-spacing: -0.3px;
-        }
-
-        .compare-text {
-            font-size: 14.5px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            white-space: pre-line;
-        }
-
         /* ——— ДЛЯ ВАС ——— */
         .for-you-block {
             background: rgba(248,180,192,0.1);
@@ -455,6 +465,7 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
+            touch-action: pan-y pinch-zoom;
         }
 
         .module-card::after {
@@ -516,7 +527,6 @@
             margin-top: 2px;
         }
 
-        /* Слайдер внутри карточки */
         .slides-wrapper {
             position: relative;
             min-height: 140px;
@@ -531,7 +541,6 @@
             display: flex;
         }
 
-        /* Мокап внутри слайда */
         .slide-mockup {
             background: #faf8f6;
             border-radius: 12px;
@@ -579,7 +588,6 @@
             height: auto;
         }
 
-        /* Точки навигации — прижаты к низу */
         .slider-dots {
             display: flex;
             justify-content: center;
@@ -606,7 +614,7 @@
             background: var(--pink);
         }
 
-        /* ——— BENTO МОКАП (общий) ——— */
+        /* ——— BENTO МОКАП ——— */
         .bento-card {
             max-width: 620px;
             width: 100%;
@@ -625,7 +633,6 @@
             box-shadow: 9px 12px 0 rgba(120, 80, 40, 0.1);
         }
 
-        /* Модификатор: на всю ширину */
         .bento-card--wide {
             max-width: none;
         }
@@ -677,9 +684,13 @@
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.4s ease;
         }
 
-        /* Вкладки внутри bento */
+        .bento-card--zoomable:hover .bento-image-holder img {
+            transform: scale(1.03);
+        }
+
         .bento-tabs {
             display: flex;
             gap: 20px;
@@ -747,7 +758,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            color: #3a3228;
+            color: var(--brown-dark);
             margin-bottom: 8px;
         }
 
@@ -756,6 +767,191 @@
             font-weight: 300;
             line-height: 1.7;
             color: #4a3f38;
+        }
+
+        /* ——— ДВА МИРА (КАРТОЧКИ ИЗ WELCOME-СТРАНИЦЫ) ——— */
+        .two-worlds-cards {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .world-card-full {
+            width: 50%;
+            border-radius: 28px;
+            padding: 36px 36px 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1.5px solid rgba(201,169,122,0.4);
+            min-height: 420px;
+        }
+
+        .world-card-full:hover {
+            transform: translateY(-5px);
+        }
+
+        .world-card-full::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            border-radius: 28px 28px 0 0;
+        }
+
+        .world-card-full--demo {
+            background: rgba(255,248,235,0.65);
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12);
+        }
+        .world-card-full--demo:hover {
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 30px 55px -12px rgba(120,80,40,0.18);
+        }
+        .world-card-full--demo::after { background: #F7D08A; }
+        .world-card-full--demo::before {
+            content: '';
+            position: absolute;
+            top: -60px; left: -40px;
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .world-card-full--clean {
+            background: rgba(255,248,235,0.65);
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.10);
+        }
+        .world-card-full--clean:hover {
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 30px 55px -12px rgba(120,80,40,0.16);
+        }
+        .world-card-full--clean::after { background: #F8B4C0; }
+        .world-card-full--clean::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -40px;
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(248,180,192,0.18) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .world-card-full--clean .world-card-full__body {
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent, transparent 35px,
+                rgba(201,169,122,0.08) 35px, rgba(201,169,122,0.08) 36px
+            );
+        }
+
+        .world-card-full__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 24px;
+        }
+
+        .world-card-full__pill {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .world-card-full__pill--demo {
+            color: #7a5840;
+            background: rgba(247,208,138,0.3);
+            border: 1px solid rgba(201,169,122,0.4);
+        }
+        .world-card-full__pill--clean {
+            color: #9b4050;
+            background: rgba(248,180,192,0.2);
+            border: 1px solid rgba(248,180,192,0.4);
+        }
+
+        .world-card-full__emoji {
+            font-size: 26px;
+            opacity: 0.5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .world-card-full__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            color: var(--brown-dark);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 16px;
+        }
+
+        .world-card-full__body {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #5a4a3a;
+            padding: 4px 0;
+        }
+
+        .world-card-full__body p { margin: 0; }
+
+        .world-card-full__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+            margin-top: 16px;
+        }
+
+        .world-card-full__chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip-tag {
+            font-size: 12px;
+            font-weight: 400;
+            padding: 5px 14px;
+            border-radius: 30px;
+            white-space: nowrap;
+        }
+        .chip-tag--filled {
+            background: rgba(247,208,138,0.2);
+            color: #5a4a3a;
+            border: 1px solid rgba(201,169,122,0.35);
+        }
+        .chip-tag--outline {
+            background: transparent;
+            color: #7a5840;
+            border: 1px solid rgba(248,180,192,0.5);
+        }
+
+        .world-card-full__arrow {
+            font-family: 'Caveat', cursive;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            color: rgba(120,80,40,0.3);
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        .world-card-full:hover .world-card-full__arrow {
+            transform: translateX(6px);
         }
 
         /* ——— ЕСЕНИЯ ——— */
@@ -864,6 +1060,7 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
+            margin-bottom: 48px;
         }
 
         .guide-title {
@@ -911,7 +1108,7 @@
             margin-top: 7px;
         }
 
-        /* ——— FAQ АККОРДЕОН ——— */
+        /* ——— FAQ ——— */
         .faq-accordion {
             display: flex;
             flex-direction: column;
@@ -1114,7 +1311,7 @@
             gap: 10px;
             font-family: 'Jost', sans-serif;
             font-size: 14px;
-            color: #3a3228;
+            color: var(--brown-dark);
             width: 100%;
             text-align: left;
             cursor: pointer;
@@ -1164,7 +1361,7 @@
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus {
             -webkit-box-shadow: 0 0 0 30px rgba(255, 248, 235, 0.9) inset !important;
-            -webkit-text-fill-color: #3a3228 !important;
+            -webkit-text-fill-color: var(--brown-dark) !important;
             border-color: rgba(201, 169, 122, 0.5) !important;
             transition: background-color 5000s ease-in-out 0s;
         }
@@ -1199,16 +1396,13 @@
             animation: fadeIn 0.4s ease both;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
             .hero-title { font-size: 38px; letter-spacing: -1.5px; white-space: normal; }
-            .compare-grid, .science-grid, .modules-grid { grid-template-columns: 1fr; }
+            .science-grid, .modules-grid { grid-template-columns: 1fr; }
+            .two-worlds-cards { flex-direction: column; }
+            .world-card-full { width: 100%; min-height: auto; }
             .final-section { padding: 40px 24px; }
             .author-block { flex-wrap: wrap; }
             .author-contact { margin-left: 0; }
@@ -1216,6 +1410,7 @@
             .bento-image-holder { height: 360px; }
             .bento-tabs { gap: 12px; padding: 10px 14px 0; flex-wrap: wrap; }
             .bento-tab-btn { font-size: 9px; }
+            .guide-block { padding: 28px 24px; margin-bottom: 36px; }
         }
         @media (max-width: 400px) {
             .bento-image-holder { height: 280px; }
@@ -1242,7 +1437,7 @@
 <div class="page">
 
     <!-- HERO -->
-    <div class="hero">
+    <div class="hero fade-up">
         <div class="hero-eyebrow">Notion-пространство для глубокого контакта с собой</div>
         <h1 class="hero-title">
             Эмоциональная<span>Гавань</span>
@@ -1257,7 +1452,7 @@
     <!-- INTRO -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="section-eyebrow">Зачем это нужно</div>
         <h2 class="section-title">Что такое<br><span>Эмоциональная Гавань</span></h2>
 
@@ -1283,10 +1478,10 @@
         </div>
     </section>
 
-    <!-- ЦЕНТРАЛЬНЫЙ ПРИЧАЛ — мокап без заголовков, на всю ширину -->
+    <!-- ЦЕНТРАЛЬНЫЙ ПРИЧАЛ -->
     <div class="divider"></div>
 
-    <div class="bento-card bento-card--wide">
+    <div class="bento-card bento-card--wide bento-card--zoomable fade-up">
         <div class="bento-browser-frame">
             <div class="bento-browser-dot"></div>
             <div class="bento-browser-dot"></div>
@@ -1304,19 +1499,18 @@
     <!-- МОДУЛИ -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="section-eyebrow">Карта Гавани</div>
         <h2 class="section-title">Шесть пространств,<br>по которым хочется <span>ходить босиком</span></h2>
 
-        <div class="modules-grid">
+        <div class="modules-grid fade-up-stagger">
 
-            <!-- ===== КАРТОЧКА 1: ДНЕВНИК НАСТРОЕНИЯ ===== -->
-            <div class="module-card mc-1">
+            <!-- ДНЕВНИК НАСТРОЕНИЯ -->
+            <div class="module-card mc-1" data-module="diary">
                 <div class="module-header">
                     <div class="module-icon">📔</div>
                     <h3 class="module-title">Дневник настроения</h3>
                 </div>
-
                 <div class="slides-wrapper">
                     <div class="slide active" id="diary-slide-1">
                         <div class="module-text">Место, куда Вы приходите не за фактами, а за оттенками чувств.
@@ -1325,13 +1519,10 @@
 Давайте дням имена — не по датам, а по ощущениям. «Благодарность и мокрый снег» вместо «22 января» и находите микро-сокровища в самых обычных буднях.
 Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
                     </div>
-
                     <div class="slide" id="diary-slide-2">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
+                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
                             </div>
                             <div class="mockup-image">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Diary_Home.png" alt="Запись в дневнике настроения Эмоциональной Гавани — эмоция Ревность" width="800" height="600" loading="lazy" decoding="async">
@@ -1339,22 +1530,19 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="module-note">Здесь рождается вся Ваша статистика.</div>
-
                 <div class="slider-dots">
-                    <button class="dot active" onclick="switchSlide('diary', 1)" aria-label="Текстовое описание дневника"></button>
-                    <button class="dot" onclick="switchSlide('diary', 2)" aria-label="Скриншот дневника настроения"></button>
+                    <button class="dot active" data-slide="1" aria-label="Текстовое описание дневника"></button>
+                    <button class="dot" data-slide="2" aria-label="Скриншот дневника настроения"></button>
                 </div>
             </div>
 
-            <!-- ===== КАРТОЧКА 2: СТАТИСТИКА ЭМОЦИЙ ===== -->
-            <div class="module-card mc-2">
+            <!-- СТАТИСТИКА ЭМОЦИЙ -->
+            <div class="module-card mc-2" data-module="stats">
                 <div class="module-header">
                     <div class="module-icon">📊</div>
                     <h3 class="module-title">Статистика эмоций</h3>
                 </div>
-
                 <div class="slides-wrapper">
                     <div class="slide active" id="stats-slide-1">
                         <div class="module-text">Самая нежная аналитика в Вашей жизни.
@@ -1363,26 +1551,20 @@
 
 Иногда он показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.</div>
                     </div>
-
                     <div class="slide" id="stats-slide-2">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
+                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
                             </div>
                             <div class="mockup-image">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotion_Cloud.png" alt="Отчёт Облако эмоций в Эмоциональной Гавани — визуализация эмоциональной палитры" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
-
                     <div class="slide" id="stats-slide-3">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
+                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
                             </div>
                             <div class="mockup-image">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotional_Diversity.png" alt="Отчёт Эмоциональное разнообразие в Эмоциональной Гавани — индекс Emodiversity" width="800" height="600" loading="lazy" decoding="async">
@@ -1390,23 +1572,20 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="module-note">Иногда показывает то, что не видно в моменте.</div>
-
                 <div class="slider-dots">
-                    <button class="dot active" onclick="switchSlide('stats', 1)" aria-label="Текстовое описание статистики"></button>
-                    <button class="dot" onclick="switchSlide('stats', 2)" aria-label="Отчёт Облако эмоций"></button>
-                    <button class="dot" onclick="switchSlide('stats', 3)" aria-label="Отчёт Эмоциональное разнообразие"></button>
+                    <button class="dot active" data-slide="1" aria-label="Текстовое описание статистики"></button>
+                    <button class="dot" data-slide="2" aria-label="Отчёт Облако эмоций"></button>
+                    <button class="dot" data-slide="3" aria-label="Отчёт Эмоциональное разнообразие"></button>
                 </div>
             </div>
 
-            <!-- ===== КАРТОЧКА 3: КОПИЛКА ТЕПЛА ===== -->
-            <div class="module-card mc-3">
+            <!-- КОПИЛКА ТЕПЛА -->
+            <div class="module-card mc-3" data-module="warmth">
                 <div class="module-header">
                     <div class="module-icon">💌</div>
                     <h3 class="module-title">Копилка тепла</h3>
                 </div>
-
                 <div class="slides-wrapper">
                     <div class="slide active" id="warmth-slide-1">
                         <div class="module-text">Самое нежное место во всей Гавани.
@@ -1415,13 +1594,10 @@
 
 Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходите сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
                     </div>
-
                     <div class="slide" id="warmth-slide-2">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
-                                <div class="mockup-dot"></div>
+                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
                             </div>
                             <div class="mockup-image">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Warmth_Jar.png" alt="Копилка тепла в Эмоциональной Гавани — запись Самозванец" width="800" height="600" loading="lazy" decoding="async">
@@ -1429,17 +1605,15 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="module-note">Аптечка с подписанными баночками.</div>
-
                 <div class="slider-dots">
-                    <button class="dot active" onclick="switchSlide('warmth', 1)" aria-label="Текстовое описание копилки тепла"></button>
-                    <button class="dot" onclick="switchSlide('warmth', 2)" aria-label="Скриншот копилки тепла"></button>
+                    <button class="dot active" data-slide="1" aria-label="Текстовое описание копилки тепла"></button>
+                    <button class="dot" data-slide="2" aria-label="Скриншот копилки тепла"></button>
                 </div>
             </div>
 
-            <!-- КАРТОЧКА 4: ИСТОЧНИКИ ЭНЕРГИИ -->
-            <div class="module-card mc-4">
+            <!-- ИСТОЧНИКИ ЭНЕРГИИ -->
+            <div class="module-card mc-4" data-module="energy">
                 <div class="module-header">
                     <div class="module-icon">🔋</div>
                     <h3 class="module-title">Источники энергии</h3>
@@ -1453,8 +1627,8 @@
 Когда силы на исходе — Вы не думаете, что делать. Просто открываете и выбираете, что откликается прямо сейчас.</div>
             </div>
 
-            <!-- КАРТОЧКА 5: МОИ ОПОРЫ -->
-            <div class="module-card mc-5">
+            <!-- МОИ ОПОРЫ -->
+            <div class="module-card mc-5" data-module="anchors">
                 <div class="module-header">
                     <div class="module-icon">🛟</div>
                     <h3 class="module-title">Мои опоры</h3>
@@ -1467,8 +1641,8 @@
                 <div class="module-note">Когда всё качает — здесь не качает.</div>
             </div>
 
-            <!-- КАРТОЧКА 6: УЮТНЫЙ КОНТЕНТ -->
-            <div class="module-card mc-6">
+            <!-- УЮТНЫЙ КОНТЕНТ -->
+            <div class="module-card mc-6" data-module="content">
                 <div class="module-header">
                     <div class="module-icon">🎬</div>
                     <h3 class="module-title">Уютный контент</h3>
@@ -1485,7 +1659,7 @@
     <!-- ЕСЕНИЯ -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="section-eyebrow">Ваш проводник</div>
         <h2 class="section-title">Познакомьтесь<br>с <span>Есенией</span></h2>
 
@@ -1502,16 +1676,68 @@
         </div>
     </section>
 
+    <!-- ДВА МИРА -->
+    <div class="divider"></div>
+
+    <section class="section fade-up">
+        <div class="section-eyebrow">Развилка</div>
+        <h2 class="section-title">После оплаты<br>Вас встретят <span>два мира</span></h2>
+
+        <div class="two-worlds-cards">
+            <!-- Мир Есении -->
+            <div class="world-card-full world-card-full--demo">
+                <div class="world-card-full__top">
+                    <span class="world-card-full__pill world-card-full__pill--demo">✦ демо-версия</span>
+                    <span class="world-card-full__emoji">🏡</span>
+                </div>
+                <div class="world-card-full__title">Погостить<br>у Есении</div>
+                <div class="world-card-full__body">
+                    <p>Зайдите сюда, чтобы выпить виртуального чаю, почитать записи в Копилке тепла и увидеть, что быть разным — это безопасно.</p>
+                    <p>Есения оставила свои записи, чтобы показать Вам, как здесь всё устроено.</p>
+                </div>
+                <div class="world-card-full__bottom">
+                    <div class="world-card-full__chips">
+                        <span class="chip-tag chip-tag--filled">📓 живые записи</span>
+                        <span class="chip-tag chip-tag--filled">💌 копилка тепла</span>
+                        <span class="chip-tag chip-tag--filled">⚡ источники энергии</span>
+                    </div>
+                    <span class="world-card-full__arrow">→</span>
+                </div>
+            </div>
+
+            <!-- Мой мир -->
+            <div class="world-card-full world-card-full--clean">
+                <div class="world-card-full__top">
+                    <span class="world-card-full__pill world-card-full__pill--clean">✦ ваша версия</span>
+                    <span class="world-card-full__emoji">🌱</span>
+                </div>
+                <div class="world-card-full__title">Написать<br>свою историю</div>
+                <div class="world-card-full__body">
+                    <p>Ваше чистое пространство, где нет оценок. Начните со своей первой «улики тепла» или просто выгрузите шум из головы.</p>
+                    <p>Здесь только Вы и Ваши чувства.</p>
+                </div>
+                <div class="world-card-full__bottom">
+                    <div class="world-card-full__chips">
+                        <span class="chip-tag chip-tag--outline">✨ чистый шаблон</span>
+                        <span class="chip-tag chip-tag--outline">📝 ваши слова</span>
+                        <span class="chip-tag chip-tag--outline">🗺 ваш путь</span>
+                    </div>
+                    <span class="world-card-full__arrow">→</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- НАУКА -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="section-eyebrow">На чём это стоит</div>
         <h2 class="section-title">Реальная наука<br>в <span>тёплой упаковке</span></h2>
         <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:16px;">Гавань — это не просто красивый шаблон. За каждым блоком стоит реальное исследование. Просто упакованное так, чтобы хотелось открывать каждый день.</p>
         <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:32px; font-style:italic;">Писать в красивом пространстве — это как пить кофе из тонкого фарфора вместо пластикового стаканчика. Смысл тот же, а самоощущение — совершенно другое.</p>
 
-        <div class="science-grid">
+        <div class="science-grid fade-up-stagger">
             <div class="science-card sc-1">
                 <div class="science-concept">Позитивная психология</div>
                 <div class="science-text"><b>Три радости дня.</b> Доказано: регулярная фиксация хорошего снижает тревогу и повышает удовлетворённость жизнью. Это не «позитивное мышление», а мягкая перенастройка фильтров внимания.</div>
@@ -1535,47 +1761,41 @@
         </div>
     </section>
 
-    <!-- ПУТЕВОДИТЕЛЬ + МОКАП С ТАБАМИ -->
+    <!-- ПУТЕВОДИТЕЛЬ + ТАБЫ -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="guide-block">
             <div class="guide-title">🗺️ Путеводитель</div>
             <div class="guide-text">Вас встретит не сухое руководство, а тёплое пространство, где каждому модулю посвящён отдельный «остров» с атмосферой, смыслом и бережным объяснением.</div>
             <div class="guide-text">Они помогут не просто «вести дневник», а почувствовать его смысл и вашу собственную глубину.</div>
         </div>
 
-        <!-- Мокап с табами на всю ширину -->
-        <div style="margin-top: 30px;">
-            <div class="bento-card bento-card--wide">
-                <div class="bento-browser-frame">
-                    <div class="bento-browser-dot"></div>
-                    <div class="bento-browser-dot"></div>
-                    <div class="bento-browser-dot"></div>
+        <div class="bento-card bento-card--wide">
+            <div class="bento-browser-frame">
+                <div class="bento-browser-dot"></div>
+                <div class="bento-browser-dot"></div>
+                <div class="bento-browser-dot"></div>
+            </div>
+            <div class="bento-tabs">
+                <button class="bento-tab-btn active" data-inner="inner-1">Дневник</button>
+                <button class="bento-tab-btn" data-inner="inner-2">Источники энергии</button>
+                <button class="bento-tab-btn" data-inner="inner-3">Опоры</button>
+            </div>
+            <div class="bento-image-holder" style="height: 560px;">
+                <div class="bento-pane active" id="inner-1">
+                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения в Эмоциональной Гавани" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
-
-                <div class="bento-tabs">
-                    <button class="bento-tab-btn active" data-inner="inner-1">Дневник</button>
-                    <button class="bento-tab-btn" data-inner="inner-2">Источники энергии</button>
-                    <button class="bento-tab-btn" data-inner="inner-3">Опоры</button>
+                <div class="bento-pane" id="inner-2">
+                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии в Эмоциональной Гавани" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
-
-                <div class="bento-image-holder" style="height: 560px;">
-                    <div class="bento-pane active" id="inner-1">
-                        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения в Эмоциональной Гавани — пошаговое руководство" width="1200" height="900" loading="lazy" decoding="async">
-                    </div>
-                    <div class="bento-pane" id="inner-2">
-                        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии в Эмоциональной Гавани" width="1200" height="900" loading="lazy" decoding="async">
-                    </div>
-                    <div class="bento-pane" id="inner-3">
-                        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры в Эмоциональной Гавани" width="1200" height="900" loading="lazy" decoding="async">
-                    </div>
+                <div class="bento-pane" id="inner-3">
+                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры в Эмоциональной Гавани" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
-
-                <div class="bento-card-info" id="inner-label">
-                    <h3>Дневник настроения</h3>
-                    <p>Три радости дня, живые календари и личная история автора.</p>
-                </div>
+            </div>
+            <div class="bento-card-info" id="inner-label">
+                <h3>Дневник настроения</h3>
+                <p>Три радости дня, живые календари и личная история автора.</p>
             </div>
         </div>
     </section>
@@ -1583,7 +1803,7 @@
     <!-- ЧТО ВНУТРИ -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="section-eyebrow">Состав</div>
         <h2 class="section-title">Внутри Вас <span>ждут</span></h2>
 
@@ -1600,11 +1820,10 @@
     <!-- FAQ -->
     <div class="divider"></div>
 
-    <section class="section">
+    <section class="section fade-up">
         <div class="section-eyebrow">Частые вопросы</div>
 
         <div class="faq-accordion">
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     А если у меня нет сил вести дневник каждый день?
@@ -1616,7 +1835,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     Что если я буду пропускать дни?
@@ -1628,7 +1846,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     Я не умею красиво писать и называть эмоции. Мне это подойдёт?
@@ -1640,7 +1857,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     Нужно ли разбираться в Notion?
@@ -1652,7 +1868,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     Нужна ли платная подписка на Notion?
@@ -1664,7 +1879,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     А это безопасно? Кто увидит мои записи?
@@ -1676,7 +1890,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     Чем это отличается от обычного дневника или трекера привычек?
@@ -1688,7 +1901,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="faq-accordion-item">
                 <button class="faq-trigger" aria-expanded="false">
                     Как получить доступ к Гавани после оплаты?
@@ -1700,28 +1912,13 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
-
-    <!-- ДВА МИРА (Demo_Worlds.png) — пока оставляем как есть, потом подумаем -->
-    <div class="divider"></div>
-
-    <div class="bento-card" style="max-width: 620px;">
-        <div class="bento-browser-frame">
-            <div class="bento-browser-dot"></div>
-            <div class="bento-browser-dot"></div>
-            <div class="bento-browser-dot"></div>
-        </div>
-        <div class="bento-image-holder" style="height: 340px; overflow: hidden;">
-            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Demo_Worlds.png" alt="Приветственная страница Два мира — вход в Эмоциональную Гавань" width="1200" height="800" loading="lazy" decoding="async">
-        </div>
-    </div>
 
     <!-- ФИНАЛ -->
     <div class="divider"></div>
 
-    <section id="buy" class="final-section">
+    <section id="buy" class="final-section fade-up">
         <div class="final-wave">🌊</div>
         <div class="final-title">Добро<br>пожаловать<br><span>домой</span></div>
         <div class="final-quote">«Если Вы чувствуете, что Вам пора домой — заходите. Ключи уже оставлены.»</div>
@@ -1736,7 +1933,7 @@
     <!-- АВТОР -->
     <div class="divider"></div>
 
-    <div class="author-block">
+    <div class="author-block fade-up">
         <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Avtor.png" alt="Логотип автора Эмоциональной Гавани" width="104" height="104" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid rgba(201,169,122,0.3);" loading="lazy" decoding="async">
         <div>
             <div class="author-name">Патрикеева Елена Александровна</div>
@@ -1761,13 +1958,10 @@
     <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
 
         <div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
-
         <div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
-
         <div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
             Остался один <span style="color:#e87a9c;">шаг</span>
         </div>
-
         <div style="width:100%; text-align:left; margin-top:14px; position:relative; z-index:2;">
             <label style="font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:#7a5840; display:block; margin-bottom:6px;">
                 💌 Введите Ваш e-mail для отправки чека
@@ -1782,19 +1976,15 @@
                 Кажется, в адресе опечатка — проверьте, пожалуйста
             </div>
         </div>
-
         <div style="width:100%; height:1px; background:linear-gradient(90deg, transparent, rgba(201,169,122,0.3) 20%, rgba(201,169,122,0.3) 80%, transparent); margin:20px 0;"></div>
-
         <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:14px;">
             Подтвердите согласие перед оплатой
         </div>
-
         <label class="custom-checkbox" style="margin-bottom:8px; align-items:flex-start;">
             <input type="checkbox" id="agree-all">
             <span class="checkmark" style="margin-top:1px;"></span>
             <span style="line-height:1.55;">Я принимаю условия <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной оферты</a> и <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политики обработки персональных данных</a></span>
         </label>
-
         <button id="pay-button" disabled onclick="goToPayment()"
             style="width:100%; padding:16px 20px; font-family:'Jost',sans-serif; font-size:13px; font-weight:600;
                    letter-spacing:3px; text-transform:uppercase; color:#f7efe0; background:#3a3228;
@@ -1803,26 +1993,33 @@
                    box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
             Создать свою Гавань
         </button>
-
         <div id="redirect-hint" class="payment-redirect-hint" style="display:none;">
             Открыли страницу оплаты в новой вкладке.<br>Это окно можно закрыть позже — просто завершите оплату там.
         </div>
-
         <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
     </div>
 </div>
 
 <script>
-    // FAQ аккордеон
+    // FADE-UP OBSERVER
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fade-up, .fade-up-stagger').forEach(el => fadeObserver.observe(el));
+
+    // FAQ
     document.querySelectorAll('.faq-trigger').forEach(trigger => {
         trigger.addEventListener('click', () => {
             const item = trigger.closest('.faq-accordion-item');
             const body = item.querySelector('.faq-body');
             const isOpen = trigger.classList.contains('open');
-            document.querySelectorAll('.faq-trigger').forEach(t => {
-                t.classList.remove('open');
-                t.setAttribute('aria-expanded', 'false');
-            });
+            document.querySelectorAll('.faq-trigger').forEach(t => { t.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); });
             document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
             if (!isOpen) {
                 trigger.classList.add('open');
@@ -1832,62 +2029,67 @@
         });
     });
 
-    // Переключение слайдов в карточках модулей
+    // SLIDERS
     function switchSlide(moduleName, slideNum) {
         const slide1 = document.getElementById(moduleName + '-slide-1');
         const slide2 = document.getElementById(moduleName + '-slide-2');
         const slide3 = document.getElementById(moduleName + '-slide-3');
-
         const allSlides = [slide1, slide2, slide3].filter(s => s !== null);
         const card = slide1 ? slide1.closest('.module-card') : null;
         const dots = card ? card.querySelectorAll('.slider-dots .dot') : [];
 
-        allSlides.forEach((slide, index) => {
-            if (index === slideNum - 1) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
-        });
-
-        dots.forEach((dot, index) => {
-            if (index === slideNum - 1) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
-        });
+        allSlides.forEach((slide, index) => slide.classList.toggle('active', index === slideNum - 1));
+        dots.forEach((dot, index) => dot.classList.toggle('active', index === slideNum - 1));
     }
 
-    // Переключение табов в bento-мокапе
-    function switchBentoTab(tabId) {
-        document.querySelectorAll('.bento-tab-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.inner === tabId);
+    document.querySelectorAll('.slider-dots .dot').forEach(dot => {
+        dot.addEventListener('click', function() {
+            const slideNum = parseInt(this.dataset.slide);
+            const card = this.closest('.module-card');
+            const moduleName = card ? card.dataset.module : null;
+            if (moduleName && slideNum) switchSlide(moduleName, slideNum);
         });
-        document.querySelectorAll('.bento-pane').forEach(pane => {
-            pane.classList.toggle('active', pane.id === tabId);
-        });
+    });
 
+    // TOUCH SWIPE
+    document.querySelectorAll('.module-card').forEach(card => {
+        let startX = 0, startY = 0;
+        card.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
+        card.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+            if (Math.abs(diffX) < Math.abs(diffY) || Math.abs(diffX) < 35) return;
+            const moduleName = card.dataset.module;
+            if (!moduleName) return;
+            const slides = card.querySelectorAll('.slide');
+            const activeSlide = card.querySelector('.slide.active');
+            const currentIdx = Array.from(slides).indexOf(activeSlide);
+            const totalSlides = slides.length;
+            if (diffX > 0 && currentIdx < totalSlides - 1) switchSlide(moduleName, currentIdx + 2);
+            else if (diffX < 0 && currentIdx > 0) switchSlide(moduleName, currentIdx);
+        });
+    });
+
+    // BENTO TABS
+    function switchBentoTab(tabId) {
+        document.querySelectorAll('.bento-tab-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.inner === tabId));
+        document.querySelectorAll('.bento-pane').forEach(pane => pane.classList.toggle('active', pane.id === tabId));
         const labels = {
             'inner-1': { title: 'Дневник настроения', desc: 'Три радости дня, живые календари и личная история автора.' },
             'inner-2': { title: 'Источники энергии', desc: 'Каталог топлива: от запахов до ритуалов. Всё, что заряжает.' },
             'inner-3': { title: 'Мои опоры', desc: 'Как находить и распознавать свои опоры. Вопросы для заполнения.' }
         };
-
         const label = labels[tabId];
         if (label) {
             document.querySelector('#inner-label h3').textContent = label.title;
             document.querySelector('#inner-label p').textContent = label.desc;
         }
     }
+    document.querySelectorAll('.bento-tab-btn').forEach(btn => btn.addEventListener('click', function() { switchBentoTab(this.dataset.inner); }));
 
-    document.querySelectorAll('.bento-tab-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            switchBentoTab(this.dataset.inner);
-        });
-    });
-
-    // Модалка
+    // PAYMENT MODAL
     const modal = document.getElementById('consent-modal');
     const agreeAll = document.getElementById('agree-all');
     const payButton = document.getElementById('pay-button');
@@ -1895,21 +2097,14 @@
     const emailError = document.getElementById('email-error');
     const redirectHint = document.getElementById('redirect-hint');
 
-    function isValidEmail(email) {
-        return email.includes('@') && email.includes('.') && email.length > 5;
-    }
+    function isValidEmail(email) { return email.includes('@') && email.includes('.') && email.length > 5; }
 
     function updateButton() {
-        const email = emailInput.value.trim();
-        const emailValid = isValidEmail(email);
-
+        const emailValid = isValidEmail(emailInput.value.trim());
         if (agreeAll.checked && emailValid) {
-            payButton.disabled = false;
-            payButton.style.opacity = '1';
-            emailError.style.display = 'none';
+            payButton.disabled = false; payButton.style.opacity = '1'; emailError.style.display = 'none';
         } else {
-            payButton.disabled = true;
-            payButton.style.opacity = '0.4';
+            payButton.disabled = true; payButton.style.opacity = '0.4';
         }
     }
 
@@ -1917,70 +2112,42 @@
     emailInput.addEventListener('input', updateButton);
 
     window.openConsentModal = function() {
-        ym(110240785, 'reachGoal', 'click_pay');
-        gtag('event', 'click_pay');
+        ym(110240785, 'reachGoal', 'click_pay'); gtag('event', 'click_pay');
         modal.style.display = 'flex';
+        redirectHint.style.display = 'none';
+        payButton.disabled = true; payButton.style.opacity = '0.4';
+        payButton.innerHTML = 'Создать свою Гавань';
     };
 
-    window.closeConsentModal = function() {
-        modal.style.display = 'none';
-    };
+    window.closeConsentModal = function() { modal.style.display = 'none'; };
 
     window.goToPayment = async function() {
         const email = emailInput.value.trim();
-
-        if (!isValidEmail(email)) {
-            emailError.style.display = 'block';
-            return;
-        }
-
-        ym(110240785, 'reachGoal', 'start_payment');
-        gtag('event', 'start_payment');
-
-        emailError.style.display = 'none';
-        redirectHint.style.display = 'none';
+        if (!isValidEmail(email)) { emailError.style.display = 'block'; return; }
+        ym(110240785, 'reachGoal', 'start_payment'); gtag('event', 'start_payment');
+        emailError.style.display = 'none'; redirectHint.style.display = 'none';
         payButton.disabled = true;
         payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
-
         try {
             const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email })
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email })
             });
-
-            if (!response.ok) {
-                throw new Error(`Ошибка сервера: ${response.status}`);
-            }
-
+            if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
             const data = await response.json();
-
             if (data.payment_url) {
                 window.open(data.payment_url, '_blank');
                 payButton.innerHTML = 'Страница оплаты открыта ✓';
                 redirectHint.style.display = 'block';
-            } else {
-                throw new Error('Нет ссылки на оплату');
-            }
+            } else throw new Error('Нет ссылки на оплату');
         } catch (e) {
-            payButton.disabled = false;
-            payButton.textContent = 'Создать свою Гавань';
-            redirectHint.style.display = 'block';
-            redirectHint.style.color = '#e87a9c';
+            payButton.disabled = false; payButton.textContent = 'Создать свою Гавань';
+            redirectHint.style.display = 'block'; redirectHint.style.color = '#e87a9c';
             redirectHint.innerHTML = 'Что-то не сработало. Попробуйте ещё раз, или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank" style="color:#e87a9c; text-decoration:underline;">Telegram</a> — отвечу быстро.';
         }
     };
 
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) closeConsentModal();
-    });
-
-    // Закрытие модалки по Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-            closeConsentModal();
-        }
-    });
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeConsentModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.style.display === 'flex') closeConsentModal(); });
 </script>
 
 </body>
