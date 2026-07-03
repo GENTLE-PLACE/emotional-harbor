@@ -1740,13 +1740,15 @@
 
     <section class="section fade-up">
         <div class="section-eyebrow">Навигация</div>
-        <h2 class="section-title">🗺️ Путеводитель</h2>
+        <h2 class="section-title">Путеводитель</h2>
         <p style="font-size:16px; font-weight:300; line-height:1.85; color:#4a3f38; max-width:740px; margin-bottom:16px;">
             Вас встретит не сухое руководство, а тёплое пространство, где каждому модулю посвящён отдельный «остров» с атмосферой, смыслом и бережным объяснением.
         </p>
-        <p style="font-size:16px; font-weight:300; line-height:1.85; color:#4a3f38; max-width:740px; margin-bottom:32px;">
+        <p style="font-size:16px; font-weight:300; line-height:1.85; color:#4a3f38; max-width:740px; margin-bottom:0;">
             Они помогут не просто «вести дневник», а почувствовать его смысл и вашу собственную глубину.
         </p>
+
+        <div class="divider"></div>
 
         <div class="bento-card bento-card--wide">
             <div class="bento-browser-frame">
@@ -1970,6 +1972,9 @@
                    box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
             Создать свою Гавань
         </button>
+        <div id="pay-error" style="font-family:'Jost',sans-serif; font-size:13px; color:#e87a9c; text-align:center; margin-top:12px; display:none; line-height:1.6; position:relative; z-index:1;">
+            Что-то не сработало. Попробуйте ещё раз или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank" style="color:#e87a9c; text-decoration:underline;">Telegram</a> — отвечу быстро.
+        </div>
         <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
     </div>
 </div>
@@ -2069,6 +2074,7 @@
     const payButton = document.getElementById('pay-button');
     const emailInput = document.getElementById('user-email');
     const emailError = document.getElementById('email-error');
+    const payError = document.getElementById('pay-error');
 
     function isValidEmail(email) { return email.includes('@') && email.includes('.') && email.length > 5; }
 
@@ -2089,6 +2095,7 @@
         modal.style.display = 'flex';
         payButton.disabled = true; payButton.style.opacity = '0.4';
         payButton.innerHTML = 'Создать свою Гавань';
+        payError.style.display = 'none';
     };
 
     window.closeConsentModal = function() { modal.style.display = 'none'; };
@@ -2098,6 +2105,7 @@
         if (!isValidEmail(email)) { emailError.style.display = 'block'; return; }
         ym(110240785, 'reachGoal', 'start_payment'); gtag('event', 'start_payment');
         emailError.style.display = 'none';
+        payError.style.display = 'none';
         payButton.disabled = true;
         payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
         try {
@@ -2111,8 +2119,9 @@
                 payButton.innerHTML = 'Страница оплаты открыта ✓';
             } else throw new Error('Нет ссылки на оплату');
         } catch (e) {
-            payButton.disabled = false; payButton.innerHTML = 'Создать свою Гавань';
-            alert('Что-то пошло не так. Попробуйте ещё раз или напишите мне в Telegram: @e_lena_patrikeeva');
+            payButton.disabled = false;
+            payButton.innerHTML = 'Создать свою Гавань';
+            payError.style.display = 'block';
         }
     };
 
