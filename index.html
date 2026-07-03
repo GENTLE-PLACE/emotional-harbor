@@ -417,7 +417,7 @@
             padding: 32px 36px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 14px;
         }
 
         .for-you-eyebrow {
@@ -445,6 +445,17 @@
             left: 0;
             color: var(--pink);
             font-weight: 400;
+        }
+
+        .for-you-quote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 14.5px;
+            color: var(--brown-mid);
+            line-height: 1.7;
+            border-left: 3px solid rgba(232,122,156,0.4);
+            padding-left: 16px;
+            margin-top: 6px;
         }
 
         /* ——— МОДУЛИ ——— */
@@ -769,7 +780,7 @@
             color: #4a3f38;
         }
 
-        /* ——— ДВА МИРА (КАРТОЧКИ ИЗ WELCOME-СТРАНИЦЫ) ——— */
+        /* ——— ДВА МИРА ——— */
         .two-worlds-cards {
             display: flex;
             gap: 24px;
@@ -1411,6 +1422,8 @@
             .bento-tabs { gap: 12px; padding: 10px 14px 0; flex-wrap: wrap; }
             .bento-tab-btn { font-size: 9px; }
             .guide-block { padding: 28px 24px; margin-bottom: 36px; }
+            .for-you-block { padding: 24px 24px; }
+            .for-you-quote { font-size: 13.5px; }
         }
         @media (max-width: 400px) {
             .bento-image-holder { height: 280px; }
@@ -1472,9 +1485,11 @@
         <div class="for-you-block">
             <div class="for-you-eyebrow">Это для Вас, если</div>
             <div class="for-you-item">Вы часто бежите сквозь дни, не замечая, какими они были на вкус.</div>
-            <div class="for-you-item">Вам не хватало места, где можно быть честной, а не продуктивной.</div>
-            <div class="for-you-item">Где грусть не нужно «прорабатывать», а злость не нужно оправдывать.</div>
-            <div class="for-you-item">Куда можно просто прийти — с любым днём.</div>
+            <div class="for-you-item">Вы чувствуете глубоко — и Вам важно дать этому пространство, а не заглушать.</div>
+            <div class="for-you-item">Вас раздражает фраза «просто думайте позитивно» — и Вы давно чувствуете, что грусть и злость тоже чего-то стоят.</div>
+            <div class="for-you-item">Вам важно понимать, почему что-то работает — и Вы доверяете практикам, за которыми стоят исследования, а не интуиция автора.</div>
+            <div class="for-you-item">Вы ищете эстетичный дом для мыслей.</div>
+            <div class="for-you-quote">Писать в красивом пространстве — это как пить кофе из тонкого фарфора вместо пластикового стаканчика. Смысл тот же, а самоощущение — совершенно другое.</div>
         </div>
     </section>
 
@@ -1492,7 +1507,7 @@
         </div>
         <div class="bento-card-info">
             <h3>Центральный причал</h3>
-            <p>Главная страница — отсюда открывается доступ ко всем модулям, отчётам и архивам.</p>
+            <p>Главная страница — отсюда открывается доступ ко всем модулям, отчётам и архивам. Ваша точка сбора.</p>
         </div>
     </div>
 
@@ -1549,7 +1564,9 @@
 
 Сюда не нужно ничего записывать отдельно — этот блок сам собирает то, чем Вы делились, и показывает Вас же: объёмно, честно, красиво. Облако эмоций, энергетический ландшафт, паттерны и связи — всё это появляется само.
 
-Иногда он показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.</div>
+Иногда он показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.
+
+Здесь живут и маленькие эксперименты: заказать в кафе «то, что сегодня самое красивое» по выбору официанта, или спеть оперу в пробке. Лёгкие, почти игровые действия — чтобы мягко встряхнуть внутренний барометр и вернуться к себе.</div>
                     </div>
                     <div class="slide" id="stats-slide-2">
                         <div class="slide-mockup">
@@ -1624,7 +1641,10 @@
 Ритуалы, которые работают как кнопка перезагрузки.
 Еда, которая возвращает в детство. Тишина, которая наполняет, а не давит.
 
+Ваш мозг — бережный казначей Вашего тела. Каждая эмоция, каждое решение, каждый разговор — это вклад или трата. Вы постоянно пополняете и расходуете ресурсы, чтобы поддерживать жизнь.
+
 Когда силы на исходе — Вы не думаете, что делать. Просто открываете и выбираете, что откликается прямо сейчас.</div>
+                <div class="module-note">Оцифруйте то, что наполняет именно Вас.</div>
             </div>
 
             <!-- МОИ ОПОРЫ -->
@@ -1681,10 +1701,9 @@
 
     <section class="section fade-up">
         <div class="section-eyebrow">Развилка</div>
-        <h2 class="section-title">После оплаты<br>Вас встретят <span>два мира</span></h2>
+        <h2 class="section-title">Вас встретят<br><span>два мира</span></h2>
 
         <div class="two-worlds-cards">
-            <!-- Мир Есении -->
             <div class="world-card-full world-card-full--demo">
                 <div class="world-card-full__top">
                     <span class="world-card-full__pill world-card-full__pill--demo">✦ демо-версия</span>
@@ -1705,7 +1724,6 @@
                 </div>
             </div>
 
-            <!-- Мой мир -->
             <div class="world-card-full world-card-full--clean">
                 <div class="world-card-full__top">
                     <span class="world-card-full__pill world-card-full__pill--clean">✦ ваша версия</span>
@@ -1734,8 +1752,7 @@
     <section class="section fade-up">
         <div class="section-eyebrow">На чём это стоит</div>
         <h2 class="section-title">Реальная наука<br>в <span>тёплой упаковке</span></h2>
-        <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:16px;">Гавань — это не просто красивый шаблон. За каждым блоком стоит реальное исследование. Просто упакованное так, чтобы хотелось открывать каждый день.</p>
-        <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:32px; font-style:italic;">Писать в красивом пространстве — это как пить кофе из тонкого фарфора вместо пластикового стаканчика. Смысл тот же, а самоощущение — совершенно другое.</p>
+        <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:32px;">Гавань — это не просто красивый шаблон. За каждым блоком стоит реальное исследование. Просто упакованное так, чтобы хотелось открывать каждый день.</p>
 
         <div class="science-grid fade-up-stagger">
             <div class="science-card sc-1">
@@ -1751,7 +1768,7 @@
             <div class="science-card sc-3">
                 <div class="science-concept">Emodiversity</div>
                 <div class="science-text"><b>Разнообразие эмоций.</b> Люди, которые переживают широкий спектр эмоций — и позитивных, и негативных — психологически устойчивее. У них нет «запрещённых» чувств.</div>
-                <div class="science-feature">Не радость вместо грусти — а радость рядом с грустью. Это и есть эмоциональная насыщенность.</div>
+                <div class="science-feature">Не радость вместо грусти — а радость рядом с грустью. Это и есть эмоциональное разнообразие.</div>
             </div>
             <div class="science-card sc-4">
                 <div class="science-concept">Expressive writing</div>
@@ -1908,7 +1925,7 @@
                 </button>
                 <div class="faq-body">
                     <div class="faq-body-inner">
-                        <div class="faq-answer">После оплаты Вы автоматически попадёте на страницу с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты.</div>
+                        <div class="faq-answer">После оплаты на ваш e-mail придёт письмо  с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты.</div>
                     </div>
                 </div>
             </div>
