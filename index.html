@@ -519,14 +519,6 @@
             line-height: 1.3;
         }
 
-        .module-text {
-            font-size: 13.5px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            white-space: pre-line;
-        }
-
         .module-note {
             font-size: 12.5px;
             font-style: italic;
@@ -538,18 +530,39 @@
             margin-top: 2px;
         }
 
+        /* ——— КАРУСЕЛЬ С ПРИЛИПАНИЕМ ——— */
         .slides-wrapper {
-            position: relative;
-            min-height: 140px;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            border-radius: 12px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .slides-wrapper::-webkit-scrollbar {
+            display: none;
         }
 
         .slide {
-            display: none;
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            display: flex;
             flex-direction: column;
+            padding: 0;
         }
 
-        .slide.active {
-            display: flex;
+        .slide-text {
+            font-size: 13.5px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #4a3f38;
+            white-space: pre-line;
+            padding: 4px 2px;
         }
 
         .slide-mockup {
@@ -599,30 +612,49 @@
             height: auto;
         }
 
+        /* ——— ТОЧКИ ——— */
         .slider-dots {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            padding: 6px 0 2px;
+            gap: 12px;
+            padding: 8px 0 2px;
             margin-top: auto;
         }
 
         .dot {
-            width: 7px;
-            height: 7px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(201, 169, 122, 0.3);
             cursor: pointer;
-            border: none;
+            border: 2px solid transparent;
             padding: 0;
-            transition: all 0.25s ease;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            flex-shrink: 0;
+            outline: none;
+            position: relative;
+        }
+
+        .dot::after {
+            content: '';
+            position: absolute;
+            inset: -14px;
+        }
+
+        .dot:hover {
+            background: rgba(201, 169, 122, 0.6);
+            transform: scale(1.15);
+        }
+
+        .dot:focus-visible {
+            border-color: var(--pink);
+            box-shadow: 0 0 0 2px rgba(232, 122, 156, 0.4);
         }
 
         .dot.active {
-            width: 10px;
-            height: 10px;
             background: var(--pink);
+            transform: scale(1.2);
         }
 
         /* ——— BENTO МОКАП ——— */
@@ -1365,6 +1397,17 @@
             margin-right: 8px;
         }
 
+        @keyframes arrive {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -1460,7 +1503,7 @@
             <div class="bento-browser-dot"></div>
         </div>
         <div class="bento-image-holder" style="height: 560px;">
-            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Home.webp" alt="Главная страница Эмоциональной Гавани в Notion — дашборд со всеми модулями" width="1200" height="900" loading="lazy" decoding="async">
+            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Home.webp" alt="Главная страница Эмоциональной Гавани в Notion — дашборд со всеми модулями" width="1200" height="900" loading="eager" decoding="async">
         </div>
         <div class="bento-card-info">
             <h3>Центральный причал</h3>
@@ -1483,15 +1526,16 @@
                     <div class="module-icon">📔</div>
                     <h3 class="module-title">Дневник настроения</h3>
                 </div>
-                <div class="slides-wrapper">
-                    <div class="slide active" id="diary-slide-1">
-                        <div class="module-text">Место, куда Вы приходите не за фактами, а за оттенками чувств.
+
+                <div class="slides-wrapper" id="carousel-diary">
+                    <div class="slide">
+                        <div class="slide-text">Место, куда Вы приходите не за фактами, а за оттенками чувств.
 Здесь не нужно писать красиво или «правильно». Можно просто шепотом рассказать себе, что на самом деле происходит внутри.
 
 Давайте дням имена — не по датам, а по ощущениям. «Благодарность и мокрый снег» вместо «22 января» и находите микро-сокровища в самых обычных буднях.
 Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
                     </div>
-                    <div class="slide" id="diary-slide-2">
+                    <div class="slide">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
                                 <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
@@ -1502,10 +1546,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="module-note">Здесь рождается вся Ваша статистика.</div>
+
                 <div class="slider-dots">
-                    <button class="dot active" data-slide="1" aria-label="Текстовое описание дневника"></button>
-                    <button class="dot" data-slide="2" aria-label="Скриншот дневника настроения"></button>
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание дневника"></button>
+                    <button class="dot" data-slide="1" aria-label="Скриншот дневника настроения"></button>
                 </div>
             </div>
 
@@ -1515,9 +1561,10 @@
                     <div class="module-icon">📊</div>
                     <h3 class="module-title">Статистика эмоций</h3>
                 </div>
-                <div class="slides-wrapper">
-                    <div class="slide active" id="stats-slide-1">
-                        <div class="module-text">Самая нежная аналитика в Вашей жизни.
+
+                <div class="slides-wrapper" id="carousel-stats">
+                    <div class="slide">
+                        <div class="slide-text">Самая нежная аналитика в Вашей жизни.
 
 Сюда не нужно ничего записывать отдельно — этот блок сам собирает то, чем Вы делились, и показывает Вас же: объёмно, честно, красиво. Облако эмоций, энергетический ландшафт, паттерны и связи — всё это появляется само.
 
@@ -1525,7 +1572,7 @@
 
 Здесь живут и маленькие эксперименты: заказать в кафе «то, что сегодня самое красивое» по выбору официанта, или спеть оперу в пробке. Лёгкие, почти игровые действия — чтобы мягко встряхнуть внутренний барометр и вернуться к себе.</div>
                     </div>
-                    <div class="slide" id="stats-slide-2">
+                    <div class="slide">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
                                 <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
@@ -1535,7 +1582,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="slide" id="stats-slide-3">
+                    <div class="slide">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
                                 <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
@@ -1546,11 +1593,13 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="module-note">Иногда показывает то, что не видно в моменте.</div>
+
                 <div class="slider-dots">
-                    <button class="dot active" data-slide="1" aria-label="Текстовое описание статистики"></button>
-                    <button class="dot" data-slide="2" aria-label="Отчёт Облако эмоций"></button>
-                    <button class="dot" data-slide="3" aria-label="Отчёт Эмоциональное разнообразие"></button>
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание статистики"></button>
+                    <button class="dot" data-slide="1" aria-label="Отчёт Облако эмоций"></button>
+                    <button class="dot" data-slide="2" aria-label="Отчёт Эмоциональное разнообразие"></button>
                 </div>
             </div>
 
@@ -1560,15 +1609,16 @@
                     <div class="module-icon">💌</div>
                     <h3 class="module-title">Копилка тепла</h3>
                 </div>
-                <div class="slides-wrapper">
-                    <div class="slide active" id="warmth-slide-1">
-                        <div class="module-text">Самое нежное место во всей Гавани.
+
+                <div class="slides-wrapper" id="carousel-warmth">
+                    <div class="slide">
+                        <div class="slide-text">Самое нежное место во всей Гавани.
 
 Голосовое от подруги, которое Вы переслушиваете в плохой день. Комментарий от клиента, после которого расправляются плечи. Письмо от мамы. Сюда попадает всё, что однажды попало точно в грудь — и оставило там свет.
 
-Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходите сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
+Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходитесь сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
                     </div>
-                    <div class="slide" id="warmth-slide-2">
+                    <div class="slide">
                         <div class="slide-mockup">
                             <div class="mockup-frame">
                                 <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
@@ -1579,10 +1629,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="module-note">Аптечка с подписанными баночками.</div>
+
                 <div class="slider-dots">
-                    <button class="dot active" data-slide="1" aria-label="Текстовое описание копилки тепла"></button>
-                    <button class="dot" data-slide="2" aria-label="Скриншот копилки тепла"></button>
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание копилки тепла"></button>
+                    <button class="dot" data-slide="1" aria-label="Скриншот копилки тепла"></button>
                 </div>
             </div>
 
@@ -1592,7 +1644,10 @@
                     <div class="module-icon">🔋</div>
                     <h3 class="module-title">Источники энергии</h3>
                 </div>
-                <div class="module-text">Ваш личный каталог топлива.
+
+                <div class="slides-wrapper" id="carousel-energy">
+                    <div class="slide">
+                        <div class="slide-text">Ваш личный каталог топлива.
 
 Запахи, от которых внутри разливается тепло.
 Ритуалы, которые работают как кнопка перезагрузки.
@@ -1601,7 +1656,14 @@
 Ваш мозг — бережный казначей Вашего тела. Каждая эмоция, каждое решение, каждый разговор — это вклад или трата. Вы постоянно пополняете и расходуете ресурсы, чтобы поддерживать жизнь.
 
 Когда силы на исходе — Вы не думаете, что делать. Просто открываете и выбираете, что откликается прямо сейчас.</div>
+                    </div>
+                </div>
+
                 <div class="module-note">Оцифруйте то, что наполняет именно Вас.</div>
+
+                <div class="slider-dots">
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание источников энергии"></button>
+                </div>
             </div>
 
             <!-- МОИ ОПОРЫ -->
@@ -1610,12 +1672,22 @@
                     <div class="module-icon">🛟</div>
                     <h3 class="module-title">Мои опоры</h3>
                 </div>
-                <div class="module-text">Самое устойчивое место в Гавани.
+
+                <div class="slides-wrapper" id="carousel-anchors">
+                    <div class="slide">
+                        <div class="slide-text">Самое устойчивое место в Гавани.
 
 Здесь не то, что случилось однажды, а то, что работает всегда.
 Люди, места, ритуалы, занятия — всё, на что можно опереться, когда всё вокруг качается.
 Со временем здесь появится Ваша личная хроника: живое доказательство того, что именно помогло Вам выпрямиться, когда наклонило почти до земли.</div>
+                    </div>
+                </div>
+
                 <div class="module-note">Когда всё качает — здесь не качает.</div>
+
+                <div class="slider-dots">
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание опор"></button>
+                </div>
             </div>
 
             <!-- УЮТНЫЙ КОНТЕНТ -->
@@ -1624,10 +1696,20 @@
                     <div class="module-icon">🎬</div>
                     <h3 class="module-title">Уютный контент</h3>
                 </div>
-                <div class="module-text">Подкаст, когда внутри слишком шумно. Книга, когда нужно вспомнить, что ценность не нужно заслуживать. Фильм, после которого дышится глубже.
+
+                <div class="slides-wrapper" id="carousel-content">
+                    <div class="slide">
+                        <div class="slide-text">Подкаст, когда внутри слишком шумно. Книга, когда нужно вспомнить, что ценность не нужно заслуживать. Фильм, после которого дышится глубже.
 
 Контент здесь собирается не по жанрам, а по состоянию. Comfort food для мозга — только для Ваших настроений и Вашей чувствительности.</div>
+                    </div>
+                </div>
+
                 <div class="module-note">Comfort food для мозга.</div>
+
+                <div class="slider-dots">
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание уютного контента"></button>
+                </div>
             </div>
 
         </div>
@@ -2008,48 +2090,88 @@
         });
     });
 
-    // SLIDERS
-    function switchSlide(moduleName, slideNum) {
-        const slide1 = document.getElementById(moduleName + '-slide-1');
-        const slide2 = document.getElementById(moduleName + '-slide-2');
-        const slide3 = document.getElementById(moduleName + '-slide-3');
-        const allSlides = [slide1, slide2, slide3].filter(s => s !== null);
-        const card = slide1 ? slide1.closest('.module-card') : null;
-        const dots = card ? card.querySelectorAll('.slider-dots .dot') : [];
+    // КАРУСЕЛИ С ПРИЛИПАНИЕМ
+    (function() {
+        const allCarousels = document.querySelectorAll('.slides-wrapper');
 
-        allSlides.forEach((slide, index) => slide.classList.toggle('active', index === slideNum - 1));
-        dots.forEach((dot, index) => dot.classList.toggle('active', index === slideNum - 1));
-    }
+        allCarousels.forEach(carousel => {
+            const card = carousel.closest('.module-card');
+            if (!card) return;
 
-    document.querySelectorAll('.slider-dots .dot').forEach(dot => {
-        dot.addEventListener('click', function() {
-            const slideNum = parseInt(this.dataset.slide);
-            const card = this.closest('.module-card');
-            const moduleName = card ? card.dataset.module : null;
-            if (moduleName && slideNum) switchSlide(moduleName, slideNum);
+            const dots = card.querySelectorAll('.slider-dots .dot');
+            const slides = carousel.querySelectorAll('.slide');
+            let isProgrammatic = false;
+
+            function updateActiveSlide() {
+                if (isProgrammatic) return;
+                const rect = carousel.getBoundingClientRect();
+                let best = 0, bestIdx = 0;
+
+                slides.forEach((s, i) => {
+                    const r = s.getBoundingClientRect();
+                    const visible = Math.max(0, Math.min(r.right, rect.right) - Math.max(r.left, rect.left));
+                    if (visible > best) {
+                        best = visible;
+                        bestIdx = i;
+                    }
+                });
+
+                dots.forEach((d, i) => d.classList.toggle('active', i === bestIdx));
+            }
+
+            carousel.addEventListener('scroll', updateActiveSlide, { passive: true });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.slide);
+                    isProgrammatic = true;
+
+                    const targetSlide = slides[idx];
+                    if (targetSlide) {
+                        targetSlide.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'nearest',
+                            inline: 'start'
+                        });
+                    }
+
+                    setTimeout(() => {
+                        isProgrammatic = false;
+                        updateActiveSlide();
+                    }, 400);
+                });
+            });
         });
-    });
 
-    // TOUCH SWIPE
-    document.querySelectorAll('.module-card').forEach(card => {
-        let startX = 0, startY = 0;
-        card.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
-        card.addEventListener('touchend', (e) => {
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changedTouches[0].clientY;
-            const diffX = startX - endX;
-            const diffY = startY - endY;
-            if (Math.abs(diffX) < Math.abs(diffY) || Math.abs(diffX) < 35) return;
-            const moduleName = card.dataset.module;
-            if (!moduleName) return;
-            const slides = card.querySelectorAll('.slide');
-            const activeSlide = card.querySelector('.slide.active');
-            const currentIdx = Array.from(slides).indexOf(activeSlide);
-            const totalSlides = slides.length;
-            if (diffX > 0 && currentIdx < totalSlides - 1) switchSlide(moduleName, currentIdx + 2);
-            else if (diffX < 0 && currentIdx > 0) switchSlide(moduleName, currentIdx);
+        // Обновление всех каруселей при ресайзе
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                allCarousels.forEach(carousel => {
+                    const card = carousel.closest('.module-card');
+                    if (!card) return;
+                    const dots = card.querySelectorAll('.slider-dots .dot');
+                    const slides = carousel.querySelectorAll('.slide');
+                    const rect = carousel.getBoundingClientRect();
+                    let best = 0, bestIdx = 0;
+
+                    slides.forEach((s, i) => {
+                        const r = s.getBoundingClientRect();
+                        const visible = Math.max(0, Math.min(r.right, rect.right) - Math.max(r.left, rect.left));
+                        if (visible > best) {
+                            best = visible;
+                            bestIdx = i;
+                        }
+                    });
+
+                    dots.forEach((d, i) => d.classList.toggle('active', i === bestIdx));
+                });
+            }, 150);
         });
-    });
+
+        console.log('✅ Все карусели с прилипанием готовы!');
+    })();
 
     // BENTO TABS
     function switchBentoTab(tabId) {
