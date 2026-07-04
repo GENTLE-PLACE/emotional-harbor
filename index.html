@@ -180,7 +180,7 @@
           "name": "Как получить доступ к Гавани после оплаты?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "После оплаты на Ваш e-mail придёт письмо с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты."
+            "text": "После оплаты на ваш e-mail придёт письмо с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты."
           }
         }
       ]
@@ -451,7 +451,7 @@
             font-family: 'Lora', serif;
             font-style: italic;
             font-size: 14.5px;
-            color: var(--brown-mid);
+            color: #6a5040;
             line-height: 1.7;
             border-left: 3px solid rgba(232,122,156,0.4);
             padding-left: 16px;
@@ -527,90 +527,45 @@
             line-height: 1.6;
             border-top: 1px dashed rgba(201,169,122,0.35);
             padding-top: 10px;
-            margin-top: 2px;
+            margin-top: auto;
         }
 
-        /* ——— КАРУСЕЛЬ С ПРИЛИПАНИЕМ ——— */
-        .slides-wrapper {
-            display: flex;
-            gap: 0;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            margin: 0;
-            padding: 0;
-            border-radius: 12px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
+/* ——— КАРУСЕЛЬ ——— */
+.slides-wrapper {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    border-radius: 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex: 1 1 auto;
+    min-height: 0;
+}
 
-        .slides-wrapper::-webkit-scrollbar {
-            display: none;
-        }
+.slides-wrapper::-webkit-scrollbar {
+    display: none;
+}
 
-        .slide {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
-            display: flex;
-            flex-direction: column;
-            padding: 0;
-        }
+.slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
 
-        .slide-text {
-            font-size: 13.5px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            white-space: pre-line;
-            padding: 4px 2px;
-        }
-
-        .slide-mockup {
-            background: #faf8f6;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            border: 1.5px solid rgba(201, 169, 122, 0.35);
-        }
-
-        .mockup-frame {
-            background: #faf5ed;
-            border-bottom: 1px solid rgba(201, 169, 122, 0.2);
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
-        }
-
-        .mockup-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-        }
-        .mockup-dot:nth-child(1) { background: #E8837A; }
-        .mockup-dot:nth-child(2) { background: #F2C07A; }
-        .mockup-dot:nth-child(3) { background: #7EC8A0; }
-
-        .mockup-image {
-            overflow-y: auto;
-            overflow-x: hidden;
-            background: #faf8f6;
-            max-height: 340px;
-            scrollbar-width: thin;
-            scrollbar-color: #d6cdc0 #faf8f6;
-        }
-
-        .mockup-image::-webkit-scrollbar { width: 4px; }
-        .mockup-image::-webkit-scrollbar-track { background: #faf8f6; border-radius: 10px; }
-        .mockup-image::-webkit-scrollbar-thumb { background: #d6cdc0; border-radius: 10px; }
-
-        .mockup-image img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
+.slide-text {
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #4a3f38;
+    white-space: pre-line;
+    padding: 4px 2px;
+}
 
         /* ——— ТОЧКИ ——— */
         .slider-dots {
@@ -619,7 +574,6 @@
             align-items: center;
             gap: 12px;
             padding: 8px 0 2px;
-            margin-top: auto;
         }
 
         .dot {
@@ -657,7 +611,65 @@
             transform: scale(1.2);
         }
 
-        /* ——— BENTO МОКАП ——— */
+        /* ——— BENTO МОКАП (в карточках) ——— */
+        .bento-mockup {
+            background: rgba(255, 248, 235, 0.6);
+            border: 1.5px solid rgba(201, 169, 122, 0.35);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 5px 7px 0 rgba(120, 80, 40, 0.07);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bento-browser-frame {
+            background: #faf5ed;
+            border-bottom: 1px solid rgba(201, 169, 122, 0.2);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .bento-browser-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+        .bento-browser-dot:nth-child(1) { background: #E8837A; }
+        .bento-browser-dot:nth-child(2) { background: #F2C07A; }
+        .bento-browser-dot:nth-child(3) { background: #7EC8A0; }
+
+        .bento-image-holder {
+            width: 100%;
+            max-height: 340px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #faf8f6;
+            position: relative;
+            scrollbar-width: thin;
+            scrollbar-color: #d6cdc0 #faf8f6;
+        }
+
+        .bento-image-holder::-webkit-scrollbar { width: 4px; background: transparent; }
+        .bento-image-holder::-webkit-scrollbar-track { background: #faf8f6; border-radius: 10px; }
+        .bento-image-holder::-webkit-scrollbar-thumb { background: #d6cdc0; border-radius: 10px; }
+
+        .bento-image-holder img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .bento-card-info {
+            padding: 14px 18px 16px;
+            border-top: 1px solid rgba(201, 169, 122, 0.2);
+            flex-shrink: 0;
+            min-height: 16px;
+        }
+
+        /* ——— БОЛЬШОЙ BENTO (Центральный причал + Путеводитель) ——— */
         .bento-card {
             max-width: 620px;
             width: 100%;
@@ -680,37 +692,12 @@
             max-width: none;
         }
 
-        .bento-browser-frame {
-            background: #faf5ed;
-            border-bottom: 1px solid rgba(201, 169, 122, 0.2);
-            padding: 10px 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
-        }
-
-        .bento-browser-dot { width: 7px; height: 7px; border-radius: 50%; }
-        .bento-browser-dot:nth-child(1) { background: #E8837A; }
-        .bento-browser-dot:nth-child(2) { background: #F2C07A; }
-        .bento-browser-dot:nth-child(3) { background: #7EC8A0; }
-
-        .bento-image-holder {
-            width: 100%;
+        .bento-card .bento-image-holder {
             height: 440px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            background: #faf8f6;
-            position: relative;
-            scrollbar-width: thin;
-            scrollbar-color: #d6cdc0 #faf8f6;
+            max-height: none;
         }
 
-        .bento-image-holder::-webkit-scrollbar { width: 4px; background: transparent; }
-        .bento-image-holder::-webkit-scrollbar-track { background: #faf8f6; border-radius: 10px; }
-        .bento-image-holder::-webkit-scrollbar-thumb { background: #d6cdc0; border-radius: 10px; }
-
-        .bento-image-holder::after {
+        .bento-card .bento-image-holder::after {
             content: '';
             position: sticky;
             bottom: 0;
@@ -723,10 +710,7 @@
             z-index: 2;
         }
 
-        .bento-image-holder img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .bento-card .bento-image-holder img {
             transition: transform 0.4s ease;
         }
 
@@ -734,6 +718,28 @@
             transform: scale(1.03);
         }
 
+        .bento-card .bento-card-info {
+            padding: 18px 20px 20px;
+        }
+
+        .bento-card .bento-card-info h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--brown-dark);
+            margin-bottom: 8px;
+        }
+
+        .bento-card .bento-card-info p {
+            font-size: 13.5px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #4a3f38;
+        }
+
+        /* Табы */
         .bento-tabs {
             display: flex;
             gap: 20px;
@@ -787,29 +793,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .bento-card-info {
-            padding: 18px 20px 20px;
-            border-top: 1px solid rgba(201, 169, 122, 0.2);
-            flex-shrink: 0;
-        }
-
-        .bento-card-info h3 {
-            font-family: 'Unbounded', sans-serif;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            color: var(--brown-dark);
-            margin-bottom: 8px;
-        }
-
-        .bento-card-info p {
-            font-size: 13.5px;
-            font-weight: 300;
-            line-height: 1.7;
-            color: #4a3f38;
         }
 
         /* ——— ДВА МИРА ——— */
@@ -1418,15 +1401,15 @@
             .final-section { padding: 40px 24px; }
             .author-block { flex-wrap: wrap; }
             .author-contact { margin-left: 0; }
-            .mockup-image { max-height: 280px; }
-            .bento-image-holder { height: 360px; }
+            .bento-image-holder { max-height: 280px; }
+            .bento-card .bento-image-holder { height: 360px; max-height: none; }
             .bento-tabs { gap: 12px; padding: 10px 14px 0; flex-wrap: wrap; }
             .bento-tab-btn { font-size: 9px; }
             .for-you-block { padding: 24px 24px; }
             .for-you-quote { font-size: 13.5px; }
         }
         @media (max-width: 400px) {
-            .bento-image-holder { height: 280px; }
+            .bento-card .bento-image-holder { height: 280px; }
         }
     </style>
 </head>
@@ -1536,13 +1519,16 @@
 Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
                     </div>
                     <div class="slide">
-                        <div class="slide-mockup">
-                            <div class="mockup-frame">
-                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+                        <div class="bento-mockup">
+                            <div class="bento-browser-frame">
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="mockup-image">
+                            <div class="bento-image-holder">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Diary_Home.webp" alt="Запись в дневнике настроения Эмоциональной Гавани — эмоция Ревность" width="800" height="600" loading="lazy" decoding="async">
                             </div>
+                            <div class="bento-card-info"></div>
                         </div>
                     </div>
                 </div>
@@ -1573,23 +1559,29 @@
 Здесь живут и маленькие эксперименты: заказать в кафе «то, что сегодня самое красивое» по выбору официанта, или спеть оперу в пробке. Лёгкие, почти игровые действия — чтобы мягко встряхнуть внутренний барометр и вернуться к себе.</div>
                     </div>
                     <div class="slide">
-                        <div class="slide-mockup">
-                            <div class="mockup-frame">
-                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+                        <div class="bento-mockup">
+                            <div class="bento-browser-frame">
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="mockup-image">
+                            <div class="bento-image-holder">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotion_Cloud.webp" alt="Отчёт Облако эмоций в Эмоциональной Гавани — визуализация эмоциональной палитры" width="800" height="600" loading="lazy" decoding="async">
                             </div>
+                            <div class="bento-card-info"></div>
                         </div>
                     </div>
                     <div class="slide">
-                        <div class="slide-mockup">
-                            <div class="mockup-frame">
-                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+                        <div class="bento-mockup">
+                            <div class="bento-browser-frame">
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="mockup-image">
+                            <div class="bento-image-holder">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotional_Diversity.webp" alt="Отчёт Эмоциональное разнообразие в Эмоциональной Гавани — индекс Emodiversity" width="800" height="600" loading="lazy" decoding="async">
                             </div>
+                            <div class="bento-card-info"></div>
                         </div>
                     </div>
                 </div>
@@ -1619,13 +1611,16 @@
 Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходитесь сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
                     </div>
                     <div class="slide">
-                        <div class="slide-mockup">
-                            <div class="mockup-frame">
-                                <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+                        <div class="bento-mockup">
+                            <div class="bento-browser-frame">
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
+                                <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="mockup-image">
+                            <div class="bento-image-holder">
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Warmth_Jar.webp" alt="Копилка тепла в Эмоциональной Гавани — запись Самозванец" width="800" height="600" loading="lazy" decoding="async">
                             </div>
+                            <div class="bento-card-info"></div>
                         </div>
                     </div>
                 </div>
@@ -1969,7 +1964,7 @@
                 </button>
                 <div class="faq-body">
                     <div class="faq-body-inner">
-                        <div class="faq-answer">После оплаты на ваш e-mail придёт письмо с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты.</div>
+                        <div class="faq-answer">После оплаты на Ваш e-mail придёт письмо с инструкцией и кнопкой входа. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so. Вход занимает меньше минуты.</div>
                     </div>
                 </div>
             </div>
@@ -2143,7 +2138,6 @@
             });
         });
 
-        // Обновление всех каруселей при ресайзе
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
