@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="https://emotional-harbor.ru/favicon.svg">
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="https://emotional-harbor.ru/favicon.svg">
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
@@ -87,7 +87,7 @@
       "@type": "Organization",
       "name": "Эмоциональная Гавань",
       "url": "https://emotional-harbor.ru/",
-      "logo": "https://emotional-harbor.ru/favicon.svg",
+      "logo": "https://emotional-harbor.ru/favicon.png",
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
@@ -275,7 +275,7 @@
         .fade-up-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
         .fade-up-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
         .fade-up-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
-        .fade-up-stagger.visible > *:nth-child(6) { transition-delay: 0.6s; }
+        .fade-up-stagger.visible > *:nth-child(6) { transition-delay: 0.5s; }
 
         .fade-up-stagger.visible > * {
             opacity: 1;
@@ -2162,6 +2162,8 @@
                 });
             }, 150);
         });
+
+        console.log('✅ Все карусели с прилипанием готовы!');
     })();
 
     // BENTO TABS
@@ -2187,6 +2189,7 @@
     const payButton = document.getElementById('pay-button');
     const emailInput = document.getElementById('user-email');
     const emailError = document.getElementById('email-error');
+    const payError = document.getElementById('pay-error');
 
     function isValidEmail(email) { return email.includes('@') && email.includes('.') && email.length > 5; }
 
@@ -2207,35 +2210,34 @@
         modal.style.display = 'flex';
         payButton.disabled = true; payButton.style.opacity = '0.4';
         payButton.innerHTML = 'Создать свою Гавань';
-        document.getElementById('pay-error').style.display = 'none';
+        payError.style.display = 'none';
     };
 
     window.closeConsentModal = function() { modal.style.display = 'none'; };
 
-    // НОВАЯ ФУНКЦИЯ ОПЛАТЫ — через форму, без fetch
-    window.goToPayment = function() {
+    window.goToPayment = async function() {
         const email = emailInput.value.trim();
         if (!isValidEmail(email)) { emailError.style.display = 'block'; return; }
         ym(110240785, 'reachGoal', 'start_payment'); gtag('event', 'start_payment');
         emailError.style.display = 'none';
-        document.getElementById('pay-error').style.display = 'none';
+        payError.style.display = 'none';
         payButton.disabled = true;
         payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
-
-        // Создаём форму и отправляем напрямую — без fetch, без CORS
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'https://auth.emotional-harbor.ru/create-payment-redirect';
-        form.style.display = 'none';
-
-        const emailField = document.createElement('input');
-        emailField.type = 'hidden';
-        emailField.name = 'email';
-        emailField.value = email;
-        form.appendChild(emailField);
-
-        document.body.appendChild(form);
-        form.submit();
+        try {
+            const response = await fetch('https://auth.emotional-harbor.ru/create-payment', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email })
+            });
+            if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
+            const data = await response.json();
+            if (data.payment_url) {
+                window.open(data.payment_url, '_blank');
+                payButton.innerHTML = 'Страница оплаты открыта ✓';
+            } else throw new Error('Нет ссылки на оплату');
+        } catch (e) {
+            payButton.disabled = false;
+            payButton.innerHTML = 'Создать свою Гавань';
+            payError.style.display = 'block';
+        }
     };
 
     modal.addEventListener('click', function(e) { if (e.target === modal) closeConsentModal(); });
