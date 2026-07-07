@@ -2224,7 +2224,7 @@
         payButton.disabled = true;
         payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
         try {
-            const response = await fetch('https://auth.emotional-harbor.ru/create-payment', {
+            const response = await fetch('https://harbor-auth.gentle-place.workers.dev/create-payment', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email })
             });
             if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
