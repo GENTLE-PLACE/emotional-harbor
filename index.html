@@ -26,7 +26,7 @@
 
         ym(110240785, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/110240785" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript><div><img src="https://mc.yandex.ru/watch/110240785" style="position:absolute; left:-9999px;" alt="Счётчик Яндекс.Метрики" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <!-- SEO -->
@@ -648,7 +648,7 @@
             background: #faf8f6;
             position: relative;
             scrollbar-width: thin;
-            scroll-color: #d6cdc0 #faf8f6;
+            scrollbar-color: #d6cdc0 #faf8f6;
         }
 
         .bento-image-holder::-webkit-scrollbar { width: 4px; background: transparent; }
@@ -809,13 +809,9 @@
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
             border: 1.5px solid rgba(201,169,122,0.4);
             min-height: 420px;
-        }
-
-        .world-card-full:hover {
-            transform: translateY(-5px);
+            transition: none;
         }
 
         .world-card-full::after {
@@ -831,7 +827,7 @@
             box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12);
         }
         .world-card-full--demo:hover {
-            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 30px 55px -12px rgba(120,80,40,0.18);
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12);
         }
         .world-card-full--demo::after { background: #F7D08A; }
         .world-card-full--demo::before {
@@ -848,7 +844,7 @@
             box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.10);
         }
         .world-card-full--clean:hover {
-            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 30px 55px -12px rgba(120,80,40,0.16);
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.10);
         }
         .world-card-full--clean::after { background: #F8B4C0; }
         .world-card-full--clean::before {
@@ -970,13 +966,9 @@
             font-size: 42px;
             font-weight: 700;
             line-height: 1;
-            transition: transform 0.2s ease;
             color: rgba(120,80,40,0.3);
             flex-shrink: 0;
             margin-left: 12px;
-        }
-        .world-card-full:hover .world-card-full__arrow {
-            transform: translateX(6px);
         }
 
         /* ——— ЕСЕНИЯ ——— */
@@ -1418,17 +1410,17 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+<svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path d="M0,200 Q300,120 600,220 T1200,160" fill="none" stroke="#c9a97a" stroke-width="3" stroke-dasharray="14 8"/>
     <path d="M0,480 Q400,380 800,500 T1200,440" fill="none" stroke="#d97787" stroke-width="2"/>
     <path d="M0,720 Q350,640 700,740 T1200,680" fill="none" stroke="#A5C2F1" stroke-width="2"/>
 </svg>
 
-<svg class="corner-wear" style="top:0;left:0;width:200px;height:200px;" viewBox="0 0 200 200">
+<svg class="corner-wear" style="top:0;left:0;width:200px;height:200px;" viewBox="0 0 200 200" aria-hidden="true">
     <defs><radialGradient id="cw1" cx="0%" cy="0%"><stop offset="0%" stop-color="#c8b898" stop-opacity="0.4"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
     <rect width="200" height="200" fill="url(#cw1)"/>
 </svg>
-<svg class="corner-wear" style="bottom:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180">
+<svg class="corner-wear" style="bottom:0;right:0;width:180px;height:180px;" viewBox="0 0 180 180" aria-hidden="true">
     <defs><radialGradient id="cw2" cx="100%" cy="100%"><stop offset="0%" stop-color="#a89878" stop-opacity="0.22"/><stop offset="70%" stop-color="transparent"/></radialGradient></defs>
     <rect width="180" height="180" fill="url(#cw2)"/>
 </svg>
@@ -1489,11 +1481,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bento-browser-dot"></div>
         </div>
         <div class="bento-image-holder" style="height: 560px;">
-            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Home.webp" alt="Дашборд Эмоциональной Гавани в Notion" width="1200" height="900" loading="eager" decoding="async">
+            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Home.webp" alt="Дашборд Эмоциональной Гавани в Notion — Центральный причал" width="1200" height="900" loading="eager" decoding="async">
         </div>
         <div class="bento-card-info">
             <h3>Центральный причал</h3>
-            <p>Главная страница — отсюда открывается доступ ко всем модулям, отчётам и архивам. Ваша точка сбора.</p>
+            <p>Главная страница — отсюда открывается доступ ко всем модулям, отчётам и архивам.</p>
         </div>
     </div>
 
@@ -1516,10 +1508,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="slides-wrapper" id="carousel-diary">
                     <div class="slide">
                         <div class="slide-text">Место, куда Вы приходите не за фактами, а за оттенками чувств.
-    Здесь не нужно писать красиво или «правильно». Можно просто шепотом рассказать себе, что на самом деле происходит внутри.
+Здесь не нужно писать красиво или «правильно». Можно просто шепотом рассказать себе, что на самом деле происходит внутри.
 
-    Давайте дням имена — не по датам, а по ощущениям. «Благодарность и мокрый снег» вместо «22 января» и находите микро-сокровища в самых обычных буднях.
-    Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
+Давайте дням имена — не по датам, а по ощущениям. «Благодарность и мокрый снег» вместо «22 января» и находите микро-сокровища в самых обычных буднях.
+Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
                     </div>
                     <div class="slide">
                         <div class="bento-mockup">
@@ -1529,7 +1521,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                             </div>
                             <div class="bento-image-holder">
-                                <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Diary_Home.webp" alt="Запись в дневнике настроения" width="800" height="600" loading="lazy" decoding="async">
+                                <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Diary_Home.webp" alt="Интерфейс дневника настроения в Notion" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
                         </div>
@@ -1539,8 +1531,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="module-note">Здесь рождается вся Ваша статистика.</div>
 
                 <div class="slider-dots">
-                    <button class="dot active" data-slide="0" aria-label="Текстовое описание дневника"></button>
-                    <button class="dot" data-slide="1" aria-label="Скриншот дневника настроения"></button>
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание дневника настроения"></button>
+                    <button class="dot" data-slide="1" aria-label="Скриншот интерфейса дневника настроения"></button>
                 </div>
             </div>
 
@@ -1555,11 +1547,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="slide">
                         <div class="slide-text">Самая нежная аналитика в Вашей жизни.
 
-    Сюда не нужно ничего записывать отдельно — этот блок сам собирает то, чем Вы делились, и показывает Вас же: объёмно, честно, красиво. Облако эмоций, энергетический ландшафт, паттерны и связи — всё это появляется само.
+Сюда не нужно ничего записывать отдельно — этот блок сам собирает то, чем Вы делились, и показывает Вас же: объёмно, честно, красиво. Облако эмоций, энергетический ландшафт, паттерны и связи — всё это появляется само.
 
-    Иногда он показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.
+Иногда он показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.
 
-    Здесь живут и маленькие эксперименты: заказать в кафе «то, что сегодня самое красивое» по выбору официанта, или спеть оперу в пробке. Лёгкие, почти игровые действия — чтобы мягко встряхнуть внутренний барометр и вернуться к себе.</div>
+Здесь живут и маленькие эксперименты: заказать в кафе «то, что сегодня самое красивое» по выбору официанта, или спеть оперу в пробке. Лёгкие, почти игровые действия — чтобы мягко встряхнуть внутренний барометр и вернуться к себе.</div>
                     </div>
                     <div class="slide">
                         <div class="bento-mockup">
@@ -1569,7 +1561,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                             </div>
                             <div class="bento-image-holder">
-                                <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotion_Cloud.webp" alt="Отчёт Облако эмоций" width="800" height="600" loading="lazy" decoding="async">
+                                <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotion_Cloud.webp" alt="Отчёт Облако эмоций в Notion" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
                         </div>
@@ -1582,7 +1574,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                             </div>
                             <div class="bento-image-holder">
-                                <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotional_Diversity.webp" alt="Отчёт Эмоциональное разнообразие" width="800" height="600" loading="lazy" decoding="async">
+                                <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotional_Diversity.webp" alt="Отчёт Эмоциональное разнообразие в Notion" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
                         </div>
@@ -1592,9 +1584,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="module-note">Иногда показывает то, что не видно в моменте.</div>
 
                 <div class="slider-dots">
-                    <button class="dot active" data-slide="0" aria-label="Текстовое описание статистики"></button>
-                    <button class="dot" data-slide="1" aria-label="Отчёт Облако эмоций"></button>
-                    <button class="dot" data-slide="2" aria-label="Отчёт Эмоциональное разнообразие"></button>
+                    <button class="dot active" data-slide="0" aria-label="Текстовое описание статистики эмоций"></button>
+                    <button class="dot" data-slide="1" aria-label="Скриншот отчёта Облако эмоций"></button>
+                    <button class="dot" data-slide="2" aria-label="Скриншот отчёта Эмоциональное разнообразие"></button>
                 </div>
             </div>
 
@@ -1609,9 +1601,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="slide">
                         <div class="slide-text">Самое нежное место во всей Гавани.
 
-    Голосовое от подруги, которое Вы переслушиваете в плохой день. Комментарий от клиента, после которого расправляются плечи. Письмо от мамы. Сюда попадает всё, что однажды попало точно в грудь — и оставило там свет.
+Голосовое от подруги, которое Вы переслушиваете в плохой день. Комментарий от клиента, после которого расправляются плечи. Письмо от мамы. Сюда попадает всё, что однажды попало точно в грудь — и оставило там свет.
 
-    Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходитесь сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
+Это не просто архив добрых слов. Это аптечка с подписанными баночками: когда внутри холодно, Вы приходитесь сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
                     </div>
                     <div class="slide">
                         <div class="bento-mockup">
@@ -1647,13 +1639,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="slide">
                         <div class="slide-text">Ваш личный каталог топлива.
 
-    Запахи, от которых внутри разливается тепло.
-    Ритуалы, которые работают как кнопка перезагрузки.
-    Еда, которая возвращает в детство. Тишина, которая наполняет, а не давит.
+Запахи, от которых внутри разливается тепло.
+Ритуалы, которые работают как кнопка перезагрузки.
+Еда, которая возвращает в детство. Тишина, которая наполняет, а не давит.
 
-    Ваш мозг — бережный казначей Вашего тела. Каждая эмоция, каждое решение, каждый разговор — это вклад или трата. Вы постоянно пополняете и расходуете ресурсы, чтобы поддерживать жизнь.
+Ваш мозг — бережный казначей Вашего тела. Каждая эмоция, каждое решение, каждый разговор — это вклад или трата. Вы постоянно пополняете и расходуете ресурсы, чтобы поддерживать жизнь.
 
-    Когда силы на исходе — Вы не думаете, что делать. Просто открываете и выбираете, что откликается прямо сейчас.</div>
+Когда силы на исходе — Вы не думаете, что делать. Просто открываете и выбираете, что откликается прямо сейчас.</div>
                     </div>
                 </div>
 
@@ -1675,9 +1667,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="slide">
                         <div class="slide-text">Самое устойчивое место в Гавани.
 
-    Здесь не то, что случилось однажды, а то, что работает всегда.
-    Люди, места, ритуалы, занятия — всё, на что можно опереться, когда всё вокруг качается.
-    Со временем здесь появится Ваша личная хроника: живое доказательство того, что именно помогло Вам выпрямиться, когда наклонило почти до земли.</div>
+Здесь не то, что случилось однажды, а то, что работает всегда.
+Люди, места, ритуалы, занятия — всё, на что можно опереться, когда всё вокруг качается.
+Со временем здесь появится Ваша личная хроника: живое доказательство того, что именно помогло Вам выпрямиться, когда наклонило почти до земли.</div>
                     </div>
                 </div>
 
@@ -1699,7 +1691,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="slide">
                         <div class="slide-text">Подкаст, когда внутри слишком шумно. Книга, когда нужно вспомнить, что ценность не нужно заслуживать. Фильм, после которого дышится глубже.
 
-    Контент здесь собирается не по жанрам, а по состоянию. Comfort food для мозга — только для Ваших настроений и Вашей чувствительности.</div>
+Контент здесь собирается не по жанрам, а по состоянию. Comfort food для мозга — только для Ваших настроений и Вашей чувствительности.</div>
                     </div>
                 </div>
 
@@ -1757,7 +1749,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <span class="chip-tag chip-tag--filled">💌 копилка тепла</span>
                         <span class="chip-tag chip-tag--filled">⚡ источники энергии</span>
                     </div>
-                    <span class="world-card-full__arrow">→</span>
                 </div>
             </div>
 
@@ -1777,7 +1768,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <span class="chip-tag chip-tag--outline">📝 ваши слова</span>
                         <span class="chip-tag chip-tag--outline">🗺 ваш путь</span>
                     </div>
-                    <span class="world-card-full__arrow">→</span>
                 </div>
             </div>
         </div>
@@ -1843,13 +1833,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="bento-image-holder" style="height: 560px;">
                 <div class="bento-pane active" id="inner-1">
-                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения" width="1200" height="900" loading="lazy" decoding="async">
+                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения в Notion" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
                 <div class="bento-pane" id="inner-2">
-                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии" width="1200" height="900" loading="lazy" decoding="async">
+                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии в Notion" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
                 <div class="bento-pane" id="inner-3">
-                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры" width="1200" height="900" loading="lazy" decoding="async">
+                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры в Notion" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
             </div>
             <div class="bento-card-info" id="inner-label">
@@ -1993,7 +1983,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="divider"></div>
 
     <div class="author-block fade-up">
-        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Avtor.png" alt="Логотип автора Эмоциональной Гавани" width="104" height="104" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid rgba(201,169,122,0.3);" loading="lazy" decoding="async">
+        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Avtor.png" alt="Логотип автора Эмоциональной Гавани — Елена Патрикеева" width="104" height="104" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid rgba(201,169,122,0.3);" loading="lazy" decoding="async">
         <div>
             <div class="author-name">Патрикеева Елена Александровна</div>
             <div class="author-inn">ИНН 503505258709</div>
@@ -2003,7 +1993,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
         <a href="https://t.me/e_lena_patrikeeva" class="author-contact" target="_blank">
-            <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                <circle cx="12" cy="12" r="12" fill="#9a7050"/>
                 <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
             </svg>
