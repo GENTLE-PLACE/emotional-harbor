@@ -540,14 +540,8 @@
             margin: 0;
             padding: 0;
             border-radius: 12px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
             flex: 1 1 auto;
             min-height: 0;
-        }
-
-        .slides-wrapper::-webkit-scrollbar {
-            display: none;
         }
 
         .slide {
@@ -648,13 +642,7 @@
             overflow-x: hidden;
             background: #faf8f6;
             position: relative;
-            scrollbar-width: thin;
-            scrollbar-color: #d6cdc0 #faf8f6;
         }
-
-        .bento-image-holder::-webkit-scrollbar { width: 4px; background: transparent; }
-        .bento-image-holder::-webkit-scrollbar-track { background: #faf8f6; border-radius: 10px; }
-        .bento-image-holder::-webkit-scrollbar-thumb { background: #d6cdc0; border-radius: 10px; }
 
         .bento-image-holder img {
             width: 100%;
@@ -741,13 +729,16 @@
             color: #4a3f38;
         }
 
-        /* Табы */
+        /* ===== ТАБЫ (НОВЫЕ — как в Табы.html) ===== */
         .bento-tabs {
             display: flex;
             gap: 20px;
             padding: 12px 20px 0;
             background: #faf8f6;
             border-bottom: 1px solid rgba(201, 169, 122, 0.15);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 3;
         }
 
         .bento-tab-btn {
@@ -784,17 +775,54 @@
             opacity: 1;
         }
 
-        .bento-pane {
-            display: none;
-            animation: fadeIn 0.25s ease both;
-        }
-        .bento-pane.active {
-            display: block;
+        /* ===== КОНТЕЙНЕР С КАРТИНКАМИ (как в Центральном причале) ===== */
+        .bento-image-holder--tabs {
+            width: 100%;
+            height: 560px;
+            background: #faf8f6;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ===== ДЫМКА (как в Центральном причале) ===== */
+        .bento-image-holder--tabs::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #faf8f6 90%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* ===== СКРОЛЛ-КОНТЕЙНЕР ===== */
+        .bento-scroll-wrap {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* ===== ПАНЕЛИ ===== */
+        .bento-pane {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            height: 100%;
+            background: #faf8f6;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .bento-pane img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #f0ece6;
         }
 
         /* ——— ДВА МИРА ——— */
@@ -1385,6 +1413,24 @@
             }
         }
 
+/* ===== СКРЫТЬ СКРОЛЛ НА ВСЕХ КОНТЕЙНЕРАХ ===== */
+.bento-image-holder::-webkit-scrollbar,
+.bento-scroll-wrap::-webkit-scrollbar,
+.bento-image-holder--tabs::-webkit-scrollbar,
+.bento-pane::-webkit-scrollbar,
+.slides-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.bento-image-holder,
+.bento-scroll-wrap,
+.bento-image-holder--tabs,
+.bento-pane,
+.slides-wrapper {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -1397,6 +1443,7 @@
             .author-contact { margin-left: 0; }
             .bento-image-holder { max-height: 280px; }
             .bento-card .bento-image-holder { height: 360px; max-height: none; }
+            .bento-image-holder--tabs { height: 360px; }
             .bento-tabs { gap: 12px; padding: 10px 14px 0; flex-wrap: wrap; }
             .bento-tab-btn { font-size: 9px; }
             .for-you-block { padding: 24px 24px; }
@@ -1404,6 +1451,7 @@
         }
         @media (max-width: 400px) {
             .bento-card .bento-image-holder { height: 280px; }
+            .bento-image-holder--tabs { height: 280px; }
         }
     </style>
 </head>
@@ -1808,7 +1856,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
-    <!-- ПУТЕВОДИТЕЛЬ + ТАБЫ -->
+    <!-- ПУТЕВОДИТЕЛЬ + ТАБЫ (НОВЫЕ) -->
     <div class="divider"></div>
 
     <section class="section fade-up">
@@ -1829,22 +1877,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="bento-browser-dot"></div>
                 <div class="bento-browser-dot"></div>
             </div>
-            <div class="bento-tabs">
+
+            <div class="bento-tabs" id="guideTabs">
                 <button class="bento-tab-btn active" data-inner="inner-1">Дневник</button>
                 <button class="bento-tab-btn" data-inner="inner-2">Источники энергии</button>
                 <button class="bento-tab-btn" data-inner="inner-3">Опоры</button>
             </div>
-            <div class="bento-image-holder" style="height: 560px;">
-                <div class="bento-pane active" id="inner-1">
-                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения в Notion" width="1200" height="900" loading="lazy" decoding="async">
-                </div>
-                <div class="bento-pane" id="inner-2">
-                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии в Notion" width="1200" height="900" loading="lazy" decoding="async">
-                </div>
-                <div class="bento-pane" id="inner-3">
-                    <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры в Notion" width="1200" height="900" loading="lazy" decoding="async">
+
+            <div class="bento-image-holder--tabs">
+                <div class="bento-scroll-wrap" id="guideSwipeContainer">
+                    <div class="bento-pane" id="inner-1">
+                        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения" loading="lazy" />
+                    </div>
+                    <div class="bento-pane" id="inner-2">
+                        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии" loading="lazy" />
+                    </div>
+                    <div class="bento-pane" id="inner-3">
+                        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры" loading="lazy" />
+                    </div>
                 </div>
             </div>
+
             <div class="bento-card-info" id="inner-label">
                 <h3>Дневник настроения</h3>
                 <p>Три радости дня, живые календари и личная история автора.</p>
@@ -1972,14 +2025,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <section id="buy" class="final-section fade-up">
         <div class="final-wave">🌊</div>
-        <div class="final-title">Добро<br>пожаловать<br><span>домой</span></div>
-        <div class="final-quote">«Если Вы чувствуете, что Вам пора домой — заходите. Ключи уже оставлены.»</div>
+        <div class="final-title">Добро<br>пожаловать</div>
+        <div class="final-quote">«Если вам нужно пространство, чтобы поставить мир на паузу — дверь открыта. Ключи уже оставлены..»</div>
         <div class="final-price-block">
             <div class="final-price-label">Цена</div>
             <div class="final-price"><span>₽</span>2 490</div>
             <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
         </div>
-        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Войти в Гавань</span>
+        <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Получить ключи</span>
     </section>
 
     <!-- АВТОР -->
@@ -2163,22 +2216,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         console.log('✅ Все карусели с прилипанием готовы!');
     })();
 
-    // BENTO TABS
-    function switchBentoTab(tabId) {
-        document.querySelectorAll('.bento-tab-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.inner === tabId));
-        document.querySelectorAll('.bento-pane').forEach(pane => pane.classList.toggle('active', pane.id === tabId));
+    // ===== ТАБЫ С ГОРИЗОНТАЛЬНЫМ СКРОЛЛОМ (как в Табы.html) =====
+    (function() {
+        const container = document.getElementById('guideSwipeContainer');
+        if (!container) return;
+
+        const tabs = document.querySelectorAll('#guideTabs .bento-tab-btn');
+        const labelTitle = document.querySelector('#inner-label h3');
+        const labelDesc = document.querySelector('#inner-label p');
+        const panes = container.querySelectorAll('.bento-pane');
+
         const labels = {
             'inner-1': { title: 'Дневник настроения', desc: 'Три радости дня, живые календари и личная история автора.' },
             'inner-2': { title: 'Источники энергии', desc: 'Каталог топлива: от запахов до ритуалов. Всё, что заряжает.' },
             'inner-3': { title: 'Мои опоры', desc: 'Как находить и распознавать свои опоры. Вопросы для заполнения.' }
         };
-        const label = labels[tabId];
-        if (label) {
-            document.querySelector('#inner-label h3').textContent = label.title;
-            document.querySelector('#inner-label p').textContent = label.desc;
+
+        function updateGuide(idx) {
+            const targetId = panes[idx]?.id;
+            if (!targetId) return;
+
+            tabs.forEach((btn) => {
+                const isActive = btn.dataset.inner === targetId;
+                btn.classList.toggle('active', isActive);
+            });
+
+            if (labels[targetId]) {
+                labelTitle.textContent = labels[targetId].title;
+                labelDesc.textContent = labels[targetId].desc;
+            }
         }
-    }
-    document.querySelectorAll('.bento-tab-btn').forEach(btn => btn.addEventListener('click', function() { switchBentoTab(this.dataset.inner); }));
+
+        function syncGuideFromScroll() {
+            const rect = container.getBoundingClientRect();
+            let best = 0, bestIdx = 0;
+
+            panes.forEach((pane, i) => {
+                const r = pane.getBoundingClientRect();
+                const visible = Math.max(0, Math.min(r.right, rect.right) - Math.max(r.left, rect.left));
+                if (visible > best) {
+                    best = visible;
+                    bestIdx = i;
+                }
+            });
+
+            updateGuide(bestIdx);
+        }
+
+        tabs.forEach((btn) => {
+            btn.addEventListener('click', function() {
+                const targetId = this.dataset.inner;
+                const targetPane = container.querySelector(`#${targetId}`);
+                if (targetPane) {
+                    targetPane.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest',
+                        inline: 'start'
+                    });
+                }
+            });
+        });
+
+        container.addEventListener('scroll', syncGuideFromScroll, { passive: true });
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(syncGuideFromScroll, 150);
+        });
+
+        setTimeout(syncGuideFromScroll, 100);
+    })();
 
     // PAYMENT MODAL
     const modal = document.getElementById('consent-modal');
