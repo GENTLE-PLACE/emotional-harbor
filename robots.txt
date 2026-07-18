@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /onboarding/
+
+User-agent: GitHub-Disallow
+Disallow: /
+
 Sitemap: https://emotional-harbor.ru/sitemap.xml
