@@ -729,7 +729,7 @@
             color: #4a3f38;
         }
 
-        /* ===== ТАБЫ (НОВЫЕ — как в Табы.html) ===== */
+        /* ===== ТАБЫ ===== */
         .bento-tabs {
             display: flex;
             gap: 20px;
@@ -775,7 +775,7 @@
             opacity: 1;
         }
 
-        /* ===== КОНТЕЙНЕР С КАРТИНКАМИ (как в Центральном причале) ===== */
+        /* ===== КОНТЕЙНЕР С КАРТИНКАМИ ===== */
         .bento-image-holder--tabs {
             width: 100%;
             height: 560px;
@@ -784,7 +784,7 @@
             overflow: hidden;
         }
 
-        /* ===== ДЫМКА (как в Центральном причале) ===== */
+        /* ===== ДЫМКА ===== */
         .bento-image-holder--tabs::after {
             content: '';
             position: absolute;
@@ -1413,23 +1413,23 @@
             }
         }
 
-/* ===== СКРЫТЬ СКРОЛЛ НА ВСЕХ КОНТЕЙНЕРАХ ===== */
-.bento-image-holder::-webkit-scrollbar,
-.bento-scroll-wrap::-webkit-scrollbar,
-.bento-image-holder--tabs::-webkit-scrollbar,
-.bento-pane::-webkit-scrollbar,
-.slides-wrapper::-webkit-scrollbar {
-    display: none;
-}
+        /* ===== СКРЫТЬ СКРОЛЛ ===== */
+        .bento-image-holder::-webkit-scrollbar,
+        .bento-scroll-wrap::-webkit-scrollbar,
+        .bento-image-holder--tabs::-webkit-scrollbar,
+        .bento-pane::-webkit-scrollbar,
+        .slides-wrapper::-webkit-scrollbar {
+            display: none;
+        }
 
-.bento-image-holder,
-.bento-scroll-wrap,
-.bento-image-holder--tabs,
-.bento-pane,
-.slides-wrapper {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
+        .bento-image-holder,
+        .bento-scroll-wrap,
+        .bento-image-holder--tabs,
+        .bento-pane,
+        .slides-wrapper {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
 
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
@@ -1856,7 +1856,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
-    <!-- ПУТЕВОДИТЕЛЬ + ТАБЫ (НОВЫЕ) -->
+    <!-- ПУТЕВОДИТЕЛЬ + ТАБЫ -->
     <div class="divider"></div>
 
     <section class="section fade-up">
@@ -2006,14 +2006,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                 </div>
             </div>
- <div class="faq-accordion-item">
-    <button class="faq-trigger" aria-expanded="false">
-        Как получить доступ к Гавани после оплаты?
-        <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-    </button>
-    <div class="faq-body">
-        <div class="faq-body-inner">
-            <div class="faq-answer">
+            <div class="faq-accordion-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    Как получить доступ к Гавани после оплаты?
+                    <div class="faq-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+                </button>
+                <div class="faq-body">
+                    <div class="faq-body-inner">
+                        <div class="faq-answer">
 После нажатия кнопки «Создать свою Гавань» Вы попадёте на платежную страницу.<br>
 Оплатите заказ.<br><br>
 <strong>На компьютере</strong> — после оплаты нажмите кнопку «Вернуться в магазин», чтобы увидеть страницу с подтверждением.<br><br>
@@ -2021,10 +2021,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 Затем на Вашу почту придёт письмо с кнопкой «Войти в Гавань».<br>
 Если письма нет — загляните в Спам. Если и там пусто — напишите мне в Telegram, я помогу.<br><br>
 Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so.
-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
     <!-- ФИНАЛ -->
     <div class="divider"></div>
@@ -2222,7 +2224,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         console.log('✅ Все карусели с прилипанием готовы!');
     })();
 
-    // ===== ТАБЫ С ГОРИЗОНТАЛЬНЫМ СКРОЛЛОМ (как в Табы.html) =====
+    // ===== ТАБЫ С ГОРИЗОНТАЛЬНЫМ СКРОЛЛОМ =====
     (function() {
         const container = document.getElementById('guideSwipeContainer');
         if (!container) return;
