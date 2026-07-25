@@ -282,6 +282,54 @@
             transform: translateY(0);
         }
 
+        /* ——— SKELETON LOADING ——— */
+        .skeleton {
+            background: #e0d8ce;
+            background-image: linear-gradient(
+                100deg,
+                rgba(255, 255, 255, 0) 30%,
+                rgba(255, 255, 255, 0.5) 50%,
+                rgba(255, 255, 255, 0) 70%
+            );
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.6s ease-in-out infinite;
+            border-radius: 4px;
+            min-height: 120px;
+            width: 100%;
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ——— LAZY IMAGE CONTAINER ——— */
+        .lazy-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: #f0ece6;
+            min-height: 120px;
+        }
+
+        .lazy-wrapper img {
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .lazy-wrapper img.loaded {
+            opacity: 1;
+        }
+
+        .lazy-wrapper .skeleton {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            min-height: 100%;
+        }
+
         /* ——— HERO ——— */
         .hero {
             min-height: auto;
@@ -339,25 +387,33 @@
             padding: 20px 36px;
             border-radius: 4px;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.3s ease;
             box-shadow: 5px 6px 0 rgba(58,50,40,0.2);
             border: none;
             cursor: pointer;
+            position: relative;
         }
 
         .cta-button:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 7px 8px 0 rgba(58,50,40,0.2);
+            transform: translate(-2px, -3px);
         }
 
         .cta-button.pink {
             background: var(--pink);
-            box-shadow: 5px 6px 0 rgba(232,122,156,0.3);
+            box-shadow: 5px 6px 0 rgba(232,122,156,0.3), 0 0 0 0 rgba(232,122,156,0);
         }
 
         .cta-button.pink:hover {
             background: #d96a8c;
-            box-shadow: 7px 8px 0 rgba(232,122,156,0.3);
+            box-shadow: 7px 8px 0 rgba(232,122,156,0.3), 0 0 24px 6px rgba(232,122,156,0.2);
+            transform: translate(-2px, -3px);
+        }
+
+        .cta-button:not(.pink):hover {
+            box-shadow: 9px 10px 0 rgba(58,50,40,0.2);
+            transform: translate(-2px, -3px);
         }
 
         .cta-price {
@@ -477,6 +533,16 @@
             position: relative;
             overflow: hidden;
             touch-action: pan-y pinch-zoom;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.3s ease;
+            will-change: transform;
+        }
+
+        .module-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 12px 16px 0 rgba(120, 80, 40, 0.1), 0 20px 40px -12px rgba(120, 80, 40, 0.15);
+            border-color: rgba(201, 169, 122, 0.6);
         }
 
         .module-card::after {
@@ -487,7 +553,13 @@
             right: 0;
             height: 4px;
             border-radius: 20px 20px 0 0;
+            transition: height 0.3s ease;
         }
+
+        .module-card:hover::after {
+            height: 6px;
+        }
+
         .mc-1::after { background: var(--yellow); }
         .mc-2::after { background: var(--pink-soft); }
         .mc-3::after { background: var(--green); }
@@ -501,6 +573,10 @@
         .mc-4 { transform: rotate(0.3deg); }
         .mc-5 { transform: rotate(-0.4deg); }
         .mc-6 { transform: rotate(0.2deg); }
+
+        .module-card:hover {
+            transform: translateY(-6px) scale(1.01) rotate(0deg);
+        }
 
         .module-header {
             display: flex;
@@ -669,7 +745,8 @@
             box-shadow: 7px 9px 0 rgba(120, 80, 40, 0.07);
             display: flex;
             flex-direction: column;
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .bento-card:hover {
@@ -682,7 +759,7 @@
         }
 
         .bento-card .bento-image-holder {
-            height: 440px;
+            height: 560px;
             max-height: none;
         }
 
@@ -752,7 +829,7 @@
             letter-spacing: 0.3px;
             color: #9a8a7a;
             padding: 8px 0 10px;
-            transition: color 0.2s ease;
+            transition: color 0.25s ease, opacity 0.25s ease;
             position: relative;
         }
 
@@ -765,7 +842,12 @@
             height: 2px;
             background: #c9a97a;
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.25s ease;
+        }
+
+        .bento-tab-btn:hover {
+            color: var(--pink);
+            opacity: 0.8;
         }
 
         .bento-tab-btn.active {
@@ -842,7 +924,13 @@
             overflow: hidden;
             border: 1.5px solid rgba(201,169,122,0.4);
             min-height: 420px;
-            transition: none;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .world-card-full:hover {
+            transform: translateY(-4px);
+            box-shadow: 9px 12px 0 rgba(120,80,40,0.1), 0 20px 40px -12px rgba(120,80,40,0.12);
         }
 
         .world-card-full::after {
@@ -851,13 +939,15 @@
             top: 0; left: 0; right: 0;
             height: 6px;
             border-radius: 28px 28px 0 0;
+            transition: height 0.3s ease;
+        }
+
+        .world-card-full:hover::after {
+            height: 8px;
         }
 
         .world-card-full--demo {
             background: rgba(255,248,235,0.65);
-            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12);
-        }
-        .world-card-full--demo:hover {
             box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12);
         }
         .world-card-full--demo::after { background: #F7D08A; }
@@ -872,9 +962,6 @@
 
         .world-card-full--clean {
             background: rgba(255,248,235,0.65);
-            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.10);
-        }
-        .world-card-full--clean:hover {
             box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.10);
         }
         .world-card-full--clean::after { background: #F8B4C0; }
@@ -1057,6 +1144,13 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .science-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(120,80,40,0.08);
         }
 
         .science-card::before {
@@ -1159,7 +1253,7 @@
             font-weight: 700;
             color: var(--brown-dark);
             line-height: 1.4;
-            transition: color 0.2s;
+            transition: color 0.2s ease;
         }
 
         .faq-trigger:hover { color: var(--pink); }
@@ -1280,22 +1374,60 @@
             color: var(--brown-light);
         }
 
-        /* ——— АВТОР ——— */
-        .author-block {
-            background: rgba(255,248,235,0.65);
-            border: 1.5px solid rgba(201,169,122,0.35);
+        /* ——— ФУТЕР ——— */
+        .footer {
+            width: 100%;
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px solid rgba(201, 169, 122, 0.35);
             border-radius: 16px;
-            padding: 28px 32px;
+            padding: 32px 40px;
+            display: grid;
+            grid-template-columns: 1.4fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 0;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .footer-col--author {
+            align-items: flex-start;
+        }
+
+        .footer-col--docs {
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-col--tg {
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .author-row {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 14px;
+        }
+
+        .author-photo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(201, 169, 122, 0.3);
+            flex-shrink: 0;
         }
 
         .author-name {
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--brown-light);
-            margin-bottom: 2px;
+            line-height: 1.3;
+            white-space: nowrap;
         }
 
         .author-inn {
@@ -1303,25 +1435,81 @@
             font-weight: 300;
             color: var(--brown-light);
             letter-spacing: 0.3px;
+            margin-top: 2px;
         }
 
-        .author-contact {
-            margin-left: auto;
-            display: flex;
+        .footer-link {
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--brown-light);
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(154, 112, 80, 0.35);
+            padding-bottom: 1px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--pink);
+            border-bottom-color: rgba(232, 122, 156, 0.5);
+        }
+
+        .tg-link {
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 13px;
-            font-weight: 400;
-            color: #9a7050;
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--brown-light);
             text-decoration: none;
-            padding-bottom: 1px;
-            flex-shrink: 0;
+            transition: color 0.2s ease;
+        }
+
+        .tg-link:hover {
+            color: var(--pink);
         }
 
         .tg-icon {
             width: 18px;
             height: 18px;
             flex-shrink: 0;
+        }
+
+        /* Пунктирный вертикальный разделитель */
+        .footer-divider {
+            width: 1px;
+            height: 48px;
+            margin: 0 28px;
+            background: none;
+            border-left: 1.5px dashed rgba(201, 169, 122, 0.4);
+        }
+
+        /* Адаптив футера */
+        @media (max-width: 720px) {
+            .footer {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 28px 24px;
+                text-align: center;
+            }
+
+            .footer-divider {
+                width: 100%;
+                height: 1px;
+                margin: 0;
+                border-left: none;
+                border-top: 1.5px dashed rgba(201, 169, 122, 0.4);
+            }
+
+            .footer-col--author,
+            .footer-col--docs,
+            .footer-col--tg {
+                align-items: center;
+                text-align: center;
+            }
+
+            .author-row {
+                justify-content: center;
+            }
         }
 
         /* ——— КАСТОМНЫЕ ЧЕКБОКСЫ ——— */
@@ -1430,7 +1618,34 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
+/* ——— ДЫХАНИЕ ВОЛН ——— */
+.bg-waves path {
+    animation: wave-breathe 16s ease-in-out infinite;
+}
 
+.bg-waves path:nth-child(2) {
+    animation-delay: -5s;
+}
+
+.bg-waves path:nth-child(3) {
+    animation-delay: -10s;
+}
+
+@keyframes wave-breathe {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Защита для тех, кому анимации мешают */
+@media (prefers-reduced-motion: reduce) {
+    .bg-waves path {
+        animation: none;
+    }
+}
         /* ——— АДАПТИВ ——— */
         @media (max-width: 680px) {
             .page { padding: 0 24px 80px; }
@@ -1531,8 +1746,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bento-browser-dot"></div>
             <div class="bento-browser-dot"></div>
         </div>
-        <div class="bento-image-holder" style="height: 560px;">
-            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Home.webp" alt="Дашборд Эмоциональной Гавани в Notion — Центральный причал" width="1200" height="900" loading="eager" decoding="async">
+        <div class="bento-image-holder lazy-wrapper">
+            <div class="skeleton"></div>
+            <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Home.webp" alt="Дашборд Эмоциональной Гавани в Notion — Центральный причал" width="1200" height="900" loading="lazy" decoding="async">
         </div>
         <div class="bento-card-info">
             <h3>Центральный причал</h3>
@@ -1571,7 +1787,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                                 <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="bento-image-holder">
+                            <div class="bento-image-holder lazy-wrapper">
+                                <div class="skeleton"></div>
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Diary_Home.webp" alt="Интерфейс дневника настроения в Notion" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
@@ -1611,7 +1828,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                                 <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="bento-image-holder">
+                            <div class="bento-image-holder lazy-wrapper">
+                                <div class="skeleton"></div>
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotion_Cloud.webp" alt="Отчёт Облако эмоций в Notion" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
@@ -1624,7 +1842,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                                 <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="bento-image-holder">
+                            <div class="bento-image-holder lazy-wrapper">
+                                <div class="skeleton"></div>
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Emotional_Diversity.webp" alt="Отчёт Эмоциональное разнообразие в Notion" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
@@ -1663,7 +1882,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <div class="bento-browser-dot"></div>
                                 <div class="bento-browser-dot"></div>
                             </div>
-                            <div class="bento-image-holder">
+                            <div class="bento-image-holder lazy-wrapper">
+                                <div class="skeleton"></div>
                                 <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Warmth_Jar.webp" alt="Копилка тепла в Эмоциональной Гавани" width="800" height="600" loading="lazy" decoding="async">
                             </div>
                             <div class="bento-card-info"></div>
@@ -1886,13 +2106,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="bento-image-holder--tabs">
                 <div class="bento-scroll-wrap" id="guideSwipeContainer">
-                    <div class="bento-pane" id="inner-1">
+                    <div class="bento-pane lazy-wrapper" id="inner-1">
+                        <div class="skeleton"></div>
                         <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-diary.webp" alt="Онбординг дневника настроения" loading="lazy" />
                     </div>
-                    <div class="bento-pane" id="inner-2">
+                    <div class="bento-pane lazy-wrapper" id="inner-2">
+                        <div class="skeleton"></div>
                         <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Energy-sources.webp" alt="Онбординг источников энергии" loading="lazy" />
                     </div>
-                    <div class="bento-pane" id="inner-3">
+                    <div class="bento-pane lazy-wrapper" id="inner-3">
+                        <div class="skeleton"></div>
                         <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/onboarding-Anchors.webp" alt="Онбординг Мои опоры" loading="lazy" />
                     </div>
                 </div>
@@ -2043,28 +2266,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Получить ключи</span>
     </section>
 
-    <!-- АВТОР -->
+    <!-- АВТОР + ФУТЕР -->
     <div class="divider"></div>
 
-    <div class="author-block fade-up">
-        <img src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Avtor.png" alt="Логотип автора Эмоциональной Гавани — Елена Патрикеева" width="104" height="104" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid rgba(201,169,122,0.3);" loading="lazy" decoding="async">
-        <div>
-            <div class="author-name">Патрикеева Елена Александровна</div>
-            <div class="author-inn">ИНН 503505258709</div>
-            <div style="margin-top:8px; padding-top:8px; border-top:1px dashed rgba(201,169,122,0.25); display:flex; gap:16px;">
-                <a href="https://emotional-harbor.ru/Oferta.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Публичная оферта</a>
-                <a href="https://emotional-harbor.ru/Privacy.html" target="_blank" style="font-size:11px; font-weight:300; color:#9a7050; text-decoration:none; border-bottom:1px dashed rgba(154,112,80,0.3);">Политика конфиденциальности</a>
+    <footer class="footer fade-up">
+        <!-- Колонка 1: Автор -->
+        <div class="footer-col footer-col--author">
+            <div class="author-row">
+                <img 
+                    class="author-photo" 
+                    src="https://raw.githubusercontent.com/GENTLE-PLACE/emotional-harbor/main/images/Avtor.png" 
+                    alt="Логотип автора Эмоциональной Гавани — Елена Патрикеева" 
+                    width="48" 
+                    height="48"
+                    loading="lazy" 
+                    decoding="async"
+                >
+                <div>
+                    <div class="author-name">Патрикеева Елена Александровна</div>
+                    <div class="author-inn">ИНН 503505258709</div>
+                </div>
             </div>
         </div>
-        <a href="https://t.me/e_lena_patrikeeva" class="author-contact" target="_blank">
-            <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-               <circle cx="12" cy="12" r="12" fill="#9a7050"/>
-                <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
-            </svg>
-            @e_lena_patrikeeva
-        </a>
-    </div>
-</div>
+
+        <!-- Пунктирный разделитель -->
+        <div class="footer-divider" aria-hidden="true"></div>
+
+        <!-- Колонка 2: Документы -->
+        <div class="footer-col footer-col--docs">
+            <a href="https://emotional-harbor.ru/Oferta.html" target="_blank" class="footer-link">Публичная оферта</a>
+            <a href="https://emotional-harbor.ru/Privacy.html" target="_blank" class="footer-link">Политика конфиденциальности</a>
+        </div>
+
+        <!-- Пунктирный разделитель -->
+        <div class="footer-divider" aria-hidden="true"></div>
+
+        <!-- Колонка 3: Telegram -->
+        <div class="footer-col footer-col--tg">
+            <a href="https://t.me/e_lena_patrikeeva" target="_blank" class="tg-link">
+                <svg class="tg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" fill="#9a7050"/>
+                    <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
+                </svg>
+                @e_lena_patrikeeva
+            </a>
+        </div>
+    </footer>
+</div> 
 
 <!-- Модалка согласия -->
 <div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
@@ -2102,7 +2350,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             style="width:100%; padding:16px 20px; font-family:'Jost',sans-serif; font-size:13px; font-weight:600;
                    letter-spacing:3px; text-transform:uppercase; color:#f7efe0; background:#3a3228;
                    border:none; border-radius:12px; cursor:pointer; opacity:0.4;
-                   transition:opacity 0.2s ease, background-color 0.2s ease;
+                   transition:opacity 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
                    box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
             Создать свою Гавань
         </button>
@@ -2125,6 +2373,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
 
     document.querySelectorAll('.fade-up, .fade-up-stagger').forEach(el => fadeObserver.observe(el));
+
+    // ===== SKELETON + LAZY LOAD =====
+    document.addEventListener('DOMContentLoaded', function() {
+        // Находим все обёртки с скелетонами
+        const lazyWrappers = document.querySelectorAll('.lazy-wrapper');
+
+        lazyWrappers.forEach(wrapper => {
+            const img = wrapper.querySelector('img');
+            const skeleton = wrapper.querySelector('.skeleton');
+
+            if (!img) return;
+
+            // Функция скрытия скелетона
+            const hideSkeleton = () => {
+                if (skeleton) skeleton.style.display = 'none';
+                img.classList.add('loaded');
+            };
+
+            // Если картинка уже загружена
+            if (img.complete) {
+                hideSkeleton();
+                return;
+            }
+
+            // Ждём загрузки
+            img.onload = hideSkeleton;
+            img.onerror = hideSkeleton; // скрываем даже если ошибка
+        });
+
+        // Для изображений в каруселях, которые могут быть добавлены динамически
+        // убеждаемся, что все img внутри lazy-wrapper обработаны
+        document.querySelectorAll('.lazy-wrapper img:not(.loaded)').forEach(img => {
+            if (img.complete) {
+                const wrapper = img.closest('.lazy-wrapper');
+                const skeleton = wrapper?.querySelector('.skeleton');
+                if (skeleton) skeleton.style.display = 'none';
+                img.classList.add('loaded');
+            }
+        });
+    });
 
     // FAQ
     document.querySelectorAll('.faq-trigger').forEach(trigger => {
@@ -2220,8 +2508,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 });
             }, 150);
         });
-
-        console.log('✅ Все карусели с прилипанием готовы!');
     })();
 
     // ===== ТАБЫ С ГОРИЗОНТАЛЬНЫМ СКРОЛЛОМ =====
