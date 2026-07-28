@@ -2489,7 +2489,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
-                    const idx = parseInt(dot.dataset.slide);
+                    const idx = parseInt(dot.dataset.slide, 10);
                     isProgrammatic = true;
 
                     const targetSlide = slides[idx];
@@ -2609,6 +2609,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
 
     // PAYMENT MODAL
+    function trackGoal(goalName) {
+        if (typeof window.ym === 'function') {
+            window.ym(110240785, 'reachGoal', goalName);
+        }
+    }
+
     const modal = document.getElementById('consent-modal');
     const agreeAll = document.getElementById('agree-all');
     const payButton = document.getElementById('pay-button');
@@ -2633,7 +2639,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     emailInput.addEventListener('input', updateButton);
 
     window.openConsentModal = function() {
-        ym(110240785, 'reachGoal', 'click_pay');
+        trackGoal('click_pay');
         modal.style.display = 'flex';
         payButton.disabled = true; payButton.style.opacity = '0.4';
         payButton.innerHTML = 'Создать свою Гавань';
@@ -2645,7 +2651,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     window.goToPayment = async function() {
         const email = emailInput.value.trim();
         if (!isValidEmail(email)) { emailError.style.display = 'block'; return; }
-        ym(110240785, 'reachGoal', 'start_payment');
+        trackGoal('start_payment');
         emailError.style.display = 'none';
         payError.style.display = 'none';
         payButton.disabled = true;
