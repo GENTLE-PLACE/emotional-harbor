@@ -190,7 +190,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://raw.githubusercontent.com">
+    <link rel="preconnect" href="https://static.emotional-harbor.ru">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Caveat:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
@@ -1668,6 +1668,193 @@
             .bento-card .bento-image-holder { height: 280px; }
             .bento-image-holder--tabs { height: 280px; }
         }
+
+        /* ——— МОДАЛКА СОГЛАСИЯ ——— */
+        .consent-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(58,50,40,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .consent-modal.is-open { display: flex; }
+
+        .consent-modal__card {
+            width: 440px;
+            border-radius: 28px;
+            background: rgba(255,248,235,0.95);
+            border: 1.5px solid rgba(201,169,122,0.4);
+            box-shadow: 8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12);
+            padding: 0 44px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .consent-modal__top-strip {
+            flex-shrink: 0;
+            width: calc(100% + 88px);
+            height: 6px;
+            background: var(--pink-soft);
+            margin-bottom: 20px;
+        }
+
+        .consent-modal__glow {
+            position: absolute;
+            top: -80px; left: -60px;
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .consent-modal__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--brown-dark);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .consent-modal__title span { color: var(--pink); }
+
+        .consent-modal__field {
+            width: 100%;
+            text-align: left;
+            margin-top: 14px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .consent-modal__label {
+            font-family: 'Jost', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--brown-mid);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .consent-modal__input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid rgba(201,169,122,0.5);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.6);
+            font-family: 'Jost', sans-serif;
+            font-size: 15px;
+            color: var(--brown-dark);
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            box-sizing: border-box;
+        }
+
+        .consent-modal__input:focus {
+            border-color: var(--pink);
+            background: #fff;
+        }
+
+        .consent-modal__error {
+            font-family: 'Jost', sans-serif;
+            font-size: 11px;
+            color: var(--pink);
+            margin-top: 6px;
+            display: none;
+        }
+
+        .consent-modal__error--pay {
+            font-size: 13px;
+            text-align: center;
+            margin-top: 12px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .consent-modal__error a { color: var(--pink); text-decoration: underline; }
+
+        .consent-modal__divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,169,122,0.3) 20%, rgba(201,169,122,0.3) 80%, transparent);
+            margin: 20px 0;
+        }
+
+        .consent-modal__hint {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 13.5px;
+            color: var(--gold);
+            text-align: center;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 14px;
+        }
+
+        .consent-modal__checkbox-label {
+            margin-bottom: 8px;
+            align-items: flex-start;
+        }
+
+        .consent-modal__checkbox-text {
+            line-height: 1.55;
+        }
+
+        .consent-modal__checkbox-text a {
+            color: var(--brown-light);
+            text-decoration: underline;
+        }
+
+        .consent-modal__submit {
+            width: 100%;
+            padding: 16px 20px;
+            font-family: 'Jost', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--beige);
+            background: var(--brown-dark);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            opacity: 1;
+            transition: opacity 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 12px rgba(58,50,40,0.15);
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .consent-modal__submit:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .consent-modal__cancel {
+            margin-top: 12px;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 13px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -2356,49 +2543,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div> 
 
 <!-- Модалка согласия -->
-<div id="consent-modal" style="display:none; position:fixed; inset:0; background:rgba(58,50,40,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px;">
-    <div style="width:440px; border-radius:28px; background:rgba(255,248,235,0.95); border:1.5px solid rgba(201,169,122,0.4); box-shadow:8px 10px 0 rgba(120,80,40,0.09), 0 20px 40px -12px rgba(120,80,40,0.12); padding:0 44px 40px; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; overflow:hidden; animation: arrive 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;">
+<div id="consent-modal" class="consent-modal">
+    <div class="consent-modal__card">
 
-        <div style="flex-shrink:0; width:calc(100% + 88px); height:6px; background:#F8B4C0; margin-bottom:20px;"></div>
-        <div style="position:absolute; top:-80px; left:-60px; width:280px; height:280px; background:radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 65%); pointer-events:none; z-index:0;"></div>
-        <div style="font-family:'Unbounded',sans-serif; font-size:18px; font-weight:700; letter-spacing:-0.5px; color:#3a3228; text-align:center; position:relative; z-index:1;">
-            Остался один <span style="color:#e87a9c;">шаг</span>
+        <div class="consent-modal__top-strip"></div>
+        <div class="consent-modal__glow"></div>
+        <div class="consent-modal__title">
+            Остался один <span>шаг</span>
         </div>
-        <div style="width:100%; text-align:left; margin-top:14px; position:relative; z-index:2;">
-            <label style="font-family:'Jost',sans-serif; font-size:13px; font-weight:500; color:#7a5840; display:block; margin-bottom:6px;">
+        <div class="consent-modal__field">
+            <label class="consent-modal__label" for="user-email">
                 💌 Введите Ваш e-mail для отправки чека
             </label>
-            <input type="email" id="user-email" placeholder="your@email.ru" autocomplete="email"
-                style="width:100%; padding:14px 18px; border:1.5px solid rgba(201,169,122,0.5); border-radius:14px;
-                       background:rgba(255,255,255,0.6); font-family:'Jost',sans-serif; font-size:15px; color:#3a3228;
-                       outline:none; transition:border-color 0.2s, background 0.2s; box-sizing:border-box;"
-                onfocus="this.style.borderColor='#e87a9c'; this.style.background='#fff';"
-                onblur="this.style.borderColor='rgba(201,169,122,0.5)'; this.style.background='rgba(255,255,255,0.6)';">
-            <div id="email-error" style="font-family:'Jost',sans-serif; font-size:11px; color:#e87a9c; margin-top:6px; display:none;">
+            <input type="email" id="user-email" class="consent-modal__input" placeholder="your@email.ru" autocomplete="email">
+            <div id="email-error" class="consent-modal__error">
                 Кажется, в адресе опечатка — проверьте, пожалуйста
             </div>
         </div>
-        <div style="width:100%; height:1px; background:linear-gradient(90deg, transparent, rgba(201,169,122,0.3) 20%, rgba(201,169,122,0.3) 80%, transparent); margin:20px 0;"></div>
-        <div style="font-family:'Lora',serif; font-style:italic; font-size:13.5px; color:#c9a97a; text-align:center; line-height:1.5; position:relative; z-index:1; margin-bottom:14px;">
+        <div class="consent-modal__divider"></div>
+        <div class="consent-modal__hint">
             Подтвердите согласие перед оплатой
         </div>
-        <label class="custom-checkbox" style="margin-bottom:8px; align-items:flex-start;">
+        <label class="custom-checkbox consent-modal__checkbox-label">
             <input type="checkbox" id="agree-all">
             <span class="checkmark" style="margin-top:1px;"></span>
-            <span style="line-height:1.55;">Я принимаю условия <a href="Oferta.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Публичной оферты</a> и <a href="Privacy.html" target="_blank" style="color:#9a7050; text-decoration:underline;">Политики обработки персональных данных</a></span>
+            <span class="consent-modal__checkbox-text">Я принимаю условия <a href="Oferta.html" target="_blank">Публичной оферты</a> и <a href="Privacy.html" target="_blank">Политики обработки персональных данных</a></span>
         </label>
-        <button id="pay-button" disabled onclick="goToPayment()"
-            style="width:100%; padding:16px 20px; font-family:'Jost',sans-serif; font-size:13px; font-weight:600;
-                   letter-spacing:3px; text-transform:uppercase; color:#f7efe0; background:#3a3228;
-                   border:none; border-radius:12px; cursor:pointer; opacity:0.4;
-                   transition:opacity 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
-                   box-shadow:0 4px 12px rgba(58,50,40,0.15); margin-top:8px; position:relative; z-index:1;">
+        <button id="pay-button" class="consent-modal__submit" disabled onclick="goToPayment()">
             Создать свою Гавань
         </button>
-        <div id="pay-error" style="font-family:'Jost',sans-serif; font-size:13px; color:#e87a9c; text-align:center; margin-top:12px; display:none; line-height:1.6; position:relative; z-index:1;">
-            Что-то не сработало. Попробуйте ещё раз или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank" style="color:#e87a9c; text-decoration:underline;">Telegram</a> — отвечу быстро.
+        <div id="pay-error" class="consent-modal__error consent-modal__error--pay">
+            Что-то не сработало. Попробуйте ещё раз или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank">Telegram</a> — отвечу быстро.
         </div>
-        <button onclick="closeConsentModal()" style="margin-top:12px; background:none; border:none; color:#c9a97a; font-family:'Lora',serif; font-style:italic; font-size:13px; cursor:pointer; position:relative; z-index:1;">Отмена</button>
+        <button onclick="closeConsentModal()" class="consent-modal__cancel">Отмена</button>
     </div>
 </div>
 
@@ -2489,7 +2666,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             dots.forEach(dot => {
                 dot.addEventListener('click', () => {
-                    const idx = parseInt(dot.dataset.slide);
+                    const idx = parseInt(dot.dataset.slide, 10);
                     isProgrammatic = true;
 
                     const targetSlide = slides[idx];
@@ -2623,36 +2800,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     function updateButton() {
         const emailValid = isValidEmail(emailInput.value.trim());
         if (agreeAll.checked && emailValid) {
-            payButton.disabled = false; payButton.style.opacity = '1'; emailError.style.display = 'none';
+            payButton.disabled = false; emailError.style.display = 'none';
         } else {
-            payButton.disabled = true; payButton.style.opacity = '0.4';
+            payButton.disabled = true;
         }
     }
 
     agreeAll.addEventListener('change', updateButton);
     emailInput.addEventListener('input', updateButton);
 
+    function trackGoal(goalName) {
+        if (typeof window.ym === 'function') {
+            window.ym(110240785, 'reachGoal', goalName);
+        }
+    }
+
+    let capturedClientId = null;
+
     window.openConsentModal = function() {
-        ym(110240785, 'reachGoal', 'click_pay');
-        modal.style.display = 'flex';
-        payButton.disabled = true; payButton.style.opacity = '0.4';
+        trackGoal('click_pay');
+        if (typeof window.ym === 'function') {
+            window.ym(110240785, 'getClientID', function(clientID) {
+                capturedClientId = clientID;
+            });
+        }
+        modal.classList.add('is-open');
+        payButton.disabled = true;
         payButton.innerHTML = 'Создать свою Гавань';
         payError.style.display = 'none';
     };
 
-    window.closeConsentModal = function() { modal.style.display = 'none'; };
+    window.closeConsentModal = function() { modal.classList.remove('is-open'); };
 
     window.goToPayment = async function() {
         const email = emailInput.value.trim();
         if (!isValidEmail(email)) { emailError.style.display = 'block'; return; }
-        ym(110240785, 'reachGoal', 'start_payment');
+        trackGoal('start_payment');
         emailError.style.display = 'none';
         payError.style.display = 'none';
         payButton.disabled = true;
         payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
         try {
             const response = await fetch('https://api.emotional-harbor.ru/create-payment', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email })
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, client_id: capturedClientId })
             });
             if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
             const data = await response.json();
@@ -2668,7 +2858,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     };
 
     modal.addEventListener('click', function(e) { if (e.target === modal) closeConsentModal(); });
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.style.display === 'flex') closeConsentModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeConsentModal(); });
 </script>
 
 </body>
