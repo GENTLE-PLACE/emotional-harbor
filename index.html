@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -248,7 +247,7 @@
             z-index: 2;
             max-width: 960px;
             margin: 0 auto;
-            padding: 0 48px 120px;
+            padding: 0 48px 40px;
         }
 
         /* ——— STICKY HEADER ——— */
@@ -1893,7 +1892,7 @@
         }
 
         @media (max-width: 680px) {
-            .page { padding: 0 24px 80px; }
+            .page { padding: 0 24px 32px; }
             .hero-title { font-size: 38px; letter-spacing: -1.5px; white-space: normal; }
             .science-grid { grid-template-columns: 1fr; }
             .two-worlds-cards { flex-direction: column; }
@@ -3007,6 +3006,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     activeCard.style.opacity = '1';
                     activeCard.style.transform = 'translateY(0)';
                 });
+
+                // Убираем инлайновые стили после анимации появления —
+                // иначе они перебивают hover-подпрыгивание из CSS сильнее любого правила стилей
+                setTimeout(() => {
+                    activeCard.style.removeProperty('opacity');
+                    activeCard.style.removeProperty('transform');
+                    activeCard.style.removeProperty('transition');
+                }, 320);
 
                 const carousel = activeCard.querySelector('.slides-wrapper');
                 if (carousel) {
