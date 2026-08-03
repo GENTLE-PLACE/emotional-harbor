@@ -33,6 +33,7 @@
             padding: 64px 32px 100px;
         }
 
+        /* ===== ССЫЛКИ (единый стиль) ===== */
         .back-link {
             display: inline-block;
             font-size: 13px;
@@ -42,8 +43,24 @@
             margin-bottom: 32px;
             border-bottom: 1px dashed rgba(201,169,122,0.5);
             padding-bottom: 2px;
+            transition: color 0.2s ease, border-color 0.2s ease;
         }
-        .back-link:hover { color: var(--pink); }
+        .back-link:hover {
+            color: var(--pink);
+            border-color: rgba(232,122,156,0.5);
+        }
+
+        .doc-link {
+            color: var(--brown-mid);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: rgba(154, 112, 80, 0.3);
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+        .doc-link:hover {
+            color: var(--pink);
+            text-decoration-color: rgba(232, 122, 156, 0.5);
+        }
 
         .header-eyebrow {
             font-size: 11px;
@@ -108,6 +125,11 @@
             font-size: 13px;
             color: var(--brown-light);
             text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .page { padding: 32px 20px 60px; }
+            .header-title { font-size: 26px; }
         }
     </style>
 </head>
