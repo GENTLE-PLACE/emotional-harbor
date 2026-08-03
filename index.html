@@ -606,7 +606,10 @@
             margin-top: 6px;
         }
 
-        /* ——— МОДУЛИ С ОГЛАВЛЕНИЕМ ——— */
+        /* ============================================================ */
+        /* ОБНОВЛЁННОЕ ОГЛАВЛЕНИЕ: пилюли с иконками, единой формой,    */
+        /* цветом как у карточки Есении                                  */
+        /* ============================================================ */
         .modules-layout {
             display: flex;
             gap: 40px;
@@ -615,52 +618,77 @@
 
         .modules-nav {
             flex-shrink: 0;
-            width: 240px;
+            width: 250px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
             position: sticky;
             top: 100px;
             margin-top: 30px;
         }
 
         .modules-nav__item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 16px;
             font-family: 'Unbounded', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(58, 50, 40, 0.45);
-            padding: 12px 16px;
+            letter-spacing: 0.4px;
+            background: transparent;
+            border: 1.5px solid rgba(201, 169, 122, 0.18);
+            color: rgba(58, 50, 40, 0.48);
             cursor: pointer;
-            border: none;
-            background: none;
+            transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
             text-align: left;
-            transition: color 0.25s ease, padding-left 0.25s ease;
-            position: relative;
-            line-height: 1.4;
+            line-height: 1.3;
+            white-space: nowrap;
         }
 
         .modules-nav__item:hover {
+            background: rgba(201, 169, 122, 0.07);
+            border-color: rgba(201, 169, 122, 0.35);
+            transform: translateX(5px);
             color: var(--brown-dark);
         }
 
+        /* Активная пилюля — тот же border-radius, но акцент теперь зависит от модуля */
         .modules-nav__item.active {
-            color: var(--pink);
+            background: rgba(255, 248, 235, 0.85);
+            border-color: rgba(201, 169, 122, 0.45);
+            box-shadow: 4px 5px 0 rgba(120, 80, 40, 0.07);
+            color: var(--brown-dark);
             font-weight: 700;
-            padding-left: 20px;
+            letter-spacing: 0.5px;
+            padding: 15px 16px;
+            border-radius: 16px;
+            transform: translateX(6px);
+            border-left: 5px solid var(--pink); /* запасной цвет, если модуль не указан ниже */
         }
 
-        .modules-nav__item.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            bottom: 8px;
-            width: 3px;
-            background: var(--pink);
-            border-radius: 0 3px 3px 0;
+        /* Цвет левого акцента = цвет карточки этого модуля (та же логика, что в .mc-1…mc-6) */
+        .modules-nav__item[data-module="diary"].active   { border-left-color: var(--yellow); }
+        .modules-nav__item[data-module="stats"].active   { border-left-color: var(--pink-soft); }
+        .modules-nav__item[data-module="warmth"].active  { border-left-color: var(--green); }
+        .modules-nav__item[data-module="energy"].active  { border-left-color: var(--blue); }
+        .modules-nav__item[data-module="anchors"].active { border-left-color: #e0c8f0; }
+        .modules-nav__item[data-module="content"].active { border-left-color: var(--yellow); }
+
+        /* Иконка модуля в навигации */
+        .nav-icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            object-fit: contain;
+            opacity: 0.45;
             transition: opacity 0.3s ease;
+        }
+
+        .modules-nav__item.active .nav-icon {
+            opacity: 1;
         }
 
         .modules-content {
@@ -672,7 +700,7 @@
             background: rgba(255, 248, 235, 0.65);
             border: 1.5px solid rgba(201, 169, 122, 0.35);
             border-radius: 20px;
-            padding: 28px 24px 24px;
+            padding: 36px 40px 32px;
             box-shadow: 3px 4px 0 rgba(120,80,40,0.04);
             display: flex;
             flex-direction: column;
@@ -717,7 +745,7 @@
         }
 
         .module-icon {
-            font-size: 20px;
+            font-size: 26px;
             line-height: 1;
             flex-shrink: 0;
             width: 32px;
@@ -728,44 +756,20 @@
         }
 
         .module-icon img {
-            width: 28px;
-            height: 28px;
+            width: 34px;
+            height: 34px;
             object-fit: contain;
             display: block;
         }
 
         .module-title {
             font-family: 'Unbounded', sans-serif;
-            font-size: 12px;
+            font-size: 18px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.3px;
             color: var(--brown-dark);
             line-height: 1.3;
-        }
-
-        .module-note {
-            font-size: 12.5px;
-            font-style: italic;
-            font-weight: 300;
-            color: var(--brown-light);
-            line-height: 1.6;
-            border-top: 1px dashed rgba(201,169,122,0.35);
-            padding-top: 10px;
-            margin-top: 4px;
-        }
-
-        /* ——— ПОЛНОЕ ПОГРУЖЕНИЕ: всегда видимый текст ——— */
-        .module-card {
-            padding: 36px 40px 32px;
-        }
-
-        .module-title { font-size: 18px; }
-        .module-icon { font-size: 26px; }
-
-        .module-icon img {
-            width: 34px;
-            height: 34px;
         }
 
         .module-text-full {
@@ -791,36 +795,18 @@
             max-width: 600px;
         }
 
-        .module-gallery { margin-top: 8px; }
-
-        .placeholder-visual {
-            width: 100%;
-            min-height: 260px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: repeating-linear-gradient(135deg, rgba(201,169,122,0.06) 0 12px, rgba(201,169,122,0.1) 12px 24px);
+        .module-note {
+            font-size: 12.5px;
+            font-style: italic;
+            font-weight: 300;
             color: var(--brown-light);
-            font-size: 12px;
-            text-align: center;
-            padding: 24px;
+            line-height: 1.6;
+            border-top: 1px dashed rgba(201,169,122,0.35);
+            padding-top: 10px;
+            margin-top: 4px;
         }
 
-        .placeholder-visual .ph-emoji { font-size: 34px; opacity: 0.55; }
-        .placeholder-visual .ph-text { font-style: italic; max-width: 260px; }
-
-        .anchor-tree-visual {
-            width: 100%;
-            min-height: 320px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            background: linear-gradient(180deg, rgba(184,224,210,0.15), rgba(255,248,235,0.4));
-            padding: 12px;
-        }
-        .anchor-tree-visual img { max-height: 300px; width: auto; }
+        .module-gallery { margin-top: 8px; }
 
         /* ——— КАРУСЕЛЬ ——— */
         .slides-wrapper {
@@ -842,15 +828,6 @@
             display: flex;
             flex-direction: column;
             padding: 0;
-        }
-
-        .slide-text {
-            font-size: 13.5px;
-            font-weight: 300;
-            line-height: 1.8;
-            color: #4a3f38;
-            white-space: pre-line;
-            padding: 4px 2px;
         }
 
         /* ——— ТОЧКИ ——— */
@@ -1921,7 +1898,7 @@
                 z-index: 40;
                 flex-direction: row;
                 overflow-x: auto;
-                gap: 4px;
+                gap: 6px;
                 padding: 8px 4px 10px;
                 background: rgba(247, 239, 224, 0.94);
                 backdrop-filter: blur(10px);
@@ -1932,19 +1909,27 @@
             .modules-nav__item {
                 white-space: nowrap;
                 font-size: 10px;
-                padding: 8px 12px;
+                padding: 10px 14px;
+                border-radius: 14px;
             }
 
             .modules-nav__item.active {
-                padding-left: 12px;
+                padding: 10px 14px;
+                border-radius: 14px;
+                transform: none;
+                border-left: none;
+                border-bottom: 3px solid var(--pink); /* запасной цвет */
             }
 
-            .modules-nav__item.active::before {
-                display: none;
-            }
+            .modules-nav__item[data-module="diary"].active   { border-bottom-color: var(--yellow); }
+            .modules-nav__item[data-module="stats"].active   { border-bottom-color: var(--pink-soft); }
+            .modules-nav__item[data-module="warmth"].active  { border-bottom-color: var(--green); }
+            .modules-nav__item[data-module="energy"].active  { border-bottom-color: var(--blue); }
+            .modules-nav__item[data-module="anchors"].active { border-bottom-color: #e0c8f0; }
+            .modules-nav__item[data-module="content"].active { border-bottom-color: var(--yellow); }
 
-            .modules-nav__item.active {
-                border-bottom: 2px solid var(--pink);
+            .modules-nav__item:hover {
+                transform: none;
             }
         }
 
@@ -2283,14 +2268,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2 class="section-title">Шесть пространств,<br>по которым хочется <span>ходить босиком</span></h2>
 
         <div class="modules-layout">
-            <!-- Оглавление -->
+            <!-- Оглавление — пилюли с иконками -->
             <div class="modules-nav" id="modulesNav">
-                <button class="modules-nav__item active" data-module="diary">Дневник настроения</button>
-                <button class="modules-nav__item" data-module="stats">Статистика эмоций</button>
-                <button class="modules-nav__item" data-module="warmth">Копилка тепла</button>
-                <button class="modules-nav__item" data-module="energy">Источники энергии</button>
-                <button class="modules-nav__item" data-module="anchors">Мои опоры</button>
-                <button class="modules-nav__item" data-module="content">Уютный контент</button>
+                <button class="modules-nav__item active" data-module="diary">
+                    <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_diary.webp" alt="" width="22" height="22" loading="lazy">
+                    Дневник настроения
+                </button>
+                <button class="modules-nav__item" data-module="stats">
+                    <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_Statistics.webp" alt="" width="22" height="22" loading="lazy">
+                    Статистика эмоций
+                </button>
+                <button class="modules-nav__item" data-module="warmth">
+                    <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_Warmth_Jar.webp" alt="" width="22" height="22" loading="lazy">
+                    Копилка тепла
+                </button>
+                <button class="modules-nav__item" data-module="energy">
+                    <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_Energy-sources_2.webp" alt="" width="22" height="22" loading="lazy">
+                    Источники энергии
+                </button>
+                <button class="modules-nav__item" data-module="anchors">
+                    <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_Anchors.webp" alt="" width="22" height="22" loading="lazy">
+                    Мои опоры
+                </button>
+                <button class="modules-nav__item" data-module="content">
+                    <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_Сozy-content.webp" alt="" width="22" height="22" loading="lazy">
+                    Уютный контент
+                </button>
             </div>
 
             <!-- Карточки модулей -->
@@ -3007,8 +3010,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     activeCard.style.transform = 'translateY(0)';
                 });
 
-                // Убираем инлайновые стили после анимации появления —
-                // иначе они перебивают hover-подпрыгивание из CSS сильнее любого правила стилей
                 setTimeout(() => {
                     activeCard.style.removeProperty('opacity');
                     activeCard.style.removeProperty('transform');
