@@ -2270,7 +2270,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="modules-layout">
             <!-- Оглавление — пилюли с иконками -->
             <div class="modules-nav" id="modulesNav">
-                <button class="modules-nav__item active" data-module="diary">
+                <button class="modules-nav__item active" data-module="diary" aria-current="true">
                     <img class="nav-icon" src="https://static.emotional-harbor.ru/Icon_diary.webp" alt="" width="22" height="22" loading="lazy">
                     Дневник настроения
                 </button>
@@ -2993,13 +2993,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const cards = document.querySelectorAll('#modulesContent .module-card');
 
         function switchModule(moduleName) {
-            navItems.forEach(item => item.classList.remove('active'));
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                item.removeAttribute('aria-current');
+            });
             cards.forEach(card => card.style.display = 'none');
 
             const activeNav = document.querySelector(`.modules-nav__item[data-module="${moduleName}"]`);
             const activeCard = document.querySelector(`#modulesContent .module-card[data-module="${moduleName}"]`);
 
-            if (activeNav) activeNav.classList.add('active');
+            if (activeNav) {
+                activeNav.classList.add('active');
+                activeNav.setAttribute('aria-current', 'true');
+            }
             if (activeCard) {
                 activeCard.style.display = 'flex';
                 activeCard.style.opacity = '0';
