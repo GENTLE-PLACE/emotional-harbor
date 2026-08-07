@@ -322,7 +322,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
             padding: 11px 22px;
-            border-radius: 4px;
+            border-radius: 12px;
             text-decoration: none;
             border: none;
             cursor: pointer;
@@ -471,7 +471,7 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 20px 36px;
-            border-radius: 4px;
+            border-radius: 12px;
             text-decoration: none;
             transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
                         box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
@@ -558,23 +558,80 @@
             white-space: pre-line;
         }
 
+        .intro-opening {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.85;
+            color: #4a3f38;
+            margin-bottom: 20px;
+            max-width: 740px;
+        }
+
+        .intro-scenes {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-width: 740px;
+            margin-bottom: 36px;
+        }
+
+        .intro-scene {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #4a3f38;
+        }
+
+        .intro-scene__verb {
+            font-weight: 500;
+            color: var(--brown-dark);
+        }
+
         /* ——— ДЛЯ ВАС ——— */
         .for-you-block {
-            background: rgba(248,180,192,0.2);
-            border: 1.5px solid rgba(248,180,192,0.5);
-            border-radius: 18px;
-            padding: 32px 36px;
+            position: relative;
+            background: #F0E6D0;
+            border: 1.5px solid rgba(201,169,122,0.35);
+            border-radius: 20px;
+            padding: 34px 38px 32px 38px;
             display: flex;
             flex-direction: column;
             gap: 14px;
-            box-shadow: 0 0 40px 8px rgba(248,180,192,0.25), 3px 4px 0 rgba(120,80,40,0.04);
+            overflow: hidden;
+            box-shadow: 3px 4px 0 rgba(120,80,40,0.04);
             transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
                         box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        .for-you-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--pink);
+            transform: scaleY(0);
+            transform-origin: bottom center;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
         .for-you-block:hover {
             transform: translateY(-4px);
-            box-shadow: 0 0 60px 14px rgba(248,180,192,0.35), 9px 12px 0 rgba(120,80,40,0.12);
+            box-shadow: 9px 12px 0 rgba(120,80,40,0.12);
+        }
+
+        .for-you-block:hover::before {
+            transform: scaleY(1);
+        }
+
+        @media (hover: none) {
+            .for-you-block::before { transform: scaleY(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .for-you-block,
+            .for-you-block::before { transition: none; }
         }
         
         .for-you-eyebrow {
@@ -603,9 +660,9 @@
             font-size: 14.5px;
             color: #6a5040;
             line-height: 1.7;
-            border-left: 3px solid rgba(232,122,156,0.4);
-            padding-left: 16px;
-            margin-top: 6px;
+            margin-top: 20px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(201,169,122,0.45);
         }
 
         /* ============================================================ */
@@ -2188,10 +2245,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="section-eyebrow">Зачем это нужно</div>
         <h2 class="section-title">Что такое<br><span>Эмоциональная Гавань</span></h2>
 
-        <div class="intro-lead">Это место, где можно выговорить то, что нельзя сказать вслух — то, о чём не расскажешь подруге.
-    Пережить застрявшие эмоции заново, до самого катарсиса, без страха оценки.
-    Понять свои истинные чувства и скрытые мотивы.
-    И ещё «историческая личная память» — зафиксировать детали жизни, чтобы не потерять ни одного важного штриха.</div>
+        <div class="intro-opening">Это место, где можно:</div>
+
+        <div class="intro-scenes">
+            <div class="intro-scene"><span class="intro-scene__verb">Выговорить</span> то, что нельзя сказать вслух — то, о чём не расскажешь подруге.</div>
+            <div class="intro-scene"><span class="intro-scene__verb">Пережить</span> застрявшие эмоции заново, до самого катарсиса, без страха оценки.</div>
+            <div class="intro-scene"><span class="intro-scene__verb">Понять</span> свои истинные чувства и скрытые мотивы.</div>
+            <div class="intro-scene"><span class="intro-scene__verb">Заметить</span>, что раздражение на партнёра — это на самом деле недельная усталость.</div>
+            <div class="intro-scene"><span class="intro-scene__verb">Запомнить</span> вкус каждого дня, и того, где солнце, и того, где дождь. Полноту жизни — и взлёты, и падения, и спокойные дни.</div>
+        </div>
 
         <div class="intro-lead">Обычный дневник — это отдельные островки. Сегодняшняя запись не помнит вчерашнюю.
 
