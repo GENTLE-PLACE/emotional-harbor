@@ -616,44 +616,250 @@
 
         .section-title span { color: var(--pink); }
 
-        /* ——— INTRO ——— */
-        .intro-lead {
-            font-size: 16px;
+        /* ——— ЧТО ТАКОЕ ЭМОЦИОНАЛЬНАЯ ГАВАНЬ ——— */
+        /* ——— ВЫДЕЛЕНИЕ ТЕКСТА: плашка + четыре точки по углам ——— */
+        .sel{
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+            background: rgba(248,180,192,0.42);
+            padding: 2px 10px;
+            margin: 0 2px;
+            transform: rotate(-1deg);
+        }
+
+        .sel::before{
+            content: '';
+            position: absolute;
+            inset: -4px;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 4px 4px, #e86b82 2.5px, transparent 2.5px),
+                radial-gradient(circle at calc(100% - 4px) 4px, #e86b82 2.5px, transparent 2.5px),
+                radial-gradient(circle at 4px calc(100% - 4px), #e86b82 2.5px, transparent 2.5px),
+                radial-gradient(circle at calc(100% - 4px) calc(100% - 4px), #e86b82 2.5px, transparent 2.5px);
+        }
+
+        /* ——— ПОДВОДКА ——— */
+        .lead-in{
+            margin-top: 58px;
+            padding-top: 36px;
+            border-top: 1px solid rgba(201,169,122,0.4);
+            font-size: clamp(22px, 3vw, 30px);
             font-weight: 300;
-            line-height: 1.85;
+            letter-spacing: -0.9px;
+            line-height: 1.35;
+            color: var(--brown-dark);
+            margin-bottom: 34px;
+        }
+
+        .lead-in .f-lora{
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+        }
+
+        /* ——— ТАЙМЛАЙН ——— */
+        .timeline{
+            position: relative;
+            display: grid;
+            grid-template-columns: 46px 1fr;
+            gap: 0 24px;
+        }
+
+        .timeline__track{
+            position: absolute;
+            left: 22px;
+            top: 30px;
+            bottom: 30px;
+            width: 0;
+            /* тот же пунктир, что на обводке карточки-архитектуры */
+            border-left: 1.5px dashed rgba(201,169,122,0.55);
+        }
+
+        .tl-marker{
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tl-marker__dot{
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--gold);
+            opacity: 0.3;
+            transition: opacity 0.3s ease,
+                        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .tl-marker.is-hover .tl-marker__dot{
+            opacity: 1;
+            transform: scale(1.35);
+            animation: dotPulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse{
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,122,0.5); }
+            50%      { box-shadow: 0 0 0 9px rgba(201,169,122,0); }
+        }
+
+        /* ——— КАРТОЧКИ ——— */
+        .tl-card{
+            background: rgba(255,248,235,0.75);
+            border: 1.5px solid rgba(201,169,122,0.35);
+            border-radius: 20px;
+            padding: 24px 28px 22px;
+            margin-bottom: 16px;
+            box-shadow: 3px 4px 0 rgba(120,80,40,0.04);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        border-color 0.35s ease;
+        }
+
+        .tl-card.is-hover{
+            transform: translate(6px, -4px);
+            box-shadow: 9px 12px 0 rgba(120,80,40,0.12);
+            border-color: var(--pink);
+        }
+
+        .tl-card__head{
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 9px;
+        }
+
+        .tl-star{
+            flex-shrink: 0;
+            width: 15px;
+            height: 15px;
+            color: var(--gold);
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                        color 0.35s ease;
+        }
+
+        .tl-card.is-hover .tl-star{
+            transform: rotate(90deg) scale(1.15);
+            color: var(--pink);
+        }
+
+        .tl-card__verb{
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: clamp(18px, 2.2vw, 23px);
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--brown-dark);
+            transition: color 0.35s ease;
+        }
+
+        .tl-card.is-hover .tl-card__verb{ color: var(--pink); }
+
+        .tl-card__text{
+            font-size: 15.5px;
+            font-weight: 300;
+            line-height: 1.72;
             color: #4a3f38;
-            margin-bottom: 36px;
-            max-width: 740px;
+        }
+
+        /* ——— МОСТИК: чужой мир — чужим шрифтом ——— */
+        .bridge{
+            margin-top: 58px;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 1.65;
+            color: var(--brown-mid);
+            max-width: 640px;
             white-space: pre-line;
         }
 
-        .intro-opening {
-            font-size: 16px;
+        /* ——— КАРТОЧКА-АРХИТЕКТУРА ——— */
+        .arch-card{
+            margin-top: 24px;
+            background: rgba(255,248,235,0.75);
+            border: 1.5px dashed rgba(201,169,122,0.55);
+            border-radius: 20px;
+            padding: 36px 38px 34px;
+            box-shadow: 3px 4px 0 rgba(120,80,40,0.04);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s ease;
+        }
+
+        @media (hover: hover){
+            .arch-card:hover{
+                transform: translateY(-4px);
+                box-shadow: 9px 12px 0 rgba(120,80,40,0.12);
+            }
+        }
+
+        .arch-card__title{
+            font-size: clamp(23px, 3vw, 30px);
+            line-height: 1.3;
+            letter-spacing: -0.8px;
             font-weight: 300;
-            line-height: 1.85;
-            color: #4a3f38;
-            margin-bottom: 20px;
-            max-width: 740px;
-        }
-
-        .intro-scenes {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            max-width: 740px;
-            margin-bottom: 36px;
-        }
-
-        .intro-scene {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 1.7;
-            color: #4a3f38;
-        }
-
-        .intro-scene__verb {
-            font-weight: 500;
             color: var(--brown-dark);
+            margin-bottom: 24px;
+        }
+
+        .arch-card__title .f-unb{
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: -0.5px;
+            color: var(--pink);
+        }
+
+        .arch-card__title .f-lora{
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+        }
+
+        .arch-card__text{
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.95;
+            color: #4a3f38;
+            white-space: pre-line;
+        }
+
+        .arch-card__payoff{
+            margin-top: 24px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(201,169,122,0.35);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.72;
+            color: #6a5040;
+            max-width: 660px;
+        }
+
+        .hl{
+            font-weight: 400;
+            color: var(--brown-dark);
+            background: linear-gradient(transparent 55%, rgba(248,180,192,0.75) 55%);
+            padding: 0 2px;
+        }
+
+        /* фишка Гавани — единственная золотая подсветка на раздел */
+        .hl--gold{
+            font-weight: 500;
+            background: linear-gradient(transparent 55%, rgba(247,208,138,0.75) 55%);
         }
 
         /* ——— ДЛЯ ВАС ——— */
@@ -1998,6 +2204,15 @@
 
         @media (max-width: 680px) {
             .page { padding: 0 24px 32px; }
+
+            /* раздел «Что такое Эмоциональная Гавань» */
+            .timeline { grid-template-columns: 26px 1fr; gap: 0 14px; }
+            .timeline__track { left: 12px; }
+            .tl-card { padding: 20px 20px 18px; border-radius: 16px; }
+            .arch-card { padding: 28px 22px 26px; border-radius: 16px; }
+            .arch-card__text { white-space: normal; }
+            .lead-in { margin-top: 48px; letter-spacing: -0.5px; }
+            .bridge { font-size: 17px; white-space: normal; }
             .hero-title { font-size: 38px; letter-spacing: -1.5px; white-space: normal; }
             .science-grid { grid-template-columns: 1fr; }
             .two-worlds-cards { flex-direction: column; }
@@ -2314,23 +2529,72 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="section-eyebrow">Зачем это нужно</div>
         <h2 class="section-title">Что такое<br><span>Эмоциональная Гавань</span></h2>
 
-        <div class="intro-opening">Это место, где можно:</div>
+        <div class="lead-in">Это место, <span class="sel"><span class="f-lora">где можно</span></span>:</div>
 
-        <div class="intro-scenes">
-            <div class="intro-scene"><span class="intro-scene__verb">Выговорить</span> то, что нельзя сказать вслух — то, о чём не расскажешь подруге.</div>
-            <div class="intro-scene"><span class="intro-scene__verb">Пережить</span> застрявшие эмоции заново, до самого катарсиса, без страха оценки.</div>
-            <div class="intro-scene"><span class="intro-scene__verb">Понять</span> свои истинные чувства и скрытые мотивы.</div>
-            <div class="intro-scene"><span class="intro-scene__verb">Заметить</span>, что раздражение на партнёра — это на самом деле недельная усталость.</div>
-            <div class="intro-scene"><span class="intro-scene__verb">Запомнить</span> вкус каждого дня, и того, где солнце, и того, где дождь. Полноту жизни — и взлёты, и падения, и спокойные дни.</div>
+        <div class="timeline">
+            <div class="timeline__track"></div>
+
+            <button class="tl-marker" data-row="0" aria-label="К пункту 1"><span class="tl-marker__dot"></span></button>
+            <div class="tl-card" data-row="0">
+                <div class="tl-card__head">
+                    <svg class="tl-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 L14.4 9.6 L24 12 L14.4 14.4 L12 24 L9.6 14.4 L0 12 L9.6 9.6 Z"/></svg>
+                    <div class="tl-card__verb">Выговорить</div>
+                </div>
+                <div class="tl-card__text">то, что нельзя сказать вслух — то, о чём не расскажешь подруге.</div>
+            </div>
+
+            <button class="tl-marker" data-row="1" aria-label="К пункту 2"><span class="tl-marker__dot"></span></button>
+            <div class="tl-card" data-row="1">
+                <div class="tl-card__head">
+                    <svg class="tl-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 L14.4 9.6 L24 12 L14.4 14.4 L12 24 L9.6 14.4 L0 12 L9.6 9.6 Z"/></svg>
+                    <div class="tl-card__verb">Пережить</div>
+                </div>
+                <div class="tl-card__text">застрявшие эмоции заново, до самого катарсиса, без страха оценки.</div>
+            </div>
+
+            <button class="tl-marker" data-row="2" aria-label="К пункту 3"><span class="tl-marker__dot"></span></button>
+            <div class="tl-card" data-row="2">
+                <div class="tl-card__head">
+                    <svg class="tl-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 L14.4 9.6 L24 12 L14.4 14.4 L12 24 L9.6 14.4 L0 12 L9.6 9.6 Z"/></svg>
+                    <div class="tl-card__verb">Понять</div>
+                </div>
+                <div class="tl-card__text">свои истинные чувства и скрытые мотивы.</div>
+            </div>
+
+            <button class="tl-marker" data-row="3" aria-label="К пункту 4"><span class="tl-marker__dot"></span></button>
+            <div class="tl-card" data-row="3">
+                <div class="tl-card__head">
+                    <svg class="tl-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 L14.4 9.6 L24 12 L14.4 14.4 L12 24 L9.6 14.4 L0 12 L9.6 9.6 Z"/></svg>
+                    <div class="tl-card__verb">Заметить</div>
+                </div>
+                <div class="tl-card__text">что раздражение на партнёра — это на самом деле недельная усталость.</div>
+            </div>
+
+            <button class="tl-marker" data-row="4" aria-label="К пункту 5"><span class="tl-marker__dot"></span></button>
+            <div class="tl-card" data-row="4">
+                <div class="tl-card__head">
+                    <svg class="tl-star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0 L14.4 9.6 L24 12 L14.4 14.4 L12 24 L9.6 14.4 L0 12 L9.6 9.6 Z"/></svg>
+                    <div class="tl-card__verb">Запомнить</div>
+                </div>
+                <div class="tl-card__text">вкус каждого дня, и того, где солнце, и того, где дождь. Полноту жизни — и взлёты, и падения, и спокойные дни.</div>
+            </div>
         </div>
 
-        <div class="intro-lead">Обычный дневник — это отдельные островки. Сегодняшняя запись не помнит вчерашнюю.
+        <div class="bridge">Обычный дневник — это отдельные островки.
+Сегодняшняя запись не помнит вчерашнюю.</div>
 
-    Гавань — это архитектура.
-    Здесь Копилка тепла помнит, в какой день и в каком состоянии Вас поддержали.
-    Источники энергии показывают, что именно сработало, когда батарея была на нуле.
-    Опоры соединяются с конкретными днями, когда они Вас удержали.
-    А нежная аналитика собирает всё это в одну карту. Через месяц Вы увидите себя с расстояния, которого не бывает в моменте — и поймёте, что были богаче, чем казалось.</div>
+        <div class="arch-card">
+            <div class="arch-card__title">
+                <span class="f-unb">Гавань</span> — это <span class="sel"><span class="f-lora">архитектура</span></span>
+            </div>
+            <div class="arch-card__text">Здесь <span class="hl">Копилка тепла</span> помнит, в какой день и в каком состоянии Вас поддержали.
+<span class="hl">Источники энергии</span> показывают, что именно сработало, когда батарея была на нуле.
+<span class="hl">Опоры</span> соединяются с конкретными днями, когда они Вас удержали.
+А <span class="hl--gold">нежная аналитика</span> собирает всё это в одну карту.</div>
+            <div class="arch-card__payoff">Через месяц Вы увидите себя с расстояния, которого не бывает в моменте — и поймёте, что были богаче, чем казалось.</div>
+        </div>
+
+        <div class="divider"></div>
 
         <div class="for-you-block fade-up">
             <div class="for-you-eyebrow">Это для Вас, если</div>
@@ -3456,6 +3720,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     modal.addEventListener('click', function(e) { if (e.target === modal) closeConsentModal(); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeConsentModal(); });
+</script>
+
+<script>
+(function(){
+    var markers = Array.prototype.slice.call(document.querySelectorAll('.tl-marker'));
+    var cards   = Array.prototype.slice.call(document.querySelectorAll('.tl-card'));
+    if(!markers.length) return;
+
+    function rowClass(i, on){
+        markers[i].classList.toggle('is-hover', on);
+        cards[i].classList.toggle('is-hover', on);
+    }
+
+    markers.concat(cards).forEach(function(el){
+        var i = +el.dataset.row;
+        el.addEventListener('mouseenter', function(){ rowClass(i, true); });
+        el.addEventListener('mouseleave', function(){ rowClass(i, false); });
+    });
+
+    // на тач-устройствах наведения нет — активна карточка в центре экрана
+    if(window.matchMedia('(hover: none)').matches){
+        var io = new IntersectionObserver(function(entries){
+            entries.forEach(function(e){ rowClass(+e.target.dataset.row, e.isIntersecting); });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        cards.forEach(function(c){ io.observe(c); });
+    }
+
+    markers.forEach(function(m, i){
+        m.addEventListener('click', function(){
+            cards[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+})();
 </script>
 
 </body>
