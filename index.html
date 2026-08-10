@@ -199,9 +199,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://static.emotional-harbor.ru">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Lora:ital,wght@1,400&family=Jost:wght@300;400;500;600&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Lora:ital,wght@1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Lora:ital,wght@1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -637,46 +637,26 @@
         .section-title span { color: var(--pink); }
 
         /* ——— ЧТО ТАКОЕ ЭМОЦИОНАЛЬНАЯ ГАВАНЬ ——— */
-        /* ——— ВЫДЕЛЕНИЕ ТЕКСТА: плашка + четыре точки по углам ——— */
-        .sel{
-            position: relative;
-            display: inline-block;
-            z-index: 1;
-            background: rgba(248,180,192,0.42);
-            padding: 2px 10px;
-            margin: 0 2px;
-        }
-
-        .sel::before{
-            content: '';
-            position: absolute;
-            inset: -4px;
-            pointer-events: none;
-            background:
-                radial-gradient(circle at 4px 4px, #e86b82 2.5px, transparent 2.5px),
-                radial-gradient(circle at calc(100% - 4px) 4px, #e86b82 2.5px, transparent 2.5px),
-                radial-gradient(circle at 4px calc(100% - 4px), #e86b82 2.5px, transparent 2.5px),
-                radial-gradient(circle at calc(100% - 4px) calc(100% - 4px), #e86b82 2.5px, transparent 2.5px);
-        }
-
         /* ——— ПОДВОДКА ——— */
         .lead-in{
             margin-top: 58px;
             padding-top: 36px;
             border-top: 1px solid rgba(201,169,122,0.4);
-            font-size: clamp(22px, 3vw, 30px);
+            font-size: clamp(19px, 2.4vw, 24px);
             font-weight: 300;
             letter-spacing: -0.9px;
             line-height: 1.35;
             color: var(--brown-dark);
-            margin-bottom: 34px;
+            margin-bottom: 30px;
         }
 
         .lead-in .f-lora{
             font-family: 'Lora', serif;
             font-style: italic;
-            font-weight: 700;
-            letter-spacing: -0.4px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            background: linear-gradient(transparent 55%, rgba(248,180,192,0.45) 55%);
+            padding: 0 4px;
         }
 
         /* ——— ТАЙМЛАЙН ——— */
@@ -833,18 +813,18 @@
 
         .arch-card__title .f-unb{
             font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: -0.5px;
-            color: var(--pink);
+            font-weight: 600;
+            font-size: 0.88em;
+            letter-spacing: -0.9px;
         }
 
         .arch-card__title .f-lora{
             font-family: 'Lora', serif;
             font-style: italic;
-            font-weight: 700;
-            letter-spacing: -0.4px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            background: linear-gradient(transparent 55%, rgba(248,180,192,0.45) 55%);
+            padding: 0 4px;
         }
 
         .arch-card__text{
@@ -2547,7 +2527,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="section-eyebrow">Зачем это нужно</div>
         <h2 class="section-title">Что такое<br><span>Эмоциональная Гавань</span></h2>
 
-        <div class="lead-in">Это место, <span class="sel"><span class="f-lora">где можно</span></span>:</div>
+        <div class="lead-in">Это место, <span class="f-lora">где можно</span>:</div>
 
         <div class="timeline">
             <div class="timeline__track"></div>
@@ -2603,7 +2583,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="arch-card">
             <div class="arch-card__title">
-                <span class="f-unb">Гавань</span> — это <span class="sel"><span class="f-lora">архитектура</span></span>
+                <span class="f-unb">Гавань</span> — это <span class="f-lora">архитектура</span>
             </div>
             <div class="arch-card__text">Здесь <span class="hl">Копилка тепла</span> собирает тёплые моменты, которые показывают, что Вас любят чаще, чем Вы помните.
 <span class="hl">Источники энергии</span> — меню того, что заряжает.
