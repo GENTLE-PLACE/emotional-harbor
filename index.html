@@ -352,21 +352,7 @@
                     rgba(247,239,224,0) 88%);
             }
 
-            /* ——— ТЕКСТ ТЕМНЕЕ, А НЕ ФОН СВЕТЛЕЕ ———
-               Картинка рассветная и светлая, поэтому контраст берём
-               затемнением букв: тёмно-коричневый на бледно-персиковом. */
-            .hero-eyebrow { color: #a8834b; }
-
-            .hero-sub {
-                color: var(--brown-dark);
-                font-weight: 400;
-            }
-
-            .trust-item {
-                font-size: 12.5px;
-                color: var(--brown-dark);
-                font-weight: 500;
-            }
+            .trust-item { font-size: 12.5px; }
         }
 
 
@@ -2590,6 +2576,23 @@
             cursor: pointer;
             position: relative;
             z-index: 1;
+        }
+
+        /* ═══ МОБИЛЬНЫЙ: ЧИТАЕМОСТЬ ПОВЕРХ КАРТИНКИ ═══
+           Блок стоит последним намеренно: базовые .hero-sub / .hero-eyebrow
+           объявлены ниже по файлу и перебивали бы правки, стоящие выше. */
+        @media (max-width: 680px) {
+            .hero-eyebrow { color: #a8834b; }
+
+            .hero-sub {
+                color: var(--brown-dark);
+                font-weight: 400;
+            }
+
+            .trust-item {
+                color: var(--brown-dark);
+                font-weight: 500;
+            }
         }
     </style>
 </head>
