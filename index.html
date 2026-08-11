@@ -2582,17 +2582,36 @@
            Блок стоит последним намеренно: базовые .hero-sub / .hero-eyebrow
            объявлены ниже по файлу и перебивали бы правки, стоящие выше. */
         @media (max-width: 680px) {
-            .hero-eyebrow { color: #a8834b; }
+            .hero-eyebrow {
+                color: #a8834b;
+                /* eyebrow лежит на небе — оно ровное, хватает лёгкого ореола */
+                text-shadow: 0 1px 3px rgba(247,239,224,0.95);
+            }
 
+            /* Подложка убирает из-под текста не тон, а ШУМ:
+               мачту, снасти и цветы. Приём тот же, что у .tl-card. */
             .hero-sub {
                 color: var(--brown-dark);
                 font-weight: 400;
+                background: rgba(250,244,233,0.88);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                padding: 14px 18px 14px 20px;
+                border-radius: 0 14px 14px 0;
+                box-shadow: 3px 4px 0 rgba(120,80,40,0.05);
             }
 
             .trust-item {
                 color: var(--brown-dark);
                 font-weight: 500;
+                background: rgba(250,244,233,0.86);
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px);
+                padding: 5px 10px;
+                border-radius: 9px;
             }
+
+            .hero-trust { gap: 7px 9px; }
         }
     </style>
 </head>
