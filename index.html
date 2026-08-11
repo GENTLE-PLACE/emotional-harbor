@@ -342,8 +342,14 @@
         @media (max-width: 680px) {
             .hero-art { width: 100%; aspect-ratio: 820 / 1024; }
             .hero-art::after {
+                /* верх держим почти глухим — там заголовок и подзаголовок,
+                   низ отпускаем: фонарь и дневник остаются живыми */
                 background: linear-gradient(to bottom,
-                    var(--beige) 0%, rgba(247,239,224,0.7) 24%, rgba(247,239,224,0.1) 62%);
+                    var(--beige) 0%,
+                    rgba(247,239,224,0.94) 22%,
+                    rgba(247,239,224,0.78) 44%,
+                    rgba(247,239,224,0.34) 68%,
+                    rgba(247,239,224,0) 88%);
             }
             .trust-item { font-size: 12.5px; }
         }
@@ -2311,7 +2317,8 @@
             .arch-card { padding: 28px 22px 26px; border-radius: 16px; }
             .lead-in { margin-top: 48px; letter-spacing: -0.5px; }
             .bridge { font-size: 17px; white-space: normal; }
-            .hero-title { font-size: 38px; letter-spacing: -1.5px; white-space: normal; }
+            /* кегль от ширины экрана: «Эмоциональная» — одно слово, перенести нельзя */
+            .hero-title { font-size: clamp(26px, 7.8vw, 38px); letter-spacing: -1.2px; white-space: normal; }
             .science-grid { grid-template-columns: 1fr; }
             .two-worlds-cards { flex-direction: column; }
             .world-card-full { width: 100%; min-height: auto; }
