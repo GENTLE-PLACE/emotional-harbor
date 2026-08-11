@@ -322,10 +322,15 @@
 
         .trust-item svg { flex: none; }
 
+        /* Phosphor, вес Fill — заливка, а не штрих.
+           Породу выбрали под логотип Notion: он сплошной, и две тонкие
+           линии рядом с ним всегда проигрывали. Плюс на 17px силуэт
+           честнее линии — он не рассыпается.
+           Цвет в тон тексту маркера: значок и слово читаются как одно
+           целое, а логотип Notion перестаёт торчать по весу. */
         .trust-ico {
             width: 17px; height: 17px;
-            stroke: var(--gold); fill: none;
-            stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+            fill: var(--brown-mid);
         }
 
         .trust-notion { width: 16px; height: 16.7px; }
@@ -2683,7 +2688,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="hero-trust">
                 <span class="trust-item">
-                    <svg class="trust-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12.9 12.9 20.5a2 2 0 0 1-2.8 0l-6.6-6.6a2 2 0 0 1-.6-1.4V4.5a2 2 0 0 1 2-2h8a2 2 0 0 1 1.4.6l6.2 6.2a2 2 0 0 1 0 2.8Z"/><circle cx="8" cy="8" r="1.6"/></svg>
+                    <svg class="trust-ico" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM97.07,155.74a8,8,0,1,1-14.14-7.48,42.79,42.79,0,0,0,0-40.52,8,8,0,0,1,14.14-7.48A59.33,59.33,0,0,1,97.07,155.74Zm28,16a8,8,0,1,1-14.12-7.52,77.07,77.07,0,0,0,0-72.48,8,8,0,1,1,14.12-7.52A93,93,0,0,1,125.06,171.76Zm28,16A8,8,0,0,1,139,180.23a110.62,110.62,0,0,0,0-104.46,8,8,0,0,1,14.12-7.54A126.67,126.67,0,0,1,153.07,187.77Z"/></svg>
                     Разовая покупка
                 </span>
                 <span class="trust-dot" aria-hidden="true">·</span>
@@ -2693,7 +2698,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </span>
                 <span class="trust-dot" aria-hidden="true">·</span>
                 <span class="trust-item">
-                    <svg class="trust-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.8" y="10.4" width="16.4" height="10.4" rx="2.4"/><path d="M7.8 10.4V7.6a4.2 4.2 0 0 1 8.4 0v2.8"/><circle cx="12" cy="15.6" r="1.15" fill="currentColor" stroke="none"/></svg>
+                    <svg class="trust-ico" viewBox="0 0 256 256" aria-hidden="true"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80Zm-72,78.63V184a8,8,0,0,1-16,0V158.63a24,24,0,1,1,16,0ZM160,80H96V56a32,32,0,0,1,64,0Z"/></svg>
                     Ваши данные только у Вас
                 </span>
             </div>
