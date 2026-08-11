@@ -2593,12 +2593,13 @@
             .hero-sub {
                 color: var(--brown-dark);
                 font-weight: 400;
-                background: rgba(250,244,233,0.88);
-                backdrop-filter: blur(6px);
-                -webkit-backdrop-filter: blur(6px);
+                /* заливка отпущена, размытие усилено:
+                   картинка просвечивает, но линии под текстом растворены */
+                background: rgba(250,244,233,0.6);
+                backdrop-filter: blur(11px);
+                -webkit-backdrop-filter: blur(11px);
                 padding: 14px 18px 14px 20px;
                 border-radius: 0 14px 14px 0;
-                box-shadow: 3px 4px 0 rgba(120,80,40,0.05);
             }
 
             .trust-item {
