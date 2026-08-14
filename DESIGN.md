@@ -212,17 +212,29 @@ Cards, buttons, and modules should all feel **tactile and handmade, like pressed
 ### Buttons
 - **Shape:** 12px radius, generous padding (20px 36px for primary CTAs, tighter 11px 22px / 15px 24px for header and floating variants).
 - **Primary (dark):** `--brown-dark` background, beige text, Unbounded 700 uppercase label, flat offset shadow, lifts + shadow-lengthens on hover.
-- **Primary (pink/accent):** `--pink` background, white text; the only button variant permitted a blurred glow on hover, marking it as the page's single highest-priority action.
+- **Primary (pink/accent):** `--pink` background; text color is **not uniform across the three pink CTAs** — see the exception below, this is deliberate, not drift. The only button variant permitted a blurred glow on hover, marking it as the page's single highest-priority action.
 - **Hover / Focus:** all buttons translate `(-2px, -3px)` and lengthen their offset shadow on hover; focus-visible states (seen on the floating buy button) use a solid 3px `--brown-dark` outline with 3px offset — no glow-only focus indicators.
 
-#### Conscious exception: white text on `--pink`
+#### Conscious exception: text color on `--pink` CTAs
 
-`#fff` on `#e87a9c` measures **2.73:1** — below WCAG AA's 4.5:1 for small text (`.sticky-header__cta` and `.floating-buy` both use it explicitly; `.cta-button.pink` inherits `--beige` at an even lower **2.39:1**). This was evaluated and kept deliberately, not overlooked:
+The three pink buttons (`.cta-button.pink`, `.sticky-header__cta`, `.floating-buy`) do not share one text color, and both colors they use sit below WCAG AA. This is a recorded, deliberate trade-off — read this before "fixing" it.
 
-- A saturated pink with a light text overlay reads as an *illuminated surface* — it carries volume and looks pressable. Dark text flattens the same surface into a printed label.
-- The hover treatment darkens the fill (`#e87a9c` → `#d96a8c`) to read as "pressed in." Lightening it instead — the direction a higher-contrast-with-dark-text fix would require — collides with this product's own modal convention, where a *lighter* button already means *disabled*. A hover that lightens would misread as the button going inactive at the exact moment the user is about to act.
+**1. The main CTA (`.cta-button.pink`) sets text to `--beige` (`#f7efe0`), not white — on purpose.**
+`--beige` is the exact color of the page background the button sits on. When the letters match the paper underneath, they don't read as ink *sitting on* the pink — they read as **cut through** it: the button becomes a window back down to the page, not a sticker laid over it. That's what gives it volume. White text is a foreign material laid on top; it flattens the same shape into a printed label. This button does not violate the "no pure white" rule in Do's and Don'ts — it uses no white at all, it inherits `--beige` from the base `.cta-button` class.
 
-**Do not silently "fix" this contrast on a future pass.** If accessibility requirements ever force a change here, treat it as a deliberate trade-off to revisit with the product owner, not a leftover bug — and recheck every dependent value (all three CTA instances, plus any inherited/blended child text like `.floating-buy__price`) since they were tuned together.
+**2. `.sticky-header__cta` and `.floating-buy` use `#ffffff`.**
+This *is* the one standing exception to "no pure white," and it was left in place on purpose when the header/floating buttons were reverted to their original state. These two buttons are small, high-frequency UI chrome (persistent header, persistent floating pill) rather than the single "cut paper" hero moment the main CTA owns — white reads as a simpler, more utilitarian action chip there. **If these three buttons are ever unified to one text color, converge on `--beige`, not white** — beige is the main CTA's intentional choice and the direction that preserves the cut-paper read; white flattening the main CTA would be the regression, not the other way around.
+
+**3. Contrast, measured:**
+- `--beige` (`#f7efe0`) on `--pink` (`#e87a9c`): **2.39:1**
+- `#ffffff` on `--pink` (`#e87a9c`): **2.73:1**
+
+Both are below WCAG AA's 4.5:1 for small text. Both were checked and kept anyway: a saturated pink with light-on-pink text reads as an *illuminated surface* with volume; dark text on the same fill goes flat and inert. The contrast shortfall is the cost of that read, accepted knowingly — not an oversight.
+
+**4. Hover darkens (`#e87a9c` → `#d96a8c`); do not switch this to lightening.**
+Darkening on hover reads as the surface being pressed in — physically plausible for a button. Lightening was tried and rejected: in this product, the payment modal already uses a *lighter* pink fill to mean a **disabled/inactive** button. A hover state that lightens the CTA would fire the same visual signal at the exact moment the user is about to act, telling them the button just turned off. Don't reintroduce a lightening hover here even in service of a contrast fix.
+
+**Do not silently "fix" this contrast on a future pass.** If accessibility requirements ever force a change, treat it as a deliberate trade-off to revisit with the product owner — not a leftover bug — and recheck all three CTA instances plus dependent child text (e.g. `.floating-buy__price`) together, since they were tuned as a set.
 
 ### Chips / Pills
 - **Filled:** soft-yellow tint background (`rgba(247,208,138,0.2)`), espresso text, thin gold border — used for factual/positive tags.
@@ -260,6 +272,6 @@ A fixed-position pink pill (bottom-right) that fades and slides up into view onc
 ### Don't:
 - **Don't** introduce a second saturated accent color competing with pink for "action" meaning.
 - **Don't** use blurred ambient shadows at rest; the one exception is the pink CTA's hover-only glow.
-- **Don't** use pure black or pure white for text/background — everything stays warm (espresso brown / warm beige), with one standing exception: white text on the pink CTA buttons (see Components → Buttons → *Conscious exception*).
+- **Don't** use pure black or pure white for text/background — everything stays warm (espresso brown / warm beige), with one standing exception: `#fff` text on `.sticky-header__cta` and `.floating-buy` (see Components → Buttons → *Conscious exception*). The main CTA (`.cta-button.pink`) doesn't need this exception at all — it uses `--beige`, not white.
 - **Don't** flatten the module-accent system into a general-purpose color palette; it is a category-marking role, not decoration.
 - **Don't** introduce corporate-SaaS visual signals (cool grays, hard-edged cards, glossy gradients) — they contradict the handmade-paper premise even if individually "clean."
