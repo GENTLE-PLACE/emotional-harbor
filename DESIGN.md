@@ -215,6 +215,15 @@ Cards, buttons, and modules should all feel **tactile and handmade, like pressed
 - **Primary (pink/accent):** `--pink` background, white text; the only button variant permitted a blurred glow on hover, marking it as the page's single highest-priority action.
 - **Hover / Focus:** all buttons translate `(-2px, -3px)` and lengthen their offset shadow on hover; focus-visible states (seen on the floating buy button) use a solid 3px `--brown-dark` outline with 3px offset — no glow-only focus indicators.
 
+#### Conscious exception: white text on `--pink`
+
+`#fff` on `#e87a9c` measures **2.73:1** — below WCAG AA's 4.5:1 for small text (`.sticky-header__cta` and `.floating-buy` both use it explicitly; `.cta-button.pink` inherits `--beige` at an even lower **2.39:1**). This was evaluated and kept deliberately, not overlooked:
+
+- A saturated pink with a light text overlay reads as an *illuminated surface* — it carries volume and looks pressable. Dark text flattens the same surface into a printed label.
+- The hover treatment darkens the fill (`#e87a9c` → `#d96a8c`) to read as "pressed in." Lightening it instead — the direction a higher-contrast-with-dark-text fix would require — collides with this product's own modal convention, where a *lighter* button already means *disabled*. A hover that lightens would misread as the button going inactive at the exact moment the user is about to act.
+
+**Do not silently "fix" this contrast on a future pass.** If accessibility requirements ever force a change here, treat it as a deliberate trade-off to revisit with the product owner, not a leftover bug — and recheck every dependent value (all three CTA instances, plus any inherited/blended child text like `.floating-buy__price`) since they were tuned together.
+
 ### Chips / Pills
 - **Filled:** soft-yellow tint background (`rgba(247,208,138,0.2)`), espresso text, thin gold border — used for factual/positive tags.
 - **Outline:** transparent background, brown text, thin pink border — used for the "your version" / cleaner-slate tags.
@@ -251,6 +260,6 @@ A fixed-position pink pill (bottom-right) that fades and slides up into view onc
 ### Don't:
 - **Don't** introduce a second saturated accent color competing with pink for "action" meaning.
 - **Don't** use blurred ambient shadows at rest; the one exception is the pink CTA's hover-only glow.
-- **Don't** use pure black or pure white for text/background — everything stays warm (espresso brown / warm beige).
+- **Don't** use pure black or pure white for text/background — everything stays warm (espresso brown / warm beige), with one standing exception: white text on the pink CTA buttons (see Components → Buttons → *Conscious exception*).
 - **Don't** flatten the module-accent system into a general-purpose color palette; it is a category-marking role, not decoration.
 - **Don't** introduce corporate-SaaS visual signals (cool grays, hard-edged cards, glossy gradients) — they contradict the handmade-paper premise even if individually "clean."
