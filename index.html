@@ -206,9 +206,9 @@
     <link rel="preload" as="image" fetchpriority="high"
           href="https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp"
           imagesrcset="https://static.emotional-harbor.ru/hero-harbor-v1-mobile.webp 820w, https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp 1536w">
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+    <!-- ШРИФТЫ: обычная загрузка. Трюк с media="print" + onload убран —
+         он откладывал шрифты и на медленной сети оставлял системную подмену. -->
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -455,6 +455,102 @@
         .sticky-header__cta:hover {
             background: #d96a8c;
             box-shadow: 5px 6px 0 rgba(232,122,156,0.3);
+        }
+
+        /* ——— МОСТИК ПОД «ДВУМЯ МИРАМИ» ——— */
+        .worlds-bridge {
+            margin-top: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .worlds-bridge__text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 20px;
+            line-height: 1.5;
+            color: var(--brown-mid);
+            max-width: 420px;
+        }
+
+        .worlds-bridge__note {
+            display: block;
+            font-family: 'Jost', sans-serif;
+            font-style: normal;
+            font-size: 13px;
+            font-weight: 300;
+            color: var(--brown-light);
+            margin-top: 8px;
+        }
+
+        /* ——— ПЛАВАЮЩАЯ КНОПКА ПОКУПКИ ——— */
+        .floating-buy {
+            position: fixed;
+            right: 28px;
+            bottom: 28px;
+            z-index: 90;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 10px;
+            background: var(--pink);
+            color: #fff;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 15px 24px;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 4px 5px 0 rgba(232,122,156,0.28), 0 8px 26px rgba(58,50,40,0.10);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(14px);
+            transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        visibility 0.4s,
+                        background 0.25s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .floating-buy.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .floating-buy:hover {
+            background: #d96a8c;
+            box-shadow: 6px 7px 0 rgba(232,122,156,0.3), 0 10px 30px rgba(58,50,40,0.14);
+        }
+
+        .floating-buy:focus-visible {
+            outline: 3px solid var(--brown-dark);
+            outline-offset: 3px;
+        }
+
+        .floating-buy__price {
+            font-weight: 400;
+            font-size: 11px;
+            letter-spacing: 0.3px;
+            opacity: 0.9;
+        }
+
+        /* прячем, пока открыта модалка согласия */
+        #consent-modal.is-open ~ .floating-buy {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .floating-buy { transition: opacity 0.2s linear, visibility 0.2s; }
+            .floating-buy,
+            .floating-buy.is-visible { transform: none; }
         }
 
         /* ——— MICRO-ANIMATIONS: FADE UP ——— */
@@ -2338,6 +2434,20 @@
             .science-grid { grid-template-columns: 1fr; }
             .two-worlds-cards { flex-direction: column; }
             .world-card-full { width: 100%; min-height: auto; }
+            .worlds-bridge { flex-direction: column; align-items: flex-start; gap: 22px; }
+            .worlds-bridge__text { font-size: 17px; }
+
+            /* плавающая кнопка: по центру внизу, с учётом «домашней полоски» iPhone */
+            .floating-buy {
+                right: auto;
+                left: 50%;
+                bottom: calc(16px + env(safe-area-inset-bottom));
+                transform: translate(-50%, 14px);
+                padding: 15px 22px;
+                font-size: 11px;
+                border-radius: 16px;
+            }
+            .floating-buy.is-visible { transform: translate(-50%, 0); }
             .final-section { padding: 40px 24px; }
             .author-block { flex-wrap: wrap; }
             .author-contact { margin-left: 0; }
@@ -3216,6 +3326,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
         </div>
+
+        <!-- МОСТИК: оба мира приходят вместе -->
+        <div class="worlds-bridge">
+            <div class="worlds-bridge__text">
+                Оба мира открываются одним ключом.
+                <span class="worlds-bridge__note">Демо Есении и Ваше чистое пространство приходят вместе, одной ссылкой.</span>
+            </div>
+            <span class="cta-button pink" onclick="openConsentModal()">Получить ключи</span>
+        </div>
     </section>
 
     <!-- НАУКА -->
@@ -3544,6 +3663,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 </div>
 
+<!-- ПЛАВАЮЩАЯ КНОПКА ПОКУПКИ -->
+<button class="floating-buy" id="floatingBuy" type="button"
+        onclick="openConsentModal()"
+        aria-label="Получить ключи, 2 490 рублей">
+    <span>Получить ключи</span>
+    <span class="floating-buy__price">2 490 ₽</span>
+</button>
+
 <script>
     // ===== STICKY HEADER =====
     (function() {
@@ -3572,6 +3699,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 ticking = true;
             }
         }, { passive: true });
+    })();
+
+    // ===== ПЛАВАЮЩАЯ КНОПКА ПОКУПКИ =====
+    (function() {
+        const fab = document.getElementById('floatingBuy');
+        if (!fab) return;
+
+        const startEl = document.getElementById('modules'); // с какого блока показывать
+        const stopEl  = document.getElementById('buy');     // где прятать (финальный блок)
+        let ticking = false;
+
+        function updateFab() {
+            const vh = window.innerHeight;
+            const started = startEl
+                ? startEl.getBoundingClientRect().top < vh * 0.5
+                : window.scrollY > vh;
+            const finalNear = stopEl
+                ? stopEl.getBoundingClientRect().top < vh * 0.9
+                : false;
+
+            fab.classList.toggle('is-visible', started && !finalNear);
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) { requestAnimationFrame(updateFab); ticking = true; }
+        }, { passive: true });
+
+        window.addEventListener('resize', updateFab, { passive: true });
+        updateFab();
     })();
 
     // ===== SMOOTH SCROLL (без якорей) =====
