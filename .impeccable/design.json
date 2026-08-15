@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-14T00:00:00.000Z",
+  "title": "Design System: Эмоциональная Гавань",
+  "extensions": {
+    "colorMeta": {
+      "beige": { "role": "neutral", "displayName": "Warm Beige", "canonical": "#f7efe0", "tonalRamp": ["#3d2d10", "#6d511c", "#9e7529", "#cc9838", "#d8b269", "#e5cb9a", "#efe0c2", "#faf5eb"] },
+      "brown-dark": { "role": "neutral", "displayName": "Espresso Brown", "canonical": "#3a3228", "tonalRamp": ["#2d271f", "#514638", "#766551", "#99856b", "#b2a38f", "#cbc1b4", "#e0dad2", "#f5f3f0"] },
+      "brown-mid": { "role": "neutral", "displayName": "Mid Brown", "canonical": "#7a5840", "tonalRamp": ["#32241a", "#5a412f", "#825e44", "#a97b5b", "#be9c83", "#d3bcab", "#e5d7cd", "#f6f2ee"] },
+      "brown-light": { "role": "neutral", "displayName": "Light Brown", "canonical": "#9a7050", "tonalRamp": ["#32251a", "#5b422f", "#835f44", "#aa7d5b", "#be9d83", "#d3bdab", "#e5d7cd", "#f6f2ee"] },
+      "gold": { "role": "secondary", "displayName": "Kraft Gold", "canonical": "#c9a97a", "tonalRamp": ["#362916", "#624a28", "#8d6b39", "#b78c4d", "#c9a879", "#dac4a4", "#e9dcc9", "#f8f3ed"] },
+      "pink": { "role": "primary", "displayName": "Rosewater Pink", "canonical": "#e87a9c", "tonalRamp": ["#410b1c", "#751432", "#aa1d49", "#da2a60", "#e35e87", "#ec92ae", "#f4bece", "#fbe9ef"] },
+      "pink-soft": { "role": "module-accent", "displayName": "Soft Pink (mood diary / stats)", "canonical": "#F8B4C0", "tonalRamp": ["#460712", "#7e0c20", "#b6112e", "#ea1a3f", "#ef526e", "#f48a9d", "#f8b9c4", "#fde8eb"] },
+      "yellow": { "role": "module-accent", "displayName": "Soft Yellow (central hub / warmth jar)", "canonical": "#F7D08A", "tonalRamp": ["#483005", "#815609", "#ba7c0d", "#efa115", "#f3b84e", "#f7cf88", "#fae2b7", "#fdf5e7"] },
+      "green": { "role": "module-accent", "displayName": "Soft Green (energy sources)", "canonical": "#b8e0d2", "tonalRamp": ["#17352b", "#2a604d", "#3c8a6f", "#51b391", "#7cc6ac", "#a6d8c7", "#cae8dd", "#edf7f4"] },
+      "blue": { "role": "module-accent", "displayName": "Soft Blue (cozy content / science cards)", "canonical": "#A5C2F1", "tonalRamp": ["#0a2042", "#133977", "#1b52ac", "#276cdd", "#5c90e6", "#91b4ee", "#bdd2f5", "#e9f0fc"] },
+      "module-purple": { "role": "module-accent", "displayName": "Soft Purple (my supports)", "canonical": "#e0c8f0", "tonalRamp": ["#2b103c", "#4d1e6c", "#6f2b9c", "#903bc9", "#ab6bd7", "#c79be4", "#ddc3ef", "#f4ebfa"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero title only." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles." },
+      "title": { "displayName": "Title", "purpose": "Card and module headings." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy, always light-weight (300)." },
+      "quote": { "displayName": "Quote / Voice", "purpose": "Есения's voice, pull-quotes, reflective asides in Lora italic." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, pills, chip tags, buttons, price labels." }
+    },
+    "shadows": [
+      { "name": "card-resting", "value": "3px 4px 0 rgba(120,80,40,0.04)", "purpose": "Default flat offset shadow for cards at rest." },
+      { "name": "card-hover", "value": "9px 12px 0 rgba(120,80,40,0.12)", "purpose": "Paired with translateY(-4px) lift on card hover." },
+      { "name": "button-dark-resting", "value": "5px 6px 0 rgba(58,50,40,0.2)", "purpose": "Brown-dark CTA button resting shadow." },
+      { "name": "button-pink-resting", "value": "5px 6px 0 rgba(232,122,156,0.3)", "purpose": "Pink CTA button resting shadow." },
+      { "name": "button-pink-hover", "value": "7px 8px 0 rgba(232,122,156,0.3), 0 0 24px 6px rgba(232,122,156,0.2)", "purpose": "The only hover state with a blurred glow layered over the flat offset shadow; reserved for the primary action." },
+      { "name": "floating-buy", "value": "4px 5px 0 rgba(232,122,156,0.28), 0 8px 26px rgba(58,50,40,0.10)", "purpose": "Heaviest double-shadow, used only for the persistent floating buy button." }
+    ],
+    "motion": [
+      { "name": "ease-lift", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Card/button lift transitions (transform, box-shadow)." },
+      { "name": "duration-lift", "value": "0.3s-0.4s", "purpose": "Standard hover lift duration." },
+      { "name": "duration-color", "value": "0.2s-0.25s ease", "purpose": "Color and background transitions (links, buttons)." }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "400px" },
+      { "name": "sm", "value": "680px" },
+      { "name": "md", "value": "720px" },
+      { "name": "lg", "value": "768px" },
+      { "name": "xl", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Dark)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Default CTA — brown-dark background, used for secondary/scroll actions.",
+      "html": "<button class=\"ds-btn-primary\">Заглянуть внутрь</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 12px; background: #3a3228; color: #f7efe0; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; padding: 20px 36px; border-radius: 12px; border: none; cursor: pointer; box-shadow: 5px 6px 0 rgba(58,50,40,0.2); transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1); } .ds-btn-primary:hover { transform: translate(-2px,-3px); box-shadow: 9px 10px 0 rgba(58,50,40,0.2); } .ds-btn-primary:focus-visible { outline: 3px solid #3a3228; outline-offset: 3px; }"
+    },
+    {
+      "name": "Primary Button (Pink)",
+      "kind": "button",
+      "refersTo": "button-accent",
+      "description": "The single highest-priority action on any screen — the only button allowed a blurred hover glow.",
+      "html": "<button class=\"ds-btn-accent\">Получить ключи</button>",
+      "css": ".ds-btn-accent { display: inline-flex; align-items: center; gap: 12px; background: #e87a9c; color: #ffffff; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; padding: 20px 36px; border-radius: 12px; border: none; cursor: pointer; box-shadow: 5px 6px 0 rgba(232,122,156,0.3); transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1), background 0.3s ease; } .ds-btn-accent:hover { background: #d96a8c; transform: translate(-2px,-3px); box-shadow: 7px 8px 0 rgba(232,122,156,0.3), 0 0 24px 6px rgba(232,122,156,0.2); } .ds-btn-accent:focus-visible { outline: 3px solid #3a3228; outline-offset: 3px; }"
+    },
+    {
+      "name": "Module Card",
+      "kind": "card",
+      "refersTo": "card-default",
+      "description": "One of the six diary-space cards; the colored top bar carries the module-accent role.",
+      "html": "<div class=\"ds-card ds-card--yellow\"><div class=\"ds-card__header\"><span class=\"ds-card__icon\">🌊</span><span class=\"ds-card__title\">Центральный причал</span></div><p class=\"ds-card__body\">Ваша отправная точка каждый раз, когда открываете Гавань.</p></div>",
+      "css": ".ds-card { position: relative; overflow: hidden; background: rgba(255,248,235,0.65); border: 1.5px solid rgba(201,169,122,0.35); border-radius: 20px; padding: 36px 40px 32px; display: flex; flex-direction: column; gap: 10px; box-shadow: 3px 4px 0 rgba(120,80,40,0.04); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1); } .ds-card:hover { transform: translateY(-4px); box-shadow: 9px 12px 0 rgba(120,80,40,0.12); } .ds-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 20px 20px 0 0; transition: height 0.3s ease; } .ds-card:hover::after { height: 6px; } .ds-card--yellow::after { background: #F7D08A; } .ds-card__header { display: flex; align-items: center; gap: 10px; } .ds-card__icon { font-size: 26px; } .ds-card__title { font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; color: #3a3228; } .ds-card__body { font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.85; color: #4a3f38; }"
+    },
+    {
+      "name": "Chip / Tag",
+      "kind": "chip",
+      "refersTo": null,
+      "description": "Small inline label used in two variants: filled (factual/positive) and outline (clean-slate).",
+      "html": "<span class=\"ds-chip ds-chip--filled\">📓 живые записи</span> <span class=\"ds-chip ds-chip--outline\">✨ чистый шаблон</span>",
+      "css": ".ds-chip { font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 400; padding: 5px 14px; border-radius: 30px; white-space: nowrap; display: inline-block; } .ds-chip--filled { background: rgba(247,208,138,0.2); color: #5a4a3a; border: 1px solid rgba(201,169,122,0.35); } .ds-chip--outline { background: transparent; color: #7a5840; border: 1px solid rgba(248,180,192,0.5); }"
+    },
+    {
+      "name": "FAQ Accordion Item",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Expand/collapse guide item — circular arrow toggle fills pink and rotates 45° when open.",
+      "html": "<div class=\"ds-faq\"><button class=\"ds-faq__trigger\">Как устроена оплата?<span class=\"ds-faq__arrow\">+</span></button><div class=\"ds-faq__body\"><p class=\"ds-faq__answer\">После оплаты письмо со ссылкой придёт на почту.</p></div></div>",
+      "css": ".ds-faq { border-bottom: 1px solid rgba(201,169,122,0.22); } .ds-faq__trigger { width: 100%; background: none; border: none; cursor: pointer; padding: 22px 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; text-align: left; font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; color: #3a3228; transition: color 0.2s ease; } .ds-faq__trigger:hover { color: #e87a9c; } .ds-faq__arrow { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid rgba(201,169,122,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; color: #3a3228; transition: transform 0.3s, background 0.2s, border-color 0.2s, color 0.2s; } .ds-faq__trigger:hover .ds-faq__arrow { transform: rotate(45deg); background: #e87a9c; border-color: #e87a9c; color: #fff; } .ds-faq__answer { padding: 0 0 24px; font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 300; line-height: 1.8; color: #4a3f38; max-width: 700px; }"
+    },
+    {
+      "name": "World Card (Two Worlds)",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Signature paired-card component — a colored corner bloom, a rounded category pill, and (clean variant) a ruled-notebook-line background.",
+      "html": "<div class=\"ds-world ds-world--demo\"><div class=\"ds-world__top\"><span class=\"ds-world__pill ds-world__pill--demo\">✦ демо-версия</span><span class=\"ds-world__emoji\">🏡</span></div><div class=\"ds-world__title\">Погостить у Есении</div><p class=\"ds-world__body\">Зайдите сюда, чтобы увидеть, как здесь всё устроено.</p></div>",
+      "css": ".ds-world { width: 50%; border-radius: 28px; padding: 36px 36px 32px; position: relative; overflow: hidden; border: 1.5px solid rgba(201,169,122,0.4); min-height: 420px; box-shadow: 3px 4px 0 rgba(120,80,40,0.04); background: rgba(255,248,235,0.65); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s cubic-bezier(0.22,1,0.36,1); } .ds-world:hover { transform: translateY(-4px); box-shadow: 9px 12px 0 rgba(120,80,40,0.12); } .ds-world::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; border-radius: 28px 28px 0 0; } .ds-world--demo::after { background: #F7D08A; } .ds-world::before { content: ''; position: absolute; top: -60px; left: -40px; width: 240px; height: 240px; background: radial-gradient(circle, rgba(247,208,138,0.2) 0%, transparent 60%); pointer-events: none; } .ds-world__top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; position: relative; z-index: 1; } .ds-world__pill { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 30px; } .ds-world__pill--demo { color: #7a5840; background: rgba(247,208,138,0.3); border: 1px solid rgba(201,169,122,0.4); } .ds-world__emoji { font-size: 26px; opacity: 0.5; } .ds-world__title { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 24px; color: #3a3228; margin-bottom: 16px; position: relative; z-index: 1; } .ds-world__body { font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 300; line-height: 1.7; color: #4a3f38; position: relative; z-index: 1; }"
+    },
+    {
+      "name": "Floating Buy Button",
+      "kind": "button",
+      "refersTo": null,
+      "description": "Fixed bottom-right pill, fades/slides in after scroll past the hero; the heaviest shadow treatment in the system.",
+      "html": "<button class=\"ds-floating-buy\">Войти <span class=\"ds-floating-buy__price\">2 490 ₽</span></button>",
+      "css": ".ds-floating-buy { position: fixed; right: 28px; bottom: 28px; display: inline-flex; align-items: baseline; gap: 10px; background: #e87a9c; color: #fff; font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; padding: 15px 24px; border: none; border-radius: 14px; cursor: pointer; white-space: nowrap; box-shadow: 4px 5px 0 rgba(232,122,156,0.28), 0 8px 26px rgba(58,50,40,0.10); transition: opacity 0.4s cubic-bezier(0.22,1,0.36,1), transform 0.4s cubic-bezier(0.22,1,0.36,1), background 0.25s ease, box-shadow 0.3s ease; } .ds-floating-buy:hover { background: #d96a8c; box-shadow: 6px 7px 0 rgba(232,122,156,0.3), 0 10px 30px rgba(58,50,40,0.14); } .ds-floating-buy:focus-visible { outline: 3px solid #3a3228; outline-offset: 3px; } .ds-floating-buy__price { opacity: 0.85; font-weight: 400; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Paper Harbor",
+    "overview": "This is a cozy, handmade journal-scrapbook, not a software product. Every surface reads like it was cut from warm cardstock and pinned to a corkboard: parchment backgrounds, a faint hand-ruled grid underneath everything, dashed gold trim standing in for twine, and flat \"stamped\" shadows that look pressed into paper rather than cast by light. The mood is cozy, warm, unhurried, and tactile-handmade — quietly confident rather than saccharine or twee. It explicitly rejects the glossy, hard-edged, corporate-blue vocabulary of productivity software: no crisp drop shadows, no cold neutrals, no aggressive contrast. Есения's world should always feel like something you could hold, not something you operate. Interaction confirms the paper metaphor rather than a digital one: cards lift by translating upward on hover while their offset shadow grows longer, the way a paper cutout casts more shadow the further it's lifted off the table — never a blur-radius fade.",
+    "keyCharacteristics": [
+      "Parchment-and-ink palette: warm beige canvas, espresso-brown text, kraft-gold trim",
+      "Flat, un-blurred \"stamped\" shadows that lengthen on hover instead of softening",
+      "Generous, consistent rounding — nothing sharp anywhere on the page",
+      "Dashed borders and ruled-paper textures used as literal stationery references",
+      "One rationed accent (rosewater pink) reserved for action and emotional emphasis",
+      "A five-color \"module accent\" family marks categories the way tabs or stickers would"
+    ],
+    "rules": [
+      { "name": "The One-Accent Rule", "body": "Rosewater Pink is the only color allowed to mean \"act here.\" If a screen needs a second call to action, it is visually subordinate (brown-dark button) — never a second saturated hue.", "section": "colors" },
+      { "name": "The No-Blur Rule", "body": "Resting shadows never use blur; only the hover-only pink CTA glow is allowed a soft blurred halo, because it signals \"this is the one thing to press,\" not ambient depth.", "section": "colors" },
+      { "name": "The Light-Body Rule", "body": "Body copy is set at font-weight 300, never 400+. Weight is reserved for display/label roles; long-form text stays visually quiet even when the point it's making is emotionally heavy.", "section": "typography" },
+      { "name": "The Paper-Stack Rule", "body": "Shadows never blur at rest; they only lengthen on hover. Depth means \"how far this paper layer sits off the one beneath it,\" not \"how close the light is.\"", "section": "elevation" },
+      { "name": "The No Sharp Corner Rule", "body": "Every rectangular surface rounds at minimum 12px. A sharp corner reads as \"screen,\" which this system never wants to feel like.", "section": "shapes" },
+      { "name": "The Illuminated-Surface Exception", "body": "The three pink CTAs (.cta-button.pink, .sticky-header__cta, .floating-buy) do not share one text color, and neither color meets WCAG AA — this is deliberate, not drift. (1) .cta-button.pink sets text to --beige (#f7efe0), the exact page-background color: letters the same shade as the paper underneath read as cut through the pink rather than laid on it, so the button becomes a window back to the page, which is what gives it volume; white would read as a foreign material sitting on top and flatten it. This button uses no white at all, so it does not violate the \"no pure white\" rule. (2) .sticky-header__cta and .floating-buy use #ffffff — this IS the standing exception to \"no pure white,\" kept as-is on a revert; they're small, high-frequency chrome rather than the main CTA's cut-paper hero moment. If the three are ever unified, converge on --beige, not white — beige is the intentional choice, and flattening the main CTA to white would be the regression. (3) Measured contrast: --beige on --pink is 2.39:1, #ffffff on --pink is 2.73:1; both below 4.5:1, both accepted knowingly for the illuminated-surface read a dark-text button would lose. (4) Hover darkens #e87a9c to #d96a8c to read as pressed in; lightening was tried and rejected because the payment modal already uses a lighter pink fill to mean disabled, so a lightening hover would tell the user the CTA just turned off at the moment they're about to act — never reintroduce a lightening hover here. Do not silently fix this contrast on a future pass; treat any change as a deliberate trade-off with the product owner and recheck all three CTA instances plus dependent child text (e.g. .floating-buy__price) together, since they were tuned as a set.", "section": "components" }
+    ],
+    "dos": [
+      "Do keep every rectangular surface rounded at 12px minimum; there are no sharp corners in this system.",
+      "Do use flat, un-blurred offset shadows at rest, and lengthen (never blur) them on hover to suggest a paper layer lifting.",
+      "Do reserve Rosewater Pink for action and emotional emphasis only — CTAs, active states, highlighted words.",
+      "Do assign each module/category exactly one color from the fixed five-color module-accent family, applied as a thin top-edge bar or corner glow, never as a full-card background.",
+      "Do set body copy in Jost at font-weight 300; reserve heavier weights for Unbounded display/label roles.",
+      "Do use Lora italic only when the copy is Есения's voice, a quote, or a reflective aside — never for structural UI text."
+    ],
+    "donts": [
+      "Don't introduce a second saturated accent color competing with pink for \"action\" meaning.",
+      "Don't use blurred ambient shadows at rest; the one exception is the pink CTA's hover-only glow.",
+      "Don't use pure black or pure white for text/background — everything stays warm (espresso brown / warm beige), with one standing exception: #fff text on .sticky-header__cta and .floating-buy (see The Illuminated-Surface Exception). The main CTA (.cta-button.pink) doesn't need this exception at all — it uses --beige, not white.",
+      "Don't flatten the module-accent system into a general-purpose color palette; it is a category-marking role, not decoration.",
+      "Don't introduce corporate-SaaS visual signals (cool grays, hard-edged cards, glossy gradients) — they contradict the handmade-paper premise even if individually \"clean.\""
+    ]
+  }
+}

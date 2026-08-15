@@ -1,3 +1,10 @@
 .claude/
 .agents/
-.impeccable/
+
+# Impeccable — рабочие файлы прячем, общие артефакты храним
+.impeccable/*
+!.impeccable/config.json
+!.impeccable/design.json
+!.impeccable/critique/
+.impeccable/critique/*
+!.impeccable/critique/*.md
