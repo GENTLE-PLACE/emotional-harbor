@@ -1335,6 +1335,28 @@
             max-width: 640px;
         }
 
+        /* ——— ПАРА «утверждение + голос» внутри карточки модуля ——— */
+        .module-feature {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .module-feature__line {
+            color: var(--brown-dark);
+        }
+
+        .module-feature__aside {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--brown-light);
+            padding-left: 14px;
+            opacity: 0.92;
+        }
+
         .module-callout {
             background: rgba(247,208,138,0.18);
             border-left: 3px solid var(--gold);
@@ -3003,9 +3025,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="module-text-full">
-        <p>Место, куда Вы приходите не за фактами, а за оттенками чувств.<br>Здесь не нужно писать красиво или «правильно». Можно просто шепотом рассказать себе, что на самом деле происходит внутри.</p>
-        <p>Давайте дням имена — не по датам, а по ощущениям. <b>«Благодарность и мокрый снег»</b> вместо «22 января». Такие названия потом помогают быстрее считать состояние того дня — и приятнее перечитывать.</p>
+        <div class="module-feature">
+            <div class="module-feature__line">Место, где можно легализовать любые эмоции и оцифровать своё внутреннее состояние.</div>
+            <div class="module-feature__aside">Здесь не нужно писать красиво или «правильно». Можно просто шёпотом рассказать себе, что на самом деле происходит внутри.</div>
+        </div>
+
+        <div class="module-feature">
+            <div class="module-feature__line">Внутри — палитра из <b>99 эмоций</b>. Вы выбираете из готового списка, как из коробки с красками, где у каждого оттенка уже есть имя.</div>
+            <div class="module-feature__aside">Иногда мы не знаем, что чувствуем, пока не увидим это слово перед собой.</div>
+        </div>
+
         <div class="module-callout">Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность». Это и есть эмоциональная гранулярность в деле.</div>
+
+        <div class="module-feature">
+            <div class="module-feature__line"><b>Три радости</b> — поле на каждый день, независимо от того, каким он был.</div>
+            <div class="module-feature__aside">Маленькая, но очень важная практика замечать хорошее даже в сложные периоды.</div>
+        </div>
+
+        <div class="module-feature">
+            <div class="module-feature__line">Настроение и энергия отмечаются отдельно.</div>
+            <div class="module-feature__aside">Потому что можно быть счастливым и уставшим. Спокойным и полным сил.</div>
+        </div>
+
+        <div class="module-feature">
+            <div class="module-feature__line"><b>Отношение к людям</b> — от «влюблённое в человечество» до «все бесят, хочется рычать».</div>
+            <div class="module-feature__aside">Единственное поле, которое честно ловит социальную усталость.</div>
+        </div>
+
+        <div class="module-feature">
+            <div class="module-feature__line">К записи можно приложить <b>фото дня</b>.</div>
+            <div class="module-feature__aside">Особенно подойдёт для тех, кто мыслит образами: кому проще поймать настроение дня в кадре, чем описать его словами.</div>
+        </div>
+
+        <div class="module-feature">
+            <div class="module-feature__line">А через год у Дневника открывается второе дно: он показывает записи, сделанные в этот же день, но в другие годы.</div>
+            <div class="module-feature__aside">Открываете — и встречаете себя прошлую.</div>
+        </div>
     </div>
 
     <div class="module-gallery">
@@ -3027,7 +3082,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 
-    <div class="module-note">Здесь рождается вся Ваша статистика..</div>
+    <div class="module-note">Здесь рождается вся Ваша статистика.</div>
 </div>
 
                 <!-- СТАТИСТИКА ЭМОЦИЙ -->
