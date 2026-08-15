@@ -444,6 +444,7 @@
             text-transform: uppercase;
             padding: 11px 22px;
             border-radius: 12px;
+            white-space: nowrap;
             text-decoration: none;
             border: none;
             cursor: pointer;
@@ -539,6 +540,7 @@
             font-size: 11px;
             letter-spacing: 0.3px;
             opacity: 0.9;
+            white-space: nowrap;
         }
 
         /* прячем, пока открыта модалка согласия */
@@ -2104,16 +2106,17 @@
         .final-price {
             font-family: 'Unbounded', sans-serif;
             font-weight: 900;
-            font-size: 52px;
+            font-size: clamp(38px, 11vw, 52px);
             letter-spacing: -2px;
             color: var(--brown-dark);
             line-height: 1;
+            white-space: nowrap; /* «2 490» — одно число, разрывать нельзя */
         }
 
         .final-price span {
-            font-size: 28px;
+            font-size: 30px;
             color: var(--pink);
-            vertical-align: super;
+            margin-left: 6px; /* ₽ идёт после числа — русская норма */
         }
 
         .final-price-note {
@@ -2449,6 +2452,7 @@
             }
             .floating-buy.is-visible { transform: translate(-50%, 0); }
             .final-section { padding: 40px 24px; }
+            .final-price-block { padding: 24px 28px; }
             .author-block { flex-wrap: wrap; }
             .author-contact { margin-left: 0; }
             .bento-image-holder { max-height: 280px; }
@@ -3575,10 +3579,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section id="buy" class="final-section fade-up">
         <div class="final-wave">🌊</div>
         <div class="final-title">Добро<br><span>пожаловать</span></div>
-        <div class="final-quote">«Если вам нужно пространство, чтобы поставить мир на паузу — дверь открыта. Ключи уже оставлены..»</div>
+        <div class="final-quote">«Если вам нужно пространство, чтобы поставить мир на паузу — дверь открыта. Ключи уже оставлены…»</div>
         <div class="final-price-block">
             <div class="final-price-label">Цена</div>
-            <div class="final-price"><span>₽</span>2 490</div>
+            <div class="final-price">2 490<span>₽</span></div>
             <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
         </div>
         <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Получить ключи</span>
