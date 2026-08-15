@@ -259,6 +259,8 @@ No form inputs exist in the current implementation (purchase happens on an exter
 ### Floating Buy Button (signature component)
 A fixed-position pink pill (bottom-right) that fades and slides up into view once the user scrolls past the hero, pairing the CTA label with the live price. Uses the heaviest shadow treatment in the system (flat offset + soft ambient glow) since it is the page's persistent final call to action.
 
+It also suppresses itself while any inline `.cta-button.pink` is within the viewport. The rule is deliberately expressed as a live check across all inline pink CTAs rather than a list of block-level exceptions — a floating CTA must never compete with a real one already on screen, and any CTA block added later inherits this behaviour without a code change.
+
 ## Do's and Don'ts
 
 ### Do:
