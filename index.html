@@ -1343,18 +1343,28 @@
         }
 
         .module-feature__line {
+            position: relative;
+            padding-left: 16px;
             color: var(--brown-dark);
         }
 
+        .module-feature__line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
         .module-feature__aside {
-            font-family: 'Lora', serif;
-            font-style: italic;
-            font-weight: 400;
             font-size: 13.5px;
-            line-height: 1.6;
+            font-weight: 300;
+            line-height: 1.75;
             color: var(--brown-light);
-            padding-left: 14px;
-            opacity: 0.92;
+            padding-left: 16px;
         }
 
         .module-callout {
@@ -3025,10 +3035,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="module-text-full">
-        <div class="module-feature">
-            <div class="module-feature__line">Место, где можно легализовать любые эмоции и оцифровать своё внутреннее состояние.</div>
-            <div class="module-feature__aside">Здесь не нужно писать красиво или «правильно». Можно просто шёпотом рассказать себе, что на самом деле происходит внутри.</div>
-        </div>
+        <p>Место, где можно легализовать любые эмоции и оцифровать своё внутреннее состояние.</p>
+
+        <p>Здесь не нужно писать красиво или «правильно». Можно просто шёпотом рассказать себе, что на самом деле происходит внутри.</p>
 
         <div class="module-feature">
             <div class="module-feature__line">Внутри — палитра из <b>99 эмоций</b>. Вы выбираете из готового списка, как из коробки с красками, где у каждого оттенка уже есть имя.</div>
@@ -3043,12 +3052,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="module-feature">
-            <div class="module-feature__line">Настроение и энергия отмечаются отдельно.</div>
+            <div class="module-feature__line"><b>Настроение и энергия</b> отмечаются отдельно.</div>
             <div class="module-feature__aside">Потому что можно быть счастливым и уставшим. Спокойным и полным сил.</div>
         </div>
 
         <div class="module-feature">
-            <div class="module-feature__line"><b>Отношение к людям</b> — от «влюблённое в человечество» до «все бесят, хочется рычать».</div>
+            <div class="module-feature__line">Отмечайте <b>отношение к людям</b> — от «влюблённое в человечество» до «все бесят, хочется рычать».</div>
             <div class="module-feature__aside">Единственное поле, которое честно ловит социальную усталость.</div>
         </div>
 
@@ -3059,7 +3068,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="module-feature">
             <div class="module-feature__line">А через год у Дневника открывается второе дно: он показывает записи, сделанные в этот же день, но в другие годы.</div>
-            <div class="module-feature__aside">Открываете — и встречаете себя прошлую.</div>
+            <div class="module-feature__aside">Открываете — и встречаете себя из прошлого: с теми мыслями, настроением, вопросами.</div>
         </div>
     </div>
 
