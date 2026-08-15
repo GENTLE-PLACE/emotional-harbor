@@ -3705,10 +3705,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     (function() {
         const fab = document.getElementById('floatingBuy');
         if (!fab) return;
-
         const startEl = document.getElementById('modules'); // с какого блока показывать
-        const stopEl  = document.getElementById('buy');     // где прятать (финальный блок)
+        const stopEl  = document.getElementById('buy');     // где прятать окончательно (финальный блок)
+
+        // Все настоящие кнопки покупки в тексте страницы.
+        // Пока любая из них видна — плавающая уходит, чтобы не дублировать.
+        const rivals = Array.from(document.querySelectorAll('.cta-button.pink'));
+
         let ticking = false;
+
+        function isOnScreen(el) {
+            const r = el.getBoundingClientRect();
+            if (r.width === 0 && r.height === 0) return false; // скрытые (модалка) не считаются
+            return r.top < window.innerHeight * 0.9 && r.bottom > 0;
+        }
 
         function updateFab() {
             const vh = window.innerHeight;
@@ -3718,15 +3728,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             const finalNear = stopEl
                 ? stopEl.getBoundingClientRect().top < vh * 0.9
                 : false;
-
-            fab.classList.toggle('is-visible', started && !finalNear);
+            const rivalVisible = rivals.some(isOnScreen);
+            fab.classList.toggle('is-visible', started && !finalNear && !rivalVisible);
             ticking = false;
         }
-
         window.addEventListener('scroll', function() {
             if (!ticking) { requestAnimationFrame(updateFab); ticking = true; }
         }, { passive: true });
-
         window.addEventListener('resize', updateFab, { passive: true });
         updateFab();
     })();
