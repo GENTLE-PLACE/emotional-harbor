@@ -9,3 +9,8 @@
 .impeccable/critique/*
 !.impeccable/critique/*.md
 .vscode/
+
+# --- Внутренние документы: в публичный репозиторий не идут ---
+PRODUCT.md
+DESIGN.md
+wordstat-*.md
