@@ -2817,6 +2817,135 @@
 
             .hero-trust { gap: 7px 9px; }
         }
+
+        /* ===== ИНСАЙТЫ В ТЕКСТЕ СТАТИСТИКИ ===== */
+
+        /* Холст кисти шире текста: клякса заканчивается собственной рваной
+           кромкой, а не срезом по границе блока. Ширину и высоту задаём явно —
+           canvas заменяемый элемент, привязки right/bottom он игнорирует. */
+        .inkwash { position: relative; }
+
+        .inkwash__canvas {
+            position: absolute;
+            top: -120px;
+            left: -170px;
+            width: calc(100% + 340px);
+            height: calc(100% + 240px);
+            z-index: 1;
+            display: block;
+            pointer-events: none;
+        }
+
+        .inkwash > *:not(.inkwash__canvas) { position: relative; z-index: 3; }
+
+        /* Слово ничем не помечено: человек читает текст, а не охотится
+           за находками. Отклик идёт по близости руки, не по попаданию. */
+        .ins {
+            position: relative;
+            cursor: default;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .ins__word {
+            position: relative;
+            z-index: 2;
+            transition: color 0.7s cubic-bezier(0.33, 0.4, 0.3, 1);
+        }
+
+        .ins.is-open .ins__word { color: var(--pink); }
+
+        .ins__glow {
+            position: absolute;
+            inset: -13px -10px;
+            border-radius: 999px;
+            /* ellipse, а не circle: круг вокруг длинного слова становится шаром */
+            background: radial-gradient(ellipse at center,
+                        rgba(248, 180, 192, 0.45),
+                        rgba(248, 180, 192, 0.1),
+                        transparent 72%);
+            opacity: 0;
+            transition: opacity 0.7s cubic-bezier(0.33, 0.4, 0.3, 1);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ins.is-open .ins__glow { opacity: 1; }
+
+        .ins__pill {
+            position: absolute;
+            left: 50%;
+            bottom: 100%;
+            transform: translateX(calc(-50% + var(--ins-shift, 0px))) translateY(6px);
+            white-space: nowrap;
+            /* торец круглый, поэтому поля по бокам больше вертикальных */
+            padding: 12px 20px 12px 16px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #fff6f0, #fdeef3);
+            border: 1.5px solid rgba(232, 122, 156, 0.3);
+            box-shadow: 3px 4px 0 rgba(232, 122, 156, 0.1);
+            font-size: 14.5px;
+            line-height: 1.35;
+            color: var(--brown-dark);
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 20;
+            transition: opacity 0.7s cubic-bezier(0.33, 0.4, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.33, 0.4, 0.3, 1);
+        }
+
+        .ins__star {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+            color: var(--pink);
+            fill: currentColor;
+        }
+
+        .ins.is-open .ins__pill {
+            opacity: 1;
+            transform: translateX(calc(-50% + var(--ins-shift, 0px))) translateY(-6px);
+        }
+
+        /* сверху не помещается — переезжает под слово */
+        .ins.is-below .ins__pill {
+            bottom: auto;
+            top: 100%;
+            transform: translateX(calc(-50% + var(--ins-shift, 0px))) translateY(-6px);
+        }
+        .ins.is-below.is-open .ins__pill {
+            transform: translateX(calc(-50% + var(--ins-shift, 0px))) translateY(6px);
+        }
+
+        @media (max-width: 700px) {
+            .inkwash__canvas {
+                top: -90px;
+                left: -90px;
+                width: calc(100% + 180px);
+                height: calc(100% + 180px);
+            }
+
+            .ins__pill {
+                white-space: normal;
+                width: max-content;
+                max-width: min(300px, 86vw);
+                /* скругление не круговое — лишнее поле по бокам не нужно */
+                border-radius: 16px;
+                font-size: 14px;
+                padding: 12px 15px 12px 13px;
+                line-height: 1.45;
+                text-align: left;
+            }
+
+            .ins__glow { inset: -9px -7px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .inkwash__canvas { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -3369,21 +3498,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="divider"></div>
 
     <section class="section fade-up" id="stats">
-        <div class="section-eyebrow">Статистика эмоций</div>
-        <h2 class="section-title">Самая <span>нежная</span><br>аналитика в Вашей жизни</h2>
+        <div class="inkwash" id="statsInkwash">
+            <canvas class="inkwash__canvas" id="statsWash" aria-hidden="true"></canvas>
 
-        <p class="stats-intro">
-            Единственное место в Гавани, куда ничего не нужно вносить. Она собирает то, чем Вы уже поделились с Дневником, и показывает Вас же — объёмно, честно, красиво.
-        </p>
-        <p class="stats-intro">
-            Иногда она показывает то, что не видно в моменте. Например, что Ваше «плохо» состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик вдохновения.
-        </p>
-        <p class="stats-intro">
-            Здесь же живут маленькие эксперименты — их отчёт предлагает сам, когда видит, что жизнь идёт слишком ровно. Спеть арию в пробке максимально пафосным голосом, с вибрато и жестами. Надеть дурацкие яркие носки с уточками под строгий образ — никто не видит, но Вы-то знаете. Заказать в кафе «то, что сегодня самое красивое», доверившись выбору официанта.
-        </p>
-        <p class="stats-intro">
-            Чем дольше Вы ведёте записи, тем больше здесь накапливается — и тем интереснее возвращаться.
-        </p>
+            <div class="section-eyebrow">Статистика эмоций</div>
+            <h2 class="section-title">Самая <span>нежная</span><br>аналитика в Вашей жизни</h2>
+
+            <p class="stats-intro">
+                Единственное место в Гавани, куда ничего не нужно вносить. Она собирает то, чем Вы уже поделились с Дневником, и показывает Вас же — объёмно, честно, красиво.
+            </p>
+            <p class="stats-intro">
+                Иногда она показывает то, что не видно в моменте. Например, что Ваше <span class="ins" data-insight="Радость рядом с грустью"><span class="ins__word">«плохо»</span></span> состояло из уязвимости и светлой грусти. Или что по вторникам у Вас почти всегда пик <span class="ins" data-insight="Можно быть уставшей, но вдохновлённой"><span class="ins__word">вдохновения</span></span>.
+            </p>
+            <p class="stats-intro">
+                Здесь же живут маленькие эксперименты — их отчёт предлагает сам, когда видит, что жизнь идёт <span class="ins" data-insight="День эмоционального изобилия"><span class="ins__word">слишком ровно</span></span>. Спеть арию в пробке максимально пафосным голосом, с вибрато и жестами. Надеть дурацкие яркие носки с уточками под строгий образ — никто не видит, но Вы-то знаете. <span class="ins" data-insight="Интерес рядом со страхом"><span class="ins__word">Заказать</span></span> в кафе «то, что сегодня самое красивое», доверившись выбору официанта.
+            </p>
+            <p class="stats-intro">
+                Чем дольше Вы ведёте записи, тем больше здесь <span class="ins" data-insight="Иногда психике нужна тишина"><span class="ins__word">накапливается</span></span> — и тем <span class="ins" data-insight="Бережный режим — это не лень"><span class="ins__word">интереснее</span></span> возвращаться.
+            </p>
+        </div>
 
         <div class="divider"></div>
 
@@ -3505,7 +3638,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="divider"></div>
 
     <section class="section fade-up" id="science">
-        <div class="section-eyebrow">На чём это стоит</div>
+        <div class="section-eyebrow">Откуда мы это знаем</div>
         <h2 class="section-title">Реальная наука<br>в <span>тёплой упаковке</span></h2>
         <p style="font-size:15px; font-weight:300; color:var(--brown-mid); line-height:1.7; max-width:560px; margin-bottom:32px;">Гавань — это не просто красивый шаблон. За каждым блоком стоит реальное исследование. Просто упакованное так, чтобы хотелось открывать каждый день.</p>
 
@@ -4173,6 +4306,272 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
 
         setTimeout(syncGuideFromScroll, 100);
+    })();
+
+    // ===== ИНСАЙТЫ В ТЕКСТЕ СТАТИСТИКИ =====
+    (function() {
+        const zone = document.getElementById('statsInkwash');
+        if (!zone) return;
+
+        const items = [].slice.call(zone.querySelectorAll('.ins'));
+        if (!items.length) return;
+
+        // Та же звезда, что отмечает пункты в «Это место, где можно»
+        const STAR = '<svg class="ins__star" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+                   + '<path d="M12 0 L14.4 9.6 L24 12 L14.4 14.4 L12 24 L9.6 14.4 L0 12 L9.6 9.6 Z"/></svg>';
+
+        items.forEach((el) => {
+            const pill = document.createElement('span');
+            pill.className = 'ins__pill';
+            pill.innerHTML = STAR + '<span></span>';
+            pill.lastChild.textContent = el.dataset.insight || '';
+
+            const glow = document.createElement('span');
+            glow.className = 'ins__glow';
+
+            el.insertBefore(glow, el.firstChild);
+            el.appendChild(pill);
+        });
+
+        const RADIUS = 170;   // зона отклика вокруг слова
+        const DELAY  = 220;   // сколько рука должна побыть рядом (только мышь)
+
+        let active = null, pending = null;
+        let waitTimer = null, hideTimer = null;
+
+        // расстояние до ближайшего края слова, а не до центра:
+        // иначе у длинных якорей края отзываются хуже середины
+        function distTo(el, x, y) {
+            const r = el.getBoundingClientRect();
+            const dx = Math.max(r.left - x, 0, x - r.right);
+            const dy = Math.max(r.top - y, 0, y - r.bottom);
+            return Math.hypot(dx, dy);
+        }
+
+        // пилюля шире слова и легко упирается в край экрана
+        function fit(el) {
+            const pill = el.querySelector('.ins__pill');
+            pill.style.setProperty('--ins-shift', '0px');
+            el.classList.remove('is-below');
+
+            const r = pill.getBoundingClientRect();
+            const pad = 12;
+            let shift = 0;
+            if (r.left < pad) shift = pad - r.left;
+            if (r.right > window.innerWidth - pad) shift = (window.innerWidth - pad) - r.right;
+            pill.style.setProperty('--ins-shift', Math.round(shift) + 'px');
+
+            const wr = el.getBoundingClientRect();
+            if (wr.top - r.height - 14 < 0) el.classList.add('is-below');
+        }
+
+        function show(el) {
+            if (active === el) return;
+            clearTimeout(hideTimer);
+            active = el;
+            items.forEach((x) => x.classList.toggle('is-open', x === el));
+            fit(el);
+            requestAnimationFrame(() => fit(el));
+        }
+
+        function hide() {
+            active = null;
+            items.forEach((x) => x.classList.remove('is-open'));
+        }
+
+        function seek(x, y, instant) {
+            let best = null, min = RADIUS;
+            items.forEach((el) => {
+                const d = distTo(el, x, y);
+                if (d < min) { min = d; best = el; }
+            });
+
+            if (best === active) { clearTimeout(waitTimer); pending = null; return; }
+            if (best === pending && !instant) return;
+
+            clearTimeout(waitTimer);
+            pending = best;
+
+            if (!best) {
+                if (!instant) waitTimer = setTimeout(hide, 260);
+                return;
+            }
+            if (instant) { show(best); return; }
+
+            waitTimer = setTimeout(() => {
+                // если что-то открыто — сначала даём ему уйти:
+                // на соседних словах иначе получается двойной удар
+                if (active) {
+                    hide();
+                    waitTimer = setTimeout(() => show(best), 220);
+                } else {
+                    show(best);
+                }
+            }, DELAY);
+        }
+
+        zone.addEventListener('mousemove', (e) => seek(e.clientX, e.clientY, false));
+        zone.addEventListener('mouseleave', () => {
+            clearTimeout(waitTimer);
+            pending = null;
+            hideTimer = setTimeout(hide, 260);
+        });
+
+        // Палец приходит ровно туда, куда целились, — ждать нечего.
+        // Задержка нужна только курсору, который проезжает мимо по дороге.
+        zone.addEventListener('touchstart', (e) => {
+            const t = e.touches[0];
+            seek(t.clientX, t.clientY, true);
+        }, { passive: true });
+        zone.addEventListener('touchmove', (e) => {
+            const t = e.touches[0];
+            seek(t.clientX, t.clientY, true);
+        }, { passive: true });
+        zone.addEventListener('touchend', () => {
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hide, 2400);
+        }, { passive: true });
+
+        window.addEventListener('resize', () => { if (active) fit(active); });
+
+        // ——— КИСТЬ ———
+        const canvas = document.getElementById('statsWash');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+        if (!ctx) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+        const STOPS = [
+            [0,   242, 213, 201, 0.60],
+            [0.45, 242, 213, 201, 0.28],
+            [0.78, 242, 213, 201, 0.11],
+            [1,   242, 213, 201, 0]
+        ];
+        const R_START = 10;
+        const R_END = isTouch ? 104 : 140;   // на узком экране крупная клякса накрывает полстроки
+        const R_VARY = 0.42;
+        const LIFETIME = 1100;
+        const MAX_STAMPS = isTouch ? 60 : 110;
+        const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+        let w = 0, h = 0, offX = 0, offY = 0;
+        let running = false, inView = true;
+        let stamps = [], lastX = null, lastY = null;
+
+        function resize() {
+            const cr = canvas.getBoundingClientRect();
+            const br = zone.getBoundingClientRect();
+            w = cr.width; h = cr.height;
+            offX = br.left - cr.left;
+            offY = br.top - cr.top;
+            canvas.width = Math.round(w * DPR);
+            canvas.height = Math.round(h * DPR);
+            ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', resize);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(resize);
+        // секция приезжает с fade-up: пока идёт transform, размеры смещены
+        zone.addEventListener('transitionend', resize);
+        setTimeout(resize, 900);
+
+        function addStamp(x, y) {
+            if (stamps.length >= MAX_STAMPS) stamps.shift();
+            stamps.push({
+                x: x, y: y,
+                born: performance.now(),
+                seed: Math.random() * Math.PI * 2,
+                rmax: R_END * (1 - R_VARY + Math.random() * R_VARY)
+            });
+        }
+
+        function stampAlong(x, y) {
+            if (lastX === null) {
+                addStamp(x, y);
+            } else {
+                const dx = x - lastX, dy = y - lastY;
+                const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 16));
+                for (let i = 1; i <= steps; i++) {
+                    addStamp(lastX + dx * i / steps, lastY + dy * i / steps);
+                }
+            }
+            lastX = x; lastY = y;
+        }
+
+        function drawBlot(x, y, r, fade, seed) {
+            const g = ctx.createRadialGradient(x, y, r * 0.06, x, y, r);
+            for (let s = 0; s < STOPS.length; s++) {
+                g.addColorStop(STOPS[s][0],
+                    'rgba(' + STOPS[s][1] + ',' + STOPS[s][2] + ',' + STOPS[s][3] + ',' + (STOPS[s][4] * fade) + ')');
+            }
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            for (let i = 0; i <= 34; i++) {
+                const a = (i / 34) * Math.PI * 2;
+                const wob = 0.70 + 0.20 * Math.sin(a * 3 + seed)
+                                 + 0.12 * Math.sin(a * 7 + seed * 2.1)
+                                 + 0.07 * Math.sin(a * 13 + seed * 0.7)
+                                 + 0.04 * Math.sin(a * 23 + seed * 1.6);
+                const rr = r * wob;
+                const px = x + Math.cos(a) * rr;
+                const py = y + Math.sin(a) * rr;
+                if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function loop() {
+            if (!inView) { running = false; stamps.length = 0; ctx.clearRect(0, 0, w, h); return; }
+            const now = performance.now();
+            ctx.clearRect(0, 0, w, h);
+            for (let i = stamps.length - 1; i >= 0; i--) {
+                const t = (now - stamps[i].born) / LIFETIME;
+                if (t >= 1) { stamps.splice(i, 1); continue; }
+                const ease = 1 - Math.pow(1 - t, 3);
+                drawBlot(stamps[i].x, stamps[i].y,
+                         R_START + (stamps[i].rmax - R_START) * ease,
+                         1 - Math.pow(t, 1.6), stamps[i].seed);
+            }
+            if (stamps.length) requestAnimationFrame(loop); else running = false;
+        }
+
+        function start() {
+            if (!running) { running = true; requestAnimationFrame(loop); }
+        }
+
+        function pt(cx, cy) {
+            const br = zone.getBoundingClientRect();
+            return [cx - br.left + offX, cy - br.top + offY];
+        }
+
+        zone.addEventListener('mouseenter', (e) => {
+            resize();
+            const p = pt(e.clientX, e.clientY);
+            lastX = p[0]; lastY = p[1];
+            stampAlong(p[0], p[1]); start();
+        });
+        zone.addEventListener('mousemove', (e) => {
+            const p = pt(e.clientX, e.clientY);
+            stampAlong(p[0], p[1]); start();
+        });
+        zone.addEventListener('mouseleave', () => { lastX = null; lastY = null; });
+
+        zone.addEventListener('touchstart', (e) => {
+            resize();
+            const t = e.touches[0], p = pt(t.clientX, t.clientY);
+            lastX = p[0]; lastY = p[1];
+            stampAlong(p[0], p[1]); start();
+        }, { passive: true });
+        zone.addEventListener('touchmove', (e) => {
+            const t = e.touches[0], p = pt(t.clientX, t.clientY);
+            stampAlong(p[0], p[1]); start();
+        }, { passive: true });
+        zone.addEventListener('touchend', () => { lastX = null; lastY = null; }, { passive: true });
+
+        new IntersectionObserver((es) => { inView = es[0].isIntersecting; },
+                                 { threshold: 0 }).observe(zone);
     })();
 
     // ===== ТАБЫ РАЗДЕЛА «СТАТИСТИКА» =====
