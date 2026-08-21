@@ -1577,6 +1577,128 @@
             max-width: none;
         }
 
+        /* ===== СТАТИСТИКА: ОГЛАВЛЕНИЕ + СКРИН ===== */
+        .stats-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .stats-nav {
+            flex-shrink: 0;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            position: sticky;
+            top: 100px;
+            margin-top: 30px;
+        }
+
+        .stats-nav__item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            background: transparent;
+            border: 1.5px solid rgba(201, 169, 122, 0.18);
+            color: rgba(58, 50, 40, 0.48);
+            cursor: pointer;
+            transition: all 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        .stats-nav__icon {
+            font-size: 15px;
+            line-height: 1;
+            flex-shrink: 0;
+            opacity: 0.45;
+            transition: opacity 0.3s ease;
+        }
+
+        .stats-nav__item.active .stats-nav__icon {
+            opacity: 1;
+        }
+
+        .stats-nav__item:hover {
+            background: rgba(201, 169, 122, 0.07);
+            border-color: rgba(201, 169, 122, 0.35);
+            transform: translateX(5px);
+            color: var(--brown-dark);
+        }
+
+        .stats-nav__item.active {
+            background: rgba(255, 248, 235, 0.85);
+            border-color: rgba(201, 169, 122, 0.45);
+            box-shadow: 4px 5px 0 rgba(120, 80, 40, 0.07);
+            color: var(--brown-dark);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 15px 16px;
+            transform: translateX(6px);
+            border-left: 5px solid var(--pink);
+        }
+
+        .stats-nav__item[data-stat="cloud"].active { border-left-color: var(--yellow); }
+        .stats-nav__item[data-stat="diversity"].active { border-left-color: var(--blue); }
+
+        .stats-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        @media (max-width: 680px) {
+            .stats-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .stats-nav {
+                width: 100%;
+                position: sticky;
+                top: 56px;
+                margin-top: 12px;
+                z-index: 40;
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 6px;
+                padding: 8px 4px 10px;
+                background: rgba(247, 239, 224, 0.94);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-bottom: 1px solid rgba(201,169,122,0.25);
+            }
+
+            .stats-nav__item {
+                white-space: nowrap;
+                font-size: 10px;
+                padding: 10px 14px;
+                border-radius: 14px;
+            }
+
+            .stats-nav__item.active {
+                padding: 10px 14px;
+                border-radius: 14px;
+                transform: none;
+                border-left: none;
+                border-bottom: 3px solid var(--pink);
+            }
+
+            .stats-nav__item[data-stat="cloud"].active { border-bottom-color: var(--yellow); }
+            .stats-nav__item[data-stat="diversity"].active { border-bottom-color: var(--blue); }
+
+            .stats-nav__item:hover {
+                transform: none;
+            }
+        }
+
         .bento-card .bento-image-holder {
             height: 560px;
             max-height: none;
@@ -2852,7 +2974,7 @@
             transition: color 0.7s cubic-bezier(0.33, 0.4, 0.3, 1);
         }
 
-        .ins.is-open .ins__word { color: var(--pink); }
+        .ins.is-open .ins__word { color: var(--gold); }
 
         .ins__glow {
             position: absolute;
@@ -2860,8 +2982,8 @@
             border-radius: 999px;
             /* ellipse, а не circle: круг вокруг длинного слова становится шаром */
             background: radial-gradient(ellipse at center,
-                        rgba(248, 180, 192, 0.45),
-                        rgba(248, 180, 192, 0.1),
+                        rgba(201, 169, 122, 0.4),
+                        rgba(201, 169, 122, 0.1),
                         transparent 72%);
             opacity: 0;
             transition: opacity 0.7s cubic-bezier(0.33, 0.4, 0.3, 1);
@@ -2880,9 +3002,9 @@
             /* торец круглый, поэтому поля по бокам больше вертикальных */
             padding: 12px 20px 12px 16px;
             border-radius: 999px;
-            background: linear-gradient(135deg, #fff6f0, #fdeef3);
-            border: 1.5px solid rgba(232, 122, 156, 0.3);
-            box-shadow: 3px 4px 0 rgba(232, 122, 156, 0.1);
+            background: linear-gradient(135deg, #fdf8ec, #f8f0dc);
+            border: 1.5px solid rgba(201, 169, 122, 0.35);
+            box-shadow: 3px 4px 0 rgba(201, 169, 122, 0.12);
             font-size: 14.5px;
             line-height: 1.35;
             color: var(--brown-dark);
@@ -2901,7 +3023,7 @@
             width: 13px;
             height: 13px;
             flex-shrink: 0;
-            color: var(--pink);
+            color: var(--gold);
             fill: currentColor;
         }
 
@@ -3520,34 +3642,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="divider"></div>
 
-        <div class="bento-card bento-card--wide">
-            <div class="bento-browser-frame">
-                <div class="bento-browser-dot"></div>
-                <div class="bento-browser-dot"></div>
-                <div class="bento-browser-dot"></div>
+        <div class="stats-layout">
+            <div class="stats-nav" id="statsNav">
+                <button class="stats-nav__item active" data-stat="cloud" aria-current="true"><span class="stats-nav__icon">⛅</span>Облако эмоций</button>
+                <button class="stats-nav__item" data-stat="diversity"><span class="stats-nav__icon">🎼</span>Эмоциональное разнообразие</button>
             </div>
 
-            <div class="bento-tabs" id="statsTabs">
-                <button class="bento-tab-btn active" data-inner="stats-1">Облако эмоций</button>
-                <button class="bento-tab-btn" data-inner="stats-2">Эмоциональное разнообразие</button>
-            </div>
+            <div class="stats-content">
+                <div class="bento-card">
+                    <div class="bento-browser-frame">
+                        <div class="bento-browser-dot"></div>
+                        <div class="bento-browser-dot"></div>
+                        <div class="bento-browser-dot"></div>
+                    </div>
 
-            <div class="bento-image-holder--tabs">
-                <div class="bento-scroll-wrap" id="statsSwipeContainer">
-                    <div class="bento-pane lazy-wrapper" id="stats-1">
-                        <div class="skeleton"></div>
-                        <img src="https://static.emotional-harbor.ru/Emotion_Cloud.webp" alt="Облако эмоций — визуализация палитры чувств за месяц в Notion" loading="lazy" />
+                    <div class="bento-image-holder--tabs">
+                        <div class="bento-scroll-wrap" id="statsSwipeContainer">
+                            <div class="bento-pane lazy-wrapper" data-stat="cloud">
+                                <div class="skeleton"></div>
+                                <img src="https://static.emotional-harbor.ru/Emotion_Cloud.webp" alt="Облако эмоций — визуализация палитры чувств за месяц в Notion" loading="lazy" />
+                            </div>
+                            <div class="bento-pane lazy-wrapper" data-stat="diversity">
+                                <div class="skeleton"></div>
+                                <img src="https://static.emotional-harbor.ru/Emotional_Diversity.webp" alt="Отчёт по эмоциональному разнообразию в Notion — аналитика чувств и состояний" loading="lazy" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="bento-pane lazy-wrapper" id="stats-2">
-                        <div class="skeleton"></div>
-                        <img src="https://static.emotional-harbor.ru/Emotional_Diversity.webp" alt="Отчёт по эмоциональному разнообразию в Notion — аналитика чувств и состояний" loading="lazy" />
-                    </div>
+
+                    <div class="bento-card-info"></div>
                 </div>
-            </div>
-
-            <div class="bento-card-info" id="stats-label">
-                <h3>Облако эмоций</h3>
-                <p>Вся палитра месяца: какие чувства приходили чаще, а какие заглянули однажды.</p>
             </div>
         </div>
     </section>
@@ -4573,54 +4696,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                  { threshold: 0 }).observe(zone);
     })();
 
-    // ===== ТАБЫ РАЗДЕЛА «СТАТИСТИКА» =====
+    // ===== СТАТИСТИКА: ОГЛАВЛЕНИЕ + СВОЙП =====
     (function() {
         const container = document.getElementById('statsSwipeContainer');
         if (!container) return;
 
-        const tabs = document.querySelectorAll('#statsTabs .bento-tab-btn');
-        const labelTitle = document.querySelector('#stats-label h3');
-        const labelDesc = document.querySelector('#stats-label p');
+        const navItems = document.querySelectorAll('#statsNav .stats-nav__item');
         const panes = container.querySelectorAll('.bento-pane');
 
-        const labels = {
-            'stats-1': { title: 'Облако эмоций', desc: 'Вся палитра месяца: какие чувства приходили чаще, а какие заглянули однажды.' },
-            'stats-2': { title: 'Эмоциональное разнообразие', desc: 'Насколько широким был спектр — и не сузился ли он незаметно за месяц.' }
-        };
-
-        function updateStats(idx) {
-            const targetId = panes[idx]?.id;
-            if (!targetId) return;
-
-            tabs.forEach((btn) => {
-                btn.classList.toggle('active', btn.dataset.inner === targetId);
+        function setActiveNav(target) {
+            navItems.forEach((nav) => {
+                const isActive = nav.dataset.stat === target;
+                nav.classList.toggle('active', isActive);
+                if (isActive) {
+                    nav.setAttribute('aria-current', 'true');
+                } else {
+                    nav.removeAttribute('aria-current');
+                }
             });
-
-            if (labels[targetId]) {
-                labelTitle.textContent = labels[targetId].title;
-                labelDesc.textContent = labels[targetId].desc;
-            }
         }
 
-        function syncStatsFromScroll() {
+        function syncNavFromScroll() {
             const rect = container.getBoundingClientRect();
-            let best = 0, bestIdx = 0;
+            let best = 0, bestPane = panes[0];
 
-            panes.forEach((pane, i) => {
+            panes.forEach((pane) => {
                 const r = pane.getBoundingClientRect();
                 const visible = Math.max(0, Math.min(r.right, rect.right) - Math.max(r.left, rect.left));
                 if (visible > best) {
                     best = visible;
-                    bestIdx = i;
+                    bestPane = pane;
                 }
             });
 
-            updateStats(bestIdx);
+            setActiveNav(bestPane.dataset.stat);
         }
 
-        tabs.forEach((btn) => {
-            btn.addEventListener('click', function() {
-                const targetPane = container.querySelector(`#${this.dataset.inner}`);
+        navItems.forEach((item) => {
+            item.addEventListener('click', function() {
+                const targetPane = container.querySelector(`.bento-pane[data-stat="${this.dataset.stat}"]`);
                 if (targetPane) {
                     targetPane.scrollIntoView({
                         behavior: 'smooth',
@@ -4631,15 +4745,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             });
         });
 
-        container.addEventListener('scroll', syncStatsFromScroll, { passive: true });
+        container.addEventListener('scroll', syncNavFromScroll, { passive: true });
 
         let statsResizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(statsResizeTimer);
-            statsResizeTimer = setTimeout(syncStatsFromScroll, 150);
+            statsResizeTimer = setTimeout(syncNavFromScroll, 150);
         });
-
-        setTimeout(syncStatsFromScroll, 100);
     })();
 
     // PAYMENT MODAL
