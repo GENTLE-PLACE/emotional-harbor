@@ -1184,6 +1184,7 @@
             align-items: center;
             gap: 10px;
             padding: 12px 16px;
+            min-height: 48px;
             border-radius: 16px;
             font-family: 'Unbounded', sans-serif;
             font-size: 10px;
@@ -1215,7 +1216,8 @@
             color: var(--brown-dark);
             font-weight: 700;
             letter-spacing: 0.5px;
-            padding: 15px 16px;
+            padding: 12px 16px;
+            min-height: 51px;
             border-radius: 16px;
             transform: translateX(6px);
             border-left: 5px solid var(--pink); /* запасной цвет, если модуль не указан ниже */
@@ -1301,6 +1303,7 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
+            scroll-margin-top: 110px;
             transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
                         box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -1564,6 +1567,7 @@
             box-shadow: 7px 9px 0 rgba(120, 80, 40, 0.07);
             display: flex;
             flex-direction: column;
+            scroll-margin-top: 110px;
             transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
                         box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -1600,6 +1604,7 @@
             align-items: center;
             gap: 10px;
             padding: 12px 16px;
+            min-height: 52px;
             border-radius: 16px;
             font-family: 'Unbounded', sans-serif;
             font-size: 10px;
@@ -1641,7 +1646,8 @@
             color: var(--brown-dark);
             font-weight: 700;
             letter-spacing: 0.5px;
-            padding: 15px 16px;
+            padding: 12px 16px;
+            min-height: 55px;
             transform: translateX(6px);
             border-left: 5px solid var(--pink);
         }
@@ -1674,6 +1680,10 @@
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
                 border-bottom: 1px solid rgba(201,169,122,0.25);
+            }
+
+            .bento-card {
+                scroll-margin-top: 116px;
             }
 
             .stats-nav__item {
@@ -2678,6 +2688,10 @@
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
                 border-bottom: 1px solid rgba(201,169,122,0.25);
+            }
+
+            .module-card {
+                scroll-margin-top: 116px;
             }
 
             .modules-nav__item {
@@ -4196,6 +4210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 activeCard.style.display = 'flex';
                 activeCard.style.opacity = '0';
                 activeCard.style.transform = 'translateY(8px)';
+                activeCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 requestAnimationFrame(() => {
                     activeCard.style.transition = 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)';
                     activeCard.style.opacity = '1';
@@ -4732,15 +4747,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             setActiveNav(bestPane.dataset.stat);
         }
 
+        const card = container.closest('.bento-card');
+
         navItems.forEach((item) => {
             item.addEventListener('click', function() {
                 const targetPane = container.querySelector(`.bento-pane[data-stat="${this.dataset.stat}"]`);
                 if (targetPane) {
-                    targetPane.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'nearest',
-                        inline: 'start'
-                    });
+                    container.scrollTo({ left: targetPane.offsetLeft, behavior: 'smooth' });
+                }
+                if (card) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
