@@ -772,6 +772,7 @@
             margin-bottom: 72px;
             padding: 100px 32px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -810,9 +811,30 @@
 
         .breather__text span { color: var(--pink); }
 
+        .breather__author {
+            position: relative;
+            z-index: 2;
+            margin-top: 14px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.02em;
+            color: var(--brown-dark);
+            opacity: 0.55;
+        }
+
         /* Вторая полоса — тише первой: ниже ростом и мельче кеглем.
            Две одинаковые полосы читаются как шаблон, разные — как приём. */
         .breather--quiet { padding: 72px 32px; }
+
+        /* Отсылка к hero: та же картинка гавани вместо бумаги —
+           полоса перед мокапом рифмуется с первым экраном. */
+        .breather--harbor {
+            background-image: url('https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp');
+            background-position: center 38%;
+        }
+
+        .breather--harbor::after { opacity: 0.6; }
 
         .breather--quiet .breather__text {
             font-size: clamp(19px, 2.4vw, 27px);
@@ -3275,8 +3297,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </section>
 
+    <!-- ПОЛОСА-ПЕРЕДЫШКА · ПЕРЕД МОКАПОМ -->
+    <div class="breather breather--quiet breather--harbor fade-up">
+        <div class="breather__text">Уязвимость — неотъемлемый компонент <span>искреннего</span> образа жизни</div>
+        <div class="breather__author">Брене Браун</div>
+    </div>
+
     <!-- ЦЕНТРАЛЬНЫЙ ПРИЧАЛ -->
-    <div class="divider"></div>
 
     <div class="bento-card bento-card--wide bento-card--zoomable">
         <div class="bento-browser-frame">
