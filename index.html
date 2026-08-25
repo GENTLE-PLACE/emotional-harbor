@@ -815,10 +815,14 @@
             position: relative;
             z-index: 2;
             margin-top: 14px;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 500;
-            font-size: 14px;
-            letter-spacing: 0.02em;
+            /* Jost, а не Unbounded: подпись — сноска, а не заголовок.
+               Прописные не используем: капитель в системе закреплена за
+               заголовками, и подпись ими снова полезла бы наверх.
+               Jost уже и легче Unbounded, поэтому кегль чуть крупнее. */
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            letter-spacing: 0.03em;
             color: var(--brown-dark);
             opacity: 0.55;
         }
@@ -826,15 +830,6 @@
         /* Вторая полоса — тише первой: ниже ростом и мельче кеглем.
            Две одинаковые полосы читаются как шаблон, разные — как приём. */
         .breather--quiet { padding: 72px 32px; }
-
-        /* Отсылка к hero: та же картинка гавани вместо бумаги —
-           полоса перед мокапом рифмуется с первым экраном. */
-        .breather--harbor {
-            background-image: url('https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp');
-            background-position: center 38%;
-        }
-
-        .breather--harbor::after { opacity: 0.6; }
 
         .breather--quiet .breather__text {
             font-size: clamp(19px, 2.4vw, 27px);
@@ -3298,8 +3293,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <!-- ПОЛОСА-ПЕРЕДЫШКА · ПЕРЕД МОКАПОМ -->
-    <div class="breather breather--quiet breather--harbor fade-up">
-        <div class="breather__text">Ваши трещинки — это то,<br>через что внутрь проникает <span>свет</span></div>
+    <div class="breather breather--quiet fade-up">
+        <div class="breather__text">Уязвимость — неотъемлемый компонент <span>искреннего</span> образа жизни</div>
+        <div class="breather__author">Брене Браун</div>
     </div>
 
     <!-- ЦЕНТРАЛЬНЫЙ ПРИЧАЛ -->
@@ -3717,8 +3713,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- ПОЛОСА-ПЕРЕДЫШКА · ПЕРЕД ЕСЕНИЕЙ -->
     <div class="breather breather--quiet fade-up">
-        <div class="breather__text">Уязвимость — неотъемлемый компонент <span>искреннего</span> образа жизни</div>
-        <div class="breather__author">Брене Браун</div>
+        <div class="breather__text">Ваши трещинки — это то,<br>через что внутрь проникает <span>свет</span></div>
     </div>
 
     <!-- ЕСЕНИЯ -->
