@@ -3294,7 +3294,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- ПОЛОСА-ПЕРЕДЫШКА · ПЕРЕД МОКАПОМ -->
     <div class="breather breather--quiet fade-up">
-        <div class="breather__text">Уязвимость — неотъемлемый компонент <span>искреннего</span> образа жизни</div>
+        <div class="breather__text">Уязвимость — неотъемлемый компонент<br><span>искреннего</span> образа жизни</div>
         <div class="breather__author">Брене Браун</div>
     </div>
 
@@ -4260,6 +4260,69 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 switchModule(moduleName);
             });
         });
+    })();
+
+    // ===== ДВИЖЕНИЕ ПОЛОС-ПЕРЕДЫШЕК НА МОБИЛЬНОМ =====
+    // На десктопе бумага «приклеена» к экрану (background-attachment: fixed),
+    // и полоса едет по ней как окно. Мобильные браузеры fixed не держат,
+    // поэтому там тот же эффект собираем руками: двигаем background-position.
+    // Позиция в ПРОЦЕНТАХ — она перемещает картинку только внутри её
+    // собственного запаса, поэтому края фона оголиться не могут в принципе.
+    (function () {
+        const strips = document.querySelectorAll('.breather');
+        if (!strips.length) return;
+
+        const mqMobile = window.matchMedia('(max-width: 700px)');
+        const mqCalm = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        let ticking = false;
+        let inView = false;
+
+        function reset() {
+            strips.forEach(s => { s.style.backgroundPosition = ''; });
+        }
+
+        function update() {
+            ticking = false;
+            const vh = window.innerHeight;
+            strips.forEach(strip => {
+                const r = strip.getBoundingClientRect();
+                if (r.bottom < -200 || r.top > vh + 200) return;
+                // t: 0 — полоса входит снизу, 1 — уходит вверх
+                let t = (vh - r.top) / (vh + r.height);
+                t = Math.max(0, Math.min(1, t));
+                // кадр панорамируется сверху вниз: 30% → 70%
+                strip.style.backgroundPosition = '50% ' + (30 + t * 40).toFixed(1) + '%';
+            });
+        }
+
+        function onScroll() {
+            if (!ticking && inView) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        }
+
+        const io = new IntersectionObserver((entries) => {
+            inView = entries.some(e => e.isIntersecting);
+            if (inView) update();
+        }, { rootMargin: '200px 0px 200px 0px' });
+
+        function apply() {
+            const on = mqMobile.matches && !mqCalm.matches;
+            if (on) {
+                strips.forEach(s => io.observe(s));
+                update();
+            } else {
+                strips.forEach(s => io.unobserve(s));
+                reset();
+            }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        mqMobile.addEventListener('change', apply);
+        mqCalm.addEventListener('change', apply);
+        apply();
     })();
 
     // FADE-UP OBSERVER
