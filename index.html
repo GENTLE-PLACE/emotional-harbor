@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WQC5W3TD');</script>
-    <!-- End Google Tag Manager -->
-
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="https://emotional-harbor.ru/favicon.svg">
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110240785', 'ym');
+    <!-- Yandex.Metrika counter — загружается только после согласия -->
+    <script>
+    (function () {
+        var COUNTER = 110240785;
 
-        ym(110240785, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+        window.ehGetConsent = function () {
+            var m = document.cookie.match(/(?:^|;\s*)eh_consent=([^;]*)/);
+            return m ? decodeURIComponent(m[1]) : null;
+        };
+
+        window.ehLoadMetrika = function () {
+            if (window.ehMetrikaLoaded) return;
+            window.ehMetrikaLoaded = true;
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,
+                a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id='+COUNTER,'ym');
+
+            ym(COUNTER, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer",
+                referrer: document.referrer, url: location.href,
+                accurateTrackBounce:true, trackLinks:true});
+        };
+
+        if (window.ehGetConsent() === 'all') window.ehLoadMetrika();
+    })();
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/110240785" style="position:absolute; left:-9999px;" alt="Счётчик Яндекс.Метрики" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 
     <!-- SEO -->
@@ -3099,14 +3108,68 @@
         @media (prefers-reduced-motion: reduce) {
             .inkwash__canvas { display: none; }
         }
+
+        /* ===== COOKIE BANNER ===== */
+        .cookie-bar {
+            position: fixed; left: 16px; right: 16px; bottom: 16px;
+            z-index: 9000;
+            display: none;
+            background: var(--beige);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            box-shadow: 6px 6px 0 rgba(58, 50, 40, 0.14);
+            padding: 22px 26px;
+            max-width: 760px; margin: 0 auto;
+            font-family: 'Jost', sans-serif;
+        }
+        .cookie-bar.is-open { display: block; animation: cookieUp .4s ease both; }
+        @keyframes cookieUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: none; }
+        }
+        .cookie-bar__title {
+            font-family: 'Unbounded', sans-serif; font-weight: 600;
+            font-size: 15px; color: var(--brown-dark); margin-bottom: 8px;
+        }
+        .cookie-bar__text {
+            font-weight: 300; font-size: 14px; line-height: 1.6;
+            color: var(--brown-mid); margin-bottom: 16px;
+        }
+        .cookie-bar__text a { color: var(--pink); text-decoration: underline; }
+        .cookie-bar__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .cookie-bar__btn {
+            font-family: 'Jost', sans-serif; font-weight: 500; font-size: 14px;
+            padding: 12px 26px; border-radius: 12px; cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+        .cookie-bar__btn--accept {
+            background: var(--pink); color: #fff;
+            box-shadow: 3px 3px 0 rgba(58, 50, 40, 0.18);
+        }
+        .cookie-bar__btn--accept:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 5px 5px 0 rgba(58, 50, 40, 0.18);
+        }
+        .cookie-bar__btn--minimal {
+            background: transparent; color: var(--brown-mid); border-color: var(--gold);
+        }
+        .cookie-bar__btn--minimal:hover { background: rgba(201, 169, 122, 0.16); }
+
+        .consent-modal__checkbox-label--optional { opacity: .88; }
+
+        /* пока баннер открыт — приподнимаем плавающую кнопку */
+        #cookie-bar.is-open ~ .floating-buy { bottom: 190px; }
+
+        @media (max-width: 560px) {
+            .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
+            .cookie-bar__actions { flex-direction: column; }
+            .cookie-bar__btn { width: 100%; }
+            #cookie-bar.is-open ~ .floating-buy { bottom: 268px; }
+        }
     </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQC5W3TD"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 <svg class="bg-waves" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path d="M0,200 Q300,120 600,220 T1200,160" fill="none" stroke="#c9a97a" stroke-width="3" stroke-dasharray="14 8"/>
     <path d="M0,480 Q400,380 800,500 T1200,440" fill="none" stroke="#d97787" stroke-width="2"/>
@@ -4104,9 +4167,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             Подтвердите согласие перед оплатой
         </div>
         <label class="custom-checkbox consent-modal__checkbox-label">
-            <input type="checkbox" id="agree-all">
+            <input type="checkbox" id="agree-offer">
             <span class="checkmark" style="margin-top:1px;"></span>
-            <span class="consent-modal__checkbox-text">Я принимаю условия <a href="Oferta.html" target="_blank">Публичной оферты</a> и <a href="Privacy.html" target="_blank">Политики обработки персональных данных</a></span>
+            <span class="consent-modal__checkbox-text">Я принимаю условия <a href="Oferta.html" target="_blank">Публичной оферты</a></span>
+        </label>
+        <label class="custom-checkbox consent-modal__checkbox-label">
+            <input type="checkbox" id="agree-pd">
+            <span class="checkmark" style="margin-top:1px;"></span>
+            <span class="consent-modal__checkbox-text">Я ознакомлен(а) с <a href="Privacy.html" target="_blank">Политикой обработки персональных данных</a> и даю согласие на обработку моего e-mail</span>
+        </label>
+        <label class="custom-checkbox consent-modal__checkbox-label consent-modal__checkbox-label--optional">
+            <input type="checkbox" id="agree-marketing">
+            <span class="checkmark" style="margin-top:1px;"></span>
+            <span class="consent-modal__checkbox-text">Хочу иногда получать письма от Есении — о новых модулях и материалах Гавани. Необязательно, отписаться можно одним кликом</span>
         </label>
         <button id="pay-button" class="consent-modal__submit" disabled onclick="goToPayment()">
             Создать свою Гавань
@@ -4117,6 +4190,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <button onclick="closeConsentModal()" class="consent-modal__cancel">Отмена</button>
     </div>
 </div>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-bar" class="cookie-bar" role="dialog" aria-label="Файлы cookie">
+    <div class="cookie-bar__title">Здесь нужно ваше слово</div>
+    <div class="cookie-bar__text">
+        Гавань использует технические файлы cookie — без них сайт просто не работает.
+        А ещё мне хотелось бы понимать, какие страницы вам оказались нужны: для этого нужна
+        Яндекс.Метрика. Она включится, только если вы разрешите. Подробности —
+        в <a href="Privacy.html" target="_blank">Политике обработки персональных данных</a>.
+    </div>
+    <div class="cookie-bar__actions">
+        <button type="button" class="cookie-bar__btn cookie-bar__btn--accept" onclick="ehSetConsent('all')">Принять</button>
+        <button type="button" class="cookie-bar__btn cookie-bar__btn--minimal" onclick="ehSetConsent('necessary')">Только необходимые</button>
+    </div>
+</div>
+
+<script>
+(function () {
+    var bar = document.getElementById('cookie-bar');
+
+    window.ehSetConsent = function (value) {
+        var d = new Date(); d.setFullYear(d.getFullYear() + 1);
+        document.cookie = 'eh_consent=' + value + '; path=/; expires=' + d.toUTCString() + '; SameSite=Lax';
+        bar.classList.remove('is-open');
+        if (value === 'all' && typeof window.ehLoadMetrika === 'function') window.ehLoadMetrika();
+    };
+
+    if (!window.ehGetConsent()) {
+        setTimeout(function () { bar.classList.add('is-open'); }, 900);
+    }
+})();
+</script>
 
 <!-- ПЛАВАЮЩАЯ КНОПКА ПОКУПКИ -->
 <button class="floating-buy" id="floatingBuy" type="button"
@@ -4793,8 +4898,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     })();
 
     // PAYMENT MODAL
+    // Редакция Политики, с которой знакомится Покупатель.
+    // Меняйте эту строку при каждой новой редакции Privacy.html.
+    const POLICY_VERSION = '2026-08-26';
     const modal = document.getElementById('consent-modal');
-    const agreeAll = document.getElementById('agree-all');
+    const agreeOffer     = document.getElementById('agree-offer');
+    const agreePd        = document.getElementById('agree-pd');
+    const agreeMarketing = document.getElementById('agree-marketing');
     const payButton = document.getElementById('pay-button');
     const emailInput = document.getElementById('user-email');
     const emailError = document.getElementById('email-error');
@@ -4806,14 +4916,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function updateButton() {
         const emailValid = isValidEmail(emailInput.value.trim());
-        if (agreeAll.checked && emailValid) {
+        if (agreeOffer.checked && agreePd.checked && emailValid) {
             payButton.disabled = false; emailError.style.display = 'none';
         } else {
             payButton.disabled = true;
         }
     }
 
-    agreeAll.addEventListener('change', updateButton);
+    agreeOffer.addEventListener('change', updateButton);
+    agreePd.addEventListener('change', updateButton);
+    agreeMarketing.addEventListener('change', updateButton);
     emailInput.addEventListener('input', updateButton);
 
     function trackGoal(goalName) {
@@ -4849,7 +4961,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         payButton.innerHTML = '<span class="button-spinner"></span>Открываем оплату…';
         try {
             const response = await fetch('https://api.emotional-harbor.ru/create-payment', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, client_id: capturedClientId })
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+                    email,
+                    client_id: capturedClientId,
+                    consent_offer: agreeOffer.checked,
+                    consent_pd: agreePd.checked,
+                    consent_marketing: agreeMarketing.checked,
+                    policy_version: POLICY_VERSION
+                })
             });
             if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
             const data = await response.json();
