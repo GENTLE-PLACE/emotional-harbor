@@ -3132,14 +3132,14 @@
             font-size: 15px; color: var(--brown-dark); margin-bottom: 8px;
         }
         .cookie-bar__text {
-            font-weight: 300; font-size: 14px; line-height: 1.6;
-            color: var(--brown-mid); margin-bottom: 16px;
+            font-weight: 300; font-size: 14px; line-height: 1.75;
+            color: var(--brown-mid); margin-bottom: 18px;
         }
         .cookie-bar__text a { color: var(--pink); text-decoration: underline; }
         .cookie-bar__actions { display: flex; gap: 12px; flex-wrap: wrap; }
         .cookie-bar__btn {
             font-family: 'Jost', sans-serif; font-weight: 500; font-size: 14px;
-            padding: 12px 26px; border-radius: 12px; cursor: pointer;
+            padding: 12px 22px; border-radius: 12px; cursor: pointer;
             border: 2px solid transparent;
             transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
         }
@@ -3159,13 +3159,13 @@
         .consent-modal__checkbox-label--optional { opacity: .88; }
 
         /* пока баннер открыт — приподнимаем плавающую кнопку */
-        #cookie-bar.is-open ~ .floating-buy { bottom: 190px; }
+        #cookie-bar.is-open ~ .floating-buy { bottom: 240px; }
 
         @media (max-width: 560px) {
             .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
             .cookie-bar__actions { flex-direction: column; }
             .cookie-bar__btn { width: 100%; }
-            #cookie-bar.is-open ~ .floating-buy { bottom: 268px; }
+            #cookie-bar.is-open ~ .floating-buy { bottom: 380px; }
         }
     </style>
 </head>
@@ -4195,14 +4195,16 @@
 <div id="cookie-bar" class="cookie-bar" role="dialog" aria-label="Файлы cookie">
     <div class="cookie-bar__title">Здесь нужно Ваше слово</div>
     <div class="cookie-bar__text">
-        Гавань использует технические файлы cookie — без них сайт просто не работает.
-        А ещё мне хотелось бы понимать, какие страницы оказались Вам нужны: для этого нужна
-        Яндекс.Метрика. Она включится, только если Вы разрешите. Подробности —
-        в <a href="Privacy.html" target="_blank">Политике обработки персональных данных</a>.
+        Гавань использует файлы cookie и Яндекс.Метрику.<br>
+        Иногда я смотрю на путь гостей по сайту, чтобы замечать, где Вы задержались, где перечитали дважды,
+        а где закрыли вкладку. Не для того, чтобы понять, кто Вы.<br>
+        По этим следам я понимаю, что переделать, чтобы Вам было удобнее, — благодаря этому Гавань становится лучше.<br>
+        Если приватность Вам важнее, Вы можете отказаться от отслеживания.
+        Подробности — в <a href="Privacy.html" target="_blank">Политике обработки персональных данных</a>.
     </div>
     <div class="cookie-bar__actions">
-        <button type="button" class="cookie-bar__btn cookie-bar__btn--accept" onclick="ehSetConsent('all')">Принять</button>
-        <button type="button" class="cookie-bar__btn cookie-bar__btn--minimal" onclick="ehSetConsent('necessary')">Только необходимые</button>
+        <button type="button" class="cookie-bar__btn cookie-bar__btn--accept" onclick="ehSetConsent('all')">Разрешить аналитику</button>
+        <button type="button" class="cookie-bar__btn cookie-bar__btn--minimal" onclick="ehSetConsent('necessary')">Пройти незаметно</button>
     </div>
 </div>
 
