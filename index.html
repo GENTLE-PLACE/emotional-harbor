@@ -4907,9 +4907,11 @@
     })();
 
     // PAYMENT MODAL
-    // Редакция Политики, с которой знакомится Покупатель.
-    // Меняйте эту строку при каждой новой редакции Privacy.html.
-    const POLICY_VERSION = '2026-08-26';
+    // Редакция документов, с которыми знакомится Покупатель.
+    // Оферта и Политика издаются единой редакцией (п. 7.4 Оферты),
+    // поэтому константа одна на оба документа.
+    // Меняйте эту строку при каждой новой редакции Privacy.html или Oferta.html.
+    const POLICY_VERSION = '2026-08-27';   // редакция Оферты и Политики (единая)
     const modal = document.getElementById('consent-modal');
     const agreeOffer     = document.getElementById('agree-offer');
     const agreePd        = document.getElementById('agree-pd');
