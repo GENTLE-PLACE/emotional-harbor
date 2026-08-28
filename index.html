@@ -210,15 +210,21 @@
 
     <title>Эмоциональная Гавань · дневник эмоций в Notion</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://static.emotional-harbor.ru">
     <link rel="preload" as="image" fetchpriority="high"
           href="https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp"
           imagesrcset="https://static.emotional-harbor.ru/hero-harbor-v1-mobile.webp 820w, https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp 1536w">
-    <!-- ШРИФТЫ: обычная загрузка. Трюк с media="print" + onload убран —
+    <!-- ШРИФТЫ: свои, с static.emotional-harbor.ru. Google Fonts убран —
+         запрос к нему уносил IP посетителя за пределы РФ.
+         Обычная загрузка: трюк с media="print" + onload убран —
          он откладывал шрифты и на медленной сети оставлял системную подмену. -->
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;900&family=Lora:ital,wght@1,400;1,600&family=Jost:wght@300;400;500;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="https://static.emotional-harbor.ru/fonts/unbounded-cyrillic.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="https://static.emotional-harbor.ru/fonts/jost-cyrillic.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+          href="https://static.emotional-harbor.ru/fonts/lora-italic-cyrillic.woff2">
+    <link href="https://static.emotional-harbor.ru/fonts/harbor-fonts.css" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
