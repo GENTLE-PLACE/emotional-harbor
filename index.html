@@ -104,7 +104,8 @@
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
-        "url": "https://t.me/e_lena_patrikeeva"
+        "url": "https://t.me/e_lena_patrikeeva",
+        "email": "emotional.harbor@gmail.com"
       }
     }
     </script>
@@ -200,7 +201,7 @@
           "name": "Как получить доступ к Гавани после оплаты?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "После нажатия кнопки «Создать свою Гавань» Вы попадёте на платежную страницу. Оплатите заказ. На компьютере — после оплаты нажмите кнопку «Вернуться в магазин», чтобы увидеть страницу с подтверждением. На телефоне — не закрывайте страницу после оплаты, дайте ей прогрузиться, пока не увидите отдельную страницу (не окно ЮKassa) с эмодзи 🌊 и надписью «Оплата прошла. Письмо со ссылкой для входа уже летит». Это займёт несколько секунд — система проверит платёж, создаст чек и отправит Вам письмо. Затем на Вашу почту придёт письмо с кнопкой «Войти в Гавань». Если письма нет — загляните в Спам. Если и там пусто — напишите мне в Telegram, я помогу. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so."
+            "text": "После нажатия кнопки «Создать свою Гавань» Вы попадёте на платежную страницу. Оплатите заказ. На компьютере — после оплаты нажмите кнопку «Вернуться в магазин», чтобы увидеть страницу с подтверждением. На телефоне — не закрывайте страницу после оплаты, дайте ей прогрузиться, пока не увидите отдельную страницу (не окно ЮKassa) с эмодзи 🌊 и надписью «Оплата прошла. Письмо со ссылкой для входа уже летит». Это займёт несколько секунд — система проверит платёж, создаст чек и отправит Вам письмо. Затем на Вашу почту придёт письмо с кнопкой «Войти в Гавань». Если письма нет — загляните в Спам. Если и там пусто — напишите мне в Telegram или на почту emotional.harbor@gmail.com, я помогу. Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so."
           }
         }
       ]
@@ -2280,6 +2281,18 @@
             max-width: 700px;
         }
 
+        .faq-answer a {
+            color: var(--pink);
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            border-bottom: 1px dashed rgba(232, 122, 156, 0.5);
+            transition: border-color 0.2s ease;
+        }
+
+        .faq-answer a:hover {
+            border-bottom-color: var(--pink);
+        }
+
         /* ——— ФИНАЛ ——— */
         .final-section {
             background: rgba(232,122,156,0.06);
@@ -2381,13 +2394,13 @@
         }
 
         .footer-col--docs {
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .footer-col--tg {
-            align-items: flex-end;
-            text-align: right;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .author-row {
@@ -2452,6 +2465,27 @@
         }
 
         .tg-icon {
+            width: 12px;
+            height: 12px;
+            flex-shrink: 0;
+        }
+
+        .mail-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 300;
+            color: var(--brown-light);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .mail-link:hover {
+            color: var(--pink);
+        }
+
+        .mail-icon {
             width: 12px;
             height: 12px;
             flex-shrink: 0;
@@ -4082,7 +4116,7 @@
 <strong>На компьютере</strong> — после оплаты нажмите кнопку «Вернуться в магазин», чтобы увидеть страницу с подтверждением.<br><br>
 <strong>На телефоне</strong> — не закрывайте страницу после оплаты, дайте ей прогрузиться, пока не увидите отдельную страницу (не окно ЮKassa) с эмодзи 🌊 и надписью «Оплата прошла. Письмо со ссылкой для входа уже летит». Это займёт несколько секунд — система проверит платёж, создаст чек и отправит Вам письмо.<br><br>
 Затем на Вашу почту придёт письмо с кнопкой «Войти в Гавань».<br>
-Если письма нет — загляните в Спам. Если и там пусто — напишите мне в Telegram, я помогу.<br><br>
+Если письма нет — загляните в Спам. Если и там пусто — напишите мне в Telegram или на почту <a href="mailto:emotional.harbor@gmail.com">emotional.harbor@gmail.com</a>, я помогу.<br><br>
 Гавань живёт в Notion — убедитесь заранее, что у Вас установлено приложение или открыт сайт notion.so.
                         </div>
                     </div>
@@ -4145,6 +4179,14 @@
                 </svg>
                 @e_lena_patrikeeva
             </a>
+            <a href="mailto:emotional.harbor@gmail.com" class="mail-link">
+                <svg class="mail-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" fill="#9a7050"/>
+                    <path d="M5.2 8.2h13.6v7.6H5.2z" fill="white"/>
+                    <path d="M5.2 8.2L12 12.8l6.8-4.6" stroke="#9a7050" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                </svg>
+                emotional.harbor@gmail.com
+            </a>
         </div>
     </footer>
 </div> 
@@ -4192,7 +4234,7 @@
             Создать свою Гавань
         </button>
         <div id="pay-error" class="consent-modal__error consent-modal__error--pay">
-            Что-то не сработало. Попробуйте ещё раз или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank">Telegram</a> — отвечу быстро.
+            Что-то не сработало. Попробуйте ещё раз или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank">Telegram</a> либо на почту <a href="mailto:emotional.harbor@gmail.com">emotional.harbor@gmail.com</a> — отвечу быстро.
         </div>
         <button onclick="closeConsentModal()" class="consent-modal__cancel">Отмена</button>
     </div>
