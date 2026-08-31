@@ -17,6 +17,7 @@ DESIGN.md
 CLAUDE.md
 schema.sql
 wordstat-*.md
+svodka-*.md
 
 # --- Бэкенд: секретная логика, не для публичного репозитория ---
 harbor-backend/
