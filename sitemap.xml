@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
         <loc>https://emotional-harbor.ru/</loc>
-        <lastmod>2026-06-28</lastmod>
+        <lastmod>2026-09-02</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
+        <image:image><image:loc>https://emotional-harbor.ru/preview-v2.jpg</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/hero-harbor-v1-1536.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Home.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Diary_Home.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/diary-gingerbread.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/diary-routine.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Warmth_Jar.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Energy-sources.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Anchors_Social-support.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Anchors_Boundary.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Cozy-content.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Brightness_Dark-restaurant.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Brightness_Pottery.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Emotion_Cloud.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Emotional_Diversity.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/onboarding-diary.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/onboarding-Energy-sources.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/onboarding-Anchors.webp</image:loc></image:image>
+        <image:image><image:loc>https://static.emotional-harbor.ru/Avtor.png</image:loc></image:image>
     </url>
     <url>
         <loc>https://emotional-harbor.ru/Oferta.html</loc>
