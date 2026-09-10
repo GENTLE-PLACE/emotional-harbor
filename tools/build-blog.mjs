@@ -463,7 +463,7 @@ ${posts.map((p) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slu
         : `<div class="empty">Здесь пока тихо. Первая запись скоро появится.</div>`;
 
     return `${head({
-        title: 'Дневник Гавани · Эмоциональная Гавань',
+        title: 'Про чувства · Эмоциональная Гавань',
         description: 'Записи о чувствах, внимании к себе и тихом порядке внутри — от автора Эмоциональной Гавани.',
         url: `${SITE}/blog.html`,
     })}
@@ -474,7 +474,7 @@ ${posts.map((p) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slu
         </nav>
 
         <header class="page-head">
-            <h1 class="page-title">Дневник<br>Гавани</h1>
+            <h1 class="page-title">Про<br>чувства</h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
         </header>
 
@@ -507,7 +507,7 @@ function renderPost(post) {
     };
 
     return `${head({
-        title: `${post.title} · Дневник Гавани`,
+        title: `${post.title} · Про чувства`,
         description: post.excerpt,
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
@@ -517,7 +517,7 @@ function renderPost(post) {
 
     <div class="wrap">
         <nav class="topbar">
-            <a href="${SITE}/blog.html">← Дневник Гавани</a>
+            <a href="${SITE}/blog.html">← Про чувства</a>
             <a href="${SITE}/">Эмоциональная Гавань</a>
         </nav>
 
