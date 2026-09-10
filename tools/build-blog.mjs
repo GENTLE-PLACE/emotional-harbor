@@ -32,13 +32,17 @@ const esc = (s) => String(s)
     .replace(/"/g, '&quot;');
 
 // Пустая строка — новый абзац. Одиночный перенос — перенос внутри абзаца.
+// Строка, начатая с «## », становится подзаголовком: по ним поисковику видно
+// устройство статьи, а читателю — где можно перевести дух.
 function toParagraphs(text) {
     return String(text)
         .replace(/\r\n/g, '\n')
         .split(/\n{2,}/)
         .map((p) => p.trim())
         .filter(Boolean)
-        .map((p) => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`)
+        .map((p) => p.startsWith('## ')
+            ? `<h2>${esc(p.slice(3).trim())}</h2>`
+            : `<p>${esc(p).replace(/\n/g, '<br>')}</p>`)
         .join('\n            ');
 }
 
@@ -301,6 +305,15 @@ const CSS = `    <style>
 
         .post-body { margin-top: 34px; }
         .post-body p { margin-bottom: 22px; }
+
+        .post-body h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 19px;
+            line-height: 1.3;
+            letter-spacing: -0.4px;
+            margin: 40px 0 18px;
+        }
 
         .post-foot {
             margin-top: 48px;
