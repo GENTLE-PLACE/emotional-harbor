@@ -290,13 +290,6 @@ const CSS = `    <style>
             height: 54px;
             border: 2.5px solid var(--ink);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 800;
-            font-size: 15px;
-            color: var(--ink);
             transform: rotate(-7deg);
             box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.14);
         }
@@ -568,7 +561,7 @@ function renderList(posts) {
     const cards = posts.length
         ? `<div class="cards">
 ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">
-                <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}">${posts.length - i}</div>
+                <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" aria-hidden="true"></div>
                 <div class="card__date">${humanDate(p.date)}</div>
                 <div class="card__title">${esc(p.title)}</div>
                 <div class="card__excerpt">${esc(p.excerpt)}</div>
@@ -640,7 +633,7 @@ function renderPost(post, number) {
         <article>
             <div class="post-head">
                 <div class="post-date">${humanDate(post.date)}</div>
-                <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}">${number}</div>
+                <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" aria-hidden="true"></div>
             </div>
             <h1 class="post-title">${esc(post.title)}</h1>
 
