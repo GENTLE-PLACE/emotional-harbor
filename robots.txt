@@ -7,3 +7,4 @@ User-agent: GitHub-Disallow
 Disallow: /
 
 Sitemap: https://emotional-harbor.ru/sitemap.xml
+Sitemap: https://emotional-harbor.ru/sitemap-blog.xml

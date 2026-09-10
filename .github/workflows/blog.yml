@@ -1,0 +1,47 @@
+# Собирает страницы блога из постов, лежащих в бакете.
+#
+# Посты публикуются через napisat.html и попадают в blog/posts.json в бакете.
+# Этот процесс раз в четверть часа забирает их и раскладывает в обычные
+# HTML-файлы прямо в репозиторий — чтобы поисковики видели готовый текст,
+# а не пустую страницу, которую дорисовывает скрипт.
+#
+# Запустить прямо сейчас, не дожидаясь расписания:
+# GitHub → вкладка Actions → «Блог» → Run workflow.
+
+name: Блог
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+# Две сборки одновременно писали бы в одни и те же файлы — пропускаем лишнюю.
+concurrency:
+  group: blog-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Собрать страницы постов
+        run: node tools/build-blog.mjs
+
+      - name: Закоммитить, если что-то изменилось
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add blog.html sitemap-blog.xml blog/
+          # Если новых постов не было, коммитить нечего — это обычное дело,
+          # а не ошибка, поэтому просто выходим.
+          if git diff --cached --quiet; then
+            echo 'Блог не менялся.'
+            exit 0
+          fi
+          git commit -m 'Блог: обновление страниц постов'
+          git push
