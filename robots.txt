@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /onboarding/
+Disallow: /napisat.html
 
 User-agent: GitHub-Disallow
 Disallow: /
