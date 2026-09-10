@@ -54,6 +54,8 @@ function humanDate(iso) {
     return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+const SEAL_TONES = ['pink', 'yellow', 'green', 'blue', 'purple'];
+
 const isoDay = (iso) => new Date(iso).toISOString().slice(0, 10);
 
 // ---------- общие куски страницы ----------
@@ -146,6 +148,12 @@ const CSS = `    <style>
             --brown-light: #9a7050;
             --gold: #c9a97a;
             --pink: #e87a9c;
+            --pink-soft: #F8B4C0;
+            --yellow: #F7D08A;
+            --green: #b8e0d2;
+            --blue: #A5C2F1;
+            --purple: #e0c8f0;
+            --ink: #2D3436;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -202,10 +210,31 @@ const CSS = `    <style>
 
         .page-title {
             font-family: 'Unbounded', sans-serif;
-            font-weight: 900;
-            font-size: clamp(34px, 5.5vw, 60px);
-            line-height: 0.98;
+            font-weight: 700;
+            font-size: clamp(34px, 5.5vw, 58px);
+            line-height: 0.92;
             letter-spacing: -2px;
+        }
+
+        /* Второе слово — розовым и крупнее, как на обложках */
+        .page-title span {
+            display: block;
+            font-weight: 900;
+            font-size: clamp(42px, 6.8vw, 72px);
+            letter-spacing: -3px;
+            color: var(--pink);
+        }
+
+        /* Приписка от руки на полях */
+        .hand {
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 25px;
+            line-height: 1.2;
+            color: var(--pink);
+            transform: rotate(-2deg);
+            display: inline-block;
+            margin-top: 16px;
         }
 
         .page-sub {
@@ -230,29 +259,67 @@ const CSS = `    <style>
         .cards { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
 
         .card {
+            position: relative;
             display: block;
             text-decoration: none;
             color: inherit;
-            background: rgba(255, 248, 235, 0.65);
-            border: 1.5px solid rgba(201, 169, 122, 0.45);
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
             border-radius: 20px;
-            padding: 30px 34px;
-            box-shadow: 5px 6px 0 rgba(120, 80, 40, 0.08);
+            padding: 30px 90px 28px 34px;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
             transition: transform .25s ease, box-shadow .25s ease;
         }
 
-        /* Бумага приподнимается — тень удлиняется, а не размывается */
+        /* Карточки лежат чуть вразнобой, как разложенные на столе */
+        .card:nth-child(odd) { transform: rotate(-0.5deg); }
+        .card:nth-child(even) { transform: rotate(0.4deg); }
+
+        /* Бумагу приподнимают и выравнивают; тень удлиняется, а не размывается */
         .card:hover {
-            transform: translate(-2px, -3px);
-            box-shadow: 8px 10px 0 rgba(120, 80, 40, 0.10);
+            transform: rotate(0deg) translate(-2px, -4px);
+            box-shadow: 10px 12px 0 rgba(45, 52, 54, 0.14);
         }
 
-        .card__date {
+        /* Круглая печать с номером записи — прямая цитата с обложек */
+        .seal {
+            position: absolute;
+            top: 26px;
+            right: 26px;
+            width: 54px;
+            height: 54px;
+            border: 2.5px solid var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 15px;
+            color: var(--ink);
+            transform: rotate(-7deg);
+            box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.14);
+        }
+
+        .seal::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            border: 1.5px dashed rgba(45, 52, 54, 0.3);
+        }
+
+        .seal--pink { background: var(--pink-soft); }
+        .seal--yellow { background: var(--yellow); }
+        .seal--green { background: var(--green); }
+        .seal--blue { background: var(--blue); }
+        .seal--purple { background: var(--purple); }
+
+        .card__date {
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 21px;
+            line-height: 1;
             color: var(--brown-light);
         }
 
@@ -269,10 +336,20 @@ const CSS = `    <style>
 
         .card__more {
             display: inline-block;
-            margin-top: 14px;
-            font-size: 13px;
-            color: var(--pink);
+            margin-top: 18px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 10.5px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            background: rgba(201, 169, 122, 0.2);
+            border: 1px solid rgba(201, 169, 122, 0.55);
+            border-radius: 30px;
+            padding: 7px 16px;
         }
+
+        .card:hover .card__more { background: var(--pink); color: #fff; border-color: var(--pink); }
 
         .empty {
             margin-top: 32px;
@@ -284,14 +361,22 @@ const CSS = `    <style>
 
         /* --- страница поста --- */
 
-        .post-date {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--brown-light);
+        .post-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
             padding-top: 44px;
+        }
+
+        .post-head .seal { position: static; flex-shrink: 0; }
+
+        .post-date {
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 23px;
+            line-height: 1;
+            color: var(--brown-light);
         }
 
         .post-title {
@@ -316,12 +401,28 @@ const CSS = `    <style>
         }
 
         .post-foot {
-            margin-top: 48px;
-            padding: 30px 34px;
-            background: rgba(255, 248, 235, 0.65);
-            border: 1.5px solid rgba(201, 169, 122, 0.45);
+            position: relative;
+            margin-top: 56px;
+            padding: 34px 34px 32px;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
             border-radius: 20px;
-            box-shadow: 5px 6px 0 rgba(120, 80, 40, 0.08);
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+            transform: rotate(-0.4deg);
+        }
+
+        /* Полоска скотча, которой открытку как будто прикрепили к странице */
+        .post-foot::before {
+            content: '';
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            width: 116px;
+            height: 26px;
+            margin-left: -58px;
+            background: rgba(247, 208, 138, 0.75);
+            border: 1px solid rgba(45, 52, 54, 0.15);
+            transform: rotate(-2deg);
         }
 
         .post-foot__text {
@@ -466,7 +567,8 @@ ${CSS}
 function renderList(posts) {
     const cards = posts.length
         ? `<div class="cards">
-${posts.map((p) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">
+${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">
+                <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}">${posts.length - i}</div>
                 <div class="card__date">${humanDate(p.date)}</div>
                 <div class="card__title">${esc(p.title)}</div>
                 <div class="card__excerpt">${esc(p.excerpt)}</div>
@@ -487,8 +589,9 @@ ${posts.map((p) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slu
         </nav>
 
         <header class="page-head">
-            <h1 class="page-title">Про<br>чувства</h1>
+            <h1 class="page-title">Про<span>чувства</span></h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
+            <div class="hand">без советов, как надо жить</div>
         </header>
 
         <div class="rule"></div>
@@ -505,7 +608,7 @@ ${COOKIE_BAR}
 `;
 }
 
-function renderPost(post) {
+function renderPost(post, number) {
     // Разметка для поисковика: что это статья, кто автор, когда вышла
     const jsonld = {
         '@context': 'https://schema.org',
@@ -535,7 +638,10 @@ function renderPost(post) {
         </nav>
 
         <article>
-            <div class="post-date">${humanDate(post.date)}</div>
+            <div class="post-head">
+                <div class="post-date">${humanDate(post.date)}</div>
+                <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}">${number}</div>
+            </div>
             <h1 class="post-title">${esc(post.title)}</h1>
 
             <div class="post-body">
@@ -594,14 +700,20 @@ await mkdir(OUT_DIR, { recursive: true });
 
 // Пост могли удалить из posts.json руками — тогда убираем и его страницу,
 // иначе она осталась бы висеть в поиске навсегда.
+const queue = [];
+
 const alive = new Set(posts.map((p) => `${p.slug}.html`));
 for (const file of await readdir(OUT_DIR)) {
     if (file.endsWith('.html') && !alive.has(file)) await rm(join(OUT_DIR, file));
 }
 
-for (const post of posts) {
-    await writeFile(join(OUT_DIR, `${post.slug}.html`), renderPost(post), 'utf8');
-}
+posts.forEach((post, i) => {
+    // Номер по хронологии: у первой записи он навсегда останется первым,
+    // сколько бы постов ни вышло после неё.
+    queue.push(writeFile(join(OUT_DIR, `${post.slug}.html`), renderPost(post, posts.length - i), 'utf8'));
+});
+
+await Promise.all(queue);
 
 await writeFile('blog.html', renderList(posts), 'utf8');
 await writeFile('sitemap-blog.xml', renderSitemap(posts), 'utf8');
