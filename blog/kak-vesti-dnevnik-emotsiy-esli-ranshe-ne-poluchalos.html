@@ -167,44 +167,54 @@
         .card {
             position: relative;
             display: block;
+            overflow: hidden;
             text-decoration: none;
             color: inherit;
-            background: rgba(255, 248, 235, 0.75);
-            border: 2px solid var(--ink);
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px solid rgba(201, 169, 122, 0.35);
             border-radius: 20px;
-            padding: 30px 90px 28px 34px;
-            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
-            transition: transform .25s ease, box-shadow .25s ease;
+            padding: 32px 96px 30px 38px;
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s ease;
         }
 
-        /* Карточки лежат чуть вразнобой, как разложенные на столе */
-        .card:nth-child(odd) { transform: rotate(-0.5deg); }
-        .card:nth-child(even) { transform: rotate(0.4deg); }
-
-        /* Бумагу приподнимают и выравнивают; тень удлиняется, а не размывается */
-        .card:hover {
-            transform: rotate(0deg) translate(-2px, -4px);
-            box-shadow: 10px 12px 0 rgba(45, 52, 54, 0.14);
+        /* Цвет темы — полоской сверху внутри карточки, как у модулей на лендинге */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            border-radius: 20px 20px 0 0;
+            transition: height 0.3s ease;
         }
 
-        /* Круглая печать с номером записи — прямая цитата с обложек */
+        @media (hover: hover) {
+            .card:hover {
+                transform: translateY(-4px);
+                box-shadow: 9px 12px 0 rgba(120, 80, 40, 0.12);
+            }
+
+            .card:hover::after { height: 6px; }
+        }
+
+        /* Печать с номером записи — единственное, что взято со старых обложек:
+           круг с пунктирным кольцом. Без чернильного контура, он там от прежней эпохи. */
         .seal {
             position: absolute;
-            top: 26px;
-            right: 26px;
-            width: 54px;
-            height: 54px;
-            border: 2.5px solid var(--ink);
+            top: 30px;
+            right: 30px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Unbounded', sans-serif;
-            font-weight: 800;
-            font-size: 15px;
-            color: var(--ink);
-            transform: rotate(-7deg);
-            box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.14);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--brown-dark);
+            transform: rotate(-5deg);
         }
 
         .seal::before {
@@ -212,14 +222,20 @@
             position: absolute;
             inset: 4px;
             border-radius: 50%;
-            border: 1.5px dashed rgba(45, 52, 54, 0.3);
+            border: 1.5px dashed rgba(58, 50, 40, 0.22);
         }
 
-        .seal--pink { background: var(--pink-soft); }
-        .seal--yellow { background: var(--yellow); }
-        .seal--green { background: var(--green); }
-        .seal--blue { background: var(--blue); }
-        .seal--purple { background: var(--purple); }
+        .tone--pink .seal, .seal--pink { background: var(--pink-soft); }
+        .tone--yellow .seal, .seal--yellow { background: var(--yellow); }
+        .tone--green .seal, .seal--green { background: var(--green); }
+        .tone--blue .seal, .seal--blue { background: var(--blue); }
+        .tone--purple .seal, .seal--purple { background: var(--purple); }
+
+        .tone--pink::after { background: var(--pink-soft); }
+        .tone--yellow::after { background: var(--yellow); }
+        .tone--green::after { background: var(--green); }
+        .tone--blue::after { background: var(--blue); }
+        .tone--purple::after { background: var(--purple); }
 
         .card__date {
             font-family: 'Caveat', cursive;
@@ -307,28 +323,12 @@
         }
 
         .post-foot {
-            position: relative;
             margin-top: 56px;
-            padding: 34px 34px 32px;
+            padding: 36px 38px 34px;
             background: rgba(255, 248, 235, 0.75);
-            border: 2px solid var(--ink);
+            border: 1.5px dashed rgba(201, 169, 122, 0.55);
             border-radius: 20px;
-            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
-            transform: rotate(-0.4deg);
-        }
-
-        /* Полоска скотча, которой открытку как будто прикрепили к странице */
-        .post-foot::before {
-            content: '';
-            position: absolute;
-            top: -13px;
-            left: 50%;
-            width: 116px;
-            height: 26px;
-            margin-left: -58px;
-            background: rgba(247, 208, 138, 0.75);
-            border: 1px solid rgba(45, 52, 54, 0.15);
-            transform: rotate(-2deg);
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
         }
 
         .post-foot__text {
