@@ -7,10 +7,14 @@
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://emotional-harbor.ru/blog/pochemu-trudno-nazvat-chto-chuvstvuesh-i-chto-menyaetsya-kog.html</loc>
+        <loc>https://emotional-harbor.ru/blog/nazyvat-emotsii-tochno.html</loc>
         <lastmod>2026-09-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/emotsionalnaya-granulyarnost-kazhdaya-iz-etih-krasok-tsennay-20260911-r6x4b</image:loc>
+            <image:title>Эмоциональная Гранулярность. Каждая из этих красок - ценная часть Вашей палитры.</image:title>
+        </image:image>
     </url>
     <url>
         <loc>https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html</loc>
