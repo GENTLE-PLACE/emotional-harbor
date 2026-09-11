@@ -283,6 +283,10 @@ const sticky = (withSection) => `<header class="sticky" id="sticky">
 </script>`;
 
 const FOOTER = `    <footer class="footer">
+        <div class="footer__up">
+            <button type="button" class="footer__top-btn" id="toTop">Наверх ↑</button>
+        </div>
+
         <div class="footer__grid">
             <div class="footer__col">
                 <a class="footer__brand" href="${SITE}/">Эмоциональная <em>Гавань</em></a>
@@ -322,7 +326,6 @@ const FOOTER = `    <footer class="footer">
 
         <div class="footer__bottom">
             <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
-            <button type="button" class="footer__top-btn" id="toTop">Наверх ↑</button>
         </div>
     </footer>
 
@@ -1026,6 +1029,12 @@ const CSS = `    <style>
             color: var(--brown-light);
         }
 
+        .footer__up {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 18px;
+        }
+
         .footer__grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr 1fr;
@@ -1119,12 +1128,8 @@ const CSS = `    <style>
         }
 
         .footer__copy {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: 12px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: var(--brown-mid);
+            font-size: 12.5px;
+            color: var(--brown-light);
         }
 
         .footer__top-btn {
