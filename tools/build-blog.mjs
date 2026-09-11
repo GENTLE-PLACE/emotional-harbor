@@ -149,6 +149,13 @@ function collectHeadings(text) {
         .map((line, i) => ({ id: `chast-${i + 1}`, title: line.slice(3).trim() }));
 }
 
+// Картинки поста — для карты сайта. Поисковик индексирует их отдельно,
+// и подпись идёт туда же: по ней картинку находят в поиске по картинкам.
+function collectImages(text) {
+    return [...String(text).matchAll(/!\[([^\]]*)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)/g)]
+        .map((m) => ({ caption: m[1].trim(), url: m[2] }));
+}
+
 // Тизер для карточки. Функция в облаке кладёт свой, но режет ровно по счёту
 // символов и рвёт слово пополам, поэтому считаем заново здесь: обрезаем по
 // последнему пробелу и снимаем хвостовую пунктуацию, чтобы не вышло «слова ,…».
@@ -557,6 +564,7 @@ const CSS = `    <style>
         .card {
             position: relative;
             display: block;
+            overflow: hidden;
             text-decoration: none;
             color: inherit;
             background: rgba(255, 248, 235, 0.75);
@@ -624,6 +632,28 @@ const CSS = `    <style>
         .seal--green { background: var(--green); }
         .seal--blue { background: var(--blue); }
         .seal--purple { background: var(--purple); }
+
+        /* Картинка поста на карточке: узкой полосой, чтобы список
+           оставался списком, а не галереей */
+        .card__shot {
+            display: block;
+            width: calc(100% + 148px);
+            margin: -32px -110px 22px -38px;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        /* Картинка поста на карточке: полосой во всю ширину, чтобы
+           список оставался списком, а не галереей */
+        .card__shot {
+            display: block;
+            width: calc(100% + 148px);
+            margin: -32px -110px 22px -38px;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--ink);
+        }
 
         .card__date {
             font-family: 'Caveat', cursive;
@@ -953,13 +983,14 @@ const CSS = `    <style>
 
         @media (max-width: 560px) {
             .card, .post-foot { padding: 24px 22px; }
+            .card__shot { width: calc(100% + 44px); margin: -24px -22px 18px; height: 150px; }
             .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
             .cookie-bar__actions { flex-direction: column; }
             .cookie-bar__btn { width: 100%; }
         }
     </style>`;
 
-function head({ title, description, url, published, modified }) {
+function head({ title, description, url, published, modified, image }) {
     const article = published ? `
     <meta property="article:published_time" content="${published}">${modified ? `
     <meta property="article:modified_time" content="${modified}">` : ''}` : '';
@@ -978,7 +1009,7 @@ function head({ title, description, url, published, modified }) {
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:url" content="${url}">
-    <meta property="og:image" content="${SITE}/preview-v2.jpg">
+    <meta property="og:image" content="${image || `${SITE}/preview-v2.jpg`}">
     <meta property="og:locale" content="ru_RU">${article}
 
     <link href="https://static.emotional-harbor.ru/fonts/harbor-fonts.css" rel="stylesheet">
@@ -994,7 +1025,8 @@ ${CSS}
 function renderList(posts) {
     const cards = posts.length
         ? `<div class="cards">
-${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">
+${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">${collectImages(p.text)[0] ? `
+                <img class="card__shot" src="${collectImages(p.text)[0].url}" alt="" loading="lazy" decoding="async">` : ''}
                 <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" title="Время чтения">
                     <span class="seal__num">${readingMinutes(p.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
@@ -1096,6 +1128,7 @@ function renderPost(post, number, newer, older) {
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
         modified: post.updated_at,
+        image: (collectImages(post.text)[0] || {}).url,
     })}
 
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
@@ -1140,13 +1173,6 @@ ${COOKIE_BAR}
 </body>
 </html>
 `;
-}
-
-// Картинки поста — для карты сайта. Поисковик индексирует их отдельно,
-// и подпись идёт туда же: по ней картинку находят в поиске по картинкам.
-function collectImages(text) {
-    return [...String(text).matchAll(/!\[([^\]]*)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)/g)]
-        .map((m) => ({ caption: m[1].trim(), url: m[2] }));
 }
 
 function renderSitemap(posts) {

@@ -12,10 +12,10 @@
     <meta property="og:title" content="Как вести дневник эмоций, если раньше не получалось · Про чувства">
     <meta property="og:description" content="Вы уже пробовали. Скорее всего, не один раз. Первые три дня получалось хорошо. Потом был день, когда писать не хотелось, и Вы пропустили. Потом ещё один. На чет…">
     <meta property="og:url" content="https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html">
-    <meta property="og:image" content="https://emotional-harbor.ru/preview-v2.jpg">
+    <meta property="og:image" content="https://storage.yandexcloud.net/emotional-harbor-blog-img/raskrytyy-dnevnik-emotsiy-20260911-t1ytl.webp">
     <meta property="og:locale" content="ru_RU">
     <meta property="article:published_time" content="2026-09-10T17:49:15.792Z">
-    <meta property="article:modified_time" content="2026-09-11T07:36:03.843Z">
+    <meta property="article:modified_time" content="2026-09-11T07:45:28.675Z">
 
     <link href="https://static.emotional-harbor.ru/fonts/harbor-fonts.css" rel="stylesheet">
 
@@ -319,6 +319,7 @@
         .card {
             position: relative;
             display: block;
+            overflow: hidden;
             text-decoration: none;
             color: inherit;
             background: rgba(255, 248, 235, 0.75);
@@ -386,6 +387,28 @@
         .seal--green { background: var(--green); }
         .seal--blue { background: var(--blue); }
         .seal--purple { background: var(--purple); }
+
+        /* Картинка поста на карточке: узкой полосой, чтобы список
+           оставался списком, а не галереей */
+        .card__shot {
+            display: block;
+            width: calc(100% + 148px);
+            margin: -32px -110px 22px -38px;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        /* Картинка поста на карточке: полосой во всю ширину, чтобы
+           список оставался списком, а не галереей */
+        .card__shot {
+            display: block;
+            width: calc(100% + 148px);
+            margin: -32px -110px 22px -38px;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--ink);
+        }
 
         .card__date {
             font-family: 'Caveat', cursive;
@@ -715,6 +738,7 @@
 
         @media (max-width: 560px) {
             .card, .post-foot { padding: 24px 22px; }
+            .card__shot { width: calc(100% + 44px); margin: -24px -22px 18px; height: 150px; }
             .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
             .cookie-bar__actions { flex-direction: column; }
             .cookie-bar__btn { width: 100%; }
@@ -723,7 +747,7 @@
 </head>
 <body>
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Как вести дневник эмоций, если раньше не получалось","description":"Вы уже пробовали. Скорее всего, не один раз. Первые три дня получалось хорошо. Потом был день, когда писать не хотелось, и Вы пропустили. Потом ещё один. На чет…","datePublished":"2026-09-10T17:49:15.792Z","dateModified":"2026-09-11T07:36:03.843Z","author":{"@type":"Person","name":"Патрикеева Елена Александровна"},"publisher":{"@type":"Organization","name":"Эмоциональная Гавань"},"mainEntityOfPage":"https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html","inLanguage":"ru-RU"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Как вести дневник эмоций, если раньше не получалось","description":"Вы уже пробовали. Скорее всего, не один раз. Первые три дня получалось хорошо. Потом был день, когда писать не хотелось, и Вы пропустили. Потом ещё один. На чет…","datePublished":"2026-09-10T17:49:15.792Z","dateModified":"2026-09-11T07:45:28.675Z","author":{"@type":"Person","name":"Патрикеева Елена Александровна"},"publisher":{"@type":"Organization","name":"Эмоциональная Гавань"},"mainEntityOfPage":"https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html","inLanguage":"ru-RU"}</script>
 
     <div class="wrap">
         <nav class="crumbs" aria-label="Хлебные крошки">
