@@ -36,15 +36,57 @@ const esc = (s) => String(s)
 // устройство статьи, а читателю — где можно перевести дух.
 function toParagraphs(text) {
     let heading = 0;
+    let leadUsed = false;
+
+    const block = (raw) => {
+        const lines = raw.split('\n').map((line) => line.trim()).filter(Boolean);
+        const inline = (s) => bold(esc(s));
+
+        // Подзаголовок части — по нему же строится оглавление
+        if (raw.startsWith('## ')) {
+            return `<h2 id="chast-${++heading}">${inline(raw.slice(3).trim())}</h2>`;
+        }
+
+        // Подзаголовок внутри части
+        if (raw.startsWith('### ')) {
+            return `<h3>${inline(raw.slice(4).trim())}</h3>`;
+        }
+
+        // Цитата: каждая строка начинается с «> »
+        if (lines.every((line) => line.startsWith('>'))) {
+            const quote = lines.map((line) => inline(line.replace(/^>\s?/, ''))).join('<br>');
+            return `<blockquote>${quote}</blockquote>`;
+        }
+
+        // Список с точками: «- пункт»
+        if (lines.every((line) => line.startsWith('- '))) {
+            const items = lines.map((line) => `<li>${inline(line.slice(2).trim())}</li>`).join('\n                ');
+            return `<ul>\n                ${items}\n            </ul>`;
+        }
+
+        // Список с номерами: «1. пункт». Номера рисует браузер, поэтому
+        // в тексте можно писать хоть все единицы — порядок не собьётся.
+        if (lines.every((line) => /^\d+[.)]\s/.test(line))) {
+            const items = lines
+                .map((line) => `<li>${inline(line.replace(/^\d+[.)]\s+/, ''))}</li>`)
+                .join('\n                ');
+            return `<ol>\n                ${items}\n            </ol>`;
+        }
+
+        // Обычный абзац. Самый первый становится лидом — вводным,
+        // который человек читает, решая, стоит ли читать дальше.
+        const cls = leadUsed ? '' : ' class="lead"';
+        leadUsed = true;
+
+        return `<p${cls}>${inline(raw).replace(/\n/g, '<br>')}</p>`;
+    };
 
     return String(text)
         .replace(/\r\n/g, '\n')
         .split(/\n{2,}/)
         .map((p) => p.trim())
         .filter(Boolean)
-        .map((p) => p.startsWith('## ')
-            ? `<h2 id="chast-${++heading}">${bold(esc(p.slice(3).trim()))}</h2>`
-            : `<p>${bold(esc(p)).replace(/\n/g, '<br>')}</p>`)
+        .map(block)
         .join('\n            ');
 }
 
@@ -169,6 +211,15 @@ const COOKIE_BAR = `<div id="cookie-bar" class="cookie-bar" role="dialog" aria-l
 })();
 </script>`;
 
+const SITE_HEAD = `        <header class="site-head">
+            <a class="site-logo" href="${SITE}/">Эмоциональная <em>Гавань</em></a>
+            <nav class="site-nav">
+                <a href="${SITE}/blog.html">Про чувства</a>
+                <a href="${SITE}/">О Гавани</a>
+                <a href="${SITE}/#buy">Получить ключи</a>
+            </nav>
+        </header>`;
+
 const FOOTER = `    <footer class="footer">
         <div class="footer-col">
             <img class="author-photo" src="https://static.emotional-harbor.ru/Avtor.png"
@@ -251,6 +302,104 @@ const CSS = `    <style>
         }
 
         .topbar a:hover { color: var(--pink); border-bottom-color: var(--pink); }
+
+        /* --- шапка сайта --- */
+
+        .site-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 28px 0 0;
+        }
+
+        .site-logo {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+
+        .site-logo em { font-style: normal; color: var(--pink); }
+
+        .site-nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+
+        .site-nav a {
+            color: var(--brown-light);
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .site-nav a:hover { color: var(--pink); }
+
+        /* --- хлебные крошки --- */
+
+        .crumbs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 32px;
+            font-size: 13px;
+            color: var(--brown-light);
+        }
+
+        .crumbs a { color: var(--brown-light); text-decoration: none; }
+        .crumbs a:hover { color: var(--pink); }
+        .crumbs .sep { color: var(--gold); }
+
+        /* --- соседние записи --- */
+
+        .neighbours {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 48px;
+        }
+
+        .neighbours a {
+            display: block;
+            padding: 22px 26px;
+            border: 1.5px dashed rgba(201, 169, 122, 0.6);
+            border-radius: 16px;
+            background: rgba(255, 248, 235, 0.4);
+            text-decoration: none;
+            color: inherit;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .neighbours a:hover { background: rgba(255, 248, 235, 0.85); transform: translateY(-2px); }
+
+        .neighbours .next { text-align: right; }
+
+        .neighbours__dir {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 6px;
+        }
+
+        .neighbours__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.35;
+            color: var(--brown-dark);
+        }
+
+        @media (max-width: 560px) {
+            .neighbours { grid-template-columns: 1fr; }
+            .neighbours .next { text-align: left; }
+        }
 
         .page-head { padding: 48px 0 8px; }
 
@@ -483,7 +632,7 @@ const CSS = `    <style>
         /* Номер части — не маркером списка, а отдельной колонкой,
            иначе длинные названия загибаются под цифру. */
         .contents__list li::before {
-            content: counter(chast);
+            content: counter(chast, decimal-leading-zero);
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
             font-size: 11px;
@@ -510,6 +659,47 @@ const CSS = `    <style>
         /* Основной текст лёгкий (Jost 300), поэтому выделение берём
            умеренное: 700 рядом с ним выглядит как крик. */
         .post-body strong { font-weight: 500; color: var(--brown-dark); }
+
+        /* Лид — первый абзац. Отдельной пометки в тексте не требует. */
+        .post-body .lead {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 1.65;
+            color: var(--brown-mid);
+            padding-left: 20px;
+            border-left: 3px solid var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .post-body h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+            margin: 32px 0 14px;
+        }
+
+        .post-body ul, .post-body ol {
+            margin: 0 0 24px 22px;
+            padding-left: 6px;
+        }
+
+        .post-body li { margin-bottom: 10px; }
+        .post-body li::marker { color: var(--gold); }
+
+        .post-body blockquote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            margin: 32px 0;
+            padding: 4px 0 4px 22px;
+            border-left: 3px solid var(--pink);
+        }
 
         .post-body h2 {
             font-family: 'Unbounded', sans-serif;
@@ -707,9 +897,7 @@ ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.
     })}
 
     <div class="wrap">
-        <nav class="topbar">
-            <a href="${SITE}/">← Эмоциональная Гавань</a>
-        </nav>
+${SITE_HEAD}
 
         <header class="page-head">
             <h1 class="page-title">Про<span>чувства</span></h1>
@@ -747,7 +935,27 @@ ${headings.map((h) => `                    <li><a href="#${h.id}">${esc(h.title)
 `;
 }
 
-function renderPost(post, number) {
+// Соседние записи. Посты отсортированы свежими вверх, поэтому «следующая»
+// по чтению — та, что ниже по списку, то есть более ранняя.
+function renderNeighbours(newer, older) {
+    if (!newer && !older) return '';
+
+    const link = (post, dir, label) => post
+        ? `                <a href="${SITE}/${OUT_DIR}/${post.slug}.html" class="${dir}">
+                    <div class="neighbours__dir">${label}</div>
+                    <div class="neighbours__title">${esc(post.title)}</div>
+                </a>`
+        : '                <span></span>';
+
+    return `
+            <nav class="neighbours" aria-label="Соседние записи">
+${link(older, 'prev', '← Предыдущая')}
+${link(newer, 'next', 'Следующая →')}
+            </nav>
+`;
+}
+
+function renderPost(post, number, newer, older) {
     // Разметка для поисковика: что это статья, кто автор, когда вышла
     const jsonld = {
         '@context': 'https://schema.org',
@@ -771,9 +979,14 @@ function renderPost(post, number) {
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 
     <div class="wrap">
-        <nav class="topbar">
-            <a href="${SITE}/blog.html">← Про чувства</a>
-            <a href="${SITE}/">Эмоциональная Гавань</a>
+${SITE_HEAD}
+
+        <nav class="crumbs" aria-label="Хлебные крошки">
+            <a href="${SITE}/">Главная</a>
+            <span class="sep">→</span>
+            <a href="${SITE}/blog.html">Про чувства</a>
+            <span class="sep">→</span>
+            <span>${esc(post.title)}</span>
         </nav>
 
         <article>
@@ -795,6 +1008,7 @@ ${renderContents(post.text)}
             <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>
             <a class="post-foot__link" href="${SITE}/">Посмотреть Гавань</a>
         </div>
+${renderNeighbours(newer, older)}
     </div>
 
 ${FOOTER}
@@ -852,7 +1066,11 @@ for (const file of await readdir(OUT_DIR)) {
 posts.forEach((post, i) => {
     // Номер по хронологии: у первой записи он навсегда останется первым,
     // сколько бы постов ни вышло после неё.
-    queue.push(writeFile(join(OUT_DIR, `${post.slug}.html`), renderPost(post, posts.length - i), 'utf8'));
+    queue.push(writeFile(
+        join(OUT_DIR, `${post.slug}.html`),
+        renderPost(post, posts.length - i, posts[i - 1], posts[i + 1]),
+        'utf8',
+    ));
 });
 
 await Promise.all(queue);
