@@ -283,19 +283,15 @@ const sticky = (withSection) => `<header class="sticky" id="sticky">
 </script>`;
 
 const FOOTER = `    <footer class="footer">
-        <div class="footer-col">
-            <img class="author-photo" src="https://static.emotional-harbor.ru/Avtor.png"
-                 alt="Логотип автора Эмоциональной Гавани — Елена Патрикеева"
-                 width="48" height="48" loading="lazy" decoding="async">
-            <div>
-                <div class="author-name">Патрикеева Елена Александровна</div>
-                <div class="author-inn">ИНН 503505258709</div>
-            </div>
-        </div>
-        <div class="footer-col footer-col--docs">
-            <a href="${SITE}/Oferta.html" class="footer-link">Публичная оферта</a>
+        <div class="footer-line">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
+
+        <div class="footer-line">
             <a href="${SITE}/Privacy.html" class="footer-link">Политика конфиденциальности</a>
+        </div>
+
+        <div class="footer-line footer-contacts">
             <a href="https://t.me/e_lena_patrikeeva" class="footer-link">@e_lena_patrikeeva</a>
+            <a href="mailto:emotional.harbor@gmail.com" class="footer-link">emotional.harbor@gmail.com</a>
         </div>
     </footer>`;
 
@@ -714,17 +710,6 @@ const CSS = `    <style>
         .seal--blue { background: var(--blue); }
         .seal--purple { background: var(--purple); }
 
-        /* Картинка поста на карточке: узкой полосой, чтобы список
-           оставался списком, а не галереей */
-        .card__shot {
-            display: block;
-            width: calc(100% + 148px);
-            margin: -32px -110px 22px -38px;
-            height: 190px;
-            object-fit: cover;
-            border-bottom: 2px solid var(--ink);
-        }
-
         /* Картинка поста на карточке: полосой во всю ширину, чтобы
            список оставался списком, а не галереей */
         .card__shot {
@@ -1009,10 +994,8 @@ const CSS = `    <style>
             color: var(--brown-light);
         }
 
-        .footer-col { display: flex; align-items: center; gap: 12px; }
-        .footer-col--docs { flex-direction: column; align-items: flex-start; gap: 6px; }
-        .author-photo { border-radius: 50%; }
-        .author-name { color: var(--brown-mid); }
+        .footer-line { display: flex; gap: 20px; flex-wrap: wrap; }
+        .footer-contacts { justify-content: flex-end; }
         .footer-link { color: var(--brown-light); text-decoration: none; }
         .footer-link:hover { color: var(--pink); }
 
