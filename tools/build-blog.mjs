@@ -1130,7 +1130,7 @@ ${posts.map((p, i) => `            <a class="card${collectImages(p.text)[0] ? ' 
 ${siteHead(false)}
 
         <header class="page-head">
-            <h1 class="page-title">Про<span>чувства</span></h1>
+            <h1 class="page-title">Про <span>чувства</span></h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
             <div class="hand">без советов, как надо жить</div>
         </header>
