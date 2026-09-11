@@ -1100,7 +1100,7 @@ const CSS = `    <style>
         .footer__contact {
             display: flex;
             align-items: center;
-            width: 300px;
+            width: 260px;
             max-width: 100%;
             min-height: 42px;
             white-space: nowrap;
