@@ -1187,9 +1187,9 @@ ${link(newer, 'next', 'Следующая →')}
 `;
 }
 
-// «Читайте также»: до трёх других записей. Показывается, только когда
-// соседей больше двух — иначе повторяет переходы «предыдущая / следующая»,
-// которые стоят тут же и говорят ровно то же самое.
+// «Читайте также»: до трёх других записей. Когда он есть, переходы
+// «предыдущая / следующая» не рисуются: на трёх постах они показывали
+// ровно те же названия, что и карточки прямо над ними.
 function renderAlso(post, all) {
     const others = all.filter((p) => p.slug !== post.slug).slice(0, 3);
     if (others.length < 2) return '';
@@ -1264,7 +1264,7 @@ ${renderContents(post.text)}
             <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>
             <a class="post-foot__link" href="${SITE}/">Посмотреть Гавань</a>
         </div>
-${renderAlso(post, all)}${renderNeighbours(newer, older)}
+${renderAlso(post, all) || renderNeighbours(newer, older)}
     </div>
 
 ${FOOTER}
