@@ -54,6 +54,25 @@ function humanDate(iso) {
     return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+// Тизер для карточки. Функция в облаке кладёт свой, но режет ровно по счёту
+// символов и рвёт слово пополам, поэтому считаем заново здесь: обрезаем по
+// последнему пробелу и снимаем хвостовую пунктуацию, чтобы не вышло «слова ,…».
+function makeExcerpt(text, limit = 180) {
+    const clean = String(text)
+        .split(/\n/)
+        .filter((line) => !line.trim().startsWith('## '))
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    if (clean.length <= limit) return clean;
+
+    const cut = clean.slice(0, limit);
+    const lastSpace = cut.lastIndexOf(' ');
+
+    return `${cut.slice(0, lastSpace > 0 ? lastSpace : limit).replace(/[\s,.;:!?—–-]+$/, '')}…`;
+}
+
 const SEAL_TONES = ['pink', 'yellow', 'green', 'blue', 'purple'];
 
 const isoDay = (iso) => new Date(iso).toISOString().slice(0, 10);
@@ -564,7 +583,7 @@ ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.
                 <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" aria-hidden="true"></div>
                 <div class="card__date">${humanDate(p.date)}</div>
                 <div class="card__title">${esc(p.title)}</div>
-                <div class="card__excerpt">${esc(p.excerpt)}</div>
+                <div class="card__excerpt">${esc(makeExcerpt(p.text))}</div>
                 <span class="card__more">Читать дальше →</span>
             </a>`).join('\n')}
         </div>`
@@ -607,7 +626,7 @@ function renderPost(post, number) {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: post.title,
-        description: post.excerpt,
+        description: makeExcerpt(post.text),
         datePublished: post.date,
         author: { '@type': 'Person', name: 'Патрикеева Елена Александровна' },
         publisher: { '@type': 'Organization', name: 'Эмоциональная Гавань' },
@@ -617,7 +636,7 @@ function renderPost(post, number) {
 
     return `${head({
         title: `${post.title} · Про чувства`,
-        description: post.excerpt,
+        description: makeExcerpt(post.text),
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
     })}
