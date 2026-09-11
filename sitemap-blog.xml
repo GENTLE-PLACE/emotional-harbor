@@ -7,6 +7,16 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://emotional-harbor.ru/blog/dnevnik-blagodarnosti-ne-rabotaet.html</loc>
+        <lastmod>2026-09-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/tri-radosti-dnya-20260911-od8ki</image:loc>
+            <image:title>Три радости дня</image:title>
+        </image:image>
+    </url>
+    <url>
         <loc>https://emotional-harbor.ru/blog/nazyvat-emotsii-tochno.html</loc>
         <lastmod>2026-09-11</lastmod>
         <changefreq>monthly</changefreq>
