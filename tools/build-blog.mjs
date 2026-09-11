@@ -52,6 +52,17 @@ function toParagraphs(text) {
             return `<h3>${inline(raw.slice(4).trim())}</h3>`;
         }
 
+        // Картинка: ![подпись](адрес). Подпись обязательна — она и
+        // описание для незрячих, и текст под изображением.
+        const picture = raw.match(/^!\[([^\]]*)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)$/);
+        if (picture) {
+            const caption = esc(picture[1].trim());
+            return `<figure class="shot">
+                <img src="${picture[2]}" alt="${caption}" loading="lazy" decoding="async">${caption ? `
+                <figcaption>${caption}</figcaption>` : ''}
+            </figure>`;
+        }
+
         // Цитата: каждая строка начинается с «> »
         if (lines.every((line) => line.startsWith('>'))) {
             const quote = lines.map((line) => inline(line.replace(/^>\s?/, ''))).join('<br>');
@@ -146,6 +157,7 @@ function makeExcerpt(text, limit = 180) {
         .split(/\n/)
         .filter((line) => !line.trim().startsWith('## '))
         .join(' ')
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
         .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/\*\*/g, '')
         .replace(/(?<!\*)\*(\S(?:[^*]*\S)?)\*(?!\*)/g, '$1')
@@ -786,6 +798,26 @@ const CSS = `    <style>
 
         .post-body li { margin-bottom: 10px; }
         .post-body li::marker { color: var(--gold); }
+
+        .shot { margin: 36px 0; }
+
+        .shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 2px solid var(--ink);
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+        }
+
+        .shot figcaption {
+            font-family: 'Caveat', cursive;
+            font-size: 19px;
+            line-height: 1.35;
+            color: var(--brown-light);
+            margin-top: 12px;
+            text-align: center;
+        }
 
         .post-body blockquote {
             font-family: 'Lora', serif;

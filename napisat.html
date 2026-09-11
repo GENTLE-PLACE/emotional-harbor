@@ -253,6 +253,9 @@
         .preview strong { font-weight: 500; }
         .preview a { color: var(--pink); }
         .preview em { font-style: italic; }
+        .preview .shot { margin: 24px 0; }
+        .preview .shot img { display: block; width: 100%; border-radius: 16px; border: 2px solid var(--ink); }
+        .preview .shot figcaption { font-family: 'Caveat', cursive; font-size: 17px; color: var(--brown-light); text-align: center; margin-top: 8px; }
 
         .hidden { display: none !important; }
     </style>
@@ -321,7 +324,7 @@
         </div>
 
         <div class="field">
-            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, **жирный**, *курсив*, [ссылка](адрес)</span></label>
+            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, **жирный**, *курсив*, [ссылка](адрес), ![подпись](адрес картинки)</span></label>
             <textarea id="text" placeholder="Первый абзац станет вводным — он выделится сам."></textarea>
         </div>
 
@@ -655,6 +658,12 @@ function renderMarkup(text) {
         if (!block) return '';
 
         const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+
+        const pic = block.match(/^!\[([^\]]*)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)$/);
+        if (pic) {
+            return '<figure class="shot"><img src="' + pic[2] + '" alt=""><figcaption>' +
+                escape(pic[1]) + '</figcaption></figure>';
+        }
 
         if (block.startsWith('## ')) return '<h2>' + inline(block.slice(3)) + '</h2>';
         if (block.startsWith('### ')) return '<h3>' + inline(block.slice(4)) + '</h3>';
