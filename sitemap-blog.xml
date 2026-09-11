@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
         <loc>https://emotional-harbor.ru/blog.html</loc>
         <changefreq>weekly</changefreq>
@@ -7,8 +8,12 @@
     </url>
     <url>
         <loc>https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html</loc>
-        <lastmod>2026-09-10</lastmod>
+        <lastmod>2026-09-11</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/raskrytyy-dnevnik-emotsiy-20260911-t1ytl.webp</image:loc>
+            <image:title>Раскрытый Дневник эмоций</image:title>
+        </image:image>
     </url>
 </urlset>

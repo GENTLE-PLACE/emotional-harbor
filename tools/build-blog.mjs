@@ -1142,6 +1142,13 @@ ${COOKIE_BAR}
 `;
 }
 
+// Картинки поста — для карты сайта. Поисковик индексирует их отдельно,
+// и подпись идёт туда же: по ней картинку находят в поиске по картинкам.
+function collectImages(text) {
+    return [...String(text).matchAll(/!\[([^\]]*)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)/g)]
+        .map((m) => ({ caption: m[1].trim(), url: m[2] }));
+}
+
 function renderSitemap(posts) {
     const urls = [
         `    <url>
@@ -1151,14 +1158,19 @@ function renderSitemap(posts) {
     </url>`,
         ...posts.map((p) => `    <url>
         <loc>${SITE}/${OUT_DIR}/${p.slug}.html</loc>
-        <lastmod>${isoDay(p.date)}</lastmod>
+        <lastmod>${isoDay(p.updated_at || p.date)}</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.6</priority>${collectImages(p.text).map((img) => `
+        <image:image>
+            <image:loc>${img.url}</image:loc>${img.caption ? `
+            <image:title>${esc(img.caption)}</image:title>` : ''}
+        </image:image>`).join('')}
     </url>`),
     ];
 
     return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.join('\n')}
 </urlset>
 `;
