@@ -283,10 +283,6 @@ const sticky = (withSection) => `<header class="sticky" id="sticky">
 </script>`;
 
 const FOOTER = `    <footer class="footer">
-        <div class="footer__up">
-            <button type="button" class="footer__top-btn" id="toTop">Наверх ↑</button>
-        </div>
-
         <div class="footer__grid">
             <div class="footer__col">
                 <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
@@ -320,6 +316,16 @@ const FOOTER = `    <footer class="footer">
                     </a>
                 </div>
             </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div class="footer__care">Бережно к себе</div>
+            <button type="button" class="footer__top-btn" id="toTop">
+                Наверх
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 19V5M5 12l7-7 7 7"/>
+                </svg>
+            </button>
         </div>
     </footer>
 
@@ -1023,10 +1029,20 @@ const CSS = `    <style>
             color: var(--brown-light);
         }
 
-        .footer__up {
+        .footer__bottom {
             display: flex;
-            justify-content: flex-end;
-            margin-bottom: 18px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 20px;
+        }
+
+        .footer__care {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            line-height: 1;
+            color: var(--brown-light);
         }
 
         .footer__grid {
@@ -1034,6 +1050,8 @@ const CSS = `    <style>
             grid-template-columns: 1.2fr 0.8fr 1fr;
             gap: 32px;
             align-items: start;
+            padding-bottom: 26px;
+            border-bottom: 1px dashed rgba(201, 169, 122, 0.65);
         }
 
         .footer__heading {
@@ -1119,6 +1137,7 @@ const CSS = `    <style>
         @media (max-width: 760px) {
             .footer { padding: 32px 20px 28px; }
             .footer__grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer__bottom { flex-direction: column; align-items: flex-start; }
         }
 
         /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
