@@ -732,97 +732,140 @@
             position: relative;
             z-index: 1;
             width: 100%;
-            padding: 44px 24px 40px;
+            padding: 44px 40px 36px;
             border-top: 1px solid rgba(201, 169, 122, 0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            text-align: center;
+            font-size: 13px;
+            color: var(--brown-light);
         }
 
-        .footer-title {
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1fr;
+            gap: 32px;
+            padding-bottom: 26px;
+            border-bottom: 1px dashed rgba(201, 169, 122, 0.65);
+        }
+
+        .footer__brand {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 1.6px;
-            text-transform: uppercase;
-            color: var(--brown-mid);
-        }
-
-        .footer-pills {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            max-width: 420px;
-        }
-
-        .pill {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 20px;
-            border-radius: 16px;
-            background: rgba(255, 248, 235, 0.75);
             font-size: 15px;
-            text-decoration: none;
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-
-        .pill__icon { width: 20px; height: 20px; flex-shrink: 0; }
-
-        .pill--tg {
-            border: 2px solid var(--pink);
-            color: var(--pink);
-            box-shadow: 3px 4px 0 rgba(232, 122, 156, 0.18);
-        }
-
-        .pill--mail {
-            border: 2px solid rgba(201, 169, 122, 0.6);
             color: var(--brown-dark);
-            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.06);
-        }
-
-        .pill:hover { transform: translate(-1px, -2px); }
-
-        .to-top {
-            margin-top: 6px;
-            padding: 10px 22px;
-            border: 1.5px dashed var(--gold);
-            border-radius: 30px;
-            font-size: 14px;
-            color: var(--brown-mid);
             text-decoration: none;
-            transition: background .2s ease, color .2s ease;
         }
 
-        .to-top:hover { background: rgba(201, 169, 122, 0.16); color: var(--brown-dark); }
+        .footer__brand em { font-style: normal; color: var(--pink); }
 
-        .footer-bottom {
-            margin-top: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+        .footer__hand {
+            font-family: 'Caveat', cursive;
+            font-size: 19px;
+            line-height: 1.3;
+            color: var(--pink);
+            margin-top: 10px;
         }
 
-        .footer-copy {
+        .footer__desc {
+            margin-top: 12px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            max-width: 320px;
+        }
+
+        .footer__heading {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 11px;
             letter-spacing: 1.4px;
             text-transform: uppercase;
             color: var(--brown-mid);
+            margin-bottom: 14px;
         }
 
-        .footer-policy {
-            font-size: 13px;
+        .footer__nav { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+        .footer__nav a {
             color: var(--brown-light);
             text-decoration: none;
+            transition: color .2s ease;
         }
 
-        .footer-policy:hover { color: var(--pink); }
+        .footer__nav a:hover { color: var(--pink); }
+
+        .footer__contacts { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+
+        /* Обе кнопки одинаковые и спокойные; розовеют только под курсором */
+        .footer__contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 14px;
+            border-radius: 12px;
+            background: rgba(247, 239, 224, 0.65);
+            border: 1px solid rgba(201, 169, 122, 0.55);
+            color: var(--brown-dark);
+            text-decoration: none;
+            transition: background .2s ease, border-color .2s ease, color .2s ease,
+                        transform .2s ease, box-shadow .2s ease;
+        }
+
+        .footer__contact:hover {
+            background: #fff;
+            border-color: var(--pink);
+            color: var(--pink);
+            transform: translateY(-2px);
+            box-shadow: 2px 3px 0 rgba(45, 52, 54, 0.08);
+        }
+
+        /* Кружок иконки берёт цвет текста кнопки — поэтому розовеет вместе с ней */
+        .footer__icon { width: 16px; height: 16px; flex-shrink: 0; color: inherit; }
+
+        .footer__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 20px;
+            font-size: 12.5px;
+        }
+
+        .footer__copy {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+        }
+
+        .footer__top-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px dashed var(--gold);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 12.5px;
+            color: var(--brown-mid);
+            cursor: pointer;
+            transition: background .2s ease, border-color .2s ease, color .2s ease;
+        }
+
+        .footer__top-btn:hover {
+            background: var(--pink-soft);
+            border-color: var(--pink);
+            color: var(--brown-dark);
+        }
+
+        @media (max-width: 760px) {
+            .footer { padding: 32px 20px 28px; }
+            .footer__grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer__bottom { flex-direction: column; align-items: flex-start; }
+        }
 
         /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
 
@@ -978,39 +1021,53 @@
     </div>
 
     <footer class="footer">
-        <div class="footer-title">Связаться с автором</div>
+        <div class="footer__grid">
+            <div class="footer__col">
+                <a class="footer__brand" href="https://emotional-harbor.ru/">Эмоциональная <em>Гавань</em></a>
+                <div class="footer__hand">тихое место для бережного внимания к себе</div>
+                <p class="footer__desc">Записи про чувства, которые трудно назвать, и про тихий порядок, который от этого появляется.</p>
+            </div>
 
-        <div class="footer-pills">
-            <a href="https://t.me/e_lena_patrikeeva" class="pill pill--tg">
-                <svg class="pill__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <circle cx="12" cy="12" r="12" fill="#e87a9c"/>
-                    <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
-                </svg>
-                @e_lena_patrikeeva
-            </a>
+            <div class="footer__col">
+                <div class="footer__heading">Разделы</div>
+                <ul class="footer__nav">
+                    <li><a href="https://emotional-harbor.ru/">Главная страница</a></li>
+                    <li><a href="https://emotional-harbor.ru/blog.html">Про чувства</a></li>
+                    <li><a href="https://emotional-harbor.ru/Privacy.html">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
 
-            <a href="mailto:emotional.harbor@gmail.com" class="pill pill--mail">
-                <svg class="pill__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <rect x="2" y="4" width="20" height="16" rx="2" fill="#2D3436"/>
-                    <path d="M3 6l9 6.5L21 6" stroke="#fff" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
-                </svg>
-                emotional.harbor@gmail.com
-            </a>
+            <div class="footer__col">
+                <div class="footer__heading">Связаться с автором</div>
+                <div class="footer__contacts">
+                    <a href="https://t.me/e_lena_patrikeeva" class="footer__contact">
+                        <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="12" cy="12" r="12" fill="currentColor"/>
+                            <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="#fff8eb"/>
+                        </svg>
+                        @e_lena_patrikeeva
+                    </a>
+                    <a href="mailto:emotional.harbor@gmail.com" class="footer__contact">
+                        <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect x="2" y="4" width="20" height="16" rx="3" fill="currentColor"/>
+                            <path d="M3.5 6.5L12 12.8l8.5-6.3" stroke="#fff8eb" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+                        </svg>
+                        emotional.harbor@gmail.com
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <a href="#" class="to-top" id="toTop">Наверх ↑</a>
-
-        <div class="footer-bottom">
-            <div class="footer-copy">© 2026 Эмоциональная Гавань</div>
-            <a href="https://emotional-harbor.ru/Privacy.html" class="footer-policy">Политика конфиденциальности</a>
+        <div class="footer__bottom">
+            <div class="footer__copy">© 2026 Эмоциональная Гавань</div>
+            <button type="button" class="footer__top-btn" id="toTop">Наверх ↑</button>
         </div>
     </footer>
 
 <script>
 (function () {
     var up = document.getElementById('toTop');
-    if (up) up.addEventListener('click', function (e) {
-        e.preventDefault();
+    if (up) up.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 })();
