@@ -216,6 +216,28 @@ const siteHead = (withSection) => `        <header class="site-head">
             <a class="site-section" href="${SITE}/blog.html">Про <em>чувства</em></a>` : ''}
         </header>`;
 
+const sticky = (withSection) => `<header class="sticky" id="sticky">
+    <a class="sticky__brand" href="${SITE}/">Эмоциональная <em>Гавань</em></a>${withSection ? `
+    <a class="sticky__link" href="${SITE}/blog.html">Про <em>чувства</em></a>` : ''}
+</header>
+
+<script>
+(function () {
+    var bar = document.getElementById('sticky');
+    var last = window.scrollY;
+
+    window.addEventListener('scroll', function () {
+        var now = window.scrollY;
+
+        if (now <= 0) bar.classList.remove('visible');
+        else if (now < last) bar.classList.add('visible');
+        else if (now > last && now > 100) bar.classList.remove('visible');
+
+        last = now;
+    }, { passive: true });
+})();
+</script>`;
+
 const FOOTER = `    <footer class="footer">
         <div class="footer-col">
             <img class="author-photo" src="https://static.emotional-harbor.ru/Avtor.png"
@@ -298,6 +320,47 @@ const CSS = `    <style>
         }
 
         .topbar a:hover { color: var(--pink); border-bottom-color: var(--pink); }
+
+        /* --- липкая шапка --- */
+
+        .sticky {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            height: 64px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: rgba(247, 239, 224, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(201, 169, 122, 0.3);
+            transform: translateY(-100%);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .sticky.visible { transform: translateY(0); }
+
+        .sticky__brand, .sticky__link {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: -0.3px;
+            color: var(--brown-dark);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .sticky__link { font-size: 13px; }
+        .sticky__brand em, .sticky__link em { font-style: normal; color: var(--pink); }
+
+        @media (max-width: 560px) {
+            .sticky { padding: 0 16px; height: 56px; }
+            .sticky__brand { font-size: 13px; }
+            .sticky__link { font-size: 11px; }
+        }
 
         /* --- шапка сайта --- */
 
@@ -905,6 +968,8 @@ ${siteHead(false)}
 
 ${FOOTER}
 
+${sticky(false)}
+
 ${COOKIE_BAR}
 
 </body>
@@ -1005,6 +1070,8 @@ ${renderNeighbours(newer, older)}
     </div>
 
 ${FOOTER}
+
+${sticky(true)}
 
 ${COOKIE_BAR}
 
