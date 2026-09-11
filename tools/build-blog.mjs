@@ -16,8 +16,12 @@
 //
 // Запускается сам через .github/workflows/blog.yml. Руками:  node tools/build-blog.mjs
 
-import { writeFile, mkdir, readdir, rm } from 'node:fs/promises';
+import { writeFile, mkdir, readdir, rm, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
+// Цитаты автор ведёт отдельно — это подарок читателю, а не анонс статьи.
+// Выгружены из базы «Цитаты» в Notion; пополняются правкой этого файла.
+const QUOTES = JSON.parse(await readFile(new URL('./quotes.json', import.meta.url), 'utf8'));
 
 const API = 'https://blog.emotional-harbor.ru/posts';
 const SITE = 'https://emotional-harbor.ru';
@@ -641,6 +645,68 @@ const CSS = `    <style>
             max-width: 520px;
         }
 
+        /* --- цитата дня --- */
+
+        .quote {
+            margin-top: 36px;
+            padding: 28px 32px 24px;
+            background: rgba(247, 208, 138, 0.22);
+            border: 1.5px dashed var(--gold);
+            border-radius: 20px;
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
+        }
+
+        .quote__label {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 10.5px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 14px;
+        }
+
+        .quote__text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--brown-dark);
+            transition: opacity .25s ease;
+        }
+
+        .quote__author {
+            font-family: 'Caveat', cursive;
+            font-size: 19px;
+            line-height: 1.3;
+            color: var(--brown-light);
+            margin-top: 10px;
+            min-height: 8px;
+            transition: opacity .25s ease;
+        }
+
+        .quote__more {
+            margin-top: 16px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--pink);
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .quote__more:hover { color: var(--brown-dark); }
+
+        @media (max-width: 560px) {
+            .quote { padding: 22px 20px 20px; }
+            .quote__text { font-size: 16px; }
+        }
+
         .rule {
             height: 1px;
             background: repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px);
@@ -1107,6 +1173,52 @@ ${CSS}
 <body>`;
 }
 
+// Цитата дня. Первая выбирается при сборке, дальше читатель может вытянуть
+// другую — это маленькая радость, а не навигация, поэтому ссылок никуда нет.
+function renderQuote() {
+    if (!QUOTES.length) return '';
+
+    const first = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+
+    return `
+        <section class="quote" id="quote">
+            <div class="quote__label">Цитата дня</div>
+            <p class="quote__text" id="quoteText">${esc(first.text)}</p>
+            <div class="quote__author" id="quoteAuthor">${first.author ? esc(first.author) : ''}</div>
+            <button type="button" class="quote__more" id="quoteMore">✦ Вытянуть другую</button>
+        </section>
+
+        <script>
+        (function () {
+            var quotes = ${JSON.stringify(QUOTES)};
+            var text = document.getElementById('quoteText');
+            var author = document.getElementById('quoteAuthor');
+            var shown = text.textContent;
+
+            document.getElementById('quoteMore').addEventListener('click', function () {
+                var pick = quotes[Math.floor(Math.random() * quotes.length)];
+                // Дважды подряд одну и ту же не показываем: это выглядит как поломка
+                var guard = 0;
+                while (pick.text === shown && quotes.length > 1 && guard++ < 20) {
+                    pick = quotes[Math.floor(Math.random() * quotes.length)];
+                }
+
+                text.style.opacity = '0';
+                author.style.opacity = '0';
+
+                setTimeout(function () {
+                    text.textContent = pick.text;
+                    author.textContent = pick.author || '';
+                    shown = pick.text;
+                    text.style.opacity = '1';
+                    author.style.opacity = '1';
+                }, 250);
+            });
+        })();
+        <\/script>
+`;
+}
+
 // ---------- страницы ----------
 
 function renderList(posts) {
@@ -1140,6 +1252,8 @@ ${siteHead(false)}
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
             <div class="hand">без советов, как надо жить</div>
         </header>
+
+${renderQuote()}
 
         <div class="rule"></div>
 
