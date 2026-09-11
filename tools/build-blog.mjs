@@ -290,8 +290,21 @@ const FOOTER = `    <footer class="footer">
         </div>
 
         <div class="footer-line footer-contacts">
-            <a href="https://t.me/e_lena_patrikeeva" class="footer-link">@e_lena_patrikeeva</a>
-            <a href="mailto:emotional.harbor@gmail.com" class="footer-link">emotional.harbor@gmail.com</a>
+            <a href="https://t.me/e_lena_patrikeeva" class="footer-link">
+                <svg class="footer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" fill="#9a7050"/>
+                    <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
+                </svg>
+                @e_lena_patrikeeva
+            </a>
+            <a href="mailto:emotional.harbor@gmail.com" class="footer-link">
+                <svg class="footer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" fill="#9a7050"/>
+                    <path d="M5.2 8.2h13.6v7.6H5.2z" fill="white"/>
+                    <path d="M5.2 8.2L12 12.8l6.8-4.6" stroke="#9a7050" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                </svg>
+                emotional.harbor@gmail.com
+            </a>
         </div>
     </footer>`;
 
@@ -996,7 +1009,16 @@ const CSS = `    <style>
 
         .footer-line { display: flex; gap: 20px; flex-wrap: wrap; }
         .footer-contacts { justify-content: flex-end; }
-        .footer-link { color: var(--brown-light); text-decoration: none; }
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--brown-light);
+            text-decoration: none;
+        }
+
+        /* Иконки те же, что в подвале лендинга — 12 пикселей, кружок с волной */
+        .footer-icon { width: 12px; height: 12px; flex-shrink: 0; }
         .footer-link:hover { color: var(--pink); }
 
         /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
