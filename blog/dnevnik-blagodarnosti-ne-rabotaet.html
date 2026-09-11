@@ -775,7 +775,7 @@
 
         .footer__grid {
             display: grid;
-            grid-template-columns: 1.7fr 1.3fr 1.3fr;
+            grid-template-columns: 1.7fr 1.3fr minmax(250px, 1.3fr);
             gap: 32px;
             align-items: start;
         }
@@ -811,6 +811,7 @@
             width: 100%;
             max-width: 100%;
             min-height: 42px;
+            white-space: nowrap;
             gap: 10px;
             padding: 9px 14px;
             border-radius: 12px;
