@@ -521,6 +521,15 @@
            умеренное: 700 рядом с ним выглядит как крик. */
         .post-body strong { font-weight: 500; color: var(--brown-dark); }
 
+        .post-body a {
+            color: var(--pink);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(232, 122, 156, 0.35);
+            transition: border-color .2s ease;
+        }
+
+        .post-body a:hover { border-bottom-color: var(--pink); }
+
         /* Лид — первый абзац. Отдельной пометки в тексте не требует. */
         .post-body .lead {
             font-family: 'Lora', serif;

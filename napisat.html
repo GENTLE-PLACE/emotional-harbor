@@ -226,6 +226,7 @@
         .preview ul, .preview ol { margin: 0 0 20px 22px; }
         .preview li { margin-bottom: 8px; }
         .preview strong { font-weight: 500; }
+        .preview a { color: var(--pink); }
 
         .hidden { display: none !important; }
     </style>
@@ -285,7 +286,7 @@
         </div>
 
         <div class="field">
-            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, **жирный**</span></label>
+            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, **жирный**, [ссылка](адрес)</span></label>
             <textarea id="text" placeholder="Первый абзац станет вводным — он выделится сам."></textarea>
         </div>
 
@@ -510,7 +511,9 @@ el('deleteBtn').addEventListener('click', async () => {
 // ## часть, ### подзаголовок, - список, 1. список, > цитата, **жирный**.
 function renderMarkup(text) {
     const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    const inline = (s) => escape(s).replace(/\*\*(\S(?:[^*]*\S)?)\*\*/g, '<strong>$1</strong>');
+    const inline = (s) => escape(s)
+        .replace(/\[([^\]]+)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>')
+        .replace(/\*\*(\S(?:[^*]*\S)?)\*\*/g, '<strong>$1</strong>');
     let leadUsed = false;
 
     return text.replace(/\r\n/g, '\n').split(/\n{2,}/).map((raw) => {

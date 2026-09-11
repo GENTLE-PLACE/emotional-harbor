@@ -40,7 +40,7 @@ function toParagraphs(text) {
 
     const block = (raw) => {
         const lines = raw.split('\n').map((line) => line.trim()).filter(Boolean);
-        const inline = (s) => bold(esc(s));
+        const inline = (s) => inlineMarkup(esc(s));
 
         // Подзаголовок части — по нему же строится оглавление
         if (raw.startsWith('## ')) {
@@ -110,6 +110,18 @@ function readingMinutes(text) {
 // внутрь тегов не может попасть ничего постороннего из текста поста.
 const bold = (html) => html.replace(/\*\*(\S(?:[^*]*\S)?)\*\*/g, '<strong>$1</strong>');
 
+// Ссылка: [текст](адрес). Тоже после экранирования.
+// Пропускаем только http(s) и адреса от корня сайта — на случай, если
+// в текст когда-нибудь попадёт что-то вроде javascript:.
+const link = (html) => html.replace(
+    /\[([^\]]+)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)/g,
+    (whole, label, href) => `<a href="${href}">${label}</a>`,
+);
+
+// Разметка внутри строки: сначала ссылки, потом жирный —
+// чтобы **жирное** работало и внутри текста ссылки.
+const inlineMarkup = (html) => bold(link(html));
+
 // Подзаголовки нужны дважды: разметить текст и собрать из них оглавление.
 // Адрес якоря — просто номер по порядку: русские буквы в адресе браузер
 // показывает как %D0%BF%D1%80…, читать такое невозможно.
@@ -130,6 +142,7 @@ function makeExcerpt(text, limit = 180) {
         .split(/\n/)
         .filter((line) => !line.trim().startsWith('## '))
         .join(' ')
+        .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/\*\*/g, '')
         .replace(/\s+/g, ' ')
         .trim();
@@ -729,6 +742,15 @@ const CSS = `    <style>
         /* Основной текст лёгкий (Jost 300), поэтому выделение берём
            умеренное: 700 рядом с ним выглядит как крик. */
         .post-body strong { font-weight: 500; color: var(--brown-dark); }
+
+        .post-body a {
+            color: var(--pink);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(232, 122, 156, 0.35);
+            transition: border-color .2s ease;
+        }
+
+        .post-body a:hover { border-bottom-color: var(--pink); }
 
         /* Лид — первый абзац. Отдельной пометки в тексте не требует. */
         .post-body .lead {
