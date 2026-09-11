@@ -1069,7 +1069,7 @@ const CSS = `    <style>
 
         .footer__grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1.3fr;
+            grid-template-columns: 1.7fr 1.3fr 1.3fr;
             gap: 32px;
             align-items: start;
         }
@@ -1087,6 +1087,7 @@ const CSS = `    <style>
         .footer__nav { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 
         .footer__nav a {
+            white-space: nowrap;
             color: var(--brown-light);
             text-decoration: none;
             transition: color .2s ease;
