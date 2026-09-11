@@ -303,16 +303,16 @@ const FOOTER = `    <footer class="footer">
                 <div class="footer__contacts">
                     <a href="https://t.me/e_lena_patrikeeva" class="footer__contact">
                         <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <circle cx="12" cy="12" r="12" fill="#9a7050"/>
+                            <circle cx="12" cy="12" r="12" fill="#3a3228"/>
                             <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
                         </svg>
                         @e_lena_patrikeeva
                     </a>
                     <a href="mailto:emotional.harbor@gmail.com" class="footer__contact">
                         <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <circle cx="12" cy="12" r="12" fill="#9a7050"/>
+                            <circle cx="12" cy="12" r="12" fill="#3a3228"/>
                             <path d="M5.2 8.2h13.6v7.6H5.2z" fill="white"/>
-                            <path d="M5.2 8.2L12 12.8l6.8-4.6" stroke="#9a7050" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                            <path d="M5.2 8.2L12 12.8l6.8-4.6" stroke="#3a3228" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
                         </svg>
                         emotional.harbor@gmail.com
                     </a>
@@ -1073,6 +1073,14 @@ const CSS = `    <style>
             grid-template-columns: 1.7fr 1.3fr minmax(250px, 1.3fr);
             gap: 32px;
             align-items: start;
+        }
+
+        /* Копирайт стоит у нижнего края своей колонки, вровень
+           с последней ссылкой разделов */
+        .footer__grid > .footer__col:first-child {
+            align-self: stretch;
+            display: flex;
+            align-items: flex-end;
         }
 
         .footer__heading {
