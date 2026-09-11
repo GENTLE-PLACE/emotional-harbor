@@ -16,6 +16,7 @@
             --gold: #c9a97a;
             --pink: #e87a9c;
             --green: #b8e0d2;
+            --ink: #2D3436;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,11 +25,9 @@
             min-height: 100vh;
             background: var(--beige);
             font-family: 'Jost', sans-serif;
+            font-weight: 300;
             color: var(--brown-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            padding: 40px 20px 80px;
             position: relative;
         }
 
@@ -43,43 +42,26 @@
             pointer-events: none;
         }
 
-        .card {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 520px;
-            border-radius: 24px;
-            background: rgba(255, 248, 235, 0.85);
-            border: 1.5px solid rgba(201, 169, 122, 0.4);
-            box-shadow: 5px 7px 0 rgba(120,80,40,0.08);
-            padding: 0 40px 40px;
-            overflow: hidden;
-        }
+        .wrap { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
 
-        .card__stripe {
-            width: calc(100% + 80px);
-            margin-left: -40px;
-            height: 5px;
-            background: var(--pink);
-            margin-bottom: 28px;
-        }
-
-        .card__title {
+        h1 {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 24px;
-            letter-spacing: -0.7px;
+            font-size: 26px;
+            letter-spacing: -0.8px;
             margin-bottom: 6px;
         }
 
-        .card__note {
-            font-size: 13.5px;
-            color: var(--brown-light);
-            line-height: 1.5;
-            margin-bottom: 28px;
-        }
+        .note { font-size: 13.5px; color: var(--brown-light); line-height: 1.6; }
 
-        form { display: flex; flex-direction: column; gap: 16px; }
+        .card {
+            background: rgba(255, 248, 235, 0.85);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+            padding: 30px 34px;
+            margin-top: 24px;
+        }
 
         label {
             display: block;
@@ -89,58 +71,61 @@
             margin-bottom: 6px;
         }
 
-        input, textarea {
+        .hint { font-weight: 300; color: var(--brown-light); }
+
+        input, textarea, select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 13px 15px;
             font-family: 'Jost', sans-serif;
+            font-weight: 300;
             font-size: 15px;
             color: var(--brown-dark);
             background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(201, 169, 122, 0.4);
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
             border-radius: 12px;
-            transition: border-color 0.2s ease, background 0.2s ease;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: var(--pink);
             background: #fff;
         }
 
-        textarea {
-            min-height: 220px;
-            resize: vertical;
-            line-height: 1.6;
-        }
+        textarea { min-height: 320px; resize: vertical; line-height: 1.7; }
 
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(201,169,122,0.35) 20%, rgba(201,169,122,0.35) 80%, transparent);
-            margin: 4px 0;
-        }
+        .field { margin-bottom: 16px; }
+
+        .row { display: flex; gap: 14px; flex-wrap: wrap; }
+        .row > * { flex: 1 1 240px; }
+
+        .buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
 
         button {
-            padding: 15px 20px;
-            font-family: 'Jost', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--beige);
-            background: var(--pink);
-            border: none;
+            padding: 14px 22px;
+            border: 2px solid var(--ink);
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 4px 5px 0 rgba(232,122,156,0.3);
-            transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--brown-dark);
+            box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.12);
+            transition: transform .2s ease, box-shadow .2s ease;
         }
 
         button:hover:not(:disabled) {
             transform: translate(-1px, -2px);
-            box-shadow: 6px 7px 0 rgba(232,122,156,0.3);
+            box-shadow: 5px 6px 0 rgba(45, 52, 54, 0.12);
         }
 
         button:disabled { opacity: 0.5; cursor: default; }
+
+        .btn--main { background: var(--pink); color: #fff; }
+        .btn--danger { background: transparent; color: #9b3f5a; border-color: #9b3f5a; box-shadow: 3px 4px 0 rgba(155,63,90,0.16); }
+        .btn--quiet { border-style: dashed; box-shadow: none; }
 
         .status {
             display: none;
@@ -148,112 +133,428 @@
             line-height: 1.6;
             padding: 12px 16px;
             border-radius: 10px;
+            margin-top: 18px;
         }
 
         .status.visible { display: block; }
+        .status--ok { background: rgba(184, 224, 210, 0.4); color: #2a4a3c; }
+        .status--error { background: rgba(232, 122, 156, 0.14); color: #9b3f5a; }
 
-        .status--ok {
-            background: rgba(184, 224, 210, 0.35);
-            color: #2a4a3c;
+        /* --- список записей --- */
+
+        .posts { margin-top: 14px; }
+
+        .post-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding: 14px 0;
+            border-bottom: 1px dashed rgba(201, 169, 122, 0.5);
         }
 
-        .status--error {
-            background: rgba(232, 122, 156, 0.12);
-            color: #9b3f5a;
+        .post-row:last-child { border-bottom: none; }
+
+        .post-row__main { flex: 1 1 280px; min-width: 0; }
+
+        .post-row__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.35;
         }
+
+        .post-row__meta { font-size: 12.5px; color: var(--brown-light); margin-top: 4px; }
+
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-right: 8px;
+        }
+
+        .tag--draft { background: rgba(201, 169, 122, 0.3); color: var(--brown-mid); }
+        .tag--live { background: rgba(184, 224, 210, 0.5); color: #2a4a3c; }
+
+        .post-row__actions { display: flex; gap: 8px; }
+        .post-row__actions button { padding: 9px 14px; font-size: 10px; }
+
+        /* --- предпросмотр --- */
+
+        .preview {
+            display: none;
+            margin-top: 24px;
+            padding: 30px 34px;
+            background: rgba(255, 248, 235, 0.85);
+            border: 2px dashed var(--gold);
+            border-radius: 20px;
+        }
+
+        .preview.visible { display: block; }
+
+        .preview h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 19px;
+            margin: 28px 0 14px;
+        }
+
+        .preview h3 { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 15px; margin: 24px 0 10px; }
+        .preview p { margin-bottom: 18px; line-height: 1.85; }
+
+        .preview .lead {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--brown-mid);
+            padding-left: 18px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .preview blockquote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 17px;
+            color: var(--brown-mid);
+            padding-left: 20px;
+            border-left: 3px solid var(--pink);
+            margin: 24px 0;
+        }
+
+        .preview ul, .preview ol { margin: 0 0 20px 22px; }
+        .preview li { margin-bottom: 8px; }
+        .preview strong { font-weight: 500; }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="card__stripe"></div>
-        <div class="card__title">Написать в блог</div>
-        <div class="card__note">Только твоя дверь. Пароль не запоминается — вводи каждый раз заново.</div>
+<div class="wrap">
 
-        <form id="postForm">
-            <div>
-                <label for="password">Пароль</label>
-                <input type="password" id="password" required autocomplete="off">
-            </div>
+    <h1>Написать в блог</h1>
+    <div class="note">Только своя дверь. Пароль не запоминается — вводится каждый раз заново.</div>
 
-            <div>
-                <label for="title">Заголовок</label>
-                <input type="text" id="title" required>
-            </div>
-
-            <div>
-                <label for="text">Текст</label>
-                <textarea id="text" required placeholder="Пишите как думаете — тизер для карточки и адрес ссылки сайт соберёт сам."></textarea>
-            </div>
-
-            <div class="divider"></div>
-
-            <div id="status" class="status"></div>
-
-            <button type="submit" id="submitBtn">Опубликовать</button>
-        </form>
+    <!-- ВХОД -->
+    <div class="card" id="gate">
+        <div class="field">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" autocomplete="off">
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn--main" id="enterBtn">Войти</button>
+        </div>
+        <div id="gateStatus" class="status"></div>
     </div>
 
-    <script>
-        const BLOG_API = 'https://blog.emotional-harbor.ru/posts';
+    <!-- СПИСОК ЗАПИСЕЙ -->
+    <div class="card hidden" id="listCard">
+        <label>Записи</label>
+        <div class="posts" id="posts"></div>
+        <div class="buttons">
+            <button type="button" class="btn--main" id="newBtn">Новая запись</button>
+        </div>
+    </div>
 
-        const form = document.getElementById('postForm');
-        const statusEl = document.getElementById('status');
-        const submitBtn = document.getElementById('submitBtn');
+    <!-- РЕДАКТОР -->
+    <div class="card hidden" id="editorCard">
+        <div class="field">
+            <label for="title">Заголовок</label>
+            <input type="text" id="title">
+        </div>
 
-        function showStatus(text, ok) {
-            statusEl.textContent = text;
-            statusEl.className = 'status visible ' + (ok ? 'status--ok' : 'status--error');
+        <div class="row">
+            <div class="field">
+                <label for="slug">Адрес страницы <span class="hint">— латиницей, можно оставить пустым</span></label>
+                <input type="text" id="slug" placeholder="соберётся из заголовка">
+            </div>
+            <div class="field">
+                <label for="status">Состояние</label>
+                <select id="status">
+                    <option value="published">Опубликовано</option>
+                    <option value="draft">Черновик</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="excerpt">Описание для поиска <span class="hint">— одна фраза; пустое посчитается из текста</span></label>
+            <input type="text" id="excerpt">
+        </div>
+
+        <div class="field">
+            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, **жирный**</span></label>
+            <textarea id="text" placeholder="Первый абзац станет вводным — он выделится сам."></textarea>
+        </div>
+
+        <div class="buttons">
+            <button type="button" class="btn--main" id="saveBtn">Опубликовать</button>
+            <button type="button" id="draftBtn">В черновики</button>
+            <button type="button" class="btn--quiet" id="previewBtn">Предпросмотр</button>
+            <button type="button" class="btn--quiet" id="cancelBtn">К списку</button>
+            <button type="button" class="btn--danger hidden" id="deleteBtn">Удалить</button>
+        </div>
+
+        <div id="editorStatus" class="status"></div>
+    </div>
+
+    <!-- ПРЕДПРОСМОТР -->
+    <div class="preview" id="preview"></div>
+
+</div>
+
+<script>
+const BLOG_API = 'https://blog.emotional-harbor.ru/posts';
+
+// Пароль живёт только в памяти вкладки: ни в cookie, ни в хранилище браузера.
+// Закрыли вкладку — забыт.
+let password = '';
+let posts = [];
+let editing = null;   // редактируемая запись или null, если новая
+
+const el = (id) => document.getElementById(id);
+
+function show(box, text, okFlag) {
+    box.textContent = text;
+    box.className = 'status visible ' + (okFlag ? 'status--ok' : 'status--error');
+}
+
+function hide(box) { box.className = 'status'; }
+
+async function api(method, body) {
+    const res = await fetch(BLOG_API, {
+        method,
+        headers: { 'Content-Type': 'application/json', 'X-Blog-Password': password },
+        body: body ? JSON.stringify(body) : undefined,
+    });
+
+    if (res.status === 401) throw new Error('Неверный пароль');
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'Что-то не сработало. Попробуйте ещё раз.');
+
+    return data;
+}
+
+// ---------- вход ----------
+
+el('enterBtn').addEventListener('click', async () => {
+    password = el('password').value;
+    if (!password) return show(el('gateStatus'), 'Введите пароль.', false);
+
+    el('enterBtn').disabled = true;
+    try {
+        posts = await api('GET');
+        el('gate').classList.add('hidden');
+        el('listCard').classList.remove('hidden');
+        renderPosts();
+    } catch (err) {
+        show(el('gateStatus'), err.message, false);
+    } finally {
+        el('enterBtn').disabled = false;
+    }
+});
+
+el('password').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') el('enterBtn').click();
+});
+
+// ---------- список ----------
+
+function renderPosts() {
+    const box = el('posts');
+    box.textContent = '';
+
+    if (!posts.length) {
+        const empty = document.createElement('div');
+        empty.className = 'note';
+        empty.textContent = 'Записей пока нет.';
+        box.appendChild(empty);
+        return;
+    }
+
+    posts.forEach((post) => {
+        const row = document.createElement('div');
+        row.className = 'post-row';
+
+        const main = document.createElement('div');
+        main.className = 'post-row__main';
+
+        const title = document.createElement('div');
+        title.className = 'post-row__title';
+        title.textContent = post.title;
+
+        const meta = document.createElement('div');
+        meta.className = 'post-row__meta';
+
+        const tag = document.createElement('span');
+        const draft = post.status === 'draft';
+        tag.className = 'tag ' + (draft ? 'tag--draft' : 'tag--live');
+        tag.textContent = draft ? 'черновик' : 'опубликовано';
+
+        meta.appendChild(tag);
+        meta.appendChild(document.createTextNode(
+            new Date(post.date).toLocaleDateString('ru-RU') + ' · /' + post.slug
+        ));
+
+        main.appendChild(title);
+        main.appendChild(meta);
+
+        const actions = document.createElement('div');
+        actions.className = 'post-row__actions';
+
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.textContent = 'Изменить';
+        edit.addEventListener('click', () => openEditor(post));
+
+        actions.appendChild(edit);
+
+        row.appendChild(main);
+        row.appendChild(actions);
+        box.appendChild(row);
+    });
+}
+
+// ---------- редактор ----------
+
+function openEditor(post) {
+    editing = post || null;
+
+    el('title').value = post ? post.title : '';
+    el('slug').value = post ? post.slug : '';
+    el('excerpt').value = post ? (post.excerpt || '') : '';
+    el('text').value = post ? post.text : '';
+    el('status').value = post && post.status === 'draft' ? 'draft' : 'published';
+
+    el('saveBtn').textContent = post ? 'Сохранить' : 'Опубликовать';
+    el('deleteBtn').classList.toggle('hidden', !post);
+
+    el('listCard').classList.add('hidden');
+    el('editorCard').classList.remove('hidden');
+    el('preview').classList.remove('visible');
+    hide(el('editorStatus'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToList() {
+    el('editorCard').classList.add('hidden');
+    el('preview').classList.remove('visible');
+    el('listCard').classList.remove('hidden');
+    renderPosts();
+}
+
+el('newBtn').addEventListener('click', () => openEditor(null));
+el('cancelBtn').addEventListener('click', backToList);
+
+async function save(statusValue) {
+    const title = el('title').value.trim();
+    const text = el('text').value.trim();
+
+    if (!title || !text) return show(el('editorStatus'), 'Заполните заголовок и текст.', false);
+
+    const payload = {
+        action: editing ? 'update' : 'create',
+        title,
+        text,
+        excerpt: el('excerpt').value.trim(),
+        status: statusValue,
+        newSlug: el('slug').value.trim(),
+    };
+
+    if (editing) payload.slug = editing.slug;
+
+    el('saveBtn').disabled = true;
+    el('draftBtn').disabled = true;
+
+    try {
+        await api('POST', payload);
+        posts = await api('GET');
+        show(el('editorStatus'),
+            statusValue === 'draft'
+                ? 'Сохранено в черновики — на сайте не появится.'
+                : 'Опубликовано. Страница соберётся в течение четверти часа.',
+            true);
+        editing = null;
+        setTimeout(backToList, 1200);
+    } catch (err) {
+        show(el('editorStatus'), err.message, false);
+    } finally {
+        el('saveBtn').disabled = false;
+        el('draftBtn').disabled = false;
+    }
+}
+
+el('saveBtn').addEventListener('click', () => save(el('status').value));
+el('draftBtn').addEventListener('click', () => save('draft'));
+
+el('deleteBtn').addEventListener('click', async () => {
+    if (!editing) return;
+    if (!confirm('Удалить запись «' + editing.title + '»? Вернуть её будет нельзя.')) return;
+
+    try {
+        await api('POST', { action: 'delete', slug: editing.slug });
+        posts = await api('GET');
+        editing = null;
+        backToList();
+    } catch (err) {
+        show(el('editorStatus'), err.message, false);
+    }
+});
+
+// ---------- предпросмотр ----------
+
+// Те же правила разметки, что у сборщика страниц: пустая строка — абзац,
+// ## часть, ### подзаголовок, - список, 1. список, > цитата, **жирный**.
+function renderMarkup(text) {
+    const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const inline = (s) => escape(s).replace(/\*\*(\S(?:[^*]*\S)?)\*\*/g, '<strong>$1</strong>');
+    let leadUsed = false;
+
+    return text.replace(/\r\n/g, '\n').split(/\n{2,}/).map((raw) => {
+        const block = raw.trim();
+        if (!block) return '';
+
+        const lines = block.split('\n').map((l) => l.trim()).filter(Boolean);
+
+        if (block.startsWith('## ')) return '<h2>' + inline(block.slice(3)) + '</h2>';
+        if (block.startsWith('### ')) return '<h3>' + inline(block.slice(4)) + '</h3>';
+
+        if (lines.every((l) => l.startsWith('>'))) {
+            return '<blockquote>' + lines.map((l) => inline(l.replace(/^>\s?/, ''))).join('<br>') + '</blockquote>';
         }
 
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
+        if (lines.every((l) => l.startsWith('- '))) {
+            return '<ul>' + lines.map((l) => '<li>' + inline(l.slice(2)) + '</li>').join('') + '</ul>';
+        }
 
-            const password = document.getElementById('password').value;
-            const title = document.getElementById('title').value.trim();
-            const text = document.getElementById('text').value.trim();
+        if (lines.every((l) => /^\d+[.)]\s/.test(l))) {
+            return '<ol>' + lines.map((l) => '<li>' + inline(l.replace(/^\d+[.)]\s+/, '')) + '</li>').join('') + '</ol>';
+        }
 
-            if (!title || !text) {
-                showStatus('Заполните заголовок и текст.', false);
-                return;
-            }
+        const cls = leadUsed ? '' : ' class="lead"';
+        leadUsed = true;
+        return '<p' + cls + '>' + inline(block).replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+}
 
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Публикуем…';
+el('previewBtn').addEventListener('click', () => {
+    const box = el('preview');
+    const title = el('title').value.trim();
+    const words = el('text').value.trim().split(/\s+/).filter(Boolean).length;
+    const minutes = Math.max(1, Math.round(words / 180));
 
-            try {
-                const res = await fetch(BLOG_API, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Blog-Password': password,
-                    },
-                    body: JSON.stringify({ title, text }),
-                });
+    box.innerHTML =
+        '<div class="note">Так это будет выглядеть · ' + minutes + ' мин чтения</div>' +
+        '<h2>' + title.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</h2>' +
+        renderMarkup(el('text').value);
 
-                if (res.status === 401) {
-                    showStatus('Неверный пароль.', false);
-                    return;
-                }
-
-                if (!res.ok) {
-                    const data = await res.json().catch(() => ({}));
-                    showStatus(data.error || 'Что-то не сработало. Попробуйте ещё раз.', false);
-                    return;
-                }
-
-                const post = await res.json();
-                showStatus('Опубликовано ✓ — «' + post.title + '»', true);
-                document.getElementById('title').value = '';
-                document.getElementById('text').value = '';
-            } catch (err) {
-                showStatus('Не получилось связаться с блогом. Проверьте соединение.', false);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Опубликовать';
-            }
-        });
-    </script>
+    box.classList.add('visible');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
 
 </body>
 </html>

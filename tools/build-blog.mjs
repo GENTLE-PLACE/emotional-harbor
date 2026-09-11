@@ -479,10 +479,10 @@ const CSS = `    <style>
         /* Круглая печать с номером записи — прямая цитата с обложек */
         .seal {
             position: absolute;
-            top: 26px;
-            right: 26px;
-            width: 58px;
-            height: 58px;
+            top: 24px;
+            right: 24px;
+            width: 86px;
+            height: 86px;
             border: 2.5px solid var(--ink);
             border-radius: 50%;
             transform: rotate(-7deg);
@@ -497,16 +497,17 @@ const CSS = `    <style>
 
         .seal__num {
             font-family: 'Unbounded', sans-serif;
-            font-weight: 800;
-            font-size: 17px;
+            font-weight: 700;
+            font-size: 20px;
         }
 
+        /* Подпись лёгкая: она поясняет цифру, а не спорит с ней */
         .seal__unit {
             font-family: 'Jost', sans-serif;
-            font-weight: 500;
-            font-size: 10px;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            font-weight: 300;
+            font-size: 9px;
+            letter-spacing: 0.3px;
+            margin-top: 5px;
         }
 
         .seal::before {
@@ -600,11 +601,7 @@ const CSS = `    <style>
 
         .contents {
             margin-top: 34px;
-            padding: 26px 30px 24px;
-            background: rgba(255, 248, 235, 0.75);
-            border: 2px solid var(--ink);
-            border-radius: 20px;
-            box-shadow: 4px 5px 0 rgba(45, 52, 54, 0.1);
+            padding: 4px 0 0;
         }
 
         .contents__title {
@@ -879,12 +876,12 @@ function renderList(posts) {
         ? `<div class="cards">
 ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">
                 <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" title="Время чтения">
-                    <span class="seal__num">${readingMinutes(p.text)}</span>
-                    <span class="seal__unit">мин</span>
+                    <span class="seal__num">${readingMinutes(p.text)} мин</span>
+                    <span class="seal__unit">время чтения</span>
                 </div>
                 <div class="card__date">${humanDate(p.date)}</div>
                 <div class="card__title">${esc(p.title)}</div>
-                <div class="card__excerpt">${esc(makeExcerpt(p.text))}</div>
+                <div class="card__excerpt">${esc(p.excerpt || makeExcerpt(p.text))}</div>
                 <span class="card__more">Читать дальше →</span>
             </a>`).join('\n')}
         </div>`
@@ -961,7 +958,7 @@ function renderPost(post, number, newer, older) {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: post.title,
-        description: makeExcerpt(post.text),
+        description: post.excerpt || makeExcerpt(post.text),
         datePublished: post.date,
         author: { '@type': 'Person', name: 'Патрикеева Елена Александровна' },
         publisher: { '@type': 'Organization', name: 'Эмоциональная Гавань' },
@@ -971,7 +968,7 @@ function renderPost(post, number, newer, older) {
 
     return `${head({
         title: `${post.title} · Про чувства`,
-        description: makeExcerpt(post.text),
+        description: post.excerpt || makeExcerpt(post.text),
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
     })}
@@ -993,8 +990,8 @@ ${SITE_HEAD}
             <div class="post-head">
                 <div class="post-date">${humanDate(post.date)}</div>
                 <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" title="Время чтения">
-                    <span class="seal__num">${readingMinutes(post.text)}</span>
-                    <span class="seal__unit">мин</span>
+                    <span class="seal__num">${readingMinutes(post.text)} мин</span>
+                    <span class="seal__unit">время чтения</span>
                 </div>
             </div>
             <h1 class="post-title">${esc(post.title)}</h1>
@@ -1047,8 +1044,12 @@ ${urls.join('\n')}
 const res = await fetch(API);
 if (!res.ok) throw new Error(`Блог ответил ${res.status} — сборку не делаем, старые файлы остаются на месте`);
 
-const posts = await res.json();
-if (!Array.isArray(posts)) throw new Error('Блог вернул не список постов');
+const all = await res.json();
+if (!Array.isArray(all)) throw new Error('Блог вернул не список постов');
+
+// Черновики на сайт не идут. Страница уже опубликованного поста,
+// переведённого в черновики, удаляется ниже вместе с остальным лишним.
+const posts = all.filter((p) => p.status !== 'draft');
 
 posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 

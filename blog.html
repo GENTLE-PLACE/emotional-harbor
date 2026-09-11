@@ -287,10 +287,10 @@
         /* Круглая печать с номером записи — прямая цитата с обложек */
         .seal {
             position: absolute;
-            top: 26px;
-            right: 26px;
-            width: 58px;
-            height: 58px;
+            top: 24px;
+            right: 24px;
+            width: 86px;
+            height: 86px;
             border: 2.5px solid var(--ink);
             border-radius: 50%;
             transform: rotate(-7deg);
@@ -305,16 +305,17 @@
 
         .seal__num {
             font-family: 'Unbounded', sans-serif;
-            font-weight: 800;
-            font-size: 17px;
+            font-weight: 700;
+            font-size: 20px;
         }
 
+        /* Подпись лёгкая: она поясняет цифру, а не спорит с ней */
         .seal__unit {
             font-family: 'Jost', sans-serif;
-            font-weight: 500;
-            font-size: 10px;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            font-weight: 300;
+            font-size: 9px;
+            letter-spacing: 0.3px;
+            margin-top: 5px;
         }
 
         .seal::before {
@@ -408,11 +409,7 @@
 
         .contents {
             margin-top: 34px;
-            padding: 26px 30px 24px;
-            background: rgba(255, 248, 235, 0.75);
-            border: 2px solid var(--ink);
-            border-radius: 20px;
-            box-shadow: 4px 5px 0 rgba(45, 52, 54, 0.1);
+            padding: 4px 0 0;
         }
 
         .contents__title {
@@ -674,12 +671,12 @@
         <div class="cards">
             <a class="card" href="https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html">
                 <div class="seal seal--pink" title="Время чтения">
-                    <span class="seal__num">4</span>
-                    <span class="seal__unit">мин</span>
+                    <span class="seal__num">4 мин</span>
+                    <span class="seal__unit">время чтения</span>
                 </div>
                 <div class="card__date">10 сентября 2026</div>
                 <div class="card__title">Как вести дневник эмоций, если раньше не получалось</div>
-                <div class="card__excerpt">Вы уже пробовали. Скорее всего, не один раз. Первые три дня получалось хорошо. Потом был день, когда писать не хотелось, и Вы пропустили. Потом ещё один. На четвёртый Вы открыли…</div>
+                <div class="card__excerpt">Вы уже пробовали. Скорее всего, не один раз. Первые три дня получалось хорошо. Потом был день, когда писать не хотелось, и Вы пропустили. Потом ещё один. На чет…</div>
                 <span class="card__more">Читать дальше →</span>
             </a>
         </div>
