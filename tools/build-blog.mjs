@@ -1042,16 +1042,21 @@ const CSS = `    <style>
             padding: 32px 40px 28px;
         }
 
+        /* Те же доли, что и в плашке: строка и кнопка встают под своими
+           колонками, а не просто по краям */
         .footer__bottom {
             max-width: 864px;
             margin: 18px auto 0;
-            display: flex;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 0.9fr;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 14px;
+            gap: 32px;
             padding: 0 4px;
         }
+
+        .footer__care { grid-column: 2; text-align: center; }
+
+        .footer__top-btn { grid-column: 3; justify-self: end; }
 
         .footer__care {
             font-size: 12.5px;
@@ -1060,7 +1065,7 @@ const CSS = `    <style>
 
         .footer__grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr 1fr;
+            grid-template-columns: 1.6fr 1fr 0.9fr;
             gap: 32px;
             align-items: start;
         }
@@ -1153,7 +1158,9 @@ const CSS = `    <style>
             .footer { padding: 8px 16px 40px; }
             .footer__card { padding: 26px 22px 22px; }
             .footer__grid { grid-template-columns: 1fr; gap: 24px; }
-            .footer__bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .footer__bottom { grid-template-columns: 1fr; gap: 12px; }
+            .footer__care { grid-column: 1; text-align: left; }
+            .footer__top-btn { grid-column: 1; justify-self: start; }
         }
 
         /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
