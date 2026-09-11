@@ -179,6 +179,13 @@ function makeExcerpt(text, limit = 180) {
     return `${cut.slice(0, lastSpace > 0 ? lastSpace : limit).replace(/[\s,.;:!?—–-]+$/, '')}…`;
 }
 
+// Описание может быть написано автором, а может лежать с прежних времён
+// вместе с разметкой внутри. Чистим в любом случае — makeExcerpt как раз
+// умеет выкидывать картинки, ссылки и звёздочки.
+const cleanExcerpt = (post) => post.excerpt
+    ? makeExcerpt(post.excerpt, 260)
+    : makeExcerpt(post.text);
+
 const SEAL_TONES = ['pink', 'yellow', 'green', 'blue', 'purple'];
 
 const isoDay = (iso) => new Date(iso).toISOString().slice(0, 10);
@@ -1033,7 +1040,7 @@ ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.
                 </div>
                 <div class="card__date">${humanDate(p.date)}</div>
                 <div class="card__title">${esc(p.title)}</div>
-                <div class="card__excerpt">${esc(p.excerpt || makeExcerpt(p.text))}</div>
+                <div class="card__excerpt">${esc(cleanExcerpt(p))}</div>
                 <span class="card__more">Читать дальше →</span>
             </a>`).join('\n')}
         </div>`
@@ -1112,7 +1119,7 @@ function renderPost(post, number, newer, older) {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: post.title,
-        description: post.excerpt || makeExcerpt(post.text),
+        description: cleanExcerpt(post),
         datePublished: post.date,
         // Дата правки: поисковик показывает «обновлено», а не только «вышло»
         ...(post.updated_at ? { dateModified: post.updated_at } : {}),
@@ -1124,11 +1131,12 @@ function renderPost(post, number, newer, older) {
 
     return `${head({
         title: `${post.title} · Про чувства`,
-        description: post.excerpt || makeExcerpt(post.text),
+        description: cleanExcerpt(post),
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
         modified: post.updated_at,
-        image: (collectImages(post.text)[0] || {}).url,
+        // Для превью берём jpeg-копию: webp Телеграм в превью не показывает
+        image: ((collectImages(post.text)[0] || {}).url || '').replace(/\.webp$/, '.jpg'),
     })}
 
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>

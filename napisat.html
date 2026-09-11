@@ -668,7 +668,12 @@ function shrink(file) {
                 canvas.height = height;
                 canvas.getContext('2d').drawImage(img, 0, 0, width, height);
 
-                resolve(canvas.toDataURL('image/webp', 0.82));
+                resolve({
+                    webp: canvas.toDataURL('image/webp', 0.82),
+                    // Телеграм и часть соцсетей не показывают webp в превью,
+                    // поэтому рядом кладём обычный jpeg
+                    jpeg: canvas.toDataURL('image/jpeg', 0.86),
+                });
             };
             img.src = reader.result;
         };
@@ -698,9 +703,14 @@ el('imageFile').addEventListener('change', async () => {
     el('imageBtn').textContent = 'Загружаю…';
 
     try {
-        const data = await shrink(file);
+        const copies = await shrink(file);
         const caption = prompt('Подпись к картинке — её увидят под изображением и прочитают вслух программы для незрячих:', '') || '';
-        const res = await api('POST', { action: 'image', name: caption || file.name, data });
+        const res = await api('POST', {
+            action: 'image',
+            name: caption || file.name,
+            data: copies.webp,
+            dataJpeg: copies.jpeg,
+        });
 
         insertAtCursor(el('text'), '![' + caption + '](' + res.url + ')');
         show(el('editorStatus'), 'Картинка добавлена в текст.', true);
