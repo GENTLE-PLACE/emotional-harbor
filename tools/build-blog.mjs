@@ -283,6 +283,7 @@ const sticky = (withSection) => `<header class="sticky" id="sticky">
 </script>`;
 
 const FOOTER = `    <footer class="footer">
+      <div class="footer__card">
         <div class="footer__grid">
             <div class="footer__col">
                 <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
@@ -327,6 +328,7 @@ const FOOTER = `    <footer class="footer">
                 </svg>
             </button>
         </div>
+      </div>
     </footer>
 
 <script>
@@ -1023,10 +1025,18 @@ const CSS = `    <style>
             position: relative;
             z-index: 1;
             width: 100%;
-            padding: 44px 40px 36px;
-            border-top: 1px solid rgba(201, 169, 122, 0.4);
+            padding: 12px 40px 56px;
             font-size: 13px;
             color: var(--brown-light);
+        }
+
+        /* Та же плашка, что у подвала лендинга: кремовая заливка,
+           тонкая золотая рамка, скругление 16 */
+        .footer__card {
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px solid rgba(201, 169, 122, 0.35);
+            border-radius: 16px;
+            padding: 32px 40px 28px;
         }
 
         /* Те же колонки, что и выше: тогда кнопка встаёт ровно под
@@ -1140,7 +1150,8 @@ const CSS = `    <style>
         }
 
         @media (max-width: 760px) {
-            .footer { padding: 32px 20px 28px; }
+            .footer { padding: 8px 16px 40px; }
+            .footer__card { padding: 26px 22px 22px; }
             .footer__grid { grid-template-columns: 1fr; gap: 24px; }
             .footer__bottom { grid-template-columns: 1fr; gap: 16px; }
             .footer__top-btn { grid-column: 1; }
