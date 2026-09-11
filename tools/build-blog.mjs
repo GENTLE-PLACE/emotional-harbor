@@ -35,14 +35,16 @@ const esc = (s) => String(s)
 // Строка, начатая с «## », становится подзаголовком: по ним поисковику видно
 // устройство статьи, а читателю — где можно перевести дух.
 function toParagraphs(text) {
+    let heading = 0;
+
     return String(text)
         .replace(/\r\n/g, '\n')
         .split(/\n{2,}/)
         .map((p) => p.trim())
         .filter(Boolean)
         .map((p) => p.startsWith('## ')
-            ? `<h2>${esc(p.slice(3).trim())}</h2>`
-            : `<p>${esc(p).replace(/\n/g, '<br>')}</p>`)
+            ? `<h2 id="chast-${++heading}">${bold(esc(p.slice(3).trim()))}</h2>`
+            : `<p>${bold(esc(p)).replace(/\n/g, '<br>')}</p>`)
         .join('\n            ');
 }
 
@@ -54,6 +56,30 @@ function humanDate(iso) {
     return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+// Время чтения. 180 слов в минуту — средний темп для русского текста
+// (обычно называют 170–200). Меньше минуты не показываем: «0 мин» звучит
+// как насмешка над человеком, который всё-таки читает.
+function readingMinutes(text) {
+    const words = String(text).trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 180));
+}
+
+// Жирный текст: **вот так**. Вызывается уже ПОСЛЕ экранирования, поэтому
+// внутрь тегов не может попасть ничего постороннего из текста поста.
+const bold = (html) => html.replace(/\*\*(\S(?:[^*]*\S)?)\*\*/g, '<strong>$1</strong>');
+
+// Подзаголовки нужны дважды: разметить текст и собрать из них оглавление.
+// Адрес якоря — просто номер по порядку: русские буквы в адресе браузер
+// показывает как %D0%BF%D1%80…, читать такое невозможно.
+function collectHeadings(text) {
+    return String(text)
+        .replace(/\r\n/g, '\n')
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line.startsWith('## '))
+        .map((line, i) => ({ id: `chast-${i + 1}`, title: line.slice(3).trim() }));
+}
+
 // Тизер для карточки. Функция в облаке кладёт свой, но режет ровно по счёту
 // символов и рвёт слово пополам, поэтому считаем заново здесь: обрезаем по
 // последнему пробелу и снимаем хвостовую пунктуацию, чтобы не вышло «слова ,…».
@@ -62,6 +88,7 @@ function makeExcerpt(text, limit = 180) {
         .split(/\n/)
         .filter((line) => !line.trim().startsWith('## '))
         .join(' ')
+        .replace(/\*\*/g, '')
         .replace(/\s+/g, ' ')
         .trim();
 
@@ -305,12 +332,32 @@ const CSS = `    <style>
             position: absolute;
             top: 26px;
             right: 26px;
-            width: 54px;
-            height: 54px;
+            width: 58px;
+            height: 58px;
             border: 2.5px solid var(--ink);
             border-radius: 50%;
             transform: rotate(-7deg);
             box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.14);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            color: var(--ink);
+        }
+
+        .seal__num {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .seal__unit {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
         }
 
         .seal::before {
@@ -400,8 +447,69 @@ const CSS = `    <style>
             margin: 14px 0 0;
         }
 
+        /* --- оглавление --- */
+
+        .contents {
+            margin-top: 34px;
+            padding: 26px 30px 24px;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 4px 5px 0 rgba(45, 52, 54, 0.1);
+        }
+
+        .contents__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 14px;
+        }
+
+        .contents__list {
+            list-style: none;
+            counter-reset: chast;
+        }
+
+        .contents__list li {
+            counter-increment: chast;
+            display: flex;
+            gap: 12px;
+            padding: 5px 0;
+        }
+
+        /* Номер части — не маркером списка, а отдельной колонкой,
+           иначе длинные названия загибаются под цифру. */
+        .contents__list li::before {
+            content: counter(chast);
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            color: var(--pink);
+            padding-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .contents__list a {
+            color: var(--brown-dark);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 169, 122, 0.6);
+            transition: color .2s ease, border-color .2s ease;
+        }
+
+        .contents__list a:hover { color: var(--pink); border-bottom-color: var(--pink); }
+
+        /* Чтобы заголовок части не прятался под верхний край окна при переходе */
+        .post-body h2 { scroll-margin-top: 24px; }
+
         .post-body { margin-top: 34px; }
         .post-body p { margin-bottom: 22px; }
+
+        /* Основной текст лёгкий (Jost 300), поэтому выделение берём
+           умеренное: 700 рядом с ним выглядит как крик. */
+        .post-body strong { font-weight: 500; color: var(--brown-dark); }
 
         .post-body h2 {
             font-family: 'Unbounded', sans-serif;
@@ -580,7 +688,10 @@ function renderList(posts) {
     const cards = posts.length
         ? `<div class="cards">
 ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">
-                <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" aria-hidden="true"></div>
+                <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" title="Время чтения">
+                    <span class="seal__num">${readingMinutes(p.text)}</span>
+                    <span class="seal__unit">мин</span>
+                </div>
                 <div class="card__date">${humanDate(p.date)}</div>
                 <div class="card__title">${esc(p.title)}</div>
                 <div class="card__excerpt">${esc(makeExcerpt(p.text))}</div>
@@ -620,6 +731,22 @@ ${COOKIE_BAR}
 `;
 }
 
+// Оглавление показываем только с трёх частей: на двух пунктах оно
+// выглядит как содержание книги из двух страниц.
+function renderContents(text) {
+    const headings = collectHeadings(text);
+    if (headings.length < 3) return '';
+
+    return `
+            <nav class="contents" aria-label="Содержание">
+                <div class="contents__title">В этом тексте</div>
+                <ol class="contents__list">
+${headings.map((h) => `                    <li><a href="#${h.id}">${esc(h.title)}</a></li>`).join('\n')}
+                </ol>
+            </nav>
+`;
+}
+
 function renderPost(post, number) {
     // Разметка для поисковика: что это статья, кто автор, когда вышла
     const jsonld = {
@@ -652,10 +779,13 @@ function renderPost(post, number) {
         <article>
             <div class="post-head">
                 <div class="post-date">${humanDate(post.date)}</div>
-                <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" aria-hidden="true"></div>
+                <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" title="Время чтения">
+                    <span class="seal__num">${readingMinutes(post.text)}</span>
+                    <span class="seal__unit">мин</span>
+                </div>
             </div>
             <h1 class="post-title">${esc(post.title)}</h1>
-
+${renderContents(post.text)}
             <div class="post-body">
             ${toParagraphs(post.text)}
             </div>

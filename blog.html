@@ -191,12 +191,32 @@
             position: absolute;
             top: 26px;
             right: 26px;
-            width: 54px;
-            height: 54px;
+            width: 58px;
+            height: 58px;
             border: 2.5px solid var(--ink);
             border-radius: 50%;
             transform: rotate(-7deg);
             box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.14);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            color: var(--ink);
+        }
+
+        .seal__num {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .seal__unit {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
         }
 
         .seal::before {
@@ -286,8 +306,69 @@
             margin: 14px 0 0;
         }
 
+        /* --- оглавление --- */
+
+        .contents {
+            margin-top: 34px;
+            padding: 26px 30px 24px;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 4px 5px 0 rgba(45, 52, 54, 0.1);
+        }
+
+        .contents__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 14px;
+        }
+
+        .contents__list {
+            list-style: none;
+            counter-reset: chast;
+        }
+
+        .contents__list li {
+            counter-increment: chast;
+            display: flex;
+            gap: 12px;
+            padding: 5px 0;
+        }
+
+        /* Номер части — не маркером списка, а отдельной колонкой,
+           иначе длинные названия загибаются под цифру. */
+        .contents__list li::before {
+            content: counter(chast);
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            color: var(--pink);
+            padding-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .contents__list a {
+            color: var(--brown-dark);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201, 169, 122, 0.6);
+            transition: color .2s ease, border-color .2s ease;
+        }
+
+        .contents__list a:hover { color: var(--pink); border-bottom-color: var(--pink); }
+
+        /* Чтобы заголовок части не прятался под верхний край окна при переходе */
+        .post-body h2 { scroll-margin-top: 24px; }
+
         .post-body { margin-top: 34px; }
         .post-body p { margin-bottom: 22px; }
+
+        /* Основной текст лёгкий (Jost 300), поэтому выделение берём
+           умеренное: 700 рядом с ним выглядит как крик. */
+        .post-body strong { font-weight: 500; color: var(--brown-dark); }
 
         .post-body h2 {
             font-family: 'Unbounded', sans-serif;
@@ -448,7 +529,10 @@
 
         <div class="cards">
             <a class="card" href="https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html">
-                <div class="seal seal--pink" aria-hidden="true"></div>
+                <div class="seal seal--pink" title="Время чтения">
+                    <span class="seal__num">4</span>
+                    <span class="seal__unit">мин</span>
+                </div>
                 <div class="card__date">10 сентября 2026</div>
                 <div class="card__title">Как вести дневник эмоций, если раньше не получалось</div>
                 <div class="card__excerpt">Вы уже пробовали. Скорее всего, не один раз. Первые три дня получалось хорошо. Потом был день, когда писать не хотелось, и Вы пропустили. Потом ещё один. На четвёртый Вы открыли…</div>
