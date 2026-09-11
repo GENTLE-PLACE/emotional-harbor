@@ -647,27 +647,16 @@ const CSS = `    <style>
 
         /* --- цитата дня --- */
 
-        /* Единственное тёмное пятно на странице — поэтому и заметно.
-           Светлая карточка тут терялась: вокруг всё того же тона. */
+        /* Светлая, как была, но с чернильной обводкой: пунктирная золотая
+           путалась с врезками, которых на странице и так много. */
         .quote {
             position: relative;
             margin-top: 36px;
-            padding: 30px 34px 26px;
-            background: var(--brown-dark);
+            padding: 28px 32px 24px;
+            background: rgba(247, 208, 138, 0.22);
             border: 2px solid var(--ink);
             border-radius: 20px;
-            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.16);
-            transform: rotate(-0.4deg);
-        }
-
-        /* Тонкая золотая рамка внутри — как на печати */
-        .quote::before {
-            content: '';
-            position: absolute;
-            inset: 7px;
-            border: 1px dashed rgba(201, 169, 122, 0.45);
-            border-radius: 14px;
-            pointer-events: none;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
         }
 
         .quote__label {
@@ -676,7 +665,7 @@ const CSS = `    <style>
             font-size: 10.5px;
             letter-spacing: 1.4px;
             text-transform: uppercase;
-            color: var(--gold);
+            color: var(--brown-light);
             margin-bottom: 14px;
         }
 
@@ -686,7 +675,7 @@ const CSS = `    <style>
             font-weight: 500;
             font-size: 17.5px;
             line-height: 1.7;
-            color: var(--beige);
+            color: var(--brown-dark);
             transition: opacity .25s ease;
         }
 
@@ -694,7 +683,7 @@ const CSS = `    <style>
             font-family: 'Caveat', cursive;
             font-size: 19px;
             line-height: 1.3;
-            color: var(--gold);
+            color: var(--brown-light);
             margin-top: 10px;
             min-height: 8px;
             transition: opacity .25s ease;
@@ -707,7 +696,7 @@ const CSS = `    <style>
             font-size: 10px;
             letter-spacing: 1.2px;
             text-transform: uppercase;
-            color: var(--pink-soft);
+            color: var(--pink);
             background: none;
             border: none;
             padding: 0;
@@ -715,7 +704,7 @@ const CSS = `    <style>
             transition: color .2s ease;
         }
 
-        .quote__more:hover { color: #fff; }
+        .quote__more:hover { color: var(--brown-dark); }
 
         @media (max-width: 560px) {
             .quote { padding: 22px 20px 20px; }
