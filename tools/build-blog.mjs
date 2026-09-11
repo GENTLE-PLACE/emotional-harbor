@@ -286,10 +286,6 @@ const FOOTER = `    <footer class="footer">
       <div class="footer__card">
         <div class="footer__grid">
             <div class="footer__col">
-                <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
-            </div>
-
-            <div class="footer__col">
                 <div class="footer__heading">Разделы</div>
                 <ul class="footer__nav">
                     <li><a href="${SITE}/">Главная страница</a></li>
@@ -323,6 +319,7 @@ const FOOTER = `    <footer class="footer">
       </div>
 
       <div class="footer__bottom">
+            <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
             <div class="footer__care">Бережно к себе</div>
             <button type="button" class="footer__top-btn" id="toTop">
                 Наверх
@@ -1050,7 +1047,7 @@ const CSS = `    <style>
             max-width: 864px;
             margin: 18px auto 0;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
             min-height: 34px;
             padding: 0 4px;
@@ -1070,28 +1067,10 @@ const CSS = `    <style>
 
         .footer__grid {
             display: grid;
-            grid-template-columns: 1.7fr 1.3fr minmax(250px, 1.3fr);
+            grid-template-columns: 1fr minmax(250px, 1fr);
             gap: 32px;
             align-items: start;
         }
-
-        /* Копирайт стоит у нижнего края своей колонки, вровень
-           с последней ссылкой разделов */
-        .footer__grid > .footer__col:first-child {
-            align-self: stretch;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        /* Плашки опускаются к нижнему краю своей колонки — тогда нижняя
-           из них встаёт вровень с копирайтом слева */
-        .footer__grid > .footer__col:last-child {
-            align-self: stretch;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .footer__grid > .footer__col:last-child .footer__contacts { margin-top: auto; }
 
         .footer__heading {
             font-family: 'Unbounded', sans-serif;
