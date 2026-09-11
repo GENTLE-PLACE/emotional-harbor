@@ -647,8 +647,8 @@ const CSS = `    <style>
 
         /* --- цитата дня --- */
 
-        /* Светлая, как была, но с чернильной обводкой: пунктирная золотая
-           путалась с врезками, которых на странице и так много. */
+        /* Пунктирная золотая обводка — как была с самого начала.
+           От карточек постов её отличает ширина, а не материал. */
         .quote {
             position: relative;
             margin-top: 36px;
@@ -657,9 +657,9 @@ const CSS = `    <style>
             max-width: 54%;
             padding: 28px 32px 24px;
             background: rgba(247, 208, 138, 0.22);
-            border: 2px solid var(--ink);
+            border: 1.5px dashed var(--gold);
             border-radius: 20px;
-            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
         }
 
         .quote__label {
