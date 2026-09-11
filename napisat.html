@@ -331,6 +331,8 @@
         <div class="buttons">
             <button type="button" class="btn--main" id="saveBtn">Опубликовать</button>
             <button type="button" id="draftBtn">В черновики</button>
+            <button type="button" id="imageBtn">Добавить картинку</button>
+            <input type="file" id="imageFile" accept="image/*" class="hidden">
             <button type="button" class="btn--quiet" id="previewBtn">Предпросмотр</button>
             <button type="button" class="btn--quiet" id="cancelBtn">К списку</button>
             <button type="button" class="btn--danger hidden" id="deleteBtn">Удалить</button>
@@ -638,6 +640,76 @@ el('deleteBtn').addEventListener('click', async () => {
         backToList();
     } catch (err) {
         show(el('editorStatus'), err.message, false);
+    }
+});
+
+
+// ---------- картинки ----------
+//
+// Файл уменьшается прямо в браузере и превращается в webp, и только потом
+// уходит на сервер. Так с телефона не улетает восьмимегабайтная фотография,
+// а на страницу попадает картинка весом в сотню килобайт.
+
+const IMAGE_WIDTH = 1400;
+
+function shrink(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Не получилось прочитать файл.'));
+        reader.onload = () => {
+            const img = new Image();
+            img.onerror = () => reject(new Error('Это не похоже на картинку.'));
+            img.onload = () => {
+                const width = Math.min(IMAGE_WIDTH, img.width);
+                const height = Math.round(img.height * width / img.width);
+
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+
+                resolve(canvas.toDataURL('image/webp', 0.82));
+            };
+            img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Вставляем разметку картинки туда, где стоит курсор, отделяя пустыми строками
+function insertAtCursor(textarea, block) {
+    const at = textarea.selectionStart;
+    const before = textarea.value.slice(0, at).replace(/\s+$/, '');
+    const after = textarea.value.slice(at).replace(/^\s+/, '');
+
+    textarea.value = (before ? before + '\n\n' : '') + block + (after ? '\n\n' + after : '\n');
+
+    textarea.focus();
+    saveDraft();
+}
+
+el('imageBtn').addEventListener('click', () => el('imageFile').click());
+
+el('imageFile').addEventListener('change', async () => {
+    const file = el('imageFile').files[0];
+    if (!file) return;
+
+    el('imageBtn').disabled = true;
+    el('imageBtn').textContent = 'Загружаю…';
+
+    try {
+        const data = await shrink(file);
+        const caption = prompt('Подпись к картинке — её увидят под изображением и прочитают вслух программы для незрячих:', '') || '';
+        const res = await api('POST', { action: 'image', name: caption || file.name, data });
+
+        insertAtCursor(el('text'), '![' + caption + '](' + res.url + ')');
+        show(el('editorStatus'), 'Картинка добавлена в текст.', true);
+    } catch (err) {
+        show(el('editorStatus'), err.message, false);
+    } finally {
+        el('imageFile').value = '';
+        el('imageBtn').disabled = false;
+        el('imageBtn').textContent = 'Добавить картинку';
     }
 });
 
