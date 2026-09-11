@@ -652,6 +652,9 @@ const CSS = `    <style>
         .quote {
             position: relative;
             margin-top: 36px;
+            /* Половина ширины: цитата — не объявление, ей идёт быть заметкой
+               на полях, а не полосой во всю страницу */
+            max-width: 54%;
             padding: 28px 32px 24px;
             background: rgba(247, 208, 138, 0.22);
             border: 2px solid var(--ink);
@@ -705,6 +708,11 @@ const CSS = `    <style>
         }
 
         .quote__more:hover { color: var(--brown-dark); }
+
+        /* На узком экране половина ширины превратилась бы в колодец текста */
+        @media (max-width: 720px) {
+            .quote { max-width: 100%; }
+        }
 
         @media (max-width: 560px) {
             .quote { padding: 22px 20px 20px; }
