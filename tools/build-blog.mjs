@@ -899,9 +899,10 @@ const CSS = `    <style>
         }
     </style>`;
 
-function head({ title, description, url, published }) {
+function head({ title, description, url, published, modified }) {
     const article = published ? `
-    <meta property="article:published_time" content="${published}">` : '';
+    <meta property="article:published_time" content="${published}">${modified ? `
+    <meta property="article:modified_time" content="${modified}">` : ''}` : '';
 
     return `<!DOCTYPE html>
 <html lang="ru">
@@ -1021,6 +1022,8 @@ function renderPost(post, number, newer, older) {
         headline: post.title,
         description: post.excerpt || makeExcerpt(post.text),
         datePublished: post.date,
+        // Дата правки: поисковик показывает «обновлено», а не только «вышло»
+        ...(post.updated_at ? { dateModified: post.updated_at } : {}),
         author: { '@type': 'Person', name: 'Патрикеева Елена Александровна' },
         publisher: { '@type': 'Organization', name: 'Эмоциональная Гавань' },
         mainEntityOfPage: `${SITE}/${OUT_DIR}/${post.slug}.html`,
@@ -1032,6 +1035,7 @@ function renderPost(post, number, newer, older) {
         description: post.excerpt || makeExcerpt(post.text),
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
+        modified: post.updated_at,
     })}
 
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
