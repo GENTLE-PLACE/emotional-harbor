@@ -1078,9 +1078,12 @@ const CSS = `    <style>
         .footer__contacts { display: flex; flex-direction: column; gap: 10px; }
 
         /* Обе кнопки одинаковые и спокойные; розовеют только под курсором */
+        /* Ширина фиксированная: по колонке они растягивались на пол-экрана */
         .footer__contact {
             display: flex;
             align-items: center;
+            width: 290px;
+            max-width: 100%;
             min-height: 42px;
             gap: 10px;
             padding: 9px 14px;
