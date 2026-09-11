@@ -651,7 +651,7 @@ const CSS = `    <style>
            От карточек постов её отличает ширина, а не материал. */
         .quote {
             position: relative;
-            margin-top: 36px;
+            margin-top: 48px;
             /* Половина ширины: цитата — не объявление, ей идёт быть заметкой
                на полях, а не полосой во всю страницу */
             max-width: 54%;
@@ -1265,11 +1265,10 @@ ${siteHead(false)}
             <div class="hand">без советов, как надо жить</div>
         </header>
 
-${renderQuote()}
-
         <div class="rule"></div>
 
         ${cards}
+${renderQuote()}
     </div>
 
 ${FOOTER}
