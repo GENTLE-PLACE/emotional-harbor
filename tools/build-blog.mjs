@@ -662,6 +662,10 @@ const CSS = `    <style>
             border-bottom: 2px solid var(--ink);
         }
 
+        /* Когда сверху картинка, печать съезжает под неё: на пёстром фоне
+           подпись «время чтения» не читалась */
+        .card--shot .seal { top: 212px; }
+
         .card__date {
             font-family: 'Caveat', cursive;
             font-weight: 600;
@@ -991,6 +995,7 @@ const CSS = `    <style>
         @media (max-width: 560px) {
             .card, .post-foot { padding: 24px 22px; }
             .card__shot { width: calc(100% + 44px); margin: -24px -22px 18px; height: 150px; }
+            .card--shot .seal { top: 160px; }
             .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
             .cookie-bar__actions { flex-direction: column; }
             .cookie-bar__btn { width: 100%; }
@@ -1032,7 +1037,7 @@ ${CSS}
 function renderList(posts) {
     const cards = posts.length
         ? `<div class="cards">
-${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.slug}.html">${collectImages(p.text)[0] ? `
+${posts.map((p, i) => `            <a class="card${collectImages(p.text)[0] ? ' card--shot' : ''}" href="${SITE}/${OUT_DIR}/${p.slug}.html">${collectImages(p.text)[0] ? `
                 <img class="card__shot" src="${collectImages(p.text)[0].url}" alt="" loading="lazy" decoding="async">` : ''}
                 <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" title="Время чтения">
                     <span class="seal__num">${readingMinutes(p.text)} мин</span>

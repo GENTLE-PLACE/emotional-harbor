@@ -408,6 +408,10 @@
             border-bottom: 2px solid var(--ink);
         }
 
+        /* Когда сверху картинка, печать съезжает под неё: на пёстром фоне
+           подпись «время чтения» не читалась */
+        .card--shot .seal { top: 212px; }
+
         .card__date {
             font-family: 'Caveat', cursive;
             font-weight: 600;
@@ -737,6 +741,7 @@
         @media (max-width: 560px) {
             .card, .post-foot { padding: 24px 22px; }
             .card__shot { width: calc(100% + 44px); margin: -24px -22px 18px; height: 150px; }
+            .card--shot .seal { top: 160px; }
             .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
             .cookie-bar__actions { flex-direction: column; }
             .cookie-bar__btn { width: 100%; }
@@ -759,7 +764,7 @@
         <div class="rule"></div>
 
         <div class="cards">
-            <a class="card" href="https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html">
+            <a class="card card--shot" href="https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html">
                 <img class="card__shot" src="https://storage.yandexcloud.net/emotional-harbor-blog-img/raskrytyy-dnevnik-emotsiy-20260911-t1ytl.webp" alt="" loading="lazy" decoding="async">
                 <div class="seal seal--pink" title="Время чтения">
                     <span class="seal__num">4 мин</span>
