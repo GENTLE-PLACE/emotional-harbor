@@ -181,6 +181,31 @@
         .post-row__actions { display: flex; gap: 8px; }
         .post-row__actions button { padding: 9px 14px; font-size: 10px; }
 
+        .restore {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 13.5px;
+            line-height: 1.6;
+            background: rgba(247, 208, 138, 0.3);
+            border: 1.5px dashed var(--gold);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+        }
+
+        .restore__actions { display: flex; gap: 8px; }
+        .restore__actions button { padding: 9px 14px; font-size: 10px; }
+
+        .draft-mark {
+            font-size: 12px;
+            color: var(--brown-light);
+            margin-top: 14px;
+            min-height: 18px;
+        }
+
         /* --- предпросмотр --- */
 
         .preview {
@@ -261,6 +286,15 @@
 
     <!-- РЕДАКТОР -->
     <div class="card hidden" id="editorCard">
+
+        <div class="restore hidden" id="restore">
+            <div>В браузере остался несохранённый текст от <span id="restoreWhen"></span>.</div>
+            <div class="restore__actions">
+                <button type="button" id="restoreYes">Вернуть</button>
+                <button type="button" class="btn--quiet" id="restoreNo">Забыть</button>
+            </div>
+        </div>
+
         <div class="field">
             <label for="title">Заголовок</label>
             <input type="text" id="title">
@@ -298,6 +332,7 @@
             <button type="button" class="btn--danger hidden" id="deleteBtn">Удалить</button>
         </div>
 
+        <div class="draft-mark" id="draftMark"></div>
         <div id="editorStatus" class="status"></div>
     </div>
 
@@ -421,6 +456,99 @@ function renderPosts() {
 
 // ---------- редактор ----------
 
+// ---------- черновик в браузере ----------
+//
+// Всё, что набрано, каждую секунду откладывается в память браузера —
+// на случай закрытой вкладки, упавшего браузера или нечаянного «назад».
+// Пароль сюда не попадает: он живёт только в переменной и умирает с вкладкой.
+// Хранится на Вашем компьютере, никуда не отправляется.
+
+const DRAFT_KEY = 'eh_blog_draft';
+let draftTimer = null;
+
+function draftBox() {
+    return {
+        for: editing ? editing.slug : '',
+        title: el('title').value,
+        slug: el('slug').value,
+        excerpt: el('excerpt').value,
+        text: el('text').value,
+        status: el('status').value,
+        savedAt: new Date().toISOString(),
+    };
+}
+
+function saveDraft() {
+    try {
+        const box = draftBox();
+        // Пустое не храним, чтобы не предлагать восстановить пустоту
+        if (!box.title.trim() && !box.text.trim()) return localStorage.removeItem(DRAFT_KEY);
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(box));
+        el('draftMark').textContent = 'сохранено в браузере · ' +
+            new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    } catch (err) {
+        // Приватный режим может запрещать хранение — молчим, но не падаем
+    }
+}
+
+function readDraft() {
+    try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (err) {
+        return null;
+    }
+}
+
+function dropDraft() {
+    try { localStorage.removeItem(DRAFT_KEY); } catch (err) {}
+    el('draftMark').textContent = '';
+    el('restore').classList.add('hidden');
+}
+
+['title', 'slug', 'excerpt', 'text', 'status'].forEach((id) => {
+    el(id).addEventListener('input', () => {
+        clearTimeout(draftTimer);
+        draftTimer = setTimeout(saveDraft, 1000);
+    });
+});
+
+// Уход со страницы с несохранённым текстом — переспрашиваем
+window.addEventListener('beforeunload', (e) => {
+    if (el('editorCard').classList.contains('hidden')) return;
+    if (!el('text').value.trim()) return;
+    e.preventDefault();
+    e.returnValue = '';
+});
+
+function offerRestore() {
+    const box = readDraft();
+    const mine = box && box.for === (editing ? editing.slug : '');
+
+    // Предлагаем вернуть только то, что отличается от загруженного
+    if (!mine || (box.title === el('title').value && box.text === el('text').value)) {
+        el('restore').classList.add('hidden');
+        return;
+    }
+
+    el('restoreWhen').textContent = new Date(box.savedAt).toLocaleString('ru-RU');
+    el('restore').classList.remove('hidden');
+}
+
+el('restoreYes').addEventListener('click', () => {
+    const box = readDraft();
+    if (!box) return;
+
+    el('title').value = box.title;
+    el('slug').value = box.slug;
+    el('excerpt').value = box.excerpt;
+    el('text').value = box.text;
+    el('status').value = box.status;
+    el('restore').classList.add('hidden');
+});
+
+el('restoreNo').addEventListener('click', dropDraft);
+
 function openEditor(post) {
     editing = post || null;
 
@@ -436,7 +564,9 @@ function openEditor(post) {
     el('listCard').classList.add('hidden');
     el('editorCard').classList.remove('hidden');
     el('preview').classList.remove('visible');
+    el('draftMark').textContent = '';
     hide(el('editorStatus'));
+    offerRestore();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -478,6 +608,7 @@ async function save(statusValue) {
                 ? 'Сохранено в черновики — на сайте не появится.'
                 : 'Опубликовано. Страница соберётся в течение четверти часа.',
             true);
+        dropDraft();
         editing = null;
         setTimeout(backToList, 1200);
     } catch (err) {
@@ -498,6 +629,7 @@ el('deleteBtn').addEventListener('click', async () => {
     try {
         await api('POST', { action: 'delete', slug: editing.slug });
         posts = await api('GET');
+        dropDraft();
         editing = null;
         backToList();
     } catch (err) {
