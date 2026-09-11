@@ -1154,7 +1154,9 @@ const CSS = `    <style>
             letter-spacing: 1.1px;
             text-transform: uppercase;
             color: var(--brown-mid);
-            line-height: 1.6;
+            /* Высота строки 1 — иначе под буквами остаётся пустое поле,
+               и к низу прижимается коробка, а не сам текст */
+            line-height: 1;
         }
 
         .footer__top-btn {
