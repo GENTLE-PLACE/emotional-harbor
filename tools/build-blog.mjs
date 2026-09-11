@@ -1029,21 +1029,22 @@ const CSS = `    <style>
             color: var(--brown-light);
         }
 
+        /* Те же колонки, что и выше: тогда кнопка встаёт ровно под
+           «Связаться с автором», а не просто у правого края */
         .footer__bottom {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1fr;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
+            gap: 32px;
             padding-top: 20px;
         }
 
         .footer__care {
-            font-family: 'Caveat', cursive;
-            font-size: 20px;
-            line-height: 1;
+            font-size: 12.5px;
             color: var(--brown-light);
         }
+
+        .footer__top-btn { grid-column: 3; justify-self: start; }
 
         .footer__grid {
             display: grid;
@@ -1137,7 +1138,8 @@ const CSS = `    <style>
         @media (max-width: 760px) {
             .footer { padding: 32px 20px 28px; }
             .footer__grid { grid-template-columns: 1fr; gap: 24px; }
-            .footer__bottom { flex-direction: column; align-items: flex-start; }
+            .footer__bottom { grid-template-columns: 1fr; gap: 16px; }
+            .footer__top-btn { grid-column: 1; }
         }
 
         /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
