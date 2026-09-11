@@ -1083,6 +1083,16 @@ const CSS = `    <style>
             align-items: flex-end;
         }
 
+        /* Плашки опускаются к нижнему краю своей колонки — тогда нижняя
+           из них встаёт вровень с копирайтом слева */
+        .footer__grid > .footer__col:last-child {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer__grid > .footer__col:last-child .footer__contacts { margin-top: auto; }
+
         .footer__heading {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
