@@ -416,7 +416,7 @@ const CSS = `    <style>
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            padding-top: 32px;
+            padding-top: 34px;
             font-size: 13px;
             color: var(--brown-light);
         }
@@ -1037,8 +1037,6 @@ function renderPost(post, number, newer, older) {
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 
     <div class="wrap">
-${siteHead(true)}
-
         <nav class="crumbs" aria-label="Хлебные крошки">
             <a href="${SITE}/">Главная</a>
             <span class="sep">→</span>
