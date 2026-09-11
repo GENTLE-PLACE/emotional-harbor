@@ -469,6 +469,81 @@ const CSS = `    <style>
         .crumbs a:hover { color: var(--pink); }
         .crumbs .sep { color: var(--gold); }
 
+        /* --- читайте также --- */
+
+        .also { margin-top: 56px; }
+
+        .also__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 20px;
+        }
+
+        .also__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+        }
+
+        .also__card {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            padding: 24px 22px 22px;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
+            border-radius: 18px;
+            box-shadow: 4px 5px 0 rgba(45, 52, 54, 0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .also__card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+        }
+
+        .tone--pink::after { background: var(--pink-soft); }
+        .tone--yellow::after { background: var(--yellow); }
+        .tone--green::after { background: var(--green); }
+        .tone--blue::after { background: var(--blue); }
+        .tone--purple::after { background: var(--purple); }
+
+        .also__card:hover {
+            transform: translate(-2px, -3px);
+            box-shadow: 7px 8px 0 rgba(45, 52, 54, 0.12);
+        }
+
+        .also__meta {
+            font-family: 'Caveat', cursive;
+            font-size: 17px;
+            line-height: 1;
+            color: var(--brown-light);
+            margin-bottom: 10px;
+        }
+
+        .also__name {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.3;
+            letter-spacing: -0.2px;
+            margin-bottom: 8px;
+        }
+
+        .also__text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--brown-mid);
+        }
+
         /* --- соседние записи --- */
 
         .neighbours {
@@ -1112,7 +1187,28 @@ ${link(newer, 'next', 'Следующая →')}
 `;
 }
 
-function renderPost(post, number, newer, older) {
+// «Читайте также»: до трёх других записей. Показывается, только когда
+// соседей больше двух — иначе повторяет переходы «предыдущая / следующая»,
+// которые стоят тут же и говорят ровно то же самое.
+function renderAlso(post, all) {
+    const others = all.filter((p) => p.slug !== post.slug).slice(0, 3);
+    if (others.length < 2) return '';
+
+    return `
+        <section class="also">
+            <div class="also__title">Читайте также</div>
+            <div class="also__grid">
+${others.map((p, i) => `                <a class="also__card tone--${SEAL_TONES[i % SEAL_TONES.length]}" href="${SITE}/${OUT_DIR}/${p.slug}.html">
+                    <div class="also__meta">${humanDate(p.date)} · ${readingMinutes(p.text)} мин</div>
+                    <div class="also__name">${esc(p.title)}</div>
+                    <div class="also__text">${esc(makeExcerpt(p.text, 90))}</div>
+                </a>`).join('\n')}
+            </div>
+        </section>
+`;
+}
+
+function renderPost(post, number, newer, older, all) {
     // Разметка для поисковика: что это статья, кто автор, когда вышла
     const jsonld = {
         '@context': 'https://schema.org',
@@ -1168,7 +1264,7 @@ ${renderContents(post.text)}
             <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>
             <a class="post-foot__link" href="${SITE}/">Посмотреть Гавань</a>
         </div>
-${renderNeighbours(newer, older)}
+${renderAlso(post, all)}${renderNeighbours(newer, older)}
     </div>
 
 ${FOOTER}
@@ -1239,7 +1335,7 @@ posts.forEach((post, i) => {
     // сколько бы постов ни вышло после неё.
     queue.push(writeFile(
         join(OUT_DIR, `${post.slug}.html`),
-        renderPost(post, posts.length - i, posts[i - 1], posts[i + 1]),
+        renderPost(post, posts.length - i, posts[i - 1], posts[i + 1], posts),
         'utf8',
     ));
 });
