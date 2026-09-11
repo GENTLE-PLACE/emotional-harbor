@@ -211,13 +211,9 @@ const COOKIE_BAR = `<div id="cookie-bar" class="cookie-bar" role="dialog" aria-l
 })();
 </script>`;
 
-const SITE_HEAD = `        <header class="site-head">
-            <a class="site-logo" href="${SITE}/">Эмоциональная <em>Гавань</em></a>
-            <nav class="site-nav">
-                <a href="${SITE}/blog.html">Про чувства</a>
-                <a href="${SITE}/">О Гавани</a>
-                <a href="${SITE}/#buy">Получить ключи</a>
-            </nav>
+const siteHead = (withSection) => `        <header class="site-head">
+            <a class="site-logo" href="${SITE}/">Эмоциональная <em>Гавань</em></a>${withSection ? `
+            <a class="site-section" href="${SITE}/blog.html">Про чувства</a>` : ''}
         </header>`;
 
 const FOOTER = `    <footer class="footer">
@@ -323,6 +319,19 @@ const CSS = `    <style>
         }
 
         .site-logo em { font-style: normal; color: var(--pink); }
+
+        .site-section {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: -0.2px;
+            color: var(--pink);
+            text-decoration: none;
+            border-bottom: 1.5px solid rgba(232, 122, 156, 0.35);
+            transition: border-color .2s ease;
+        }
+
+        .site-section:hover { border-bottom-color: var(--pink); }
 
         .site-nav {
             display: flex;
@@ -481,8 +490,8 @@ const CSS = `    <style>
             position: absolute;
             top: 24px;
             right: 24px;
-            width: 86px;
-            height: 86px;
+            width: 74px;
+            height: 74px;
             border: 2.5px solid var(--ink);
             border-radius: 50%;
             transform: rotate(-7deg);
@@ -498,16 +507,16 @@ const CSS = `    <style>
         .seal__num {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 13px;
         }
 
         /* Подпись лёгкая: она поясняет цифру, а не спорит с ней */
         .seal__unit {
             font-family: 'Jost', sans-serif;
             font-weight: 300;
-            font-size: 9px;
-            letter-spacing: 0.3px;
-            margin-top: 5px;
+            font-size: 8px;
+            letter-spacing: 0.2px;
+            margin-top: 4px;
         }
 
         .seal::before {
@@ -600,18 +609,22 @@ const CSS = `    <style>
         /* --- оглавление --- */
 
         .contents {
-            margin-top: 34px;
-            padding: 4px 0 0;
+            margin: 48px 0 0;
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px dashed var(--gold);
+            border-radius: 20px;
+            padding: 32px 36px;
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
         }
 
         .contents__title {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 11px;
-            letter-spacing: 1.4px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--brown-light);
-            margin-bottom: 14px;
+            margin-bottom: 18px;
         }
 
         .contents__list {
@@ -621,31 +634,29 @@ const CSS = `    <style>
 
         .contents__list li {
             counter-increment: chast;
-            display: flex;
-            gap: 12px;
-            padding: 5px 0;
+            position: relative;
+            padding-left: 34px;
+            margin-bottom: 10px;
         }
 
-        /* Номер части — не маркером списка, а отдельной колонкой,
-           иначе длинные названия загибаются под цифру. */
         .contents__list li::before {
             content: counter(chast, decimal-leading-zero);
+            position: absolute;
+            left: 0;
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 11px;
-            color: var(--pink);
-            padding-top: 4px;
-            flex-shrink: 0;
+            font-size: 12px;
+            color: var(--gold);
         }
 
         .contents__list a {
-            color: var(--brown-dark);
+            color: var(--brown-mid);
             text-decoration: none;
-            border-bottom: 1px solid rgba(201, 169, 122, 0.6);
-            transition: color .2s ease, border-color .2s ease;
+            font-size: 15px;
+            transition: color .2s ease;
         }
 
-        .contents__list a:hover { color: var(--pink); border-bottom-color: var(--pink); }
+        .contents__list a:hover { color: var(--pink); }
 
         /* Чтобы заголовок части не прятался под верхний край окна при переходе */
         .post-body h2 { scroll-margin-top: 24px; }
@@ -716,20 +727,6 @@ const CSS = `    <style>
             border-radius: 20px;
             box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
             transform: rotate(-0.4deg);
-        }
-
-        /* Полоска скотча, которой открытку как будто прикрепили к странице */
-        .post-foot::before {
-            content: '';
-            position: absolute;
-            top: -13px;
-            left: 50%;
-            width: 116px;
-            height: 26px;
-            margin-left: -58px;
-            background: rgba(247, 208, 138, 0.75);
-            border: 1px solid rgba(45, 52, 54, 0.15);
-            transform: rotate(-2deg);
         }
 
         .post-foot__text {
@@ -894,7 +891,7 @@ ${posts.map((p, i) => `            <a class="card" href="${SITE}/${OUT_DIR}/${p.
     })}
 
     <div class="wrap">
-${SITE_HEAD}
+${siteHead(false)}
 
         <header class="page-head">
             <h1 class="page-title">Про<span>чувства</span></h1>
@@ -924,7 +921,7 @@ function renderContents(text) {
 
     return `
             <nav class="contents" aria-label="Содержание">
-                <div class="contents__title">В этом тексте</div>
+                <div class="contents__title">Содержание</div>
                 <ol class="contents__list">
 ${headings.map((h) => `                    <li><a href="#${h.id}">${esc(h.title)}</a></li>`).join('\n')}
                 </ol>
@@ -976,7 +973,7 @@ function renderPost(post, number, newer, older) {
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 
     <div class="wrap">
-${SITE_HEAD}
+${siteHead(true)}
 
         <nav class="crumbs" aria-label="Хлебные крошки">
             <a href="${SITE}/">Главная</a>
