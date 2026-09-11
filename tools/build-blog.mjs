@@ -1050,7 +1050,7 @@ const CSS = `    <style>
             justify-content: space-between;
             align-items: center;
             min-height: 34px;
-            padding: 0 4px;
+            padding: 0 20px;
         }
 
         /* По центру всей строки, независимо от колонок выше */
@@ -1100,7 +1100,7 @@ const CSS = `    <style>
         .footer__contact {
             display: flex;
             align-items: center;
-            width: 100%;
+            width: 300px;
             max-width: 100%;
             min-height: 42px;
             white-space: nowrap;
