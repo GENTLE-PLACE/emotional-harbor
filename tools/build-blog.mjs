@@ -473,7 +473,7 @@ const CSS = `    <style>
 
         .neighbours {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-top: 48px;
         }
@@ -494,13 +494,12 @@ const CSS = `    <style>
         .neighbours .next { text-align: right; }
 
         .neighbours__dir {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: 10px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 19px;
+            line-height: 1;
             color: var(--brown-light);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .neighbours__title {
@@ -1103,7 +1102,7 @@ function renderNeighbours(newer, older) {
                     <div class="neighbours__dir">${label}</div>
                     <div class="neighbours__title">${esc(post.title)}</div>
                 </a>`
-        : '                <span></span>';
+        : '';
 
     return `
             <nav class="neighbours" aria-label="Соседние записи">

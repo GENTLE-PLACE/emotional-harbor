@@ -221,7 +221,7 @@
 
         .neighbours {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-top: 48px;
         }
@@ -242,13 +242,12 @@
         .neighbours .next { text-align: right; }
 
         .neighbours__dir {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: 10px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 19px;
+            line-height: 1;
             color: var(--brown-light);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .neighbours__title {
@@ -822,7 +821,7 @@
         </div>
 
             <nav class="neighbours" aria-label="Соседние записи">
-                <span></span>
+
                 <a href="https://emotional-harbor.ru/blog/pochemu-trudno-nazvat-chto-chuvstvuesh-i-chto-menyaetsya-kog.html" class="next">
                     <div class="neighbours__dir">Следующая →</div>
                     <div class="neighbours__title">Почему трудно назвать, что чувствуешь — и что меняется, когда получается</div>
