@@ -289,9 +289,7 @@ const FOOTER = `    <footer class="footer">
 
         <div class="footer__grid">
             <div class="footer__col">
-                <a class="footer__brand" href="${SITE}/">Эмоциональная <em>Гавань</em></a>
-                <div class="footer__hand">тихое место для бережного внимания к себе</div>
-                <p class="footer__desc">Записи про чувства, которые трудно назвать, и про тихий порядок, который от этого появляется.</p>
+                <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
             </div>
 
             <div class="footer__col">
@@ -322,10 +320,6 @@ const FOOTER = `    <footer class="footer">
                     </a>
                 </div>
             </div>
-        </div>
-
-        <div class="footer__bottom">
-            <div class="footer__copy">© ${new Date().getFullYear()} Эмоциональная Гавань</div>
         </div>
     </footer>
 
@@ -1039,34 +1033,7 @@ const CSS = `    <style>
             display: grid;
             grid-template-columns: 1.2fr 0.8fr 1fr;
             gap: 32px;
-            padding-bottom: 26px;
-            border-bottom: 1px dashed rgba(201, 169, 122, 0.65);
-        }
-
-        .footer__brand {
-            font-family: 'Unbounded', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--brown-dark);
-            text-decoration: none;
-        }
-
-        .footer__brand em { font-style: normal; color: var(--pink); }
-
-        .footer__hand {
-            font-family: 'Caveat', cursive;
-            font-size: 19px;
-            line-height: 1.3;
-            color: var(--pink);
-            margin-top: 10px;
-        }
-
-        .footer__desc {
-            margin-top: 12px;
-            font-size: 13px;
-            line-height: 1.7;
-            color: var(--brown-mid);
-            max-width: 320px;
+            align-items: start;
         }
 
         .footer__heading {
@@ -1117,19 +1084,14 @@ const CSS = `    <style>
         /* Кружок иконки берёт цвет текста кнопки — поэтому розовеет вместе с ней */
         .footer__icon { width: 16px; height: 16px; flex-shrink: 0; color: inherit; }
 
-        .footer__bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding-top: 20px;
-            font-size: 12.5px;
-        }
-
         .footer__copy {
-            font-size: 12.5px;
-            color: var(--brown-light);
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            line-height: 1.5;
         }
 
         .footer__top-btn {
@@ -1157,7 +1119,6 @@ const CSS = `    <style>
         @media (max-width: 760px) {
             .footer { padding: 32px 20px 28px; }
             .footer__grid { grid-template-columns: 1fr; gap: 24px; }
-            .footer__bottom { flex-direction: column; align-items: flex-start; }
         }
 
         /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
