@@ -213,7 +213,7 @@ const COOKIE_BAR = `<div id="cookie-bar" class="cookie-bar" role="dialog" aria-l
 
 const siteHead = (withSection) => `        <header class="site-head">
             <a class="site-logo" href="${SITE}/">Эмоциональная <em>Гавань</em></a>${withSection ? `
-            <a class="site-section" href="${SITE}/blog.html">Про чувства</a>` : ''}
+            <a class="site-section" href="${SITE}/blog.html">Про <em>чувства</em></a>` : ''}
         </header>`;
 
 const FOOTER = `    <footer class="footer">
@@ -320,18 +320,17 @@ const CSS = `    <style>
 
         .site-logo em { font-style: normal; color: var(--pink); }
 
+        /* Тот же приём, что у имени Гавани: первое слово тёмное, второе розовое */
         .site-section {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
-            font-size: 13px;
-            letter-spacing: -0.2px;
-            color: var(--pink);
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            color: var(--brown-dark);
             text-decoration: none;
-            border-bottom: 1.5px solid rgba(232, 122, 156, 0.35);
-            transition: border-color .2s ease;
         }
 
-        .site-section:hover { border-bottom-color: var(--pink); }
+        .site-section em { font-style: normal; color: var(--pink); }
 
         .site-nav {
             display: flex;
