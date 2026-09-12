@@ -7,6 +7,16 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://emotional-harbor.ru/blog/111.html</loc>
+        <lastmod>2026-09-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/111-20260912-aw41d</image:loc>
+            <image:title>111</image:title>
+        </image:image>
+    </url>
+    <url>
         <loc>https://emotional-harbor.ru/blog/dnevnik-blagodarnosti-ne-rabotaet.html</loc>
         <lastmod>2026-09-11</lastmod>
         <changefreq>monthly</changefreq>
