@@ -1461,10 +1461,33 @@ ${urls.join('\n')}
 
 // ---------- сборка ----------
 
-const res = await fetch(API);
-if (!res.ok) throw new Error(`Блог ответил ${res.status} — сборку не делаем, старые файлы остаются на месте`);
+// Блог отвечает из облака, а облако иногда моргает: 12.09.2026 сборка упала
+// на том, что у функции не отозвался внутренний DNS — одна осечка из девяти
+// запусков за сутки, соседние прошли чисто. Одна такая секунда не повод
+// считать блог упавшим, поэтому спрашиваем трижды с передышкой. Если и
+// третья попытка не удалась — значит, дело не в моргании, и сборку честно
+// останавливаем: страницы на сайте при этом остаются прежними.
+const ATTEMPTS = 3;
+const PAUSE_MS = 5000;
+const TIMEOUT_MS = 30000; // столько же держит шлюз; без этого зависший запрос ждал бы вечно
 
-const all = await res.json();
+async function fetchPosts() {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            const res = await fetch(API, { signal: AbortSignal.timeout(TIMEOUT_MS) });
+            if (!res.ok) throw new Error(`блог ответил ${res.status}`);
+            return await res.json();
+        } catch (err) {
+            if (attempt === ATTEMPTS) {
+                throw new Error(`Блог не ответил с ${ATTEMPTS} попыток (${err.message}) — сборку не делаем, старые файлы остаются на месте`);
+            }
+            console.log(`Попытка ${attempt} из ${ATTEMPTS} не удалась (${err.message}) — повтор через ${PAUSE_MS / 1000} с`);
+            await new Promise((next) => setTimeout(next, PAUSE_MS));
+        }
+    }
+}
+
+const all = await fetchPosts();
 if (!Array.isArray(all)) throw new Error('Блог вернул не список постов');
 
 // Черновики на сайт не идут. Страница уже опубликованного поста,
