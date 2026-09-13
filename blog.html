@@ -717,6 +717,49 @@
             margin: 40px 0 18px;
         }
 
+        /* Блок автора. Иконка круглая, как в подвале лендинга — это одна
+           и та же картинка, и человек должен узнать её без объяснений. */
+        .author {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin: 48px 0 0;
+            padding-top: 28px;
+            border-top: 1px dashed rgba(201, 169, 122, 0.55);
+        }
+
+        .author__icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
+            flex-shrink: 0;
+        }
+
+        .author__name {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: -0.2px;
+        }
+
+        .author__role {
+            font-size: 12.5px;
+            letter-spacing: 0.3px;
+            color: var(--brown-light);
+            margin-top: 2px;
+        }
+
+        .author__about {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            margin-top: 10px;
+        }
+
         .post-foot {
             position: relative;
             margin-top: 56px;

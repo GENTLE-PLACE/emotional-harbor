@@ -719,6 +719,49 @@
             margin: 40px 0 18px;
         }
 
+        /* Блок автора. Иконка круглая, как в подвале лендинга — это одна
+           и та же картинка, и человек должен узнать её без объяснений. */
+        .author {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin: 48px 0 0;
+            padding-top: 28px;
+            border-top: 1px dashed rgba(201, 169, 122, 0.55);
+        }
+
+        .author__icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
+            flex-shrink: 0;
+        }
+
+        .author__name {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: -0.2px;
+        }
+
+        .author__role {
+            font-size: 12.5px;
+            letter-spacing: 0.3px;
+            color: var(--brown-light);
+            margin-top: 2px;
+        }
+
+        .author__about {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            margin-top: 10px;
+        }
+
         .post-foot {
             position: relative;
             margin-top: 56px;
@@ -969,7 +1012,7 @@
 </head>
 <body>
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Дневник благодарности: почему не работает по списку — и что вместо","description":"Три вещи каждый вечер — и через неделю пусто? Разбираю, почему благодарность по списку даётся не всем и что можно делать вместо неё.","datePublished":"2026-09-11T08:53:47.032Z","dateModified":"2026-09-11T09:01:16.593Z","author":{"@type":"Person","name":"Патрикеева Елена Александровна"},"publisher":{"@type":"Organization","name":"Эмоциональная Гавань"},"mainEntityOfPage":"https://emotional-harbor.ru/blog/dnevnik-blagodarnosti-ne-rabotaet.html","inLanguage":"ru-RU"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Дневник благодарности: почему не работает по списку — и что вместо","description":"Три вещи каждый вечер — и через неделю пусто? Разбираю, почему благодарность по списку даётся не всем и что можно делать вместо неё.","datePublished":"2026-09-11T08:53:47.032Z","dateModified":"2026-09-11T09:01:16.593Z","author":{"@type":"Person","name":"Елена Патрикеева","description":"Автор Эмоциональной Гавани"},"publisher":{"@type":"Organization","name":"Эмоциональная Гавань"},"mainEntityOfPage":"https://emotional-harbor.ru/blog/dnevnik-blagodarnosti-ne-rabotaet.html","inLanguage":"ru-RU"}</script>
 
     <div class="wrap">
         <nav class="crumbs" aria-label="Хлебные крошки">
@@ -982,7 +1025,7 @@
 
         <article>
             <div class="post-head">
-                <div class="post-date">11 сентября 2026</div>
+                <div class="post-date">11 сентября 2026 · Елена</div>
                 <div class="seal seal--green" title="Время чтения">
                     <span class="seal__num">3 мин</span>
                     <span class="seal__unit">время чтения</span>
@@ -1039,6 +1082,15 @@
             <p>Достаточно не проходить мимо, когда оно случается.</p>
             </div>
         </article>
+
+        <aside class="author">
+            <img class="author__icon" src="https://static.emotional-harbor.ru/Avtor.png" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <div class="author__text">
+                <div class="author__name">Елена</div>
+                <div class="author__role">Автор Эмоциональной Гавани</div>
+                <p class="author__about">Я не психолог. Занимаюсь йогой и пилатесом. Замечать, что происходит внутри, научилась на коврике — а Гавань сделала красивой, потому что верю, что эстетика лечит.</p>
+            </div>
+        </aside>
 
         <div class="post-foot">
             <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>

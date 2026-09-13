@@ -114,6 +114,19 @@ function toParagraphs(text) {
         .join('\n            ');
 }
 
+// Автор один, поэтому блок собирается из констант, а не из данных поста.
+// Иконка лежит на своём бакете: внешних запросов у страницы нет и не будет.
+const AUTHOR = {
+    // На странице — просто имя: фамилия в подписи под текстом про чувства
+    // звучит официально. Полное имя остаётся в разметке для поисковиков
+    // и в подвале лендинга, где оно стоит по оферте.
+    name: 'Елена',
+    fullName: 'Елена Патрикеева',
+    role: 'Автор Эмоциональной Гавани',
+    about: 'Я не психолог. Занимаюсь йогой и пилатесом. Замечать, что происходит внутри, научилась на коврике — а Гавань сделала красивой, потому что верю, что эстетика лечит.',
+    icon: 'https://static.emotional-harbor.ru/Avtor.png',
+};
+
 const MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
     'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 
@@ -1024,6 +1037,49 @@ const CSS = `    <style>
             margin: 40px 0 18px;
         }
 
+        /* Блок автора. Иконка круглая, как в подвале лендинга — это одна
+           и та же картинка, и человек должен узнать её без объяснений. */
+        .author {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin: 48px 0 0;
+            padding-top: 28px;
+            border-top: 1px dashed rgba(201, 169, 122, 0.55);
+        }
+
+        .author__icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
+            flex-shrink: 0;
+        }
+
+        .author__name {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: -0.2px;
+        }
+
+        .author__role {
+            font-size: 12.5px;
+            letter-spacing: 0.3px;
+            color: var(--brown-light);
+            margin-top: 2px;
+        }
+
+        .author__about {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            margin-top: 10px;
+        }
+
         .post-foot {
             position: relative;
             margin-top: 56px;
@@ -1419,7 +1475,9 @@ function renderPost(post, number, newer, older, all) {
         datePublished: post.date,
         // Дата правки: поисковик показывает «обновлено», а не только «вышло»
         ...(post.updated_at ? { dateModified: post.updated_at } : {}),
-        author: { '@type': 'Person', name: 'Патрикеева Елена Александровна' },
+        // В разметке имя полное: поисковику нужен человек, которого можно
+        // найти, а на странице достаточно имени.
+        author: { '@type': 'Person', name: AUTHOR.fullName, description: AUTHOR.role },
         publisher: { '@type': 'Organization', name: 'Эмоциональная Гавань' },
         mainEntityOfPage: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         inLanguage: 'ru-RU',
@@ -1448,7 +1506,7 @@ function renderPost(post, number, newer, older, all) {
 
         <article>
             <div class="post-head">
-                <div class="post-date">${humanDate(post.date)}</div>
+                <div class="post-date">${humanDate(post.date)} · ${AUTHOR.name}</div>
                 <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" title="Время чтения">
                     <span class="seal__num">${readingMinutes(post.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
@@ -1460,6 +1518,15 @@ ${renderContents(post.text)}
             ${toParagraphs(post.text)}
             </div>
         </article>
+
+        <aside class="author">
+            <img class="author__icon" src="${AUTHOR.icon}" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <div class="author__text">
+                <div class="author__name">${AUTHOR.name}</div>
+                <div class="author__role">${AUTHOR.role}</div>
+                <p class="author__about">${esc(AUTHOR.about)}</p>
+            </div>
+        </aside>
 
         <div class="post-foot">
             <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>
