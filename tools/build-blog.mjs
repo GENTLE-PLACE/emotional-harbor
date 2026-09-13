@@ -63,6 +63,19 @@ function toParagraphs(text) {
             </figure>`;
         }
 
+        // Практика: каждая строка начинается с «+ ». Заголовок рисуется сам,
+        // набирать его не нужно. Задумано по одному блоку на запись: два таких
+        // блока перестают быть особенными и становятся обычным текстом в рамке.
+        if (lines.every((line) => line.startsWith('+'))) {
+            const body = lines
+                .map((line) => `<p>${inline(line.replace(/^\+\s?/, ''))}</p>`)
+                .join('\n                ');
+            return `<aside class="task">
+                <div class="task__title"><span aria-hidden="true">📝</span> Практика</div>
+                ${body}
+            </aside>`;
+        }
+
         // Цитата: каждая строка начинается с «> »
         if (lines.every((line) => line.startsWith('>'))) {
             const quote = lines.map((line) => inline(line.replace(/^>\s?/, ''))).join('<br>');
@@ -935,6 +948,37 @@ const CSS = `    <style>
 
         .post-body li { margin-bottom: 10px; }
         .post-body li::marker { color: var(--gold); }
+
+        /* Практика — блок «+ » в тексте. Заливка чуть светлее холста:
+           бежевый на бежевом не читается, а белый был бы чужим. */
+        .task {
+            margin: 36px 0;
+            padding: 26px 28px;
+            border-radius: 16px;
+            background: rgba(255, 253, 247, 0.65);
+            border: 1.5px dashed var(--gold);
+        }
+
+        .task__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 12px;
+        }
+
+        .task p:last-child { margin-bottom: 0; }
 
         .shot { margin: 36px 0; }
 

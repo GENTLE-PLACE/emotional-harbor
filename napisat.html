@@ -253,6 +253,26 @@
         .preview strong { font-weight: 500; }
         .preview a { color: var(--pink); }
         .preview em { font-style: italic; }
+        .preview .task {
+            margin: 24px 0;
+            padding: 20px 22px;
+            border-radius: 16px;
+            background: rgba(255, 253, 247, 0.65);
+            border: 1.5px dashed var(--gold);
+        }
+        .preview .task__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .preview .task p { font-size: 14px; color: var(--brown-mid); margin-bottom: 10px; }
+        .preview .task p:last-child { margin-bottom: 0; }
         .preview .shot { margin: 24px 0; }
         .preview .shot img { display: block; width: 100%; border-radius: 16px; border: 2px solid var(--ink); }
         .preview .shot figcaption { font-family: 'Caveat', cursive; font-size: 17px; color: var(--brown-light); text-align: center; margin-top: 8px; }
@@ -324,7 +344,7 @@
         </div>
 
         <div class="field">
-            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, **жирный**, *курсив*, [ссылка](адрес), ![подпись](адрес картинки)</span></label>
+            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, + практика, **жирный**, *курсив*, [ссылка](адрес), ![подпись](адрес картинки)</span></label>
             <textarea id="text" placeholder="Первый абзац станет вводным — он выделится сам."></textarea>
         </div>
 
@@ -749,6 +769,11 @@ function renderMarkup(text) {
 
         if (block.startsWith('## ')) return '<h2>' + inline(block.slice(3)) + '</h2>';
         if (block.startsWith('### ')) return '<h3>' + inline(block.slice(4)) + '</h3>';
+
+        if (lines.every((l) => l.startsWith('+'))) {
+            return '<aside class="task"><div class="task__title"><span>📝</span> Практика</div>' +
+                lines.map((l) => '<p>' + inline(l.replace(/^\+\s?/, '')) + '</p>').join('') + '</aside>';
+        }
 
         if (lines.every((l) => l.startsWith('>'))) {
             return '<blockquote>' + lines.map((l) => inline(l.replace(/^>\s?/, ''))).join('<br>') + '</blockquote>';
