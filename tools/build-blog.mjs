@@ -1506,7 +1506,7 @@ function renderPost(post, number, newer, older, all) {
 
         <article>
             <div class="post-head">
-                <div class="post-date">${humanDate(post.date)} · ${AUTHOR.name}</div>
+                <div class="post-date">${humanDate(post.date)}</div>
                 <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" title="Время чтения">
                     <span class="seal__num">${readingMinutes(post.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
