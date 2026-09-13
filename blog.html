@@ -642,6 +642,37 @@
         .post-body li { margin-bottom: 10px; }
         .post-body li::marker { color: var(--gold); }
 
+        /* Практика — блок «+ » в тексте. Заливка чуть светлее холста:
+           бежевый на бежевом не читается, а белый был бы чужим. */
+        .task {
+            margin: 36px 0;
+            padding: 26px 28px;
+            border-radius: 16px;
+            background: rgba(255, 253, 247, 0.65);
+            border: 1.5px dashed var(--gold);
+        }
+
+        .task__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 12px;
+        }
+
+        .task p:last-child { margin-bottom: 0; }
+
         .shot { margin: 36px 0; }
 
         .shot img {
@@ -961,7 +992,7 @@
             <a class="card card--shot" href="https://emotional-harbor.ru/blog/nazyvat-emotsii-tochno.html">
                 <img class="card__shot" src="https://storage.yandexcloud.net/emotional-harbor-blog-img/emotsionalnaya-granulyarnost-kazhdaya-iz-etih-krasok-tsennay-20260911-r6x4b" alt="" loading="lazy" decoding="async">
                 <div class="seal seal--yellow" title="Время чтения">
-                    <span class="seal__num">3 мин</span>
+                    <span class="seal__num">5 мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
                 <div class="card__date">11 сентября 2026</div>
