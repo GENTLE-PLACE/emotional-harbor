@@ -831,7 +831,7 @@ const CSS = `    <style>
             color: var(--brown-dark);
             box-shadow: 2px 3px 0 rgba(45, 52, 54, 0.18);
         }
-        .post-cat { margin-bottom: 18px; }
+        .post-cat { line-height: 1; }
 
         /* Подвал карточки: «читать» слева, дата справа, над ними волосяная
            линия — она отделяет служебное от текста, а не рисует рамку */
@@ -883,17 +883,22 @@ const CSS = `    <style>
 
         /* --- страница поста --- */
 
+        /* Сверху рубрика и печать, под ними заголовок, под заголовком дата.
+           Печать прижата вправо отступом, а не space-between: у записи без
+           рубрики она осталась бы в этой строке одна и уехала бы влево. */
         .post-head {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 20px;
             padding-top: 44px;
         }
 
+        .post-head .seal { margin-left: auto; }
+
         .post-head .seal { position: static; flex-shrink: 0; }
 
         .post-date {
+            margin-top: 16px;
             font-family: 'Caveat', cursive;
             font-weight: 600;
             font-size: 23px;
@@ -907,7 +912,7 @@ const CSS = `    <style>
             font-size: clamp(28px, 4.2vw, 42px);
             line-height: 1.08;
             letter-spacing: -1.5px;
-            margin: 14px 0 0;
+            margin: 18px 0 0;
         }
 
         /* --- оглавление --- */
@@ -1559,15 +1564,15 @@ function renderPost(post, number, newer, older, all) {
         </nav>
 
         <article>
-            <div class="post-head">
-                <div class="post-date">${humanDate(post.date)}</div>
+            <div class="post-head">${post.category ? `
+                <div class="post-cat"><span class="chip">${esc(post.category)}</span></div>` : ''}
                 <div class="seal seal--${SEAL_TONES[(number - 1) % SEAL_TONES.length]}" title="Время чтения">
                     <span class="seal__num">${readingMinutes(post.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-            </div>${post.category ? `
-            <div class="post-cat"><span class="chip">${esc(post.category)}</span></div>` : ''}
+            </div>
             <h1 class="post-title">${esc(post.title)}</h1>
+            <div class="post-date">${humanDate(post.date)}</div>
 ${renderContents(post.text)}
             <div class="post-body">
             ${toParagraphs(post.text)}
