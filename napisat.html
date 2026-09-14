@@ -219,6 +219,23 @@
 
         .preview.visible { display: block; }
 
+        /* Та же капсула, что на собранной странице блога */
+        .preview .chip {
+            display: inline-block;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brown-mid);
+            border: 1.5px solid var(--gold);
+            border-radius: 999px;
+            padding: 5px 12px;
+            background: rgba(255, 248, 235, 0.6);
+        }
+
+        .preview .preview-cat { margin-bottom: 14px; }
+
         .preview h2 {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
@@ -819,8 +836,12 @@ el('previewBtn').addEventListener('click', () => {
     const words = el('text').value.trim().split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.round(words / 180));
 
+    // Пилюля рубрики стоит над заголовком — там же, где на собранной странице
+    const cat = el('category').value;
+
     box.innerHTML =
         '<div class="note">Так это будет выглядеть · ' + minutes + ' мин чтения</div>' +
+        (cat ? '<div class="preview-cat"><span class="chip">' + cat + '</span></div>' : '') +
         '<h2>' + title.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</h2>' +
         renderMarkup(el('text').value);
 
