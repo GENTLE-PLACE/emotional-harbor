@@ -796,6 +796,25 @@ const CSS = `    <style>
             color: var(--brown-light);
         }
 
+        /* Рубрика — имя комнаты Гавани. Капсула: скругление больше половины
+           высоты, поэтому радиус заведомо избыточный. */
+        .chip {
+            display: inline-block;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brown-mid);
+            border: 1.5px solid var(--gold);
+            border-radius: 999px;
+            padding: 5px 12px;
+            background: rgba(255, 248, 235, 0.6);
+        }
+
+        .card__cat { margin-top: 10px; }
+        .post-cat { margin-bottom: 18px; }
+
         .card__title {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
@@ -1369,7 +1388,8 @@ ${posts.map((p, i) => `            <a class="card${collectImages(p.text)[0] ? ' 
                     <span class="seal__num">${readingMinutes(p.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-                <div class="card__date">${humanDate(p.date)}</div>
+                <div class="card__date">${humanDate(p.date)}</div>${p.category ? `
+                <div class="card__cat"><span class="chip">${esc(p.category)}</span></div>` : ''}
                 <div class="card__title">${esc(p.title)}</div>
                 <div class="card__excerpt">${esc(cleanExcerpt(p))}</div>
                 <span class="card__more">Читать дальше →</span>
@@ -1511,7 +1531,8 @@ function renderPost(post, number, newer, older, all) {
                     <span class="seal__num">${readingMinutes(post.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-            </div>
+            </div>${post.category ? `
+            <div class="post-cat"><span class="chip">${esc(post.category)}</span></div>` : ''}
             <h1 class="post-title">${esc(post.title)}</h1>
 ${renderContents(post.text)}
             <div class="post-body">

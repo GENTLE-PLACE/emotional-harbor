@@ -325,6 +325,19 @@
             <input type="text" id="title">
         </div>
 
+        <div class="field">
+            <label for="category">Рубрика <span class="hint">— имя комнаты Гавани; можно не выбирать</span></label>
+            <select id="category">
+                <option value="">Без рубрики</option>
+                <option>Дневник настроения</option>
+                <option>Копилка тепла</option>
+                <option>Источники энергии</option>
+                <option>Мои опоры</option>
+                <option>Уютный контент</option>
+                <option>Яркость жизни</option>
+            </select>
+        </div>
+
         <div class="row">
             <div class="field">
                 <label for="slug">Адрес страницы <span class="hint">— латиницей, можно оставить пустым</span></label>
@@ -501,6 +514,7 @@ function draftBox() {
         excerpt: el('excerpt').value,
         text: el('text').value,
         status: el('status').value,
+        category: el('category').value,
         savedAt: new Date().toISOString(),
     };
 }
@@ -533,7 +547,7 @@ function dropDraft() {
     el('restore').classList.add('hidden');
 }
 
-['title', 'slug', 'excerpt', 'text', 'status'].forEach((id) => {
+['title', 'slug', 'excerpt', 'text', 'status', 'category'].forEach((id) => {
     el(id).addEventListener('input', () => {
         clearTimeout(draftTimer);
         draftTimer = setTimeout(saveDraft, 1000);
@@ -568,9 +582,12 @@ el('restoreYes').addEventListener('click', () => {
 
     el('title').value = box.title;
     el('slug').value = box.slug;
-    el('excerpt').value = box.excerpt;
     el('text').value = box.text;
     el('status').value = box.status;
+    // Старый черновик мог быть сохранён до того, как появились эти поля, —
+    // тогда возвращать нечего, и трогать их нельзя: сотрём то, что уже есть.
+    if ('category' in box) el('category').value = box.category || '';
+    if (box.excerpt) el('excerpt').value = box.excerpt;
     el('restore').classList.add('hidden');
 });
 
@@ -584,6 +601,7 @@ function openEditor(post) {
     el('excerpt').value = post ? (post.excerpt || '') : '';
     el('text').value = post ? post.text : '';
     el('status').value = post && post.status === 'draft' ? 'draft' : 'published';
+    el('category').value = post ? (post.category || '') : '';
 
     el('saveBtn').textContent = post ? 'Сохранить' : 'Опубликовать';
     el('deleteBtn').classList.toggle('hidden', !post);
@@ -619,6 +637,7 @@ async function save(statusValue) {
         text,
         excerpt: el('excerpt').value.trim(),
         status: statusValue,
+        category: el('category').value,
         newSlug: el('slug').value.trim(),
     };
 

@@ -476,6 +476,25 @@
             color: var(--brown-light);
         }
 
+        /* Рубрика — имя комнаты Гавани. Капсула: скругление больше половины
+           высоты, поэтому радиус заведомо избыточный. */
+        .chip {
+            display: inline-block;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brown-mid);
+            border: 1.5px solid var(--gold);
+            border-radius: 999px;
+            padding: 5px 12px;
+            background: rgba(255, 248, 235, 0.6);
+        }
+
+        .card__cat { margin-top: 10px; }
+        .post-cat { margin-bottom: 18px; }
+
         .card__title {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
