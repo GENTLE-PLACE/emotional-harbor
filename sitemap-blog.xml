@@ -26,14 +26,4 @@
             <image:title>Эмоциональная Гранулярность. Каждая из этих красок - ценная часть Вашей палитры.</image:title>
         </image:image>
     </url>
-    <url>
-        <loc>https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html</loc>
-        <lastmod>2026-09-11</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-        <image:image>
-            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/raskrytyy-dnevnik-emotsiy-20260911-t1ytl.webp</image:loc>
-            <image:title>Раскрытый Дневник эмоций</image:title>
-        </image:image>
-    </url>
 </urlset>
