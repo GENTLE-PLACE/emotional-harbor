@@ -815,7 +815,7 @@ const CSS = `    <style>
         .card__cat { margin-bottom: 14px; }
         .post-cat { margin-bottom: 18px; }
 
-        /* Подвал карточки: дата слева, «читать» справа, между ними волосяная
+        /* Подвал карточки: «читать» слева, дата справа, над ними волосяная
            линия — она отделяет служебное от текста, а не рисует рамку */
         .card__foot {
             display: flex;
@@ -1405,8 +1405,8 @@ ${p.category ? `
                 <div class="card__title">${esc(p.title)}</div>
                 <div class="card__excerpt">${esc(cleanExcerpt(p))}</div>
                 <div class="card__foot">
-                    <span class="card__date">${humanDate(p.date)}</span>
                     <span class="card__more">Читать дальше →</span>
+                    <span class="card__date">${humanDate(p.date)}</span>
                 </div>
             </a>`).join('\n')}
         </div>`
