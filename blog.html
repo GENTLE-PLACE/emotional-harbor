@@ -471,7 +471,7 @@
         .card__date {
             font-family: 'Caveat', cursive;
             font-weight: 600;
-            font-size: 21px;
+            font-size: 20px;
             line-height: 1;
             color: var(--brown-light);
         }
@@ -492,8 +492,21 @@
             background: rgba(255, 248, 235, 0.6);
         }
 
-        .card__cat { margin-top: 10px; }
+        .card__cat { margin-bottom: 14px; }
         .post-cat { margin-bottom: 18px; }
+
+        /* Подвал карточки: дата слева, «читать» справа, между ними волосяная
+           линия — она отделяет служебное от текста, а не рисует рамку */
+        .card__foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(201, 169, 122, 0.4);
+        }
 
         .card__title {
             font-family: 'Unbounded', sans-serif;
@@ -501,14 +514,13 @@
             font-size: 21px;
             line-height: 1.25;
             letter-spacing: -0.6px;
-            margin: 12px 0 10px;
+            margin: 0 0 10px;
         }
 
         .card__excerpt { color: var(--brown-mid); }
 
         .card__more {
             display: inline-block;
-            margin-top: 18px;
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
             font-size: 10.5px;
@@ -1049,10 +1061,13 @@
                     <span class="seal__num">4 мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-                <div class="card__date">11 сентября 2026</div>
+
                 <div class="card__title">Дневник благодарности: как вести, если благодарности пока нет</div>
                 <div class="card__excerpt">Практике тысяча лет — от японских книг у изголовья до исследований Селигмана. Как вести дневник благодарности, когда благодарности внутри пока нет, и что меняется через месяц.</div>
-                <span class="card__more">Читать дальше →</span>
+                <div class="card__foot">
+                    <span class="card__date">11 сентября 2026</span>
+                    <span class="card__more">Читать дальше →</span>
+                </div>
             </a>
             <a class="card card--shot" href="https://emotional-harbor.ru/blog/nazyvat-emotsii-tochno.html">
                 <img class="card__shot" src="https://storage.yandexcloud.net/emotional-harbor-blog-img/emotsionalnaya-granulyarnost-kazhdaya-iz-etih-krasok-tsennay-20260911-r6x4b" alt="" loading="lazy" decoding="async">
@@ -1060,10 +1075,13 @@
                     <span class="seal__num">5 мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-                <div class="card__date">11 сентября 2026</div>
+
                 <div class="card__title">Почему трудно назвать, что чувствуешь — и что меняется, когда получается</div>
                 <div class="card__excerpt">Как называть эмоции точнее — и что меняется, когда получается</div>
-                <span class="card__more">Читать дальше →</span>
+                <div class="card__foot">
+                    <span class="card__date">11 сентября 2026</span>
+                    <span class="card__more">Читать дальше →</span>
+                </div>
             </a>
             <a class="card card--shot" href="https://emotional-harbor.ru/blog/kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.html">
                 <img class="card__shot" src="https://storage.yandexcloud.net/emotional-harbor-blog-img/raskrytyy-dnevnik-emotsiy-20260911-t1ytl.webp" alt="" loading="lazy" decoding="async">
@@ -1071,11 +1089,14 @@
                     <span class="seal__num">4 мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-                <div class="card__date">10 сентября 2026</div>
+
                 <div class="card__cat"><span class="chip">Дневник настроения</span></div>
                 <div class="card__title">Как вести дневник эмоций, если раньше не получалось</div>
                 <div class="card__excerpt">Вы уже пробовали. Скорее всего, не один раз…</div>
-                <span class="card__more">Читать дальше →</span>
+                <div class="card__foot">
+                    <span class="card__date">10 сентября 2026</span>
+                    <span class="card__more">Читать дальше →</span>
+                </div>
             </a>
         </div>
     </div>

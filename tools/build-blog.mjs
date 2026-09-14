@@ -791,7 +791,7 @@ const CSS = `    <style>
         .card__date {
             font-family: 'Caveat', cursive;
             font-weight: 600;
-            font-size: 21px;
+            font-size: 20px;
             line-height: 1;
             color: var(--brown-light);
         }
@@ -812,8 +812,21 @@ const CSS = `    <style>
             background: rgba(255, 248, 235, 0.6);
         }
 
-        .card__cat { margin-top: 10px; }
+        .card__cat { margin-bottom: 14px; }
         .post-cat { margin-bottom: 18px; }
+
+        /* Подвал карточки: дата слева, «читать» справа, между ними волосяная
+           линия — она отделяет служебное от текста, а не рисует рамку */
+        .card__foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(201, 169, 122, 0.4);
+        }
 
         .card__title {
             font-family: 'Unbounded', sans-serif;
@@ -821,14 +834,13 @@ const CSS = `    <style>
             font-size: 21px;
             line-height: 1.25;
             letter-spacing: -0.6px;
-            margin: 12px 0 10px;
+            margin: 0 0 10px;
         }
 
         .card__excerpt { color: var(--brown-mid); }
 
         .card__more {
             display: inline-block;
-            margin-top: 18px;
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
             font-size: 10.5px;
@@ -1388,11 +1400,14 @@ ${posts.map((p, i) => `            <a class="card${collectImages(p.text)[0] ? ' 
                     <span class="seal__num">${readingMinutes(p.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
                 </div>
-                <div class="card__date">${humanDate(p.date)}</div>${p.category ? `
+${p.category ? `
                 <div class="card__cat"><span class="chip">${esc(p.category)}</span></div>` : ''}
                 <div class="card__title">${esc(p.title)}</div>
                 <div class="card__excerpt">${esc(cleanExcerpt(p))}</div>
-                <span class="card__more">Читать дальше →</span>
+                <div class="card__foot">
+                    <span class="card__date">${humanDate(p.date)}</span>
+                    <span class="card__more">Читать дальше →</span>
+                </div>
             </a>`).join('\n')}
         </div>`
         : `<div class="empty">Здесь пока тихо. Первая запись скоро появится.</div>`;
