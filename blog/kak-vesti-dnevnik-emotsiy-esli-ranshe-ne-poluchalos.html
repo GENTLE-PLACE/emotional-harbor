@@ -357,15 +357,18 @@
         .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
         .f-pink { color: var(--pink); }
 
-        /* След розового маркера под вторым словом */
+        /* След розового маркера под вторым словом. Пропорции взяты с экрана
+           «Смыслы» и пересчитаны из пикселей в доли кегля: там при 52px было
+           32px высоты и вынос 5/12px — чтобы полоса не отставала от заголовка,
+           который на витрине резиновый. */
         .pt-marker { position: relative; z-index: 1; width: fit-content; }
         .pt-marker::before {
             content: '';
             position: absolute;
-            bottom: 0.32em;
-            left: -2px;
-            right: -2px;
-            height: 0.32em;
+            bottom: 0.04em;
+            left: -0.1em;
+            right: -0.22em;
+            height: 0.62em;
             background: var(--pink-soft);
             opacity: 0.45;
             z-index: -1;
