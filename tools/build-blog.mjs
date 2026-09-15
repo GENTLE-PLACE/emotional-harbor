@@ -2289,19 +2289,37 @@ for (const file of await readdir(OUT_DIR)) {
     if (file.endsWith('.html') && !alive.has(file)) await rm(join(OUT_DIR, file));
 }
 
+// Ошибка в одной строке скрипта отменяет весь скрипт целиком — браузер не
+// выполняет из него ничего. Страница при этом выглядит совершенно здоровой,
+// а поломка видна только в консоли, которую никто не открывает: 15.09.2026
+// так тихо умерла вся открытка из-за потерянных кавычек у цвета. Поэтому
+// перед записью каждый встроенный скрипт компилируем. Компилируем, а не
+// выполняем: `new Function` только разбирает текст, ничего не запуская.
+function checkScripts(html, where) {
+    const tags = /<script(?![^>]*\ssrc=)(?![^>]*\stype=)[^>]*>([\s\S]*?)<\/script>/g;
+    let found;
+    while ((found = tags.exec(html)) !== null) {
+        try {
+            new Function(found[1]);
+        } catch (err) {
+            throw new Error(`${where}: встроенный скрипт не компилируется (${err.message}) — страницу не пишем`);
+        }
+    }
+}
+
 posts.forEach((post, i) => {
     // Номер по хронологии: у первой записи он навсегда останется первым,
     // сколько бы постов ни вышло после неё.
-    queue.push(writeFile(
-        join(OUT_DIR, `${post.slug}.html`),
-        renderPost(post, posts.length - i, posts[i - 1], posts[i + 1], posts),
-        'utf8',
-    ));
+    const page = renderPost(post, posts.length - i, posts[i - 1], posts[i + 1], posts);
+    checkScripts(page, `${post.slug}.html`);
+    queue.push(writeFile(join(OUT_DIR, `${post.slug}.html`), page, 'utf8'));
 });
 
 await Promise.all(queue);
 
-await writeFile('blog.html', renderList(posts), 'utf8');
+const list = renderList(posts);
+checkScripts(list, 'blog.html');
+await writeFile('blog.html', list, 'utf8');
 await writeFile('sitemap-blog.xml', renderSitemap(posts), 'utf8');
 
 console.log(`Собрано: ${posts.length} ${posts.length === 1 ? 'пост' : 'постов'}`);
