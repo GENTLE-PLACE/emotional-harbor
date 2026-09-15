@@ -679,10 +679,10 @@ const CSS = `    <style>
         .pt-marker::before {
             content: '';
             position: absolute;
-            bottom: 0.2em;
+            bottom: 0.32em;
             left: -2px;
             right: -2px;
-            height: 0.34em;
+            height: 0.32em;
             background: var(--pink-soft);
             opacity: 0.45;
             z-index: -1;
@@ -694,6 +694,9 @@ const CSS = `    <style>
 
 
         /* Приписка от руки на полях */
+        /* Розовая строка от руки: сейчас на витрине её нет — прежняя «без советов,
+           как надо жить» расходилась с текстами, где советы как раз есть.
+           Стиль оставлен: строка вернётся, когда найдётся правдивая. */
         .hand {
             font-family: 'Caveat', cursive;
             font-weight: 600;
@@ -1472,7 +1475,6 @@ ${siteHead(false)}
                 <span class="pt-line pt-marker"><span class="f-lora">ч</span><span class="f-unb">у</span><span class="f-cav">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
             </h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
-            <div class="hand">без советов, как надо жить</div>
         </header>
 
         <div class="rule"></div>
