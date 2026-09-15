@@ -357,6 +357,18 @@
         .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
         .f-pink { color: var(--pink); }
 
+        /* Высокая рукописная буквица. line-height: 0 — чтобы она не раздвигала
+           строки заголовка: иначе браузер считает высоту строки по самой
+           крупной букве, и «Про» отъезжает вверх. */
+        .pt-init {
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            font-size: 2em;
+            line-height: 0;
+            letter-spacing: 0;
+            vertical-align: -0.12em;
+        }
+
         /* След розового маркера под вторым словом. Пропорции взяты с экрана
            «Смыслы» и пересчитаны из пикселей в доли кегля: там при 52px было
            32px высоты и вынос 5/12px — чтобы полоса не отставала от заголовка,
@@ -400,7 +412,7 @@
             font-size: 17px;
             line-height: 1.65;
             color: var(--brown-mid);
-            margin-top: 18px;
+            margin-top: 34px;
             max-width: 520px;
         }
 

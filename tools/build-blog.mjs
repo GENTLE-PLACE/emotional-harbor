@@ -674,6 +674,18 @@ const CSS = `    <style>
         .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
         .f-pink { color: var(--pink); }
 
+        /* Высокая рукописная буквица. line-height: 0 — чтобы она не раздвигала
+           строки заголовка: иначе браузер считает высоту строки по самой
+           крупной букве, и «Про» отъезжает вверх. */
+        .pt-init {
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            font-size: 2em;
+            line-height: 0;
+            letter-spacing: 0;
+            vertical-align: -0.12em;
+        }
+
         /* След розового маркера под вторым словом. Пропорции взяты с экрана
            «Смыслы» и пересчитаны из пикселей в доли кегля: там при 52px было
            32px высоты и вынос 5/12px — чтобы полоса не отставала от заголовка,
@@ -717,7 +729,7 @@ const CSS = `    <style>
             font-size: 17px;
             line-height: 1.65;
             color: var(--brown-mid);
-            margin-top: 18px;
+            margin-top: 34px;
             max-width: 520px;
         }
 
@@ -1474,7 +1486,7 @@ ${siteHead(false)}
         <header class="page-head">
             <h1 class="page-title">
                 <span class="pt-line"><span class="f-unb">П</span><span class="f-cav f-pink">р</span><span class="f-lora">о</span></span>
-                <span class="pt-line pt-marker"><span class="f-lora">ч</span><span class="f-unb">у</span><span class="f-cav">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
+                <span class="pt-line pt-marker"><span class="pt-init f-pink">Ч</span><span class="f-unb">у</span><span class="f-cav">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
             </h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
         </header>
