@@ -338,19 +338,41 @@
 
         .page-head { padding: 48px 0 8px; }
 
+        /* Заголовок витрины набран вперемешку тремя шрифтами — тот же приём,
+           что на экране «Смыслы». Поджатие ослаблено до 1px: на -3px буквы
+           разных гарнитур начинают наезжать друг на друга. */
         .page-title {
             font-family: 'Unbounded', sans-serif;
             font-weight: 900;
-            font-size: clamp(42px, 6.8vw, 72px);
-            line-height: 0.92;
-            letter-spacing: -3px;
+            font-size: clamp(40px, 6.4vw, 66px);
+            line-height: 0.95;
+            letter-spacing: -1px;
+        }
+
+        .pt-line { display: block; }
+        .f-unb { font-family: 'Unbounded', sans-serif; font-weight: 900; text-transform: uppercase; }
+        .f-lora { font-family: 'Lora', serif; font-weight: 700; font-style: italic; font-size: 1.05em; }
+        .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
+        .f-pink { color: var(--pink); }
+
+        /* След розового маркера под вторым словом */
+        .pt-marker { position: relative; z-index: 1; width: fit-content; }
+        .pt-marker::before {
+            content: '';
+            position: absolute;
+            bottom: 0.2em;
+            left: -2px;
+            right: -2px;
+            height: 0.34em;
+            background: var(--pink-soft);
+            opacity: 0.45;
+            z-index: -1;
+            transform: rotate(-1.5deg);
+            border-radius: 4px;
         }
 
         /* Оба слова одинаковые, разница только в цвете */
-        .page-title span {
-            display: block;
-            color: var(--pink);
-        }
+
 
         /* Приписка от руки на полях */
         .hand {
@@ -1071,7 +1093,10 @@
         </header>
 
         <header class="page-head">
-            <h1 class="page-title">Про <span>чувства</span></h1>
+            <h1 class="page-title">
+                <span class="pt-line"><span class="f-unb">П</span><span class="f-cav f-pink">р</span><span class="f-lora">о</span></span>
+                <span class="pt-line pt-marker"><span class="f-lora">ч</span><span class="f-unb">у</span><span class="f-cav">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
+            </h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
             <div class="hand">без советов, как надо жить</div>
         </header>
