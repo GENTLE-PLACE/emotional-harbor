@@ -1110,6 +1110,180 @@
             .cookie-bar__actions { flex-direction: column; }
             .cookie-bar__btn { width: 100%; }
         }
+
+        /* --- открытка с цитатой (только страницы записей) --- */
+
+        .card-cta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 26px;
+            border-top: 1px dashed rgba(201, 169, 122, 0.55);
+        }
+
+        .card-cta__text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            max-width: 430px;
+        }
+
+        .card-btn {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--brown-dark);
+            background: rgba(255, 248, 235, 0.85);
+            border: 1.5px solid var(--gold);
+            border-radius: 12px;
+            padding: 13px 22px;
+            cursor: pointer;
+            box-shadow: 3px 4px 0 rgba(58, 50, 40, 0.1);
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .card-btn:hover {
+            transform: translate(-1px, -2px);
+            box-shadow: 5px 6px 0 rgba(58, 50, 40, 0.12);
+            background: #fff8eb;
+        }
+
+        .card-btn--pink {
+            background: var(--pink);
+            border-color: var(--pink);
+            color: #fff;
+        }
+
+        .card-btn--pink:hover { background: #d96a8c; }
+
+        /* Кнопка, всплывающая над выделенным куском текста */
+        .card-pop {
+            position: fixed;
+            z-index: 120;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -100%) scale(.96);
+            transition: opacity .18s ease, transform .18s ease;
+        }
+
+        .card-pop.is-open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -100%) scale(1);
+        }
+
+        .card-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 130;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(58, 50, 40, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease;
+        }
+
+        .card-modal.is-open { opacity: 1; pointer-events: auto; }
+
+        .card-sheet {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            max-height: 92vh;
+            overflow-y: auto;
+            background: rgba(255, 248, 235, 0.98);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.14);
+            padding: 26px 26px 24px;
+        }
+
+        .card-sheet__close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            border: none;
+            background: none;
+            font-size: 22px;
+            line-height: 1;
+            color: var(--brown-light);
+            cursor: pointer;
+        }
+
+        .card-sheet__close:hover { color: var(--brown-dark); }
+
+        .card-sheet__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: -0.2px;
+            padding-right: 40px;
+        }
+
+        .card-sheet__note {
+            font-size: 13px;
+            color: var(--brown-light);
+            margin-top: 4px;
+        }
+
+        .card-formats { display: flex; gap: 8px; margin: 16px 0 14px; }
+
+        .card-fmt {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            padding: 7px 16px;
+            border-radius: 30px;
+            border: 1.5px dashed var(--gold);
+            background: transparent;
+            color: var(--brown-mid);
+            cursor: pointer;
+        }
+
+        .card-fmt.is-on {
+            border-style: solid;
+            background: rgba(247, 208, 138, 0.35);
+            color: var(--brown-dark);
+        }
+
+        .card-stage {
+            display: flex;
+            justify-content: center;
+            padding: 14px;
+            border: 1.5px dashed rgba(201, 169, 122, 0.5);
+            border-radius: 16px;
+            background: rgba(247, 239, 224, 0.6);
+        }
+
+        .card-stage canvas {
+            max-width: 100%;
+            max-height: 50vh;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .card-acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+        .card-acts .card-btn { flex: 1 1 auto; }
+
+        @media (max-width: 560px) {
+            .card-cta { flex-direction: column; align-items: flex-start; }
+            .card-sheet { padding: 20px 18px 18px; }
+        }
     </style>
 </head>
 <body>
@@ -1195,6 +1369,374 @@
             </aside>
             </div>
         </article>
+
+        <div class="card-cta">
+            <div class="card-cta__text">Если строчка отозвалась — выделите её в тексте и заберите открыткой.</div>
+            <button class="card-btn" type="button" id="card-open">Сделать открытку</button>
+        </div>
+
+<div class="card-pop" id="card-pop"><button class="card-btn card-btn--pink" type="button" id="card-pop-btn">Сделать открытку</button></div>
+
+<div class="card-modal" id="card-modal" role="dialog" aria-label="Открытка с цитатой">
+    <div class="card-sheet">
+        <button class="card-sheet__close" type="button" id="card-close" aria-label="Закрыть">&times;</button>
+        <div class="card-sheet__title">Открытка с цитатой</div>
+        <div class="card-sheet__note">Картинка собирается прямо в Вашем браузере.</div>
+        <div class="card-formats">
+            <button class="card-fmt is-on" type="button" data-fmt="square">Квадрат</button>
+            <button class="card-fmt" type="button" data-fmt="story">Сторис</button>
+        </div>
+        <div class="card-stage"><canvas id="card-canvas" width="1080" height="1080"></canvas></div>
+        <div class="card-acts">
+            <button class="card-btn card-btn--pink" type="button" id="card-save">Скачать картинку</button>
+            <button class="card-btn" type="button" id="card-copy">Скопировать</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var TITLE = "Как вести дневник эмоций, если раньше не получалось";
+    var FALLBACK = "Вы бросали не из лени. Правила, из-за которых дневники не доживают до второй недели, никто никогда не устанавливал — и их можно просто не соблюдать.";
+    var FILE = "otkrytka-kak-vesti-dnevnik-emotsiy-esli-ranshe-ne-poluchalos.png";
+    var MAX = 240;
+
+    var pop = document.getElementById('card-pop');
+    var modal = document.getElementById('card-modal');
+    var canvas = document.getElementById('card-canvas');
+    var text = document.querySelector('.post-body');
+    if (!pop || !modal || !canvas || !text || !canvas.getContext) return;
+
+    var ctx = canvas.getContext('2d');
+    var quote = '';
+    var picked = '';
+    var pickedRange = null;
+    var shape = 'square';
+    var loaded = false;
+
+    // Переносы строк сохраняем: если выделили четыре строки списка, на
+    // открытке должны остаться четыре строки, а не сплошная лента. Схлопываем
+    // только пробелы внутри строки и пустые строки, идущие подряд.
+    function tidy(value) {
+        return String(value)
+            .replace(/\r/g, '')
+            .split('\n')
+            .map(function (line) { return line.replace(/[ \t\u00a0]+/g, ' ').trim(); })
+            .join('\n')
+            .replace(/\n{3,}/g, '\n\n')
+            .trim();
+    }
+
+    // Выделение, отданное браузером строкой, теряет маркеры списка: пункты
+    // слипаются в сплошную ленту. Поэтому берём не строку, а сам кусок
+    // разметки — и возвращаем точки сами. Заодно отбиваем абзацы и
+    // подзаголовки переносом, иначе они тоже склеятся.
+    function take(range) {
+        var box = document.createElement('div');
+        box.appendChild(range.cloneContents());
+        Array.prototype.forEach.call(box.querySelectorAll('li'), function (item) {
+            item.insertBefore(document.createTextNode('• '), item.firstChild);
+        });
+        Array.prototype.forEach.call(box.querySelectorAll('p,li,h2,h3,h4,blockquote'), function (block) {
+            block.appendChild(document.createTextNode('\n'));
+        });
+        // Внутри абзаца строки разведены тегом <br> — он текста не несёт,
+        // и без замены пять строк слипаются в одну ленту
+        Array.prototype.forEach.call(box.querySelectorAll('br'), function (brk) {
+            brk.parentNode.replaceChild(document.createTextNode('\n'), brk);
+        });
+        return tidy(box.textContent);
+    }
+
+    function hidePop() { pop.classList.remove('is-open'); }
+
+    // Кнопка всплывает только над выделением внутри самой записи:
+    // заголовок, крошки и подвал открыткой не становятся.
+    function onSelect() {
+        var sel = window.getSelection();
+        if (!sel || sel.isCollapsed || modal.classList.contains('is-open')) { hidePop(); return; }
+        var said = tidy(sel.toString());
+        if (said.length < 12) { hidePop(); return; }
+        var range = sel.getRangeAt(0);
+        if (!text.contains(range.commonAncestorContainer)) { hidePop(); return; }
+        var box = range.getBoundingClientRect();
+        if (!box.width || !box.height) { hidePop(); return; }
+        picked = said;
+        // Кусок запоминаем целиком: к нажатию на кнопку выделение может
+        // уже пропасть, а разметка нужна для маркеров
+        pickedRange = range.cloneRange();
+        pop.style.left = Math.min(Math.max(box.left + box.width / 2, 100), window.innerWidth - 100) + 'px';
+        pop.style.top = Math.max(box.top - 8, 62) + 'px';
+        pop.classList.add('is-open');
+    }
+
+    document.addEventListener('selectionchange', onSelect);
+    window.addEventListener('scroll', hidePop, { passive: true });
+    window.addEventListener('resize', hidePop);
+
+    // Длинную простыню на открытку не пускаем: цитата — это строчка,
+    // а не половина главы. Режем по последнему пробелу, чтобы не рвать слово.
+    function shorten(value) {
+        if (value.length <= MAX) return value;
+        var cut = value.slice(0, MAX);
+        var stop = Math.max(cut.lastIndexOf(' '), cut.lastIndexOf('\n'));
+        if (stop > MAX * 0.6) cut = cut.slice(0, stop);
+        return cut.replace(/[\s.,;:—-]+$/, '') + '…';
+    }
+
+    function open(value) {
+        quote = shorten(tidy(value));
+        hidePop();
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        fonts().then(draw);
+    }
+
+    function close() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    // Шрифт, который на странице нигде не нарисован в этом начертании,
+    // браузер может и не запросить — тогда canvas молча возьмёт системный,
+    // и заметить подмену можно только глазами. Поэтому просим явно.
+    function fonts() {
+        if (loaded || !document.fonts) return Promise.resolve();
+        return Promise.all([
+            document.fonts.load('italic 600 48px Lora'),
+            document.fonts.load('700 30px Unbounded'),
+            document.fonts.load('400 21px Jost'),
+        ]).then(function () { loaded = true; }, function () {});
+    }
+
+    document.getElementById('card-pop-btn').addEventListener('click', function () {
+        open(pickedRange ? take(pickedRange) : picked);
+    });
+
+    // Кнопкой без выделения открытка тоже делается — на неё встаёт тизер записи
+    document.getElementById('card-open').addEventListener('click', function () {
+        var sel = window.getSelection();
+        var said = sel && !sel.isCollapsed ? tidy(sel.toString()) : '';
+        open(said.length >= 12 ? take(sel.getRangeAt(0)) : FALLBACK);
+    });
+
+    document.getElementById('card-close').addEventListener('click', close);
+    modal.addEventListener('click', function (event) { if (event.target === modal) close(); });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') close(); });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.card-fmt'), function (button) {
+        button.addEventListener('click', function () {
+            shape = button.getAttribute('data-fmt');
+            Array.prototype.forEach.call(document.querySelectorAll('.card-fmt'), function (other) {
+                other.classList.toggle('is-on', other === button);
+            });
+            draw();
+        });
+    });
+
+    function round(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+    }
+
+    function wrap(value, max) {
+        var words = String(value).split(' ');
+        var rows = [];
+        var row = '';
+        for (var i = 0; i < words.length; i++) {
+            var next = row ? row + ' ' + words[i] : words[i];
+            if (row && ctx.measureText(next).width > max) { rows.push(row); row = words[i]; }
+            else { row = next; }
+        }
+        if (row) rows.push(row);
+
+        // Слово длиннее строки переносить не по чему — делим по буквам
+        var out = [];
+        rows.forEach(function (line) {
+            while (ctx.measureText(line).width > max && line.length > 1) {
+                var n = line.length;
+                while (n > 1 && ctx.measureText(line.slice(0, n)).width > max) n--;
+                out.push(line.slice(0, n));
+                line = line.slice(n);
+            }
+            out.push(line);
+        });
+        return out;
+    }
+
+    // Раскладка цитаты: каждый кусок между переносами переносится сам по себе,
+    // пустая строка остаётся пустой строкой.
+    function lay(value, max) {
+        var out = [];
+        String(value).split('\n').forEach(function (part, i) {
+            if (!part) { if (i) out.push({ text: '', pad: 0 }); return; }
+            // Длинный пункт списка переносится с отступом под первую букву,
+            // а не под точку: иначе маркер теряется в столбце текста
+            var mark = /^•\s/.test(part) ? ctx.measureText('• ').width : 0;
+            wrap(mark ? part.slice(2) : part, max - mark).forEach(function (line, k) {
+                out.push({ text: (mark && !k ? '• ' : '') + line, pad: mark && k ? mark : 0 });
+            });
+        });
+        return out;
+    }
+
+    // Пустая строка занимает половину обычной: воздух нужен, дыра — нет
+    function stack(rows, step) {
+        var sum = 0;
+        rows.forEach(function (row) { sum += row.text ? step : step / 2; });
+        return sum;
+    }
+
+    function draw() {
+        var story = shape === 'story';
+        var W = 1080;
+        var H = story ? 1920 : 1080;
+        canvas.width = W;
+        canvas.height = H;
+
+        ctx.fillStyle = '#f7efe0';
+        ctx.fillRect(0, 0, W, H);
+
+        // Бумага в клетку — та же, что под всеми страницами сайта
+        ctx.strokeStyle = 'rgba(201, 169, 122, 0.18)';
+        ctx.lineWidth = 2;
+        for (var x = 45; x < W; x += 45) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+        for (var y = 45; y < H; y += 45) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+        var mx = 70;
+        var my = story ? 230 : 70;
+        var cw = W - mx * 2;
+        var ch = H - my * 2;
+        var r = 34;
+
+        // Плоская тень без размытия — как у карточек блога
+        ctx.fillStyle = 'rgba(45, 52, 54, 0.12)';
+        round(mx + 14, my + 16, cw, ch, r);
+        ctx.fill();
+
+        ctx.fillStyle = '#fff8eb';
+        round(mx, my, cw, ch, r);
+        ctx.fill();
+
+        // Полоска сверху — светлый розовый, одинаковый у всех открыток.
+        // Тот же, что у печати «розовый песок» на страницах: акцентный
+        // #e87a9c на такой ширине кричит и спорит с подписью внизу.
+        ctx.save();
+        round(mx, my, cw, ch, r);
+        ctx.clip();
+        ctx.fillStyle = '#F8B4C0';
+        ctx.fillRect(mx, my, cw, 18);
+        ctx.restore();
+
+        ctx.strokeStyle = '#2D3436';
+        ctx.lineWidth = 4;
+        round(mx, my, cw, ch, r);
+        ctx.stroke();
+
+        var pad = 62;
+        var left = mx + pad;
+        var right = mx + cw - pad;
+        var maxW = cw - pad * 2;
+
+        // Шапка: «Гавань» розовая, как логотип на сайте
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.font = '700 30px Unbounded, sans-serif';
+        var first = 'Эмоциональная ';
+        ctx.fillStyle = '#3a3228';
+        ctx.fillText(first, left, my + 112);
+        ctx.fillStyle = '#e87a9c';
+        ctx.fillText('Гавань', left + ctx.measureText(first).width, my + 112);
+
+        ctx.fillStyle = '#9a7050';
+        ctx.font = '300 22px Jost, sans-serif';
+        ctx.fillText('Про чувства', left, my + 150);
+
+        // Подпись внизу — только адрес, и тихо. Пробовали крупнее, чтобы
+        // легче было набрать руками: вышло похоже на просьбу. Кому нужно —
+        // тот прочтёт и так.
+        var footY = my + ch - 62;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#e87a9c';
+        ctx.font = '700 24px Unbounded, sans-serif';
+        ctx.fillText('emotional-harbor.ru', mx + cw / 2, footY);
+
+        // Откуда строчка — над адресом, не больше двух строк
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#7a5840';
+        ctx.font = '400 21px Jost, sans-serif';
+        var source = wrap('— из записи «' + TITLE + '»', maxW).slice(0, 2);
+        var sourceY = footY - 60 - (source.length - 1) * 30;
+        source.forEach(function (line, i) { ctx.fillText(line, left, sourceY + i * 30); });
+
+        ctx.strokeStyle = 'rgba(201, 169, 122, 0.6)';
+        ctx.setLineDash([9, 9]);
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(left, sourceY - 42);
+        ctx.lineTo(right, sourceY - 42);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Цитата занимает всё, что осталось между шапкой и подписью:
+        // кегль подбирается вниз, пока блок не уместится.
+        var top = my + 210;
+        var bottom = sourceY - 90;
+        var size = story ? 52 : 46;
+        var rows = [];
+        var step = 0;
+        var tall = 0;
+        while (true) {
+            ctx.font = 'italic 600 ' + size + 'px Lora, serif';
+            rows = lay('«' + quote + '»', maxW);
+            step = size * 1.5;
+            tall = stack(rows, step);
+            if (tall <= bottom - top || size <= 22) break;
+            size -= 2;
+        }
+
+        ctx.fillStyle = '#3a3228';
+        var pen = top + (bottom - top - tall) / 2 + size;
+        rows.forEach(function (row) {
+            if (row.text) ctx.fillText(row.text, left + row.pad, pen);
+            pen += row.text ? step : step / 2;
+        });
+    }
+
+    function blink(button, said) {
+        var was = button.textContent;
+        button.textContent = said;
+        setTimeout(function () { button.textContent = was; }, 1800);
+    }
+
+    function save() {
+        var link = document.createElement('a');
+        link.download = FILE;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    document.getElementById('card-save').addEventListener('click', save);
+
+    // Буфер обмена для картинок умеет не всякий браузер — на айфоне нет.
+    // Отказ не показываем ошибкой: просто отдаём файл.
+    document.getElementById('card-copy').addEventListener('click', function () {
+        var button = this;
+        function instead() { save(); blink(button, 'Скачала файлом'); }
+        if (!canvas.toBlob || !window.ClipboardItem || !navigator.clipboard) { instead(); return; }
+        canvas.toBlob(function (blob) {
+            if (!blob) { instead(); return; }
+            navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+                .then(function () { blink(button, 'Скопировано'); }, instead);
+        });
+    });
+})();
+</script>
 
         <aside class="author">
             <img class="author__icon" src="https://static.emotional-harbor.ru/Avtor.png" alt="" width="56" height="56" loading="lazy" decoding="async">
