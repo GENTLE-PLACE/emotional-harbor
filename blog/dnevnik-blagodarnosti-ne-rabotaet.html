@@ -347,7 +347,9 @@
             font-family: 'Unbounded', sans-serif;
             font-weight: 900;
             font-size: clamp(40px, 6.4vw, 66px);
-            line-height: 0.95;
+            /* 1.05, а не 0.95: в просвет между строками поднимается хвост
+               буквицы «Ч» — иначе он наезжает на «р» в слове «Про». */
+            line-height: 1.05;
             letter-spacing: -1px;
         }
 
