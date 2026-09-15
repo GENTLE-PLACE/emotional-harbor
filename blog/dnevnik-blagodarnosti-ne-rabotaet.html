@@ -1400,7 +1400,7 @@
     var TITLE = "Дневник благодарности: как вести, если благодарности пока нет";
     var FALLBACK = "Практике тысяча лет — от японских книг у изголовья до исследований Селигмана. Как вести дневник благодарности, когда благодарности внутри пока нет, и что меняется через месяц.";
     var FILE = "otkrytka-dnevnik-blagodarnosti-ne-rabotaet.png";
-    var MAX = 240;
+    var MAX = 280;
 
     var pop = document.getElementById('card-pop');
     var modal = document.getElementById('card-modal');
@@ -1472,14 +1472,28 @@
     }
 
     document.addEventListener('selectionchange', onSelect);
-    window.addEventListener('scroll', hidePop, { passive: true });
+    // Прокрутка уводит выделение из-под кнопки. Проверку ставим первой:
+    // обработчик срабатывает на каждое движение колеса, а прятать почти
+    // всегда нечего.
+    window.addEventListener('scroll', function () {
+        if (pop.classList.contains('is-open')) hidePop();
+    }, { passive: true });
     window.addEventListener('resize', hidePop);
 
-    // Длинную простыню на открытку не пускаем: цитата — это строчка,
-    // а не половина главы. Режем по последнему пробелу, чтобы не рвать слово.
+    // Длинную простыню на открытку не пускаем: цитата — это строчка, а не
+    // половина главы. Обрываем по возможности на конце предложения: открытка,
+    // кончающаяся на полуслове, читается сломанной, а не выбранной.
+    // Многоточие — запасной вариант, когда целой мысли в пределе не нашлось.
     function shorten(value) {
         if (value.length <= MAX) return value;
         var cut = value.slice(0, MAX);
+
+        var end = -1;
+        var finder = /[.!?]["»)]?(?=\s|$)/g;
+        var hit;
+        while ((hit = finder.exec(cut)) !== null) end = hit.index + hit[0].length;
+        if (end > MAX / 2) return cut.slice(0, end);
+
         var stop = Math.max(cut.lastIndexOf(' '), cut.lastIndexOf('\n'));
         if (stop > MAX * 0.6) cut = cut.slice(0, stop);
         return cut.replace(/[\s.,;:—-]+$/, '') + '…';
@@ -1593,6 +1607,24 @@
         return sum;
     }
 
+    // Кавычка-шарик: круглая голова и короткий хвост. Рисуем сами, а не
+    // берём знак из шрифта — у Lora он узкий и вытянутый, в крупном кегле
+    // выглядит тощим.
+    // Хвост смотрит вверх, шарик внизу — форма «66». Открывающая кавычка
+    // это запятая, перевёрнутая на 180°; хвостом вниз («99») рисуется
+    // закрывающая, и на месте открывающей она читается ошибкой.
+    function mark(x, y, r) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x - r, y);
+        ctx.quadraticCurveTo(x - r * 0.95, y - r * 2.1, x + r * 0.1, y - r * 1.9);
+        ctx.quadraticCurveTo(x - r * 0.35, y - r * 1.1, x + r * 0.05, y - r * 0.85);
+        ctx.closePath();
+        ctx.fill();
+    }
+
     function draw() {
         var story = shape === 'story';
         var W = 1080;
@@ -1688,21 +1720,39 @@
         // кегль подбирается вниз, пока блок не уместится.
         var top = my + 210;
         var bottom = sourceY - 90;
+        // Сама цитата в «ёлочки» не берётся: внутри текста бывают свои
+        // кавычки, и вторая закрывающая подряд читается опечаткой. Роль
+        // открывающей берёт на себя шарик сверху.
+        // Кавычки стоят высоко и отдельно, под самой шапкой, а не жмутся
+        // к первой строке: они тут знак, а не часть набора.
+        var markR = story ? 26 : 22;
+        var markH = markR * 3.9;
+        // Шарик внизу, хвост вверх: отмеряем от макушки хвоста, а не от центра
+        var markY = top + markR * 2.4;
+        var textTop = top + markH;
+
         var size = story ? 52 : 46;
         var rows = [];
         var step = 0;
         var tall = 0;
         while (true) {
             ctx.font = 'italic 600 ' + size + 'px Lora, serif';
-            rows = lay('«' + quote + '»', maxW);
+            rows = lay(quote, maxW);
             step = size * 1.5;
             tall = stack(rows, step);
-            if (tall <= bottom - top || size <= 22) break;
+            if (tall <= bottom - textTop || size <= 22) break;
             size -= 2;
         }
 
+        // Бледнее заливки полоски: знак должен быть виден, но не спорить
+        // с текстом за внимание
+        ctx.fillStyle = 'rgba(232, 122, 156, 0.28)';
+        mark(left + markR, markY, markR);
+        mark(left + markR * 3.4, markY, markR);
+
+        var pen = textTop + (bottom - textTop - tall) / 2 + size;
+
         ctx.fillStyle = '#3a3228';
-        var pen = top + (bottom - top - tall) / 2 + size;
         rows.forEach(function (row) {
             if (row.text) ctx.fillText(row.text, left + row.pad, pen);
             pen += row.text ? step : step / 2;
