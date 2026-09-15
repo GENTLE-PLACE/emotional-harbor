@@ -671,6 +671,11 @@ const CSS = `    <style>
         }
 
         .pt-line { display: block; }
+
+        /* Первая строка строгая: предлог — слово служебное, ему и положено быть
+           набранным ровно. Вся игра шрифтов уходит во вторую строку. Чуть
+           крупнее и плотнее, как в прежней вывеске витрины. */
+        .pt-line--strict { font-size: 1.08em; letter-spacing: -3px; }
         .f-unb { font-family: 'Unbounded', sans-serif; font-weight: 900; text-transform: uppercase; }
         .f-lora { font-family: 'Lora', serif; font-weight: 700; font-style: italic; font-size: 1.05em; }
         .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
@@ -1487,7 +1492,7 @@ ${siteHead(false)}
 
         <header class="page-head">
             <h1 class="page-title">
-                <span class="pt-line"><span class="f-unb">П</span><span class="f-cav f-pink">р</span><span class="f-lora">о</span></span>
+                <span class="pt-line pt-line--strict">Про</span>
                 <span class="pt-line pt-marker"><span class="pt-init f-pink">Ч</span><span class="f-unb">у</span><span class="f-cav">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
             </h1>
             <p class="page-sub">Здесь я пишу о том, что замечаю: о чувствах, которые трудно назвать, и о тихом порядке, который от этого появляется.</p>
