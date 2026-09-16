@@ -475,6 +475,21 @@ const CSS = `    <style>
 
         .sticky.visible { transform: translateY(0); }
 
+        /* Полоска чтения: меряет не страницу, а сам текст статьи —
+           доходит до конца ровно на последней строке, а не после подвала.
+           Цвет — светлый розовый, тот же, что полоса сверху у открытки
+           с цитатой: акцентный #e87a9c означает «нажми», а здесь нажимать
+           нечего. Золото на такой толщине выглядит выцветшим. */
+        .reading {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 120;
+            height: 4px;
+            width: 0;
+            background: var(--pink-soft);
+            pointer-events: none;
+        }
+
         .sticky__brand, .sticky__link {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
@@ -2268,6 +2283,8 @@ function renderPost(post, number, newer, older, all) {
 
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 
+    <div class="reading" id="reading" aria-hidden="true"></div>
+
     <div class="wrap">
         <nav class="crumbs" aria-label="Хлебные крошки">
             <a href="${SITE}/">Главная</a>
@@ -2313,6 +2330,42 @@ ${renderAlso(post, all) || renderNeighbours(newer, older)}
 ${FOOTER}
 
 ${sticky(true)}
+
+<script>
+(function () {
+    var bar = document.getElementById('reading');
+    var text = document.querySelector('.post-body');
+    if (!bar || !text) return;
+
+    var waiting = false;
+
+    // Считаем по тексту статьи: ноль — пока первая строка не поднялась
+    // к верху окна, единица — когда последняя показалась внизу.
+    function draw() {
+        waiting = false;
+
+        var box = text.getBoundingClientRect();
+        var seen = -box.top + window.innerHeight * 0.5;
+        var all = box.height;
+        var part = all > 0 ? seen / all : 0;
+
+        if (part < 0) part = 0;
+        if (part > 1) part = 1;
+
+        bar.style.width = (part * 100).toFixed(2) + '%';
+    }
+
+    function ask() {
+        if (waiting) return;
+        waiting = true;
+        window.requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask, { passive: true });
+    draw();
+})();
+</script>
 
 ${COOKIE_BAR}
 
