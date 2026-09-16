@@ -1730,7 +1730,15 @@ function head({ title, description, url, published, modified, image }) {
     <meta property="og:image:width" content="${DEFAULT_PREVIEW.width}">
     <meta property="og:image:height" content="${DEFAULT_PREVIEW.height}">
     <meta property="og:image:alt" content="${DEFAULT_PREVIEW.alt}">`}
+    <meta property="og:site_name" content="Эмоциональная Гавань">
     <meta property="og:locale" content="ru_RU">${article}
+
+    <!-- Карточку рисует не размер картинки, а этот тег: без него Телеграм
+         показывает мелкий квадратик, даже зная ширину и высоту. -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${esc(title)}">
+    <meta name="twitter:description" content="${esc(description)}">
+    <meta name="twitter:image" content="${image || DEFAULT_PREVIEW.url}">
 
     <link href="https://static.emotional-harbor.ru/fonts/harbor-fonts.css" rel="stylesheet">
 
