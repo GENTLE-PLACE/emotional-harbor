@@ -1620,6 +1620,10 @@ function head({ title, description, url, published, modified, image }) {
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <!-- Светлая схема объявлена намеренно: без неё Chrome на телефоне
+         с тёмной темой перекрашивает страницу сам и ломает бумагу. -->
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f7efe0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}">
