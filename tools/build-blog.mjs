@@ -63,6 +63,21 @@ function toParagraphs(text) {
             </figure>`;
         }
 
+        // Исследование: первая строка «✦ Понятие · Авторы, год», дальше текст.
+        // Тот же приём, что в путеводителях: наука стоит рядом с текстом, а не
+        // внутри него, — её можно пропустить, и абзац не развалится. Задумано
+        // по одной врезке на запись: со второй статья становится рефератом.
+        if (raw.startsWith('✦')) {
+            const [head, ...rest] = lines;
+            const body = rest
+                .map((line) => `<p>${inline(line)}</p>`)
+                .join('\n                ');
+            return `<aside class="note">
+                <div class="note__title">${inline(head.replace(/^✦\s?/, ''))}</div>
+                ${body}
+            </aside>`;
+        }
+
         // Практика: каждая строка начинается с «+ ». Заголовок рисуется сам,
         // набирать его не нужно. Задумано по одному блоку на запись: два таких
         // блока перестают быть особенными и становятся обычным текстом в рамке.
@@ -1103,6 +1118,36 @@ const CSS = `    <style>
         }
 
         .task p:last-child { margin-bottom: 0; }
+
+        /* Исследование — блок «✦». Практика зовёт что-то сделать и потому
+           обведена пунктиром; врезка только сообщает, поэтому тише: заливка
+           без рамки. Два блока в одном тексте не должны спорить за внимание. */
+        .note {
+            margin: 36px 0;
+            padding: 22px 26px;
+            border-radius: 16px;
+            background: rgba(201, 169, 122, 0.12);
+        }
+
+        .note__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            color: var(--brown-light);
+            margin-bottom: 10px;
+        }
+
+        .note p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 10px;
+        }
+
+        .note p:last-child { margin-bottom: 0; }
 
         .shot { margin: 36px 0; }
 

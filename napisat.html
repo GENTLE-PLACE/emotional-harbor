@@ -379,14 +379,15 @@
         </div>
 
         <div class="field">
-            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, + практика, **жирный**, *курсив*, [ссылка](адрес), ![подпись](адрес картинки)</span></label>
+            <label for="text">Текст <span class="hint">— ## часть, ### подзаголовок, - список, &gt; цитата, + практика, ✦ исследование, **жирный**, *курсив*, [ссылка](адрес), ![подпись](адрес картинки)</span></label>
             <textarea id="text" placeholder="Первый абзац станет вводным — он выделится сам."></textarea>
         </div>
 
         <div class="buttons">
             <button type="button" class="btn--main" id="saveBtn">Опубликовать</button>
             <button type="button" id="draftBtn">В черновики</button>
-            <button type="button" id="imageBtn">Добавить картинку</button>
+            <button type="button" id="noteBtn">Исследование</button>
+                <button type="button" id="imageBtn">Добавить картинку</button>
             <input type="file" id="imageFile" accept="image/*" class="hidden">
             <button type="button" class="btn--quiet" id="previewBtn">Предпросмотр</button>
             <button type="button" class="btn--quiet" id="cancelBtn">К списку</button>
@@ -754,6 +755,11 @@ function insertAtCursor(textarea, block) {
     saveDraft();
 }
 
+// Символ ✦ с клавиатуры не набрать, поэтому заготовку вставляет кнопка.
+el('noteBtn').addEventListener('click', () => {
+    insertAtCursor(el('text'), '✦ Понятие · Авторы, год');
+});
+
 el('imageBtn').addEventListener('click', () => el('imageFile').click());
 
 el('imageFile').addEventListener('change', async () => {
@@ -810,6 +816,13 @@ function renderMarkup(text) {
 
         if (block.startsWith('## ')) return '<h2>' + inline(block.slice(3)) + '</h2>';
         if (block.startsWith('### ')) return '<h3>' + inline(block.slice(4)) + '</h3>';
+
+        if (block.startsWith('✦')) {
+            const [head, ...rest] = lines;
+            return '<aside class="note"><div class="note__title">' +
+                inline(head.replace(/^✦\s?/, '')) + '</div>' +
+                rest.map((l) => '<p>' + inline(l) + '</p>').join('') + '</aside>';
+        }
 
         if (lines.every((l) => l.startsWith('+'))) {
             return '<aside class="task"><div class="task__title"><span>📝</span> Практика</div>' +
