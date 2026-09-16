@@ -145,6 +145,21 @@
 
         .sticky.visible { transform: translateY(0); }
 
+        /* Полоска чтения: меряет не страницу, а сам текст статьи —
+           доходит до конца ровно на последней строке, а не после подвала.
+           Цвет — светлый розовый, тот же, что полоса сверху у открытки
+           с цитатой: акцентный #e87a9c означает «нажми», а здесь нажимать
+           нечего. Золото на такой толщине выглядит выцветшим. */
+        .reading {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 120;
+            height: 4px;
+            width: 0;
+            background: var(--pink-soft);
+            pointer-events: none;
+        }
+
         .sticky__brand, .sticky__link {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;

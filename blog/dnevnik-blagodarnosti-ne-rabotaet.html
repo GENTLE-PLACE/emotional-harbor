@@ -147,6 +147,21 @@
 
         .sticky.visible { transform: translateY(0); }
 
+        /* Полоска чтения: меряет не страницу, а сам текст статьи —
+           доходит до конца ровно на последней строке, а не после подвала.
+           Цвет — светлый розовый, тот же, что полоса сверху у открытки
+           с цитатой: акцентный #e87a9c означает «нажми», а здесь нажимать
+           нечего. Золото на такой толщине выглядит выцветшим. */
+        .reading {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 120;
+            height: 4px;
+            width: 0;
+            background: var(--pink-soft);
+            pointer-events: none;
+        }
+
         .sticky__brand, .sticky__link {
             font-family: 'Unbounded', sans-serif;
             font-weight: 700;
@@ -1332,6 +1347,8 @@
 
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Дневник благодарности: как вести, если благодарности пока нет","description":"Практике тысяча лет — от японских книг у изголовья до исследований Селигмана. Как вести дневник благодарности, когда благодарности внутри пока нет, и что меняется через месяц.","datePublished":"2026-09-11T08:53:47.032Z","dateModified":"2026-09-14T04:41:14.269Z","author":{"@type":"Person","name":"Елена Патрикеева","description":"Автор Эмоциональной Гавани"},"publisher":{"@type":"Organization","name":"Эмоциональная Гавань"},"mainEntityOfPage":"https://emotional-harbor.ru/blog/dnevnik-blagodarnosti-ne-rabotaet.html","inLanguage":"ru-RU"}</script>
 
+    <div class="reading" id="reading" aria-hidden="true"></div>
+
     <div class="wrap">
         <nav class="crumbs" aria-label="Хлебные крошки">
             <a href="https://emotional-harbor.ru/">Главная</a>
@@ -1944,6 +1961,42 @@
 
         last = now;
     }, { passive: true });
+})();
+</script>
+
+<script>
+(function () {
+    var bar = document.getElementById('reading');
+    var text = document.querySelector('.post-body');
+    if (!bar || !text) return;
+
+    var waiting = false;
+
+    // Считаем по тексту статьи: ноль — пока первая строка не поднялась
+    // к верху окна, единица — когда последняя показалась внизу.
+    function draw() {
+        waiting = false;
+
+        var box = text.getBoundingClientRect();
+        var seen = -box.top + window.innerHeight * 0.5;
+        var all = box.height;
+        var part = all > 0 ? seen / all : 0;
+
+        if (part < 0) part = 0;
+        if (part > 1) part = 1;
+
+        bar.style.width = (part * 100).toFixed(2) + '%';
+    }
+
+    function ask() {
+        if (waiting) return;
+        waiting = true;
+        window.requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask, { passive: true });
+    draw();
 })();
 </script>
 
