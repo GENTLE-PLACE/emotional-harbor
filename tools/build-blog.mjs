@@ -228,6 +228,37 @@ const cleanExcerpt = (post) => post.excerpt
 
 const SEAL_TONES = ['pink', 'yellow', 'green', 'blue', 'purple'];
 
+// Обложка Гавани — запасное превью для соцсетей. Размеры объявляем прямо
+// в странице: без них Телеграм считает картинку неизвестной и рисует
+// маленький квадратик вместо большой карточки.
+const DEFAULT_PREVIEW = {
+    url: `${SITE}/preview-v2.jpg`,
+    width: 1200,
+    height: 630,
+    alt: 'Эмоциональная Гавань — дневник эмоций в Notion',
+};
+
+// Картинка поста лежит в бакете в webp, а webp в превью не показывают
+// ни Телеграм, ни часть соцсетей. Рядом с ней панель кладёт jpeg-копию:
+// то же имя плюс «.jpg». Проверяем, есть ли она на самом деле, — у постов,
+// вышедших до этого, копии нет, и тогда берём общую обложку.
+async function previewImage(url) {
+    if (!url) return '';
+    if (/\.(jpe?g|png)$/i.test(url)) return url;
+
+    const candidate = `${url.replace(/\.webp$/i, '')}.jpg`;
+
+    try {
+        const res = await fetch(candidate, {
+            method: 'HEAD',
+            signal: AbortSignal.timeout(5000),
+        });
+        return res.ok ? candidate : '';
+    } catch {
+        return '';
+    }
+}
+
 const isoDay = (iso) => new Date(iso).toISOString().slice(0, 10);
 
 // ---------- общие куски страницы ----------
@@ -1694,7 +1725,11 @@ function head({ title, description, url, published, modified, image }) {
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:url" content="${url}">
-    <meta property="og:image" content="${image || `${SITE}/preview-v2.jpg`}">
+    <meta property="og:image" content="${image || DEFAULT_PREVIEW.url}">${image ? '' : `
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="${DEFAULT_PREVIEW.width}">
+    <meta property="og:image:height" content="${DEFAULT_PREVIEW.height}">
+    <meta property="og:image:alt" content="${DEFAULT_PREVIEW.alt}">`}
     <meta property="og:locale" content="ru_RU">${article}
 
     <link href="https://static.emotional-harbor.ru/fonts/harbor-fonts.css" rel="stylesheet">
@@ -2277,8 +2312,9 @@ function renderPost(post, number, newer, older, all) {
         url: `${SITE}/${OUT_DIR}/${post.slug}.html`,
         published: post.date,
         modified: post.updated_at,
-        // Для превью берём jpeg-копию: webp Телеграм в превью не показывает
-        image: ((collectImages(post.text)[0] || {}).url || '').replace(/\.webp$/, '.jpg'),
+        // Для превью берём jpeg-копию картинки; её адрес выяснен заранее,
+        // до сборки страницы (см. previewImage). Пусто — встанет обложка.
+        image: post.preview,
     })}
 
     <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
@@ -2437,6 +2473,12 @@ if (!Array.isArray(all)) throw new Error('Блог вернул не списо�
 const posts = all.filter((p) => p.status !== 'draft');
 
 posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+// Адрес картинки для соцсетей выясняем до сборки: проверка идёт запросом
+// в бакет, а разметку страницы собираем уже без ожиданий.
+await Promise.all(posts.map(async (post) => {
+    post.preview = await previewImage((collectImages(post.text)[0] || {}).url || '');
+}));
 
 await mkdir(OUT_DIR, { recursive: true });
 
