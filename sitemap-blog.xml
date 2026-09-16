@@ -7,6 +7,16 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://emotional-harbor.ru/blog/emotsionalnyy-detoks-sem-shagov.html</loc>
+        <lastmod>2026-09-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/vydoh-dlinnee-vdoha-20260916-997j0</image:loc>
+            <image:title>Выдох длиннее вдоха</image:title>
+        </image:image>
+    </url>
+    <url>
         <loc>https://emotional-harbor.ru/blog/dnevnik-blagodarnosti-ne-rabotaet.html</loc>
         <lastmod>2026-09-14</lastmod>
         <changefreq>monthly</changefreq>
