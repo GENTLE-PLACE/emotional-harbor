@@ -402,6 +402,12 @@
         .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
         .f-pink { color: var(--pink); }
 
+        /* Поджатие связки «вства» к «Чу». Рукописная Caveat несёт широкие поля
+           по бокам глифа, и после прямой «У» они складывались в просвет шириной
+           почти в букву — слово читалось как два. Сдвиг в долях кегля, а не в
+           пикселях: заголовок резиновый, от 40px на телефоне до 66px. */
+        .pt-tight { margin-left: -0.16em; }
+
         /* Высокая рукописная буквица. line-height: 0 — чтобы она не раздвигала
            строки заголовка: иначе браузер считает высоту строки по самой
            крупной букве, и «Про» отъезжает вверх. */
@@ -1363,7 +1369,7 @@
         <header class="page-head">
             <h1 class="page-title">
                 <span class="pt-line pt-line--strict">Про</span>
-                <span class="pt-line pt-marker"><span class="pt-init f-pink">Ч</span><span class="f-unb">у</span><span class="f-cav">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
+                <span class="pt-line pt-marker"><span class="pt-init f-pink">Ч</span><span class="f-unb">у</span><span class="f-cav pt-tight">в</span><span class="f-unb f-pink">с</span><span class="f-lora">т</span><span class="f-unb">в</span><span class="f-lora">а</span></span>
             </h1>
             <p class="page-sub">Здесь я пишу о том, как мы чувствуем, об эмоциональной гигиене и почему это важно.</p>
         </header>
