@@ -852,6 +852,57 @@
 
         .note p:last-child { margin-bottom: 0; }
 
+        /* Граница — блок «※». Практика зовёт что-то сделать, врезка только
+           сообщает, а здесь запись честно говорит, где наша помощь кончается.
+           Поэтому не заливка, а открытка: светлая бумага в тонкой золотой
+           рамке. Чернильная рамка 2px была бы криком — ею обведены картинки,
+           они и должны быть громкими. Тени нет по той же причине. */
+        .care {
+            margin: 36px 0;
+            padding: 24px 28px 22px;
+            border-radius: 20px;
+            background: rgba(255, 248, 235, 0.9);
+            border: 1.5px solid var(--gold);
+        }
+
+        .care__head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .care__icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--pink-soft);
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--brown-dark);
+        }
+
+        .care__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-dark);
+        }
+
+        .care p {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 10px;
+        }
+
+        .care p:last-child { margin-bottom: 0; }
+
         .shot { margin: 36px 0; }
 
         .shot img {
