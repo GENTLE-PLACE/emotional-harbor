@@ -78,6 +78,24 @@ function toParagraphs(text) {
             </aside>`;
         }
 
+        // Граница: блок «※». Единственное место, где запись говорит, что
+        // помощь дневника кончилась. Заголовок фиксированный — обещание
+        // должно звучать одинаково во всех записях; текст свой, потому что
+        // запись не всегда про дневник.
+        if (raw.startsWith('※')) {
+            const said = lines
+                .map((line, i) => (i ? line : line.replace(/^※\s?/, '')))
+                .map((line) => `<p>${inline(line)}</p>`)
+                .join('\n                ');
+            return `<aside class="care">
+                <div class="care__head">
+                    <span class="care__icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
+                    <span class="care__title">С заботой о Вас</span>
+                </div>
+                ${said}
+            </aside>`;
+        }
+
         // Практика: каждая строка начинается с «+ ». Заголовок рисуется сам,
         // набирать его не нужно. Задумано по одному блоку на запись: два таких
         // блока перестают быть особенными и становятся обычным текстом в рамке.
@@ -1203,6 +1221,57 @@ const CSS = `    <style>
 
         .note p:last-child { margin-bottom: 0; }
 
+        /* Граница — блок «※». Практика зовёт что-то сделать, врезка только
+           сообщает, а здесь запись честно говорит, где наша помощь кончается.
+           Поэтому не заливка, а открытка: светлая бумага в тонкой золотой
+           рамке. Чернильная рамка 2px была бы криком — ею обведены картинки,
+           они и должны быть громкими. Тени нет по той же причине. */
+        .care {
+            margin: 36px 0;
+            padding: 24px 28px 22px;
+            border-radius: 20px;
+            background: rgba(255, 248, 235, 0.9);
+            border: 1.5px solid var(--gold);
+        }
+
+        .care__head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .care__icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--pink-soft);
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--brown-dark);
+        }
+
+        .care__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-dark);
+        }
+
+        .care p {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 10px;
+        }
+
+        .care p:last-child { margin-bottom: 0; }
+
         .shot { margin: 36px 0; }
 
         .shot img {
@@ -1835,6 +1904,11 @@ function renderCard(post) {
     function take(range) {
         var box = document.createElement('div');
         box.appendChild(range.cloneContents());
+        // Граница на открытку не уходит: «обратитесь к специалисту» в чужой
+        // ленте, без записи вокруг, читается как диагноз, а не как забота
+        Array.prototype.forEach.call(box.querySelectorAll('.care'), function (part) {
+            part.parentNode.removeChild(part);
+        });
         Array.prototype.forEach.call(box.querySelectorAll('li'), function (item) {
             item.insertBefore(document.createTextNode('• '), item.firstChild);
         });
@@ -1860,6 +1934,10 @@ function renderCard(post) {
         if (said.length < 12) { hidePop(); return; }
         var range = sel.getRangeAt(0);
         if (!text.contains(range.commonAncestorContainer)) { hidePop(); return; }
+        // Выделили одну только границу — кнопке взяться не за что
+        var host = range.commonAncestorContainer;
+        host = host.nodeType === 1 ? host : host.parentNode;
+        if (host && host.closest && host.closest('.care')) { hidePop(); return; }
         var box = range.getBoundingClientRect();
         if (!box.width || !box.height) { hidePop(); return; }
         picked = said;
@@ -1918,7 +1996,7 @@ function renderCard(post) {
     function fonts() {
         if (loaded || !document.fonts) return Promise.resolve();
         return Promise.all([
-            document.fonts.load('italic 600 48px Lora'),
+            document.fonts.load('350 48px Jost'),
             document.fonts.load('700 30px Unbounded'),
             document.fonts.load('400 21px Jost'),
         ]).then(function () { loaded = true; }, function () {});
@@ -2008,7 +2086,7 @@ function renderCard(post) {
     }
 
     // Кавычка-шарик: круглая голова и короткий хвост. Рисуем сами, а не
-    // берём знак из шрифта — у Lora он узкий и вытянутый, в крупном кегле
+    // берём знак из шрифта — там он узкий и вытянутый, в крупном кегле
     // выглядит тощим.
     // Хвост смотрит вверх, шарик внизу — форма «66». Открывающая кавычка
     // это запятая, перевёрнутая на 180°; хвостом вниз («99») рисуется
@@ -2136,7 +2214,10 @@ function renderCard(post) {
         var step = 0;
         var tall = 0;
         while (true) {
-            ctx.font = 'italic 600 ' + size + 'px Lora, serif';
+            // Lora italic — голос Есении, а на открытке строчка читателя,
+            // поэтому набор тот же, что в тексте записи. Холст не умеет
+            // промежуточные веса переменного шрифта: 350 он рисует как 400.
+            ctx.font = '350 ' + size + 'px Jost, sans-serif';
             rows = lay(quote, maxW);
             step = size * 1.5;
             tall = stack(rows, step);
