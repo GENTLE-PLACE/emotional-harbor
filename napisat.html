@@ -181,6 +181,7 @@
 
         .tag--draft { background: rgba(201, 169, 122, 0.3); color: var(--brown-mid); }
         .tag--live { background: rgba(184, 224, 210, 0.5); color: #2a4a3c; }
+        .tag--queued { background: rgba(247, 208, 138, 0.55); color: var(--brown-mid); }
 
         .post-row__actions { display: flex; gap: 8px; }
         .post-row__actions button { padding: 9px 14px; font-size: 10px; }
@@ -422,6 +423,11 @@
         </div>
 
         <div class="field">
+            <label for="publishAt">Когда выйти <span class="hint" id="publishAtHint">— пусто значит сразу; выйдет с ближайшей сборкой после этого часа</span></label>
+            <input type="datetime-local" id="publishAt">
+        </div>
+
+        <div class="field">
             <label for="excerpt">Описание для поиска <span class="hint">— одна фраза; пустое посчитается из текста</span></label>
             <input type="text" id="excerpt">
         </div>
@@ -537,9 +543,17 @@ function renderPosts() {
         meta.className = 'post-row__meta';
 
         const tag = document.createElement('span');
-        const draft = post.status === 'draft';
-        tag.className = 'tag ' + (draft ? 'tag--draft' : 'tag--live');
-        tag.textContent = draft ? 'черновик' : 'опубликовано';
+        if (post.status === 'draft') {
+            tag.className = 'tag tag--draft';
+            tag.textContent = 'черновик';
+        } else if (isQueued(post)) {
+            tag.className = 'tag tag--queued';
+            tag.textContent = 'в очереди · ' + new Date(post.date).toLocaleString('ru-RU',
+                { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
+        } else {
+            tag.className = 'tag tag--live';
+            tag.textContent = 'опубликовано';
+        }
 
         meta.appendChild(tag);
         meta.appendChild(document.createTextNode(
@@ -567,6 +581,35 @@ function renderPosts() {
 
 // ---------- редактор ----------
 
+// Опубликованная запись с датой в будущем стоит в очереди: функция не
+// отдаёт её наружу, пока время не придёт, и первая сборка после этого
+// часа выкладывает её на сайт.
+const isQueued = (post) => post.status !== 'draft' && new Date(post.date) > new Date();
+const isLive = (post) => post.status !== 'draft' && !isQueued(post);
+
+// Поле datetime-local понимает только местное время вида 2026-10-05T09:00
+function toLocalInput(iso) {
+    const d = new Date(iso);
+    const pad = (n) => String(n).padStart(2, '0');
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+        'T' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+}
+
+const inFuture = () => el('publishAt').value && new Date(el('publishAt').value) > new Date();
+
+// Кнопка говорит, что случится на самом деле: «опубликовать» при дате
+// в будущем было бы неправдой.
+function syncSaveLabel() {
+    if (el('status').value === 'published' && inFuture()) {
+        el('saveBtn').textContent = 'Поставить в очередь';
+    } else {
+        el('saveBtn').textContent = editing ? 'Сохранить' : 'Опубликовать';
+    }
+}
+
+el('publishAt').addEventListener('input', syncSaveLabel);
+el('status').addEventListener('input', syncSaveLabel);
+
 // ---------- черновик в браузере ----------
 //
 // Всё, что набрано, каждую секунду откладывается в память браузера —
@@ -586,6 +629,7 @@ function draftBox() {
         text: el('text').value,
         status: el('status').value,
         category: el('category').value,
+        publishAt: el('publishAt').value,
         savedAt: new Date().toISOString(),
     };
 }
@@ -618,7 +662,7 @@ function dropDraft() {
     el('restore').classList.add('hidden');
 }
 
-['title', 'slug', 'excerpt', 'text', 'status', 'category'].forEach((id) => {
+['title', 'slug', 'excerpt', 'text', 'status', 'category', 'publishAt'].forEach((id) => {
     el(id).addEventListener('input', () => {
         clearTimeout(draftTimer);
         draftTimer = setTimeout(saveDraft, 1000);
@@ -659,6 +703,8 @@ el('restoreYes').addEventListener('click', () => {
     // тогда возвращать нечего, и трогать их нельзя: сотрём то, что уже есть.
     if ('category' in box) el('category').value = box.category || '';
     if (box.excerpt) el('excerpt').value = box.excerpt;
+    if (box.publishAt && !el('publishAt').disabled) el('publishAt').value = box.publishAt;
+    syncSaveLabel();
     el('restore').classList.add('hidden');
 });
 
@@ -674,7 +720,17 @@ function openEditor(post) {
     el('status').value = post && post.status === 'draft' ? 'draft' : 'published';
     el('category').value = post ? (post.category || '') : '';
 
-    el('saveBtn').textContent = post ? 'Сохранить' : 'Опубликовать';
+    // Дата вышедшей записи уже стоит в карте сайта, её не переносят.
+    // Поле заполнено только у записи в очереди.
+    const live = post && isLive(post);
+    el('publishAt').disabled = !!live;
+    el('publishAt').value = post && isQueued(post) ? toLocalInput(post.date) : '';
+    el('publishAt').min = toLocalInput(new Date().toISOString());
+    el('publishAtHint').textContent = live
+        ? '— запись уже вышла, её дату не переносят'
+        : '— пусто значит сразу; выйдет с ближайшей сборкой после этого часа';
+
+    syncSaveLabel();
     el('deleteBtn').classList.toggle('hidden', !post);
 
     el('listCard').classList.add('hidden');
@@ -710,9 +766,12 @@ async function save(statusValue) {
         status: statusValue,
         category: el('category').value,
         newSlug: el('slug').value.trim(),
+        // Местное время превращаем в точное: функция живёт в другом часовом поясе
+        publishAt: inFuture() ? new Date(el('publishAt').value).toISOString() : '',
     };
 
     if (editing) payload.slug = editing.slug;
+    const queued = statusValue === 'published' && payload.publishAt;
 
     el('saveBtn').disabled = true;
     el('draftBtn').disabled = true;
@@ -723,7 +782,11 @@ async function save(statusValue) {
         show(el('editorStatus'),
             statusValue === 'draft'
                 ? 'Сохранено в черновики — на сайте не появится.'
-                : 'Опубликовано. Страница соберётся в течение четверти часа.',
+                : queued
+                    ? 'Встала в очередь. Выйдет ' + new Date(payload.publishAt).toLocaleString('ru-RU',
+                        { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) +
+                        ' — с ближайшей сборкой после этого часа.'
+                    : 'Опубликовано. Страница соберётся в течение четверти часа.',
             true);
         dropDraft();
         editing = null;

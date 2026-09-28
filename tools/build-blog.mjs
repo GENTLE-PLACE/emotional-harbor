@@ -2577,7 +2577,9 @@ if (!Array.isArray(all)) throw new Error('Блог вернул не списо�
 
 // Черновики на сайт не идут. Страница уже опубликованного поста,
 // переведённого в черновики, удаляется ниже вместе с остальным лишним.
-const posts = all.filter((p) => p.status !== 'draft');
+// Очередь (дата в будущем) не идёт тоже. Без пароля функция её и так не
+// отдаёт — здесь вторая защита на случай, если это когда-нибудь поменяется.
+const posts = all.filter((p) => p.status !== 'draft' && new Date(p.date).getTime() <= Date.now());
 
 posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
