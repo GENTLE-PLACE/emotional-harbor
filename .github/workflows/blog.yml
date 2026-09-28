@@ -33,6 +33,7 @@ jobs:
         run: node tools/build-blog.mjs
 
       - name: Закоммитить, если что-то изменилось
+        id: commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -45,3 +46,11 @@ jobs:
           fi
           git commit -m 'Блог: обновление страниц постов'
           git push
+          echo 'pushed=true' >> "$GITHUB_OUTPUT"
+
+      # Сообщить Яндексу об изменённых страницах — только если что-то ушло
+      # на сайт. Скрипт сам дожидается, пока GitHub Pages выложит новую
+      # версию, и никогда не роняет сборку.
+      - name: Сообщить Яндексу (IndexNow)
+        if: steps.commit.outputs.pushed == 'true'
+        run: node tools/indexnow.mjs
