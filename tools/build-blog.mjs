@@ -2368,11 +2368,17 @@ ${link(newer, 'next', 'Следующая →')}
 `;
 }
 
-// «Читайте также»: до трёх других записей. Когда он есть, переходы
-// «предыдущая / следующая» не рисуются: на трёх постах они показывали
-// ровно те же названия, что и карточки прямо над ними.
-function renderAlso(post, all) {
-    const others = all.filter((p) => p.slug !== post.slug).slice(0, 3);
+// «Читайте также»: до трёх других записей, кроме соседей по дате — те уже
+// стоят в переходах «предыдущая / следующая» ниже, и повторять их незачем.
+//
+// Переходы нужны всегда: карточки берут самые свежие записи, и без цепочки
+// соседей старые выпадали отовсюду — на пятой записи «Как вести дневник
+// эмоций» не попадала ни на одну страницу. С 11.09 по 28.09.2026 переходы
+// прятались, когда есть карточки: на трёх-четырёх постах оба блока неизбежно
+// показывали одни и те же названия.
+function renderAlso(post, all, neighbours = []) {
+    const skip = new Set([post.slug, ...neighbours.filter(Boolean).map((p) => p.slug)]);
+    const others = all.filter((p) => !skip.has(p.slug)).slice(0, 3);
     if (others.length < 2) return '';
 
     return `
@@ -2461,7 +2467,7 @@ ${renderCard(post)}
             <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>
             <a class="post-foot__link" href="${SITE}/">Посмотреть Гавань</a>
         </div>
-${renderAlso(post, all) || renderNeighbours(newer, older)}
+${renderAlso(post, all, [newer, older])}${renderNeighbours(newer, older)}
     </div>
 
 ${FOOTER}
