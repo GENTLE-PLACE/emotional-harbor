@@ -1,0 +1,32 @@
+# Переносит записи витрины «Погостить у Есении» (DEMO) на новый месяц.
+#
+# Первого числа записи прошлого месяца переезжают в текущий, число
+# остаётся — чтобы отчёты «этого месяца» у посетителя не были пустыми.
+# Подробности — в tools/demo-novyy-mesyats.mjs.
+#
+# Запустить прямо сейчас: GitHub → Actions → «Демо: новый месяц» → Run workflow.
+#
+# Ключ Notion лежит в секрете NOTION_DEMO_TOKEN (Settings → Secrets → Actions).
+
+name: 'Демо: новый месяц'
+
+on:
+  schedule:
+    # 00:30 UTC первого числа = 03:30 по Москве. GitHub запускает по
+    # расписанию «по возможности», так что реально — ранним утром.
+    - cron: '30 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Перенести записи на новый месяц
+        run: node tools/demo-novyy-mesyats.mjs
+        env:
+          NOTION_DEMO_TOKEN: ${{ secrets.NOTION_DEMO_TOKEN }}
