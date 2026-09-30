@@ -18,6 +18,7 @@ CLAUDE.md
 schema.sql
 wordstat-*.md
 svodka-*.md
+product-marketing*.md
 
 # --- Бэкенд: секретная логика, не для публичного репозитория ---
 harbor-backend/
@@ -31,3 +32,7 @@ harbor-blog/
 # --- Личный бот дневника: токены и личные записи. Только локально ---
 harbor-diary-bot/
 
+
+# --- Скиллы для текстов лендинга: рабочие, не для публики ---
+marketing-skills/
+Смыслы для лендинга.md

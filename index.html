@@ -1586,6 +1586,17 @@
             background: #f0ece6;
         }
 
+        /* Скрин шире окна: крутится внутри в обе стороны (доска Копилки) */
+        .bento-image-holder--wide {
+            overflow: auto;
+            contain: inline-size;
+        }
+
+        .bento-image-holder--wide img {
+            width: 900px;
+            max-width: none;
+        }
+
         .bento-card-info {
             padding: 14px 18px 16px;
             border-top: 1px solid rgba(201, 169, 122, 0.2);
@@ -3461,10 +3472,10 @@
 
         <div class="module-feature">
             <div class="module-feature__line">Внутри — палитра из <b>99 эмоций</b>. Вы выбираете из готового списка, как из коробки с красками, где у каждого оттенка уже есть имя.</div>
-            <div class="module-feature__aside">Иногда мы не знаем, что чувствуем, пока не увидим это слово перед собой.</div>
+            <div class="module-feature__aside">Иногда мы не знаем, что чувствуем, пока не увидим это слово перед собой. Умение различать оттенки психологи называют эмоциональной гранулярностью.</div>
         </div>
 
-        <div class="module-callout">Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность». Это и есть эмоциональная гранулярность в деле.</div>
+        <div class="module-callout">Замечайте, как даже в самый хмурый вторник рядом с «тревогой» робко цветёт «нежность».</div>
 
         <div class="module-feature">
             <div class="module-feature__line"><b>Три радости</b> — поле на каждый день, независимо от того, каким он был.</div>
@@ -3557,9 +3568,13 @@
                     </div>
 
                     <div class="module-text-full">
-                        <p>Самое нежное место во всей Гавани.</p>
-                        <p>Голосовое от подруги, которое Вы переслушиваете в плохой день. Комментарий от клиента, после которого расправляются плечи. Письмо от мамы. Сюда попадает всё, что однажды попало точно в грудь — и оставило там свет.</p>
-                        <div class="module-callout">Это не просто архив добрых слов. Это аптечка с подписанными баночками. Когда внутри холодно, Вы приходите сюда и берёте именно то, что нужно сейчас. Доказательная база того, что Вас видят.</div>
+                        <p>Вы уже знаете, что положите сюда первым.</p>
+                        <p>Голосовое, где подруга смеётся так, что половину слов не разобрать. Мамино «горжусь» — с тремя восклицательными знаками и не тем смайликом. Сообщение от клиента, после которого Вы выпрямились прямо на стуле.<br>Всё, что однажды попало точно в грудь — и оставило там свет.</p>
+                        <div class="module-feature">
+                            <div class="module-feature__line">Сейчас это живёт в галерее — между фото еды и скриншотом парковки. Здесь у него <b>свой дом</b>: сам скрин, само голосовое.</div>
+                            <div class="module-feature__aside">Через полгода Вы услышите её смех раньше, чем вспомните повод.</div>
+                        </div>
+                        <div class="module-callout">Открывать её можно просто так. В обычный вторник — чтобы снова почувствовать себя любимой и значимой.<br>А в день, когда кажется, что мир холоден, а люди далеки, — чтобы проникнуться этим опытом тепла, принятия и смеха.</div>
                     </div>
 
                     <div class="module-gallery">
@@ -3571,17 +3586,35 @@
                                         <div class="bento-browser-dot"></div>
                                         <div class="bento-browser-dot"></div>
                                     </div>
+                                    <div class="bento-image-holder bento-image-holder--wide lazy-wrapper">
+                                        <div class="skeleton"></div>
+                                        <img src="https://static.emotional-harbor.ru/Warmth_Jar_Board.webp" alt="Копилка тепла в Notion: переписки с мамой, коллегами и сестрой на одной доске — шаблон Эмоциональная Гавань" width="1587" height="696" loading="lazy" decoding="async">
+                                    </div>
+                                    <div class="bento-card-info"></div>
+                                </div>
+                            </div>
+                            <div class="slide">
+                                <div class="bento-mockup">
+                                    <div class="bento-browser-frame">
+                                        <div class="bento-browser-dot"></div>
+                                        <div class="bento-browser-dot"></div>
+                                        <div class="bento-browser-dot"></div>
+                                    </div>
                                     <div class="bento-image-holder lazy-wrapper">
                                         <div class="skeleton"></div>
-                                        <img src="https://static.emotional-harbor.ru/Warmth_Jar.webp" alt="Копилка тепла и благодарностей — шаблон для самотерапии в Notion" width="1139" height="1246" loading="lazy" decoding="async">
+                                        <img src="https://static.emotional-harbor.ru/Warmth_Jar_Card.webp" alt="Запись в Копилке тепла: переписка, контекст и чувство в тот момент — Notion-шаблон Эмоциональная Гавань" width="1139" height="1246" loading="lazy" decoding="async">
                                     </div>
                                     <div class="bento-card-info"></div>
                                 </div>
                             </div>
                         </div>
+                        <div class="slider-dots">
+                            <button class="dot active" data-slide="0" aria-label="Доска Копилки тепла"></button>
+                            <button class="dot" data-slide="1" aria-label="Запись в Копилке тепла"></button>
+                        </div>
                     </div>
 
-                    <div class="module-note">Аптечка с подписанными баночками.</div>
+                    <div class="module-note">Вас любят чаще, чем Вы помните.</div>
                 </div>
 
 <!-- ИСТОЧНИКИ ЭНЕРГИИ -->
