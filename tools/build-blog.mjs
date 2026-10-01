@@ -52,13 +52,15 @@ function toParagraphs(text) {
             return `<h3>${inline(raw.slice(4).trim())}</h3>`;
         }
 
-        // Картинка: ![подпись](адрес). Подпись обязательна — она и
-        // описание для незрячих, и текст под изображением.
+        // Картинка: ![подпись](адрес). Подпись обязательна — это текст под
+        // изображением, его же читают незрячим. В alt она не дублируется:
+        // поисковик брал оба и показывал подпись в сниппете дважды
+        // (01.10.2026). Для поиска по картинкам подпись есть ещё в карте блога.
         const picture = raw.match(/^!\[([^\]]*)\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)$/);
         if (picture) {
             const caption = esc(picture[1].trim());
             return `<figure class="shot">
-                <img src="${picture[2]}" alt="${caption}" loading="lazy" decoding="async">${caption ? `
+                <img src="${picture[2]}" alt="" loading="lazy" decoding="async">${caption ? `
                 <figcaption>${caption}</figcaption>` : ''}
             </figure>`;
         }
