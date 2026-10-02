@@ -393,6 +393,16 @@
             padding: 0 48px 40px;
         }
 
+        /* Пока .page во всю ширину экрана, обрезаем по ней то, что нарочно
+           шире текста (холст кисти, невидимые плашки находок). Иначе телефон
+           считает страницу шире экрана и отдаляет её целиком — Вебмастер
+           02.10.2026 признал сайт «недостаточно адаптированным». overflow-x
+           у body этого не лечит: мобильный Chrome его здесь не слушает.
+           clip, а не hidden: hidden обрезал бы и кляксу по вертикали. */
+        @media (max-width: 960px) {
+            .page { overflow-x: clip; }
+        }
+
         /* ——— STICKY HEADER ——— */
         .sticky-header {
             position: fixed;
@@ -3223,6 +3233,11 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
+            .inkwash__canvas { display: none; }
+        }
+
+        /* Клякса только под мышью: на компьютере она эффектнее (решение 02.10.2026) */
+        @media (hover: none), (pointer: coarse) {
             .inkwash__canvas { display: none; }
         }
 
