@@ -19,6 +19,7 @@ schema.sql
 wordstat-*.md
 svodka-*.md
 product-marketing*.md
+COVERS.md
 
 # --- Бэкенд: секретная логика, не для публичного репозитория ---
 harbor-backend/
