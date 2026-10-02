@@ -1586,7 +1586,7 @@
             background: #f0ece6;
         }
 
-        /* Скрин шире окна: крутится внутри в обе стороны (доска Копилки) */
+        /* Скрин шире окна: на компьютере крутится внутри в обе стороны (доски Копилки и Источников) */
         .bento-image-holder--wide {
             overflow: auto;
             contain: inline-size;
@@ -1595,6 +1595,89 @@
         .bento-image-holder--wide img {
             width: 900px;
             max-width: none;
+        }
+
+        /* На телефоне прокрутка внутри перехватывала палец у страницы:
+           доска видна целиком, крупно — по нажатию */
+        @media (max-width: 760px) {
+            .bento-image-holder--wide {
+                max-height: none;
+                overflow: hidden;
+                cursor: zoom-in;
+            }
+
+            .bento-image-holder--wide img {
+                width: 100%;
+            }
+        }
+
+        .board-zoom-hint { display: none; }
+
+        @media (max-width: 760px) {
+            .board-zoom-hint { display: block; }
+        }
+
+        .board-zoom-hint {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            padding: 6px 14px;
+            border: 1px solid var(--gold);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--brown-dark);
+            font: 400 13px/1.2 'Jost', sans-serif;
+            box-shadow: 2px 2px 0 rgba(58, 50, 40, 0.12);
+            pointer-events: none;
+        }
+
+        .board-view {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(58, 50, 40, 0.88);
+            display: none;
+        }
+
+        .board-view.is-open { display: block; }
+
+        .board-view__scroll {
+            position: absolute;
+            inset: 0;
+            overflow: auto;
+            display: flex;
+            padding: 56px 16px 24px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .board-view__scroll img {
+            display: block;
+            margin: auto;
+            width: min(1600px, 100%);
+            height: auto;
+            flex-shrink: 0;
+        }
+
+        /* На узком экране — крупнее экрана, чтобы текст читался; листается пальцем */
+        @media (max-width: 760px) {
+            .board-view__scroll img { width: 1100px; max-width: none; }
+        }
+
+        .board-view__close {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 1;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            background: var(--beige);
+            color: var(--brown-dark);
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 2px 2px 0 rgba(58, 50, 40, 0.15);
         }
 
         .bento-card-info {
@@ -5145,6 +5228,79 @@
         m.addEventListener('click', function(){
             cards[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
+    });
+})();
+</script>
+
+<div class="board-view" id="boardView" role="dialog" aria-modal="true" aria-label="Скрин крупно">
+    <button class="board-view__close" type="button" aria-label="Закрыть">×</button>
+    <div class="board-view__scroll"><img alt=""></div>
+</div>
+
+<script>
+// Доски Копилки и Источников на телефоне: в карточке видны целиком, по нажатию — крупно.
+// На компьютере остаётся прокрутка внутри окна, просмотр крупно не нужен.
+(function(){
+    var phone = window.matchMedia('(max-width: 760px)');
+    var view = document.getElementById('boardView');
+    var big = view.querySelector('img');
+    var lastFocus = null;
+
+    function open(img){
+        lastFocus = document.activeElement;
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        view.classList.add('is-open');
+        document.documentElement.style.overflow = 'hidden';
+        view.querySelector('.board-view__scroll').scrollTo(0, 0);
+        view.querySelector('.board-view__close').focus();
+    }
+    function close(){
+        view.classList.remove('is-open');
+        document.documentElement.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+    }
+
+    var holders = document.querySelectorAll('.bento-image-holder--wide');
+
+    function setMode(){
+        holders.forEach(function(holder){
+            if (phone.matches) {
+                holder.setAttribute('role', 'button');
+                holder.setAttribute('tabindex', '0');
+                holder.setAttribute('aria-label', 'Открыть скрин крупнее');
+            } else {
+                holder.removeAttribute('role');
+                holder.removeAttribute('tabindex');
+                holder.removeAttribute('aria-label');
+            }
+        });
+        if (!phone.matches && view.classList.contains('is-open')) close();
+    }
+
+    holders.forEach(function(holder){
+        var img = holder.querySelector('img');
+        if (!img) return;
+        var hint = document.createElement('span');
+        hint.className = 'board-zoom-hint';
+        hint.textContent = 'Открыть крупнее';
+        holder.appendChild(hint);
+        holder.addEventListener('click', function(){ if (phone.matches) open(img); });
+        holder.addEventListener('keydown', function(e){
+            if (phone.matches && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(img); }
+        });
+    });
+
+    setMode();
+    if (phone.addEventListener) phone.addEventListener('change', setMode);
+    else phone.addListener(setMode);
+
+    view.querySelector('.board-view__close').addEventListener('click', close);
+    view.addEventListener('click', function(e){
+        if (e.target === view || e.target.classList.contains('board-view__scroll')) close();
+    });
+    document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && view.classList.contains('is-open')) close();
     });
 })();
 </script>
