@@ -822,6 +822,19 @@
 
         .task p:last-child { margin-bottom: 0; }
 
+        .task .task__list {
+            margin: 0 0 0 20px;
+            padding-left: 4px;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+        }
+
+        .task .task__list li { margin-bottom: 12px; }
+        .task .task__list li:last-child { margin-bottom: 0; }
+        .task .task__list li::marker { color: var(--gold); }
+        .task .task__list:not(:last-child) { margin-bottom: 12px; }
+
         /* Исследование — блок «✦». Практика зовёт что-то сделать и потому
            обведена пунктиром; врезка только сообщает, поэтому тише: заливка
            без рамки. Два блока в одном тексте не должны спорить за внимание. */
