@@ -101,9 +101,28 @@ function toParagraphs(text) {
         // Практика: каждая строка начинается с «+ ». Заголовок рисуется сам,
         // набирать его не нужно. Задумано по одному блоку на запись: два таких
         // блока перестают быть особенными и становятся обычным текстом в рамке.
+        // Строка «+ - текст» — пункт с золотой точкой, как в обычных списках
+        // блога; просто «+ текст» — абзац. Точки по желанию, а не всем строкам
+        // подряд: в старых записях вторая строка практики — пояснение
+        // («Есть своя Гавань — отметьте там…»), и точка сделала бы её шагом.
+        // Соседние пункты собираются в один список. Решено 06.10.2026.
         if (lines.every((line) => line.startsWith('+'))) {
-            const body = lines
-                .map((line) => `<p>${inline(line.replace(/^\+\s?/, ''))}</p>`)
+            const parts = [];
+            for (const line of lines) {
+                const text = line.replace(/^\+\s?/, '');
+                const item = text.match(/^-\s+(.*)$/);
+                if (item) {
+                    const last = parts[parts.length - 1];
+                    if (Array.isArray(last)) last.push(inline(item[1]));
+                    else parts.push([inline(item[1])]);
+                } else {
+                    parts.push(`<p>${inline(text)}</p>`);
+                }
+            }
+            const body = parts
+                .map((part) => (Array.isArray(part)
+                    ? `<ul class="task__list">\n                    ${part.map((li) => `<li>${li}</li>`).join('\n                    ')}\n                </ul>`
+                    : part))
                 .join('\n                ');
             return `<aside class="task">
                 <div class="task__title"><span aria-hidden="true">📝</span> Практика</div>
@@ -1192,6 +1211,19 @@ const CSS = `    <style>
         }
 
         .task p:last-child { margin-bottom: 0; }
+
+        .task .task__list {
+            margin: 0 0 0 20px;
+            padding-left: 4px;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+        }
+
+        .task .task__list li { margin-bottom: 12px; }
+        .task .task__list li:last-child { margin-bottom: 0; }
+        .task .task__list li::marker { color: var(--gold); }
+        .task .task__list:not(:last-child) { margin-bottom: 12px; }
 
         /* Исследование — блок «✦». Практика зовёт что-то сделать и потому
            обведена пунктиром; врезка только сообщает, поэтому тише: заливка

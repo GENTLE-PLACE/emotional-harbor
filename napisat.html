@@ -296,6 +296,11 @@
         }
         .preview .task p { font-size: 14px; color: var(--brown-mid); margin-bottom: 10px; }
         .preview .task p:last-child { margin-bottom: 0; }
+        .preview .task__list { margin: 0 0 0 20px; padding-left: 4px; font-size: 14px; color: var(--brown-mid); }
+        .preview .task__list li { margin-bottom: 10px; }
+        .preview .task__list li:last-child { margin-bottom: 0; }
+        .preview .task__list li::marker { color: var(--gold); }
+        .preview .task__list:not(:last-child) { margin-bottom: 10px; }
         .preview .note {
             margin: 24px 0;
             padding: 20px 22px;
@@ -951,9 +956,19 @@ function renderMarkup(text) {
                 '<span class="care__title">С заботой о Вас</span></div>' + said + '</aside>';
         }
 
+        // Как в сборщике: «+ - текст» — пункт с точкой, «+ текст» — абзац
         if (lines.every((l) => l.startsWith('+'))) {
-            return '<aside class="task"><div class="task__title"><span>📝</span> Практика</div>' +
-                lines.map((l) => '<p>' + inline(l.replace(/^\+\s?/, '')) + '</p>').join('') + '</aside>';
+            let body = '';
+            let open = false;
+            lines.forEach((l) => {
+                const text = l.replace(/^\+\s?/, '');
+                const item = text.match(/^-\s+(.*)$/);
+                if (item && !open) { body += '<ul class="task__list">'; open = true; }
+                if (!item && open) { body += '</ul>'; open = false; }
+                body += item ? '<li>' + inline(item[1]) + '</li>' : '<p>' + inline(text) + '</p>';
+            });
+            if (open) body += '</ul>';
+            return '<aside class="task"><div class="task__title"><span>📝</span> Практика</div>' + body + '</aside>';
         }
 
         if (lines.every((l) => l.startsWith('>'))) {
