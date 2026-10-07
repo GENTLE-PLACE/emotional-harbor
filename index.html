@@ -4590,6 +4590,15 @@
                 switchModule(moduleName);
             });
         });
+
+        // Ссылка из блога сразу на нужное пространство: /#kopilka-tepla
+        const byHash = {
+            'dnevnik-nastroeniya': 'diary', 'kopilka-tepla': 'warmth',
+            'istochniki-energii': 'energy', 'moi-opory': 'anchors',
+            'uyutnyy-kontent': 'content', 'yarkost-zhizni': 'brightness',
+        };
+        const fromHash = byHash[location.hash.slice(1)];
+        if (fromHash) switchModule(fromHash);
     })();
 
     // FADE-UP OBSERVER
