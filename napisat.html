@@ -103,6 +103,7 @@
         .row > * { flex: 1 1 240px; }
 
         .buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+        .buttons--top { margin-top: 0; margin-bottom: 26px; }
 
         button {
             font-family: 'Unbounded', sans-serif;
@@ -377,11 +378,11 @@
 
     <!-- СПИСОК ЗАПИСЕЙ -->
     <div class="card hidden" id="listCard">
-        <label>Записи</label>
-        <div class="posts" id="posts"></div>
-        <div class="buttons">
+        <div class="buttons buttons--top">
             <button type="button" class="btn--main" id="newBtn">Новая запись</button>
         </div>
+        <label>Записи</label>
+        <div class="posts" id="posts"></div>
     </div>
 
     <!-- РЕДАКТОР -->
