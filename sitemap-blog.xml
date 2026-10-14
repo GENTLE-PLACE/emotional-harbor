@@ -7,6 +7,16 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://emotional-harbor.ru/blog/revnost.html</loc>
+        <lastmod>2026-10-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/pro-revnost-20261008-e7bu3</image:loc>
+            <image:title>Про ревность</image:title>
+        </image:image>
+    </url>
+    <url>
         <loc>https://emotional-harbor.ru/blog/atlas-emotsiy.html</loc>
         <lastmod>2026-10-05</lastmod>
         <changefreq>monthly</changefreq>
