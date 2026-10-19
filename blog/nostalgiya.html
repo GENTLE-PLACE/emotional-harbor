@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <!-- Светлая схема объявлена намеренно: без неё Chrome на телефоне
+         с тёмной темой перекрашивает страницу сам и ломает бумагу. -->
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f7efe0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ностальгия. Почему мы скучаем по прошлому · Про чувства</title>
+    <meta name="description" content="Триста лет назад тоску по дому лечили опиумом, а за пастуший напев грозили казнью. Как «болезнь швейцарских солдат» оказалась не причиной боли, а лекарством от неё?">
+    <link rel="canonical" href="https://emotional-harbor.ru/blog/nostalgiya.html">
+    <link rel="icon" type="image/svg+xml" href="https://emotional-harbor.ru/favicon.svg">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ностальгия. Почему мы скучаем по прошлому · Про чувства">
+    <meta property="og:description" content="Триста лет назад тоску по дому лечили опиумом, а за пастуший напев грозили казнью. Как «болезнь швейцарских солдат» оказалась не причиной боли, а лекарством от неё?">
+    <meta property="og:url" content="https://emotional-harbor.ru/blog/nostalgiya.html">
+    <meta property="og:image" content="https://storage.yandexcloud.net/emotional-harbor-blog-img/nostalgiya-20261008-fuv4t.jpg">
+    <meta property="og:site_name" content="Эмоциональная Гавань">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="article:published_time" content="2026-10-19T07:01:00.000Z">
+
+    <!-- Карточку рисует не размер картинки, а этот тег: без него Телеграм
+         показывает мелкий квадратик, даже зная ширину и высоту. -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ностальгия. Почему мы скучаем по прошлому · Про чувства">
+    <meta name="twitter:description" content="Триста лет назад тоску по дому лечили опиумом, а за пастуший напев грозили казнью. Как «болезнь швейцарских солдат» оказалась не причиной боли, а лекарством от неё?">
+    <meta name="twitter:image" content="https://storage.yandexcloud.net/emotional-harbor-blog-img/nostalgiya-20261008-fuv4t.jpg">
+
+    <link href="https://static.emotional-harbor.ru/fonts/harbor-fonts.css" rel="stylesheet">
+
+    <script>
+    (function () {
+        var COUNTER = 110240785;
+
+        window.ehGetConsent = function () {
+            var m = document.cookie.match(/(?:^|;\s*)eh_consent=([^;]*)/);
+            return m ? decodeURIComponent(m[1]) : null;
+        };
+
+        window.ehLoadMetrika = function () {
+            if (window.ehMetrikaLoaded) return;
+            window.ehMetrikaLoaded = true;
+            (function(m,e,t,r,i,k,a){
+                m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                for (var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,
+                a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id='+COUNTER,'ym');
+
+            ym(COUNTER, 'init', {ssr:true, webvisor:true, clickmap:true,
+                referrer: document.referrer, url: location.href,
+                accurateTrackBounce:true, trackLinks:true});
+        };
+
+        if (window.ehGetConsent() === 'all') window.ehLoadMetrika();
+    })();
+    </script>
+    <style>
+        :root {
+            --beige: #f7efe0;
+            --brown-dark: #3a3228;
+            --brown-mid: #7a5840;
+            --brown-light: #9a7050;
+            --gold: #c9a97a;
+            --pink: #e87a9c;
+            --pink-soft: #F8B4C0;
+            --yellow: #F7D08A;
+            --green: #b8e0d2;
+            --blue: #A5C2F1;
+            --purple: #e0c8f0;
+            --ink: #2D3436;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--beige);
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.85;
+            color: var(--brown-dark);
+            position: relative;
+        }
+
+        /* Бумага в клетку под всем содержимым — как на лендинге */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(201,169,122,0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(201,169,122,0.08) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Выделение — главный жест на странице записи: им забирают строчку
+           открыткой. Системный синий прямоугольник на бежевой бумаге в этот
+           момент выглядит чужим, поэтому красим розовым песком. */
+        ::selection {
+            background: rgba(248, 180, 192, 0.5);
+            color: var(--brown-dark);
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px 72px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 28px 0 0;
+            font-size: 13px;
+        }
+
+        .topbar a {
+            color: var(--brown-light);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: color .2s ease, border-color .2s ease;
+        }
+
+        .topbar a:hover { color: var(--pink); border-bottom-color: var(--pink); }
+
+        /* --- липкая шапка --- */
+
+        .sticky {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            height: 64px;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: rgba(247, 239, 224, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(201, 169, 122, 0.3);
+            transform: translateY(-100%);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .sticky.visible { transform: translateY(0); }
+
+        /* Полоска чтения: меряет не страницу, а сам текст статьи —
+           доходит до конца ровно на последней строке, а не после подвала.
+           Цвет — светлый розовый, тот же, что полоса сверху у открытки
+           с цитатой: акцентный #e87a9c означает «нажми», а здесь нажимать
+           нечего. Золото на такой толщине выглядит выцветшим. */
+        .reading {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 120;
+            height: 4px;
+            width: 0;
+            background: var(--pink-soft);
+            pointer-events: none;
+        }
+
+        .sticky__brand, .sticky__link {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: -0.3px;
+            color: var(--brown-dark);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .sticky__link { font-size: 13px; }
+        .sticky__brand em, .sticky__link em { font-style: normal; color: var(--pink); }
+
+        @media (max-width: 560px) {
+            .sticky { padding: 0 16px; height: 56px; }
+            .sticky__brand { font-size: 13px; }
+            .sticky__link { font-size: 11px; }
+        }
+
+        /* --- шапка сайта --- */
+
+        .site-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 28px 0 0;
+        }
+
+        .site-logo {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+
+        .site-logo em { font-style: normal; color: var(--pink); }
+
+        /* Тот же приём, что у имени Гавани: первое слово тёмное, второе розовое */
+        .site-section {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+            color: var(--brown-dark);
+            text-decoration: none;
+        }
+
+        .site-section em { font-style: normal; color: var(--pink); }
+
+        .site-nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+
+        .site-nav a {
+            color: var(--brown-light);
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .site-nav a:hover { color: var(--pink); }
+
+        /* --- хлебные крошки --- */
+
+        .crumbs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 34px;
+            font-size: 13px;
+            color: var(--brown-light);
+        }
+
+        .crumbs a { color: var(--brown-light); text-decoration: none; }
+        .crumbs a:hover { color: var(--pink); }
+        .crumbs .sep { color: var(--gold); }
+
+        /* --- читайте также --- */
+
+        .also { margin-top: 56px; }
+
+        .also__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 20px;
+        }
+
+        .also__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+        }
+
+        .also__card {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            padding: 24px 22px 22px;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
+            border-radius: 18px;
+            box-shadow: 4px 5px 0 rgba(45, 52, 54, 0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .also__card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+        }
+
+        .tone--pink::after { background: var(--pink-soft); }
+        .tone--yellow::after { background: var(--yellow); }
+        .tone--green::after { background: var(--green); }
+        .tone--blue::after { background: var(--blue); }
+        .tone--purple::after { background: var(--purple); }
+
+        .also__card:hover {
+            transform: translate(-2px, -3px);
+            box-shadow: 7px 8px 0 rgba(45, 52, 54, 0.12);
+        }
+
+        .also__meta {
+            font-family: 'Caveat', cursive;
+            font-size: 17px;
+            line-height: 1;
+            color: var(--brown-light);
+            margin-bottom: 10px;
+        }
+
+        .also__name {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.3;
+            letter-spacing: -0.2px;
+            margin-bottom: 8px;
+        }
+
+        .also__text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--brown-mid);
+        }
+
+        /* --- соседние записи --- */
+
+        .neighbours {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 48px;
+        }
+
+        .neighbours a {
+            display: block;
+            padding: 22px 26px;
+            border: 1.5px dashed rgba(201, 169, 122, 0.6);
+            border-radius: 16px;
+            background: rgba(255, 248, 235, 0.4);
+            text-decoration: none;
+            color: inherit;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .neighbours a:hover { background: rgba(255, 248, 235, 0.85); transform: translateY(-2px); }
+
+        .neighbours .next { text-align: right; }
+
+        .neighbours__dir {
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 19px;
+            line-height: 1;
+            color: var(--brown-light);
+            margin-bottom: 8px;
+        }
+
+        .neighbours__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.35;
+            color: var(--brown-dark);
+        }
+
+        @media (max-width: 560px) {
+            .neighbours { grid-template-columns: 1fr; }
+            .neighbours .next { text-align: left; }
+        }
+
+        .page-head { padding: 48px 0 8px; }
+
+        /* Заголовок витрины набран вперемешку тремя шрифтами — тот же приём,
+           что на экране «Смыслы». Поджатие ослаблено до 1px: на -3px буквы
+           разных гарнитур начинают наезжать друг на друга. */
+        .page-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 900;
+            font-size: clamp(40px, 6.4vw, 66px);
+            /* Просвет держит хвост буквицы «Ч»: она вдвое выше строки, но из
+               расчёта высоты исключена (line-height: 0), поэтому место под неё
+               приходится добавлять здесь. При 0.95 она упиралась в «Про». */
+            line-height: 1.18;
+            letter-spacing: -1px;
+        }
+
+        .pt-line { display: block; }
+
+        /* Первая строка строгая: предлог — слово служебное, ему и положено быть
+           набранным ровно. Вся игра шрифтов уходит во вторую строку. Чуть
+           крупнее и плотнее, как в прежней вывеске витрины. */
+        .pt-line--strict { font-size: 1.08em; letter-spacing: -3px; }
+        .f-unb { font-family: 'Unbounded', sans-serif; font-weight: 900; text-transform: uppercase; }
+        .f-lora { font-family: 'Lora', serif; font-weight: 700; font-style: italic; font-size: 1.05em; }
+        .f-cav { font-family: 'Caveat', cursive; font-weight: 700; font-size: 1.2em; }
+        .f-pink { color: var(--pink); }
+
+        /* Поджатие связки «вства» к «Чу». Рукописная Caveat несёт широкие поля
+           по бокам глифа, и после прямой «У» они складывались в просвет шириной
+           почти в букву — слово читалось как два. Сдвиг в долях кегля, а не в
+           пикселях: заголовок резиновый, от 40px на телефоне до 66px. */
+        .pt-tight { margin-left: -0.16em; }
+
+        /* Высокая рукописная буквица. line-height: 0 — чтобы она не раздвигала
+           строки заголовка: иначе браузер считает высоту строки по самой
+           крупной букве, и «Про» отъезжает вверх. */
+        .pt-init {
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            font-size: 2em;
+            line-height: 0;
+            letter-spacing: 0;
+            vertical-align: -0.12em;
+        }
+
+        /* След розового маркера под вторым словом. Пропорции взяты с экрана
+           «Смыслы» и пересчитаны из пикселей в доли кегля: там при 52px было
+           32px высоты и вынос 5/12px — чтобы полоса не отставала от заголовка,
+           который на витрине резиновый. */
+        .pt-marker { position: relative; z-index: 1; width: fit-content; }
+        .pt-marker::before {
+            content: '';
+            position: absolute;
+            bottom: 0.04em;
+            left: -0.1em;
+            right: -0.22em;
+            height: 0.62em;
+            background: var(--pink-soft);
+            opacity: 0.45;
+            z-index: -1;
+            transform: rotate(-1.5deg);
+            border-radius: 4px;
+        }
+
+        /* Оба слова одинаковые, разница только в цвете */
+
+
+        /* Приписка от руки на полях */
+        /* Прежняя строка снята 15.09.2026: обещала отсутствие советов, а они
+           в текстах есть. Стиль ждёт правдивой замены. */
+        .hand {
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 25px;
+            line-height: 1.2;
+            color: var(--pink);
+            transform: rotate(-2deg);
+            display: inline-block;
+            margin-top: 16px;
+        }
+
+        .page-sub {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 1.65;
+            color: var(--brown-mid);
+            margin-top: 34px;
+            max-width: 520px;
+        }
+
+        .rule {
+            height: 1px;
+            background: repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px);
+            margin: 40px 0 8px;
+        }
+
+        /* --- список постов --- */
+
+        .cards { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+
+        .card {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            padding: 30px 90px 28px 34px;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        /* Карточки лежат чуть вразнобой, как разложенные на столе */
+        .card:nth-child(odd) { transform: rotate(-0.5deg); }
+        .card:nth-child(even) { transform: rotate(0.4deg); }
+
+        /* Бумагу приподнимают и выравнивают; тень удлиняется, а не размывается */
+        .card:hover {
+            transform: rotate(0deg) translate(-2px, -4px);
+            box-shadow: 10px 12px 0 rgba(45, 52, 54, 0.14);
+        }
+
+        /* Круглая печать с номером записи — прямая цитата с обложек */
+        .seal {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 74px;
+            height: 74px;
+            border: 2.5px solid var(--ink);
+            border-radius: 50%;
+            transform: rotate(-7deg);
+            box-shadow: 3px 4px 0 rgba(45, 52, 54, 0.14);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            color: var(--ink);
+        }
+
+        .seal__num {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        /* Подпись лёгкая: она поясняет цифру, а не спорит с ней */
+        .seal__unit {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 8px;
+            letter-spacing: 0.2px;
+            margin-top: 4px;
+        }
+
+        .seal::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border-radius: 50%;
+            border: 1.5px dashed rgba(45, 52, 54, 0.3);
+        }
+
+        .seal--pink { background: var(--pink-soft); }
+        .seal--yellow { background: var(--yellow); }
+        .seal--green { background: var(--green); }
+        .seal--blue { background: var(--blue); }
+        .seal--purple { background: var(--purple); }
+
+        /* Картинка поста на карточке: полосой во всю ширину, чтобы
+           список оставался списком, а не галереей */
+        .card__shot {
+            display: block;
+            width: calc(100% + 148px);
+            margin: -32px -110px 22px -38px;
+            height: 190px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .card__date {
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 1;
+            color: var(--brown-light);
+        }
+
+        /* Рубрика — имя комнаты Гавани. Капсула: скругление больше половины
+           высоты, поэтому радиус заведомо избыточный. */
+        .chip {
+            display: inline-block;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brown-mid);
+            border: 1.5px solid var(--gold);
+            border-radius: 999px;
+            padding: 5px 12px;
+            background: rgba(255, 248, 235, 0.6);
+        }
+
+        .card__cat { margin-bottom: 14px; }
+
+        /* Есть картинка — рубрика ложится прямо на неё, слева, в пару к печати
+           со временем чтения справа. Заливка становится плотной: полупрозрачный
+           кремовый на фотографии растворяется и перестаёт читаться. */
+        .card--shot .card__cat {
+            position: absolute;
+            top: 26px;
+            left: 26px;
+            margin: 0;
+            z-index: 2;
+        }
+
+        .card--shot .card__cat .chip {
+            background: var(--beige);
+            border-color: var(--ink);
+            color: var(--brown-dark);
+            box-shadow: 2px 3px 0 rgba(45, 52, 54, 0.18);
+        }
+        .post-cat { line-height: 1; }
+
+        /* Подвал карточки: «читать» слева, дата справа, над ними волосяная
+           линия — она отделяет служебное от текста, а не рисует рамку */
+        .card__foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(201, 169, 122, 0.4);
+        }
+
+        .card__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 21px;
+            line-height: 1.25;
+            letter-spacing: -0.6px;
+            margin: 0 0 10px;
+        }
+
+        .card__excerpt { color: var(--brown-mid); }
+
+        .card__more {
+            display: inline-block;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 10.5px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            background: rgba(201, 169, 122, 0.2);
+            border: 1px solid rgba(201, 169, 122, 0.55);
+            border-radius: 30px;
+            padding: 7px 16px;
+        }
+
+        .card:hover .card__more { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+        .empty {
+            margin-top: 32px;
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 17px;
+            color: var(--brown-mid);
+        }
+
+        /* --- страница поста --- */
+
+        /* Сверху рубрика и печать, под ними заголовок, под заголовком дата.
+           Печать прижата вправо отступом, а не space-between: у записи без
+           рубрики она осталась бы в этой строке одна и уехала бы влево. */
+        .post-head {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-top: 44px;
+        }
+
+        .post-head .seal { margin-left: auto; }
+
+        .post-head .seal { position: static; flex-shrink: 0; }
+
+        .post-date {
+            margin-top: 16px;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            font-size: 23px;
+            line-height: 1;
+            color: var(--brown-light);
+        }
+
+        .post-title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: clamp(28px, 4.2vw, 42px);
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            margin: 18px 0 0;
+        }
+
+        /* --- оглавление --- */
+
+        .contents {
+            margin: 48px 0 0;
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px dashed var(--gold);
+            border-radius: 20px;
+            padding: 32px 36px;
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
+        }
+
+        .contents__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--brown-light);
+            margin-bottom: 18px;
+        }
+
+        .contents__list {
+            list-style: none;
+            counter-reset: chast;
+        }
+
+        .contents__list li {
+            counter-increment: chast;
+            position: relative;
+            padding-left: 34px;
+            margin-bottom: 10px;
+        }
+
+        .contents__list li::before {
+            content: counter(chast, decimal-leading-zero);
+            position: absolute;
+            left: 0;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--gold);
+        }
+
+        .contents__list a {
+            color: var(--brown-mid);
+            text-decoration: none;
+            font-size: 15px;
+            transition: color .2s ease;
+        }
+
+        .contents__list a:hover { color: var(--pink); }
+
+        /* Чтобы заголовок части не прятался под верхний край окна при переходе */
+        .post-body h2 { scroll-margin-top: 24px; }
+
+        .post-body { margin-top: 34px; }
+        .post-body p { margin-bottom: 22px; }
+
+        /* Основной текст лёгкий (Jost 300), поэтому выделение берём
+           умеренное: 700 рядом с ним выглядит как крик. */
+        .post-body strong { font-weight: 500; color: var(--brown-dark); }
+        .post-body em { font-style: italic; }
+
+        .post-body a {
+            color: var(--pink);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(232, 122, 156, 0.35);
+            transition: border-color .2s ease;
+        }
+
+        .post-body a:hover { border-bottom-color: var(--pink); }
+
+        /* Лид — первый абзац. Отдельной пометки в тексте не требует. */
+        .post-body .lead {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 1.65;
+            color: var(--brown-mid);
+            padding-left: 20px;
+            border-left: 3px solid var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .post-body h3 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+            margin: 32px 0 14px;
+        }
+
+        .post-body ul, .post-body ol {
+            margin: 0 0 24px 22px;
+            padding-left: 6px;
+        }
+
+        .post-body li { margin-bottom: 10px; }
+        .post-body li::marker { color: var(--gold); }
+
+        /* Практика — блок «+ » в тексте. Заливка, скругление и тень
+           те же, что у содержания: два блока в пунктирной рамке на одной
+           странице должны читаться как родственники, а не как два разных
+           приёма. Свой тон у практики был холоднее и выбивался. */
+        .task {
+            margin: 36px 0;
+            padding: 26px 28px;
+            border-radius: 20px;
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px dashed var(--gold);
+            box-shadow: 3px 4px 0 rgba(120, 80, 40, 0.04);
+        }
+
+        .task__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 12px;
+        }
+
+        .task p:last-child { margin-bottom: 0; }
+
+        .task .task__list {
+            margin: 0 0 0 20px;
+            padding-left: 4px;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+        }
+
+        .task .task__list li { margin-bottom: 12px; }
+        .task .task__list li:last-child { margin-bottom: 0; }
+        .task .task__list li::marker { color: var(--gold); }
+        .task .task__list:not(:last-child) { margin-bottom: 12px; }
+
+        /* Исследование — блок «✦». Практика зовёт что-то сделать и потому
+           обведена пунктиром; врезка только сообщает, поэтому тише: заливка
+           без рамки. Два блока в одном тексте не должны спорить за внимание. */
+        .note {
+            margin: 36px 0;
+            padding: 22px 26px;
+            border-radius: 16px;
+            background: rgba(201, 169, 122, 0.12);
+        }
+
+        .note__title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            color: var(--brown-light);
+            margin-bottom: 10px;
+        }
+
+        .note p {
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 10px;
+        }
+
+        .note p:last-child { margin-bottom: 0; }
+
+        /* Граница — блок «※». Практика зовёт что-то сделать, врезка только
+           сообщает, а здесь запись честно говорит, где наша помощь кончается.
+           Тёплая жёлтая бумага в золотом пунктире, без тени. Чернильная рамка
+           2px была бы криком — ею обведены картинки, они и должны быть
+           громкими. Пунктир тот же, что у практики: различает их заливка,
+           у практики она кремовая, здесь жёлтая. */
+        .care {
+            margin: 36px 0;
+            padding: 24px 28px 22px;
+            border-radius: 20px;
+            background: rgba(247, 208, 138, 0.22);
+            border: 1.5px dashed var(--gold);
+        }
+
+        .care__head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .care__icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--pink-soft);
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--brown-dark);
+        }
+
+        .care__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--brown-dark);
+        }
+
+        .care p {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: var(--brown-mid);
+            margin-bottom: 10px;
+        }
+
+        .care p:last-child { margin-bottom: 0; }
+
+        .shot { margin: 36px 0; }
+
+        .shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 2px solid var(--ink);
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+        }
+
+        .shot figcaption {
+            font-family: 'Caveat', cursive;
+            font-size: 19px;
+            line-height: 1.35;
+            color: var(--brown-light);
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .post-body blockquote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            margin: 32px 0;
+            padding: 4px 0 4px 22px;
+            border-left: 3px solid var(--pink);
+        }
+
+        .post-body h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 19px;
+            line-height: 1.3;
+            letter-spacing: -0.4px;
+            margin: 40px 0 18px;
+        }
+
+        /* Блок автора. Иконка круглая, как в подвале лендинга — это одна
+           и та же картинка, и человек должен узнать её без объяснений. */
+        .author {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin: 48px 0 0;
+            padding-top: 28px;
+            border-top: 1px dashed rgba(201, 169, 122, 0.55);
+        }
+
+        .author__icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(201, 169, 122, 0.5);
+            flex-shrink: 0;
+        }
+
+        .author__name {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: -0.2px;
+        }
+
+        .author__role {
+            font-size: 12.5px;
+            letter-spacing: 0.3px;
+            color: var(--brown-light);
+            margin-top: 2px;
+        }
+
+        .author__about {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            margin-top: 10px;
+        }
+
+        .post-foot {
+            position: relative;
+            margin-top: 56px;
+            padding: 34px 34px 32px;
+            background: rgba(255, 248, 235, 0.75);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.12);
+            transform: rotate(-0.4deg);
+        }
+
+        .post-foot__text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 17px;
+            line-height: 1.65;
+            color: var(--brown-mid);
+        }
+
+        .post-foot__link {
+            display: inline-block;
+            margin-top: 18px;
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--pink);
+            border-radius: 12px;
+            padding: 16px 30px;
+            text-decoration: none;
+            box-shadow: 4px 5px 0 rgba(58, 50, 40, 0.18);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .post-foot__link:hover {
+            transform: translate(-1px, -2px);
+            box-shadow: 6px 7px 0 rgba(58, 50, 40, 0.18);
+        }
+
+        /* --- подвал --- */
+
+        .footer {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 12px 40px 56px;
+            font-size: 13px;
+            color: var(--brown-light);
+        }
+
+        /* Та же плашка, что у подвала лендинга: кремовая заливка,
+           тонкая золотая рамка, скругление 16 */
+        .footer__card {
+            max-width: 864px;
+            margin: 0 auto;
+            background: rgba(255, 248, 235, 0.65);
+            border: 1.5px solid rgba(201, 169, 122, 0.35);
+            border-radius: 16px;
+            padding: 32px 40px 28px;
+        }
+
+        /* Те же доли, что и в плашке: строка и кнопка встают под своими
+           колонками, а не просто по краям */
+        .footer__bottom {
+            position: relative;
+            max-width: 864px;
+            margin: 18px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 20px;
+        }
+
+        /* По центру всей строки, независимо от колонок выше */
+        .footer__care {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .footer__care {
+            font-size: 12.5px;
+            color: var(--brown-light);
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1fr minmax(250px, 1fr);
+            gap: 32px;
+            align-items: start;
+        }
+
+        .footer__heading {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            margin-bottom: 14px;
+        }
+
+        .footer__nav { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+        .footer__nav a {
+            white-space: nowrap;
+            color: var(--brown-light);
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+
+        .footer__nav a:hover { color: var(--pink); }
+
+        .footer__contacts { display: flex; flex-direction: column; gap: 10px; }
+
+        /* Обе кнопки одинаковые и спокойные; розовеют только под курсором */
+        /* Ширина фиксированная: по колонке они растягивались на пол-экрана */
+        .footer__contact {
+            display: flex;
+            align-items: center;
+            width: 245px;
+            max-width: 100%;
+            min-height: 42px;
+            white-space: nowrap;
+            gap: 10px;
+            padding: 9px 14px;
+            border-radius: 12px;
+            background: rgba(247, 239, 224, 0.65);
+            border: 1px solid rgba(201, 169, 122, 0.55);
+            color: var(--brown-dark);
+            text-decoration: none;
+            transition: background .2s ease, border-color .2s ease, color .2s ease,
+                        transform .2s ease, box-shadow .2s ease;
+        }
+
+        .footer__contact:hover {
+            background: #fff;
+            border-color: var(--pink);
+            color: var(--pink);
+            transform: translateY(-2px);
+            box-shadow: 2px 3px 0 rgba(45, 52, 54, 0.08);
+        }
+
+        /* Кружок иконки берёт цвет текста кнопки — поэтому розовеет вместе с ней */
+        .footer__icon { width: 16px; height: 16px; flex-shrink: 0; color: inherit; }
+
+        .footer__copy {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 10px;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            /* Высота строки 1 — иначе под буквами остаётся пустое поле,
+               и к низу прижимается коробка, а не сам текст */
+            line-height: 1;
+        }
+
+        .footer__top-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px dashed var(--gold);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            font-size: 12.5px;
+            color: var(--brown-mid);
+            cursor: pointer;
+            transition: background .2s ease, border-color .2s ease, color .2s ease;
+        }
+
+        .footer__top-btn:hover {
+            background: var(--pink-soft);
+            border-color: var(--pink);
+            color: var(--brown-dark);
+        }
+
+        @media (max-width: 760px) {
+            .footer { padding: 8px 16px 40px; }
+            .footer__card { padding: 26px 22px 22px; }
+            .footer__grid { grid-template-columns: 1fr; gap: 24px; }
+            .footer__bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .footer__care { position: static; transform: none; }
+        }
+
+        /* --- cookie-баннер: обе кнопки рядом и равноценны --- */
+
+        .cookie-bar {
+            position: fixed; left: 16px; right: 16px; bottom: 16px;
+            z-index: 9000;
+            display: none;
+            background: var(--beige);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            box-shadow: 6px 6px 0 rgba(58, 50, 40, 0.14);
+            padding: 22px 26px;
+            max-width: 760px; margin: 0 auto;
+        }
+
+        .cookie-bar.is-open { display: block; }
+
+        .cookie-bar__title {
+            font-family: 'Unbounded', sans-serif; font-weight: 600;
+            font-size: 15px; color: var(--brown-dark); margin-bottom: 8px;
+        }
+
+        .cookie-bar__text {
+            font-size: 14px; line-height: 1.75;
+            color: var(--brown-mid); margin-bottom: 18px;
+        }
+
+        .cookie-bar__text a { color: var(--pink); }
+
+        .cookie-bar__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+        .cookie-bar__btn {
+            font-family: 'Jost', sans-serif; font-weight: 500; font-size: 14px;
+            padding: 12px 22px; border-radius: 12px; cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .cookie-bar__btn--accept {
+            background: var(--pink); color: #fff;
+            box-shadow: 3px 3px 0 rgba(58, 50, 40, 0.18);
+        }
+
+        .cookie-bar__btn--minimal {
+            background: transparent; color: var(--brown-mid); border-color: var(--gold);
+        }
+
+        @media (max-width: 560px) {
+            .footer { padding: 28px 20px 40px; gap: 16px; }
+            .footer-contacts { justify-content: flex-start; }
+            .card, .post-foot { padding: 24px 22px; }
+            .card__shot { width: calc(100% + 44px); margin: -24px -22px 18px; height: 150px; }
+            .card--shot .card__cat { top: 18px; left: 18px; }
+            .cookie-bar { padding: 18px; left: 10px; right: 10px; bottom: 10px; }
+            .cookie-bar__actions { flex-direction: column; }
+            .cookie-bar__btn { width: 100%; }
+        }
+
+        /* --- открытка с цитатой (только страницы записей) --- */
+
+        .card-cta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 26px;
+            border-top: 1px dashed rgba(201, 169, 122, 0.55);
+        }
+
+        .card-cta__text {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--brown-mid);
+            max-width: 430px;
+        }
+
+        .card-btn {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--brown-dark);
+            background: rgba(255, 248, 235, 0.85);
+            border: 1.5px solid var(--gold);
+            border-radius: 12px;
+            padding: 13px 22px;
+            cursor: pointer;
+            box-shadow: 3px 4px 0 rgba(58, 50, 40, 0.1);
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .card-btn:hover {
+            transform: translate(-1px, -2px);
+            box-shadow: 5px 6px 0 rgba(58, 50, 40, 0.12);
+            background: #fff8eb;
+        }
+
+        .card-btn--pink {
+            background: var(--pink);
+            border-color: var(--pink);
+            color: #fff;
+        }
+
+        .card-btn--pink:hover { background: #d96a8c; }
+
+        /* Кнопка, всплывающая над выделенным куском текста */
+        .card-pop {
+            position: fixed;
+            z-index: 120;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -100%) scale(.96);
+            transition: opacity .18s ease, transform .18s ease;
+        }
+
+        .card-pop.is-open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -100%) scale(1);
+        }
+
+        .card-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 130;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(58, 50, 40, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s ease;
+        }
+
+        .card-modal.is-open { opacity: 1; pointer-events: auto; }
+
+        .card-sheet {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            max-height: 92vh;
+            overflow-y: auto;
+            background: rgba(255, 248, 235, 0.98);
+            border: 2px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 6px 7px 0 rgba(45, 52, 54, 0.14);
+            padding: 26px 26px 24px;
+        }
+
+        .card-sheet__close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            border: none;
+            background: none;
+            font-size: 22px;
+            line-height: 1;
+            color: var(--brown-light);
+            cursor: pointer;
+        }
+
+        .card-sheet__close:hover { color: var(--brown-dark); }
+
+        .card-sheet__title {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: -0.2px;
+            padding-right: 40px;
+        }
+
+        .card-sheet__note {
+            font-size: 13px;
+            color: var(--brown-light);
+            margin-top: 4px;
+        }
+
+        .card-formats { display: flex; gap: 8px; margin: 16px 0 14px; }
+
+        .card-fmt {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            font-size: 13px;
+            padding: 7px 16px;
+            border-radius: 30px;
+            border: 1.5px dashed var(--gold);
+            background: transparent;
+            color: var(--brown-mid);
+            cursor: pointer;
+        }
+
+        .card-fmt.is-on {
+            border-style: solid;
+            background: rgba(247, 208, 138, 0.35);
+            color: var(--brown-dark);
+        }
+
+        .card-stage {
+            display: flex;
+            justify-content: center;
+            padding: 14px;
+            border: 1.5px dashed rgba(201, 169, 122, 0.5);
+            border-radius: 16px;
+            background: rgba(247, 239, 224, 0.6);
+        }
+
+        .card-stage canvas {
+            max-width: 100%;
+            max-height: 50vh;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .card-acts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+        .card-acts .card-btn { flex: 1 1 auto; }
+
+        @media (max-width: 560px) {
+            .card-cta { flex-direction: column; align-items: flex-start; }
+            .card-sheet { padding: 20px 18px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Ностальгия. Почему мы скучаем по прошлому","description":"Триста лет назад тоску по дому лечили опиумом, а за пастуший напев грозили казнью. Как «болезнь швейцарских солдат» оказалась не причиной боли, а лекарством от неё?","datePublished":"2026-10-19T07:01:00.000Z","author":{"@type":"Person","name":"Елена Патрикеева","description":"Автор Эмоциональной Гавани"},"publisher":{"@type":"Organization","name":"Эмоциональная Гавань"},"mainEntityOfPage":"https://emotional-harbor.ru/blog/nostalgiya.html","inLanguage":"ru-RU"}</script>
+
+    <div class="reading" id="reading" aria-hidden="true"></div>
+
+    <div class="wrap">
+        <nav class="crumbs" aria-label="Хлебные крошки">
+            <a href="https://emotional-harbor.ru/">Главная</a>
+            <span class="sep">→</span>
+            <a href="https://emotional-harbor.ru/blog.html">Про чувства</a>
+            <span class="sep">→</span>
+            <span>Ностальгия. Почему мы скучаем по прошлому</span>
+        </nav>
+
+        <article>
+            <div class="post-head">
+                <div class="post-cat"><span class="chip">Копилка тепла</span></div>
+                <div class="seal seal--blue" title="Время чтения">
+                    <span class="seal__num">7 мин</span>
+                    <span class="seal__unit">время чтения</span>
+                </div>
+            </div>
+            <h1 class="post-title">Ностальгия. Почему мы скучаем по прошлому</h1>
+            <div class="post-date">19 октября 2026</div>
+
+            <nav class="contents" aria-label="Содержание">
+                <div class="contents__title">Содержание</div>
+                <ol class="contents__list">
+                    <li><a href="#chast-1">Запрещённые песни и смертельный звон</a></li>
+                    <li><a href="#chast-2">Ошибка длиной в триста лет</a></li>
+                    <li><a href="#chast-3">У каждого своя корица</a></li>
+                    <li><a href="#chast-4">Когда она приходит</a></li>
+                    <li><a href="#chast-5">Тёплое место в памяти</a></li>
+                    <li><a href="#chast-6">Оглянуться, чтобы двинуться вперёд</a></li>
+                    <li><a href="#chast-7">Ностальгия, собранная заранее</a></li>
+                    <li><a href="#chast-8">Чего ностальгия не умеет</a></li>
+                </ol>
+            </nav>
+
+            <div class="post-body">
+            <figure class="shot">
+                <img src="https://storage.yandexcloud.net/emotional-harbor-blog-img/nostalgiya-20261008-fuv4t" alt="" loading="lazy" decoding="async">
+                <figcaption>Ностальгия</figcaption>
+            </figure>
+            <p class="lead">Триста лет назад ностальгия считалась смертельной болезнью. <br>В 1688 году молодой швейцарский студент-медик Иоганнес Хофер придумал новое слово.<br>Nostos — возвращение домой. Algos — боль. Ностальгия.</p>
+            <p>Сейчас ностальгия догоняет нас внезапно, например в супермаркете между полками с крупой, когда из колонок вдруг доносится песня, под которую мы танцевали в девятнадцать. <br>И горло на секунду перехватывает. На мгновение исчезают ценники, список покупок и шум города. <br>Возвращается другое время. Другие люди.</p>
+            <p>Но если бы Вы описали это состояние врачу XVIII века, он, не колеблясь, начал бы ставить Вам пиявки.</p>
+            <h2 id="chast-1">Запрещённые песни и смертельный звон</h2>
+            <p>Хофер наблюдал за швейцарскими наёмниками, воевавшими вдали от родных Альп. Солдаты угасали на глазах: плохо спали, отказывались от еды, жаловались на тревогу, сердцебиение, жар и тоску.</p>
+            <p>Хофер решил: причина найдена. Солдаты слишком сильно скучают по дому.</p>
+            <p>Объяснение он дал в духе своей эпохи. По его теории, ностальгия была физическим заболеванием мозга — «непрерывными колебаниями животных духов в волокнах среднего мозга, где удерживаются следы представлений об отечестве».</p>
+            <p>Так началась медицинская история ностальгии. И чем дальше, тем экзотичнее становились диагнозы:</p>
+            <ul>
+                <li>Давление воздуха: считалось, что на равнине оно гонит кровь горцев от сердца к мозгу.</li>
+                <li>Коровьи колокольчики: медики серьёзно утверждали, что их непрерывный звон в Альпах травмирует барабанные перепонки и мозг.</li>
+            </ul>
+            <p>Жан-Жак Руссо писал, что в швейцарских войсках под страхом смертной казни запрещали играть Ranz des Vaches — старинный пастуший напев. По его словам, стоило солдатам услышать эти звуки, как они начинали плакать, дезертировали или умирали от тоски.</p>
+            <p>В 1898 году учёный Клайн <strong>находил ностальгию у собак, кошек, лошадей и коров</strong>.</p>
+            <p>Современный психолог Клэй Рутледж, изучающий природу этого чувства, иронично замечает в своей книге: «Я изо всех сил пытаюсь представить себе ностальгирующую корову. Нет, не получается».</p>
+            <p>История звучит почти комично.<br>Пока не понимаешь, насколько серьёзно к этому относились.</p>
+            <p>В армии лечили ностальгию опиумом, кровопусканием, пиявками.</p>
+            <p>А в некоторых случаях — угрозами.<br>Когда в XVIII веке русские солдаты начали массово тосковать по дому во время кампании в Германии, командование пригрозило похоронить заживо первого заболевшего.</p>
+            <p>Иногда люди действительно умирали. Но не потому, что вспоминали дом.</p>
+            <h2 id="chast-2">Ошибка длиной в триста лет</h2>
+            <p>Иоганнес Хофер совершил классическую логическую ошибку: он увидел рядом два явления — страдающих солдат и солдат, скучающих по дому — и решил, что второе вызывает первое.</p>
+            <p>Это как винить пожарных в пожарах: их ведь всегда видят рядом с огнём.</p>
+            <p>У наёмников в чужой стране было отчего не спать и терять аппетит.<br>Конечно, они вспоминали дом. Дом был не причиной их боли. Дом был лекарством от неё.<br>Ностальгия приходила не разрушать. Она приходила спасать.</p>
+            <h2 id="chast-3">У каждого своя корица</h2>
+            <p>Промозглый ветер стучит в окно. Экран телефона светит холодным светом, в голове гудят уведомления и дела. Вы открываете кухонный шкафчик и задеваете баночку с корицей и сушёной яблочной кожурой.</p>
+            <p>Один вдох — и город за окном растворяется.</p>
+            <p>Вы на дачном крыльце, доски нагреты солнцем. На сковороде шкворчат бабушкины оладьи, ноги босые и зелёные от травы, где-то хлопает калитка. Впереди всё лето.</p>
+            <p>У каждого своя корица. У кого-то это бензин в дедовом гараже, у кого-то хлорка бассейна, где учились плавать, у кого-то мандарины и мокрые варежки на батарее.</p>
+            <p>Часто ностальгия начинается не со слов. Сначала приходит ощущение. И только потом память достраивает историю.</p>
+            <p><strong>Сегодня мы можем заглянуть внутрь этого процесса</strong>. <br>Когда японские исследователи показывали участницам эксперимента картинки из времени их детства прямо в сканере МРТ, в мозге одновременно вспыхивали две зоны: центры памяти и система вознаграждения — та самая, которая откликается на вкусную еду или долгожданные подарки.</p>
+            <h2 id="chast-4">Когда она приходит</h2>
+            <p>Если Вы пересматриваете один и тот же фильм каждый декабрь, храните билет с первого концерта и помните наизусть песню, которую не слышали двадцать лет, — Вы в большинстве. Люди ностальгируют несколько раз в неделю, и чаще всех — самые молодые взрослые и самые пожилые.</p>
+            <p>Но ностальгия не приходит когда попало. В минуты полного благополучия мы вспоминаем прошлое редко. Её зовёт дискомфорт: грусть, тревога, фоновый стресс, резкие перемены. Но сильнее всего — одиночество.</p>
+            <aside class="note">
+                <div class="note__title">Цунами, медвежонок и зонд · Вильдшут и коллеги, 2006</div>
+                <p>Студентки читают новость. Одним достаётся цунами в Индийском океане. Другим — белый медвежонок, который только что родился в Лондонском зоопарке. Третьим — зонд, севший на Титан, спутник Сатурна.</p>
+                <p>Потом всех спрашивают, тянет ли их сейчас в прошлое.</p>
+                <p>Медвежонок не изменил ничего. Титан тоже. Потянуло только тех, кто читал про волну.</p>
+            </aside>
+            <p>Ничего не напоминает? Вечер, когда в новостях одно плохое, а рука сама тянется к старому альбому.</p>
+            <h2 id="chast-5">Тёплое место в памяти</h2>
+            <p>В ностальгическом воспоминании мы почти всегда главные герои. Но почти никогда не одни. Рядом папа, который давно так не улыбался, друзья у ночного костра; бабушка у плиты; старый пёс, которого гладишь по шерсти. Тепло прошлого почти всегда разделено с кем-то.</p>
+            <p>Поэтому, когда нам одиноко или страшно, память совершает побег именно туда — к людям. <br>Она возвращает забытое, но фундаментальное ощущение: меня любили, мной дорожили, мне есть на кого опереться.</p>
+            <p>И это тепло греет не только метафорически.</p>
+            <aside class="note">
+                <div class="note__title">Двадцать градусов · Чжоу и коллеги, 2012</div>
+                <p>Девятнадцать человек месяц вели дневник: в холодные дни они ностальгировали чаще.</p>
+                <p>Потом девяносто студентов рассадили по комнатам: на 20, 24 и 28 градусов.</p>
+                <p>Всплеск ностальгических чувств произошёл только в первой группе, где было прохладно. Погрузившись в тёплые воспоминания, участники начинали оценивать температуру в «холодной» комнате как более высокую!</p>
+                <p>А в финальном испытании те, кто перед тестом вспомнил нечто ностальгическое, смогли продержать руку в ледяной воде значительно дольше остальных.</p>
+            </aside>
+            <p>Ностальгия работает как внутренний обогреватель.</p>
+            <h2 id="chast-6">Оглянуться, чтобы двинуться вперёд</h2>
+            <p>Остаётся главный вопрос: да, ностальгия согревает, но не застревает ли человек в прошлом? Не становится ли она побегом от реальности?</p>
+            <p>Эксперименты говорят о противоположном. <br>Вспомнив нечто тёплое, люди начинают сильнее хотеть встреч с друзьями, охотнее идут на примирение после ссор и проявляют больше любопытства к новому.</p>
+            <aside class="note">
+                <div class="note__title">Стулья и карандаши · Стефан и коллеги, 2014</div>
+                <p>В 2014 году психолог Элена Стефан с коллегами провела простой опыт: студентам сообщили, что им предстоит короткая беседа с незнакомцем, и попросили поставить два стула для разговора.</p>
+                <p>Те участники, которые перед этим погружались в ностальгические воспоминания, ставили стулья заметно ближе друг к другу.</p>
+                <p>А когда экспериментатор «случайно» рассыпал коробку с карандашами, именно ностальгирующие студенты бросались помогать и собирали больше всего предметов.</p>
+            </aside>
+            <p>Ностальгия не удерживает за рукав. Она напоминает: Вас уже учили любить, Вы уже умеете быть близкими. И с этим багажом гораздо проще сделать шаг навстречу другим людям здесь и сейчас.</p>
+            <h2 id="chast-7">Ностальгия, собранная заранее</h2>
+            <p>Тепло можно хранить не только в голове.</p>
+            <p>Голосовое от подруги, которое пришло вечером того дня, когда ничего не получалось. Мамино теплое сообщение. Пара строк от бывшей коллеги, написанная через год после Вашего ухода.</p>
+            <p>Через десять лет это станет ностальгией. Только не смонтированной памятью, а настоящей: тот самый голос, те самые слова, тот самый смайлик не к месту.</p>
+            <p>Для этого в Гавани есть <a href="/#kopilka-tepla">Копилка тепла</a> — место, куда кладут то, что согрело.</p>
+            <aside class="task">
+                <div class="task__title"><span aria-hidden="true">📝</span> Практика</div>
+                <p>Вспомните человека, с которым связано одно из Ваших самых тёплых воспоминаний. Возможно, Вы давно не общались или просто закрутились в рутине.</p>
+                <p>Напишите ему прямо сейчас — без особого повода, буквально пару строк:</p>
+                <p>«Сегодня случайно вспомнил(а), как мы [маленькая деталь: сидели на крыльце / пили тот странный чай / промокли под дождём]. Захотелось просто сказать тебе спасибо за тот день».</p>
+                <p><em>Это не просто добрый знак внимания. В эту секунду Ваша ностальгия снова становится живой, настоящей связью</em>.</p>
+            </aside>
+            <h2 id="chast-8">Чего ностальгия не умеет</h2>
+            <p>Честности ради — у неё есть пределы.</p>
+            <p>Память монтирует. Плохое в ней выцветает быстрее хорошего, так что прошлое в ностальгии всегда немного лучше, чем было. Это не обман: так уж устроена память. Но об этом стоит помнить.</p>
+            <p>В опытах ностальгия скорее прибавляет хорошего, чем убирает плохое. Грусть она не отменяет — она ставит рядом с ней что-то тёплое.</p>
+            </div>
+        </article>
+
+        <div class="card-cta">
+            <div class="card-cta__text">Если строчка отозвалась — выделите её в тексте и заберите открыткой.</div>
+            <button class="card-btn" type="button" id="card-open">Сделать открытку</button>
+        </div>
+
+<div class="card-pop" id="card-pop"><button class="card-btn card-btn--pink" type="button" id="card-pop-btn">Сделать открытку</button></div>
+
+<div class="card-modal" id="card-modal" role="dialog" aria-label="Открытка с цитатой">
+    <div class="card-sheet">
+        <button class="card-sheet__close" type="button" id="card-close" aria-label="Закрыть">&times;</button>
+        <div class="card-sheet__title">Открытка с цитатой</div>
+        <div class="card-sheet__note">Картинка собирается прямо в Вашем браузере.</div>
+        <div class="card-formats">
+            <button class="card-fmt is-on" type="button" data-fmt="square">Квадрат</button>
+            <button class="card-fmt" type="button" data-fmt="story">Сторис</button>
+        </div>
+        <div class="card-stage"><canvas id="card-canvas" width="1080" height="1080"></canvas></div>
+        <div class="card-acts">
+            <button class="card-btn card-btn--pink" type="button" id="card-save">Скачать картинку</button>
+            <button class="card-btn" type="button" id="card-copy">Скопировать</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    var TITLE = "Ностальгия. Почему мы скучаем по прошлому";
+    var FALLBACK = "Триста лет назад тоску по дому лечили опиумом, а за пастуший напев грозили казнью. Как «болезнь швейцарских солдат» оказалась не причиной боли, а лекарством от неё?";
+    var FILE = "otkrytka-nostalgiya.png";
+    var MAX = 280;
+
+    var pop = document.getElementById('card-pop');
+    var modal = document.getElementById('card-modal');
+    var canvas = document.getElementById('card-canvas');
+    var text = document.querySelector('.post-body');
+    if (!pop || !modal || !canvas || !text || !canvas.getContext) return;
+
+    var ctx = canvas.getContext('2d');
+    var quote = '';
+    var picked = '';
+    var pickedRange = null;
+    var shape = 'square';
+    var loaded = false;
+
+    // Переносы строк сохраняем: если выделили четыре строки списка, на
+    // открытке должны остаться четыре строки, а не сплошная лента. Схлопываем
+    // только пробелы внутри строки и пустые строки, идущие подряд.
+    function tidy(value) {
+        return String(value)
+            .replace(/\r/g, '')
+            .split('\n')
+            .map(function (line) { return line.replace(/[ \t\u00a0]+/g, ' ').trim(); })
+            .join('\n')
+            .replace(/\n{3,}/g, '\n\n')
+            .trim();
+    }
+
+    // Выделение, отданное браузером строкой, теряет маркеры списка: пункты
+    // слипаются в сплошную ленту. Поэтому берём не строку, а сам кусок
+    // разметки — и возвращаем точки сами. Заодно отбиваем абзацы и
+    // подзаголовки переносом, иначе они тоже склеятся.
+    function take(range) {
+        var box = document.createElement('div');
+        box.appendChild(range.cloneContents());
+        // Граница на открытку не уходит: «обратитесь к специалисту» в чужой
+        // ленте, без записи вокруг, читается как диагноз, а не как забота
+        Array.prototype.forEach.call(box.querySelectorAll('.care'), function (part) {
+            part.parentNode.removeChild(part);
+        });
+        Array.prototype.forEach.call(box.querySelectorAll('li'), function (item) {
+            item.insertBefore(document.createTextNode('• '), item.firstChild);
+        });
+        Array.prototype.forEach.call(box.querySelectorAll('p,li,h2,h3,h4,blockquote'), function (block) {
+            block.appendChild(document.createTextNode('\n'));
+        });
+        // Внутри абзаца строки разведены тегом <br> — он текста не несёт,
+        // и без замены пять строк слипаются в одну ленту
+        Array.prototype.forEach.call(box.querySelectorAll('br'), function (brk) {
+            brk.parentNode.replaceChild(document.createTextNode('\n'), brk);
+        });
+        return tidy(box.textContent);
+    }
+
+    function hidePop() { pop.classList.remove('is-open'); }
+
+    // Кнопка всплывает только над выделением внутри самой записи:
+    // заголовок, крошки и подвал открыткой не становятся.
+    function onSelect() {
+        var sel = window.getSelection();
+        if (!sel || sel.isCollapsed || modal.classList.contains('is-open')) { hidePop(); return; }
+        var said = tidy(sel.toString());
+        if (said.length < 12) { hidePop(); return; }
+        var range = sel.getRangeAt(0);
+        if (!text.contains(range.commonAncestorContainer)) { hidePop(); return; }
+        // Выделили одну только границу — кнопке взяться не за что
+        var host = range.commonAncestorContainer;
+        host = host.nodeType === 1 ? host : host.parentNode;
+        if (host && host.closest && host.closest('.care')) { hidePop(); return; }
+        var box = range.getBoundingClientRect();
+        if (!box.width || !box.height) { hidePop(); return; }
+        picked = said;
+        // Кусок запоминаем целиком: к нажатию на кнопку выделение может
+        // уже пропасть, а разметка нужна для маркеров
+        pickedRange = range.cloneRange();
+        pop.style.left = Math.min(Math.max(box.left + box.width / 2, 100), window.innerWidth - 100) + 'px';
+        pop.style.top = Math.max(box.top - 8, 62) + 'px';
+        pop.classList.add('is-open');
+    }
+
+    document.addEventListener('selectionchange', onSelect);
+    // Прокрутка уводит выделение из-под кнопки. Проверку ставим первой:
+    // обработчик срабатывает на каждое движение колеса, а прятать почти
+    // всегда нечего.
+    window.addEventListener('scroll', function () {
+        if (pop.classList.contains('is-open')) hidePop();
+    }, { passive: true });
+    window.addEventListener('resize', hidePop);
+
+    // Длинную простыню на открытку не пускаем: цитата — это строчка, а не
+    // половина главы. Обрываем по возможности на конце предложения: открытка,
+    // кончающаяся на полуслове, читается сломанной, а не выбранной.
+    // Многоточие — запасной вариант, когда целой мысли в пределе не нашлось.
+    function shorten(value) {
+        if (value.length <= MAX) return value;
+        var cut = value.slice(0, MAX);
+
+        var end = -1;
+        var finder = /[.!?]["»)]?(?=\s|$)/g;
+        var hit;
+        while ((hit = finder.exec(cut)) !== null) end = hit.index + hit[0].length;
+        if (end > MAX / 2) return cut.slice(0, end);
+
+        var stop = Math.max(cut.lastIndexOf(' '), cut.lastIndexOf('\n'));
+        if (stop > MAX * 0.6) cut = cut.slice(0, stop);
+        return cut.replace(/[\s.,;:—-]+$/, '') + '…';
+    }
+
+    function open(value) {
+        quote = shorten(tidy(value));
+        hidePop();
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        fonts().then(draw);
+    }
+
+    function close() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    // Шрифт, который на странице нигде не нарисован в этом начертании,
+    // браузер может и не запросить — тогда canvas молча возьмёт системный,
+    // и заметить подмену можно только глазами. Поэтому просим явно.
+    function fonts() {
+        if (loaded || !document.fonts) return Promise.resolve();
+        return Promise.all([
+            // Проверочная строка обязана быть кириллической: без неё браузер
+            // просит латинский кусок шрифта, а рисовать нам русский текст
+            document.fonts.load('italic 450 48px Lora', 'Тревога'),
+            document.fonts.load('700 30px Unbounded', 'Гавань'),
+            document.fonts.load('400 21px Jost', 'Тревога'),
+        ]).then(function () { loaded = true; }, function () {});
+    }
+
+    document.getElementById('card-pop-btn').addEventListener('click', function () {
+        open(pickedRange ? take(pickedRange) : picked);
+    });
+
+    // Кнопкой без выделения открытка тоже делается — на неё встаёт тизер записи
+    document.getElementById('card-open').addEventListener('click', function () {
+        var sel = window.getSelection();
+        var said = sel && !sel.isCollapsed ? tidy(sel.toString()) : '';
+        open(said.length >= 12 ? take(sel.getRangeAt(0)) : FALLBACK);
+    });
+
+    document.getElementById('card-close').addEventListener('click', close);
+    modal.addEventListener('click', function (event) { if (event.target === modal) close(); });
+    document.addEventListener('keydown', function (event) { if (event.key === 'Escape') close(); });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.card-fmt'), function (button) {
+        button.addEventListener('click', function () {
+            shape = button.getAttribute('data-fmt');
+            Array.prototype.forEach.call(document.querySelectorAll('.card-fmt'), function (other) {
+                other.classList.toggle('is-on', other === button);
+            });
+            draw();
+        });
+    });
+
+    function round(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+    }
+
+    function wrap(value, max) {
+        var words = String(value).split(' ');
+        var rows = [];
+        var row = '';
+        for (var i = 0; i < words.length; i++) {
+            var next = row ? row + ' ' + words[i] : words[i];
+            if (row && ctx.measureText(next).width > max) { rows.push(row); row = words[i]; }
+            else { row = next; }
+        }
+        if (row) rows.push(row);
+
+        // Слово длиннее строки переносить не по чему — делим по буквам
+        var out = [];
+        rows.forEach(function (line) {
+            while (ctx.measureText(line).width > max && line.length > 1) {
+                var n = line.length;
+                while (n > 1 && ctx.measureText(line.slice(0, n)).width > max) n--;
+                out.push(line.slice(0, n));
+                line = line.slice(n);
+            }
+            out.push(line);
+        });
+        return out;
+    }
+
+    // Раскладка цитаты: каждый кусок между переносами переносится сам по себе,
+    // пустая строка остаётся пустой строкой.
+    function lay(value, max) {
+        var out = [];
+        String(value).split('\n').forEach(function (part, i) {
+            if (!part) { if (i) out.push({ text: '', pad: 0 }); return; }
+            // Длинный пункт списка переносится с отступом под первую букву,
+            // а не под точку: иначе маркер теряется в столбце текста
+            var mark = /^•\s/.test(part) ? ctx.measureText('• ').width : 0;
+            wrap(mark ? part.slice(2) : part, max - mark).forEach(function (line, k) {
+                out.push({ text: (mark && !k ? '• ' : '') + line, pad: mark && k ? mark : 0 });
+            });
+        });
+        return out;
+    }
+
+    // Пустая строка занимает половину обычной: воздух нужен, дыра — нет
+    function stack(rows, step) {
+        var sum = 0;
+        rows.forEach(function (row) { sum += row.text ? step : step / 2; });
+        return sum;
+    }
+
+    // Кавычка-шарик: круглая голова и короткий хвост. Рисуем сами, а не
+    // берём знак из шрифта — у Lora он узкий и вытянутый, в крупном кегле
+    // выглядит тощим.
+    // Хвост смотрит вверх, шарик внизу — форма «66». Открывающая кавычка
+    // это запятая, перевёрнутая на 180°; хвостом вниз («99») рисуется
+    // закрывающая, и на месте открывающей она читается ошибкой.
+    function mark(x, y, r) {
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x - r, y);
+        ctx.quadraticCurveTo(x - r * 0.95, y - r * 2.1, x + r * 0.1, y - r * 1.9);
+        ctx.quadraticCurveTo(x - r * 0.35, y - r * 1.1, x + r * 0.05, y - r * 0.85);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function draw() {
+        var story = shape === 'story';
+        var W = 1080;
+        var H = story ? 1920 : 1080;
+        canvas.width = W;
+        canvas.height = H;
+
+        ctx.fillStyle = '#f7efe0';
+        ctx.fillRect(0, 0, W, H);
+
+        // Бумага в клетку — та же, что под всеми страницами сайта
+        ctx.strokeStyle = 'rgba(201, 169, 122, 0.18)';
+        ctx.lineWidth = 2;
+        for (var x = 45; x < W; x += 45) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+        for (var y = 45; y < H; y += 45) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+        var mx = 70;
+        var my = story ? 230 : 70;
+        var cw = W - mx * 2;
+        var ch = H - my * 2;
+        var r = 34;
+
+        // Плоская тень без размытия — как у карточек блога
+        ctx.fillStyle = 'rgba(45, 52, 54, 0.12)';
+        round(mx + 14, my + 16, cw, ch, r);
+        ctx.fill();
+
+        ctx.fillStyle = '#fff8eb';
+        round(mx, my, cw, ch, r);
+        ctx.fill();
+
+        // Полоска сверху — светлый розовый, одинаковый у всех открыток.
+        // Тот же, что у печати «розовый песок» на страницах: акцентный
+        // #e87a9c на такой ширине кричит и спорит с подписью внизу.
+        ctx.save();
+        round(mx, my, cw, ch, r);
+        ctx.clip();
+        ctx.fillStyle = '#F8B4C0';
+        ctx.fillRect(mx, my, cw, 18);
+        ctx.restore();
+
+        ctx.strokeStyle = '#2D3436';
+        ctx.lineWidth = 4;
+        round(mx, my, cw, ch, r);
+        ctx.stroke();
+
+        var pad = 62;
+        var left = mx + pad;
+        var right = mx + cw - pad;
+        var maxW = cw - pad * 2;
+
+        // Шапка: «Гавань» розовая, как логотип на сайте
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.font = '700 30px Unbounded, sans-serif';
+        var first = 'Эмоциональная ';
+        ctx.fillStyle = '#3a3228';
+        ctx.fillText(first, left, my + 112);
+        ctx.fillStyle = '#e87a9c';
+        ctx.fillText('Гавань', left + ctx.measureText(first).width, my + 112);
+
+        ctx.fillStyle = '#9a7050';
+        ctx.font = '300 22px Jost, sans-serif';
+        ctx.fillText('Про чувства', left, my + 150);
+
+        // Подпись внизу — только адрес, и тихо. Пробовали крупнее, чтобы
+        // легче было набрать руками: вышло похоже на просьбу. Кому нужно —
+        // тот прочтёт и так.
+        var footY = my + ch - 62;
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#e87a9c';
+        ctx.font = '700 24px Unbounded, sans-serif';
+        ctx.fillText('emotional-harbor.ru', mx + cw / 2, footY);
+
+        // Откуда строчка — над адресом, не больше двух строк
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#7a5840';
+        ctx.font = '400 21px Jost, sans-serif';
+        var source = wrap('— из записи «' + TITLE + '»', maxW).slice(0, 2);
+        var sourceY = footY - 60 - (source.length - 1) * 30;
+        source.forEach(function (line, i) { ctx.fillText(line, left, sourceY + i * 30); });
+
+        ctx.strokeStyle = 'rgba(201, 169, 122, 0.6)';
+        ctx.setLineDash([9, 9]);
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(left, sourceY - 42);
+        ctx.lineTo(right, sourceY - 42);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Цитата занимает всё, что осталось между шапкой и подписью:
+        // кегль подбирается вниз, пока блок не уместится.
+        var top = my + 210;
+        var bottom = sourceY - 90;
+        // Сама цитата в «ёлочки» не берётся: внутри текста бывают свои
+        // кавычки, и вторая закрывающая подряд читается опечаткой. Роль
+        // открывающей берёт на себя шарик сверху.
+        // Кавычки стоят высоко и отдельно, под самой шапкой, а не жмутся
+        // к первой строке: они тут знак, а не часть набора.
+        var markR = story ? 26 : 22;
+        var markH = markR * 3.9;
+        // Шарик внизу, хвост вверх: отмеряем от макушки хвоста, а не от центра
+        var markY = top + markR * 2.4;
+        var textTop = top + markH;
+
+        var size = story ? 52 : 46;
+        var rows = [];
+        var step = 0;
+        var tall = 0;
+        while (true) {
+            // Пробовали Jost, как в тексте записи, — вышло сухо: на открытке
+            // строчка живёт одна, без абзацев вокруг, и курсив ей нужен.
+            // Вес 450 холст рисует как 400 (промежуточных он не умеет) —
+            // это самая лёгкая Lora, и она легче прежних 600.
+            ctx.font = 'italic 450 ' + size + 'px Lora, serif';
+            rows = lay(quote, maxW);
+            step = size * 1.5;
+            tall = stack(rows, step);
+            if (tall <= bottom - textTop || size <= 22) break;
+            size -= 2;
+        }
+
+        // Бледнее заливки полоски: знак должен быть виден, но не спорить
+        // с текстом за внимание
+        ctx.fillStyle = 'rgba(232, 122, 156, 0.28)';
+        mark(left + markR, markY, markR);
+        mark(left + markR * 3.4, markY, markR);
+
+        var pen = textTop + (bottom - textTop - tall) / 2 + size;
+
+        ctx.fillStyle = '#3a3228';
+        rows.forEach(function (row) {
+            if (row.text) ctx.fillText(row.text, left + row.pad, pen);
+            pen += row.text ? step : step / 2;
+        });
+    }
+
+    function blink(button, said) {
+        var was = button.textContent;
+        button.textContent = said;
+        setTimeout(function () { button.textContent = was; }, 1800);
+    }
+
+    function save() {
+        var link = document.createElement('a');
+        link.download = FILE;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    document.getElementById('card-save').addEventListener('click', save);
+
+    // Буфер обмена для картинок умеет не всякий браузер — на айфоне нет.
+    // Отказ не показываем ошибкой: просто отдаём файл.
+    document.getElementById('card-copy').addEventListener('click', function () {
+        var button = this;
+        function instead() { save(); blink(button, 'Скачала файлом'); }
+        if (!canvas.toBlob || !window.ClipboardItem || !navigator.clipboard) { instead(); return; }
+        canvas.toBlob(function (blob) {
+            if (!blob) { instead(); return; }
+            navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+                .then(function () { blink(button, 'Скопировано'); }, instead);
+        });
+    });
+})();
+</script>
+
+        <aside class="author">
+            <img class="author__icon" src="https://static.emotional-harbor.ru/Avtor.png" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <div class="author__text">
+                <div class="author__name">Елена Патрикеева</div>
+                <div class="author__role">Автор Эмоциональной Гавани</div>
+                <p class="author__about">Я не психолог. Занимаюсь йогой и пилатесом. Замечать, что происходит внутри, научилась на коврике — а Гавань сделала красивой, потому что верю, что эстетика лечит.</p>
+            </div>
+        </aside>
+
+        <div class="post-foot">
+            <div class="post-foot__text">Если хочется не только читать про чувства, но и вести их — Гавань для этого и сделана.</div>
+            <a class="post-foot__link" href="https://emotional-harbor.ru/">Посмотреть Гавань</a>
+        </div>
+
+        <section class="also">
+            <div class="also__title">Читайте также</div>
+            <div class="also__grid">
+                <a class="also__card tone--pink" href="https://emotional-harbor.ru/blog/atlas-emotsiy.html">
+                    <div class="also__meta">5 октября 2026 · 4 мин</div>
+                    <div class="also__name">Атлас эмоций: карта, за которую Далай-лама заплатил 750 тысяч долларов</div>
+                    <div class="also__text">Десять лет назад Далай-лама заплатил психологу Полу Экману не меньше 750 тысяч долларов…</div>
+                </a>
+                <a class="also__card tone--yellow" href="https://emotional-harbor.ru/blog/pochemu-my-ne-vybrasyvaem-chashku-so-skolom.html">
+                    <div class="also__meta">1 октября 2026 · 4 мин</div>
+                    <div class="also__name">Почему мы не выбрасываем чашку со сколом</div>
+                    <div class="also__text">У Вас наверняка есть чашка, которую давно пора выбросить. Скол на ручке, рисунок стёрся с…</div>
+                </a>
+                <a class="also__card tone--green" href="https://emotional-harbor.ru/blog/emotsionalnoe-raznoobrazie.html">
+                    <div class="also__meta">28 сентября 2026 · 6 мин</div>
+                    <div class="also__name">Эмоциональное разнообразие: почему день не бывает просто «нормальным»</div>
+                    <div class="also__text">Вечер. Кто-то спрашивает: «Как день?» — и Вы отвечаете: «Нормально». Одно серое слово на…</div>
+                </a>
+            </div>
+        </section>
+
+            <nav class="neighbours" aria-label="Соседние записи">
+                <a href="https://emotional-harbor.ru/blog/revnost.html" class="prev">
+                    <div class="neighbours__dir">← Предыдущая</div>
+                    <div class="neighbours__title">Почему ревность — это не дефект характера</div>
+                </a>
+
+            </nav>
+
+    </div>
+
+    <footer class="footer">
+      <div class="footer__card">
+        <div class="footer__grid">
+            <div class="footer__col">
+                <div class="footer__heading">Разделы</div>
+                <ul class="footer__nav">
+                    <li><a href="https://emotional-harbor.ru/">Главная страница</a></li>
+                    <li><a href="https://emotional-harbor.ru/blog.html">Про чувства</a></li>
+                    <li><a href="https://emotional-harbor.ru/Privacy.html">Политика конфиденциальности</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <div class="footer__heading">Связаться с автором</div>
+                <div class="footer__contacts">
+                    <a href="https://t.me/e_lena_patrikeeva" class="footer__contact">
+                        <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="12" cy="12" r="12" fill="#3a3228"/>
+                            <path d="M5.5 11.8L18 7l-2.5 11-3.8-3.2-1.8 1.7V14l5.5-5.2-6.8 4.2L5.5 11.8z" fill="white"/>
+                        </svg>
+                        @e_lena_patrikeeva
+                    </a>
+                    <a href="mailto:emotional.harbor@gmail.com" class="footer__contact">
+                        <svg class="footer__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="12" cy="12" r="12" fill="#3a3228"/>
+                            <path d="M5.2 8.2h13.6v7.6H5.2z" fill="white"/>
+                            <path d="M5.2 8.2L12 12.8l6.8-4.6" stroke="#3a3228" stroke-width="1.3" fill="none" stroke-linejoin="round"/>
+                        </svg>
+                        emotional.harbor@gmail.com
+                    </a>
+                </div>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+            <div class="footer__copy">© 2026 Эмоциональная Гавань</div>
+            <div class="footer__care">Бережно к себе</div>
+            <button type="button" class="footer__top-btn" id="toTop">
+                Наверх
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 19V5M5 12l7-7 7 7"/>
+                </svg>
+            </button>
+      </div>
+    </footer>
+
+<script>
+(function () {
+    var up = document.getElementById('toTop');
+    if (up) up.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+</script>
+
+<header class="sticky" id="sticky">
+    <a class="sticky__brand" href="https://emotional-harbor.ru/">Эмоциональная <em>Гавань</em></a>
+    <a class="sticky__link" href="https://emotional-harbor.ru/blog.html">Про <em>чувства</em></a>
+</header>
+
+<script>
+(function () {
+    var bar = document.getElementById('sticky');
+    var last = window.scrollY;
+
+    window.addEventListener('scroll', function () {
+        var now = window.scrollY;
+
+        if (now <= 0) bar.classList.remove('visible');
+        else if (now < last) bar.classList.add('visible');
+        else if (now > last && now > 100) bar.classList.remove('visible');
+
+        last = now;
+    }, { passive: true });
+})();
+</script>
+
+<script>
+(function () {
+    var bar = document.getElementById('reading');
+    var text = document.querySelector('.post-body');
+    if (!bar || !text) return;
+
+    var waiting = false;
+
+    // Считаем по тексту статьи: ноль — пока первая строка не поднялась
+    // к верху окна, единица — когда последняя показалась внизу.
+    function draw() {
+        waiting = false;
+
+        var box = text.getBoundingClientRect();
+        var seen = -box.top + window.innerHeight * 0.5;
+        var all = box.height;
+        var part = all > 0 ? seen / all : 0;
+
+        if (part < 0) part = 0;
+        if (part > 1) part = 1;
+
+        bar.style.width = (part * 100).toFixed(2) + '%';
+    }
+
+    function ask() {
+        if (waiting) return;
+        waiting = true;
+        window.requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask, { passive: true });
+    draw();
+})();
+</script>
+
+<div id="cookie-bar" class="cookie-bar" role="dialog" aria-label="Файлы cookie">
+    <div class="cookie-bar__title">Забота о деталях</div>
+    <div class="cookie-bar__text">
+        Гавань использует файлы cookie и Яндекс.Метрику.<br>
+        Иногда я смотрю на путь гостей по сайту, чтобы замечать, где Вы задержались, где перечитали дважды,
+        а где закрыли вкладку. Не для того, чтобы понять, кто Вы.<br>
+        Если приватность Вам важнее, Яндекс.Метрику можно отключить.
+        Подробности — в <a href="https://emotional-harbor.ru/Privacy.html" target="_blank">Политике обработки персональных данных</a>.
+    </div>
+    <div class="cookie-bar__actions">
+        <button type="button" class="cookie-bar__btn cookie-bar__btn--accept" onclick="ehSetConsent('all')">Разрешить аналитику</button>
+        <button type="button" class="cookie-bar__btn cookie-bar__btn--minimal" onclick="ehSetConsent('necessary')">Пройти незаметно</button>
+    </div>
+</div>
+
+<script>
+(function () {
+    var bar = document.getElementById('cookie-bar');
+
+    window.ehSetConsent = function (value) {
+        var d = new Date(); d.setFullYear(d.getFullYear() + 1);
+        document.cookie = 'eh_consent=' + value + '; path=/; expires=' + d.toUTCString() + '; SameSite=Lax';
+        bar.classList.remove('is-open');
+        if (value === 'all' && typeof window.ehLoadMetrika === 'function') window.ehLoadMetrika();
+    };
+
+    if (!window.ehGetConsent()) {
+        setTimeout(function () { bar.classList.add('is-open'); }, 900);
+    }
+})();
+</script>
+
+</body>
+</html>
