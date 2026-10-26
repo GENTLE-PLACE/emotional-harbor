@@ -7,6 +7,16 @@
         <priority>0.7</priority>
     </url>
     <url>
+        <loc>https://emotional-harbor.ru/blog/lyubov-emotsiya-ili-potrebnost.html</loc>
+        <lastmod>2026-10-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://storage.yandexcloud.net/emotional-harbor-blog-img/tretya-stroka-tablitsy-a-mysli-uzhe-o-nem-20261009-iqj6m</image:loc>
+            <image:title>Третья строка таблицы, а мысли уже о нём</image:title>
+        </image:image>
+    </url>
+    <url>
         <loc>https://emotional-harbor.ru/blog/nostalgiya.html</loc>
         <lastmod>2026-10-23</lastmod>
         <changefreq>monthly</changefreq>
