@@ -1561,31 +1561,7 @@
         .module-media .module-video video { border: 0; border-radius: 0; box-shadow: none; }
         .module-media .module-video__controls { padding: 12px 14px 0; }
         .module-media .module-video figcaption { margin: 12px 14px 14px; }
-        .module-media__tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 12px 14px;
-            border-top: 1px solid rgba(201,169,122,0.2);
-        }
-        .module-media__tab {
-            flex: 1 1 0;
-            min-width: 0;
-            padding: 9px 10px;
-            border: 1px solid transparent;
-            border-radius: 10px;
-            background: transparent;
-            color: var(--brown-light);
-            font: 400 13px Jost, sans-serif;
-            cursor: pointer;
-        }
-        .module-media__tab[aria-selected="true"] {
-            border-color: rgba(232,122,156,0.3);
-            background: rgba(232,122,156,0.12);
-            color: var(--brown-dark);
-        }
-        .module-media__tab:first-child { flex-grow: 1.6; }
-        .module-media__tab:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+        .module-media .bento-tab-btn:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
         @media (max-width: 760px) {
             .modules-content { width: 100%; }
         }
@@ -3995,6 +3971,10 @@
                             <div class="bento-browser-dot"></div>
                             <div class="bento-browser-dot"></div>
                         </div>
+                        <div class="bento-tabs" role="tablist" aria-label="Видео и скриншоты Яркости жизни">
+                            <button class="bento-tab-btn active" id="brightness-story-tab" type="button" role="tab" data-media-tab="story" aria-selected="true" aria-controls="brightness-story-panel">История Есении · 33 сек</button>
+                            <button class="bento-tab-btn" id="brightness-screenshots-tab" type="button" role="tab" data-media-tab="screenshots" aria-selected="false" aria-controls="brightness-screenshots-panel" tabindex="-1">Скриншоты</button>
+                        </div>
                         <div id="brightness-story-panel" data-media-panel="story" role="tabpanel" aria-labelledby="brightness-story-tab">
                     <figure class="module-video">
                         <video controls playsinline preload="none" width="1600" height="900"
@@ -4046,10 +4026,7 @@
                         </div>
                     </div>
 
-                        <div class="module-media__tabs" role="tablist" aria-label="Видео и скриншоты Яркости жизни">
-                            <button class="module-media__tab" id="brightness-story-tab" type="button" role="tab" data-media-tab="story" aria-selected="true" aria-controls="brightness-story-panel">История Есении · 33 сек</button>
-                            <button class="module-media__tab" id="brightness-screenshots-tab" type="button" role="tab" data-media-tab="screenshots" aria-selected="false" aria-controls="brightness-screenshots-panel" tabindex="-1">Скриншоты</button>
-                        </div>
+
                     </div>
 
                     <div class="module-note">Здесь нечего достигать. Только предвкушать.</div>
@@ -4679,6 +4656,7 @@
             tabs.forEach(tab => {
                 const active = tab.dataset.mediaTab === name;
                 tab.setAttribute('aria-selected', String(active));
+                tab.classList.toggle('active', active);
                 tab.tabIndex = active ? 0 : -1;
             });
             panels.forEach(panel => {
