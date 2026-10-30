@@ -1484,6 +1484,30 @@
 
         .module-gallery { margin-top: 8px; }
 
+        .module-video {
+            margin: 8px 0 4px;
+        }
+
+        .module-video video {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            background: var(--beige);
+            border: 1px solid rgba(201,169,122,0.5);
+            border-radius: 14px;
+            box-shadow: 4px 4px 0 rgba(201,169,122,0.16);
+        }
+
+        .module-video figcaption {
+            margin-top: 12px;
+            color: var(--brown-light);
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.6;
+            text-align: center;
+        }
+
         /* ——— КАРУСЕЛЬ ——— */
         .slides-wrapper {
             display: flex;
@@ -3883,6 +3907,17 @@
                         <div class="module-callout">Это не список дел. Ничего не горит и не просрочено. Захотелось — записали. Дошли руки — прожили и связали с тем днём в Дневнике. Кривая миска и такой хороший день.</div>
                     </div>
 
+                    <figure class="module-video">
+                        <video controls playsinline preload="none" width="1600" height="900"
+                            poster="assets/video/krivaia-miska-poster-v1.webp"
+                            aria-label="Кривая миска — история одного впечатления Есении, 33 секунды"
+                            aria-describedby="brightness-video-caption">
+                            <source src="assets/video/krivaia-miska-v1.mp4" type="video/mp4">
+                            <a href="assets/video/krivaia-miska-v1.mp4">Посмотреть видео «Кривая миска»</a>
+                        </video>
+                        <figcaption id="brightness-video-caption">Одно впечатление из жизни Есении</figcaption>
+                    </figure>
+
                     <div class="module-gallery">
                         <div class="slides-wrapper" id="carousel-brightness">
                             <div class="slide">
@@ -4549,7 +4584,10 @@
                 item.classList.remove('active');
                 item.removeAttribute('aria-current');
             });
-            cards.forEach(card => card.style.display = 'none');
+            cards.forEach(card => {
+                card.querySelectorAll('video').forEach(video => video.pause());
+                card.style.display = 'none';
+            });
 
             const activeNav = document.querySelector(`.modules-nav__item[data-module="${moduleName}"]`);
             const activeCard = document.querySelector(`#modulesContent .module-card[data-module="${moduleName}"]`);
