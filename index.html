@@ -1555,6 +1555,41 @@
         .module-video:fullscreen video { max-height: calc(100vh - 85px); object-fit: contain; }
         .module-video:fullscreen figcaption { display: none; }
 
+        .module-media { width: 100%; min-width: 0; margin-top: 8px; }
+        .module-media [data-media-panel][hidden] { display: none; }
+        .module-media .module-video, .module-media .module-gallery { margin: 0; }
+        .module-media .module-video video { border: 0; border-radius: 0; box-shadow: none; }
+        .module-media .module-video__controls { padding: 12px 14px 0; }
+        .module-media .module-video figcaption { margin: 12px 14px 14px; }
+        .module-media__tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px 14px;
+            border-top: 1px solid rgba(201,169,122,0.2);
+        }
+        .module-media__tab {
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 9px 10px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--brown-light);
+            font: 400 13px Jost, sans-serif;
+            cursor: pointer;
+        }
+        .module-media__tab[aria-selected="true"] {
+            border-color: rgba(232,122,156,0.3);
+            background: rgba(232,122,156,0.12);
+            color: var(--brown-dark);
+        }
+        .module-media__tab:first-child { flex-grow: 1.6; }
+        .module-media__tab:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+        @media (max-width: 760px) {
+            .modules-content { width: 100%; }
+        }
+
         /* ——— КАРУСЕЛЬ ——— */
         .slides-wrapper {
             display: flex;
@@ -3954,6 +3989,13 @@
                         <div class="module-callout">Это не список дел. Ничего не горит и не просрочено. Захотелось — записали. Дошли руки — прожили и связали с тем днём в Дневнике. Кривая миска и такой хороший день.</div>
                     </div>
 
+                    <div class="module-media bento-mockup" data-module-media>
+                        <div class="bento-browser-frame" aria-hidden="true">
+                            <div class="bento-browser-dot"></div>
+                            <div class="bento-browser-dot"></div>
+                            <div class="bento-browser-dot"></div>
+                        </div>
+                        <div id="brightness-story-panel" data-media-panel="story" role="tabpanel" aria-labelledby="brightness-story-tab">
                     <figure class="module-video">
                         <video controls playsinline preload="none" width="1600" height="900"
                             poster="assets/video/krivaia-miska-poster-v1.webp"
@@ -3975,16 +4017,12 @@
                         </div>
                         <figcaption id="brightness-video-caption">Одно впечатление из жизни Есении</figcaption>
                     </figure>
+                        </div>
 
-                    <div class="module-gallery">
+                    <div class="module-gallery" id="brightness-screenshots-panel" data-media-panel="screenshots" role="tabpanel" aria-labelledby="brightness-screenshots-tab" hidden>
                         <div class="slides-wrapper" id="carousel-brightness">
                             <div class="slide">
-                                <div class="bento-mockup">
-                                    <div class="bento-browser-frame">
-                                        <div class="bento-browser-dot"></div>
-                                        <div class="bento-browser-dot"></div>
-                                        <div class="bento-browser-dot"></div>
-                                    </div>
+                                <div class="module-media__screenshot">
                                     <div class="bento-image-holder lazy-wrapper">
                                         <div class="skeleton"></div>
                                         <img src="https://static.emotional-harbor.ru/Brightness_Dark-restaurant.webp" alt="Карточка впечатления «Ресторан в темноте» со статусом «Хочу попробовать» — раздел Яркость жизни в Notion-шаблоне Эмоциональная Гавань" width="1152" height="1060" loading="lazy" decoding="async">
@@ -3993,12 +4031,7 @@
                                 </div>
                             </div>
                             <div class="slide">
-                                <div class="bento-mockup">
-                                    <div class="bento-browser-frame">
-                                        <div class="bento-browser-dot"></div>
-                                        <div class="bento-browser-dot"></div>
-                                        <div class="bento-browser-dot"></div>
-                                    </div>
+                                <div class="module-media__screenshot">
                                     <div class="bento-image-holder lazy-wrapper">
                                         <div class="skeleton"></div>
                                         <img src="https://static.emotional-harbor.ru/Brightness_Pottery.webp" alt="Карточка прожитого впечатления «Мастер-класс по гончарному кругу» — раздел Яркость жизни в Notion-шаблоне Эмоциональная Гавань" width="1152" height="1006" loading="lazy" decoding="async">
@@ -4010,6 +4043,12 @@
                         <div class="slider-dots">
                             <button class="dot active" data-slide="0" aria-label="Скриншот галереи впечатлений"></button>
                             <button class="dot" data-slide="1" aria-label="Скриншот прожитого впечатления"></button>
+                        </div>
+                    </div>
+
+                        <div class="module-media__tabs" role="tablist" aria-label="Видео и скриншоты Яркости жизни">
+                            <button class="module-media__tab" id="brightness-story-tab" type="button" role="tab" data-media-tab="story" aria-selected="true" aria-controls="brightness-story-panel">История Есении · 33 сек</button>
+                            <button class="module-media__tab" id="brightness-screenshots-tab" type="button" role="tab" data-media-tab="screenshots" aria-selected="false" aria-controls="brightness-screenshots-panel" tabindex="-1">Скриншоты</button>
                         </div>
                     </div>
 
@@ -4631,6 +4670,41 @@
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // История и скриншоты открываются в одном окне, без автоперелистывания.
+    document.querySelectorAll('[data-module-media]').forEach(media => {
+        const tabs = Array.from(media.querySelectorAll('[data-media-tab]'));
+        const panels = media.querySelectorAll('[data-media-panel]');
+        const select = name => {
+            tabs.forEach(tab => {
+                const active = tab.dataset.mediaTab === name;
+                tab.setAttribute('aria-selected', String(active));
+                tab.tabIndex = active ? 0 : -1;
+            });
+            panels.forEach(panel => {
+                panel.hidden = panel.dataset.mediaPanel !== name;
+                if (panel.hidden) panel.querySelectorAll('video').forEach(video => video.pause());
+            });
+            const carousel = media.querySelector('.slides-wrapper');
+            if (name === 'screenshots' && carousel) {
+                requestAnimationFrame(() => carousel.dispatchEvent(new Event('scroll')));
+            }
+        };
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => select(tab.dataset.mediaTab));
+            tab.addEventListener('keydown', event => {
+                let next;
+                if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+                else if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+                else if (event.key === 'Home') next = 0;
+                else if (event.key === 'End') next = tabs.length - 1;
+                else return;
+                event.preventDefault();
+                select(tabs[next].dataset.mediaTab);
+                tabs[next].focus();
+            });
+        });
+    });
 
     // Светлое управление под роликом: панель не перекрывает сам кадр.
     document.querySelectorAll('.module-video').forEach(figure => {
