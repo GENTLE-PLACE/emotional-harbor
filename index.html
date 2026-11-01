@@ -867,6 +867,17 @@
             letter-spacing: -0.8px;
         }
 
+        @media (min-width: 1000px) {
+            .breather--vonnegut .breather__text {
+                max-width: none;
+                font-size: clamp(19px, 2vw, 27px);
+            }
+
+            .breather--vonnegut .breather__line {
+                white-space: nowrap;
+            }
+        }
+
         @media (max-width: 700px) {
             .breather {
                 padding: 64px 22px;
@@ -4102,8 +4113,9 @@
     </section>
 
     <!-- ПОЛОСА-ПЕРЕДЫШКА · ПЕРЕД ЕСЕНИЕЙ -->
-    <div class="breather breather--quiet fade-up">
-        <div class="breather__text">Ваши трещинки — это то,<br>через что внутрь проникает <span>свет</span></div>
+    <div class="breather breather--quiet breather--vonnegut fade-up">
+        <div class="breather__text">Пожалуйста, <span>замечайте</span>, когда Вы счастливы…<div class="breather__line">«Если это не прекрасно, то я не знаю, что тогда прекрасно».</div></div>
+        <div class="breather__author">Курт Воннегут</div>
     </div>
 
     <!-- ЕСЕНИЯ -->
