@@ -1556,11 +1556,30 @@
         .module-video:fullscreen figcaption { display: none; }
 
         .module-media { width: 100%; min-width: 0; margin-top: 8px; }
+        /* The Diary carousel clips the mockup shadow at its rounded viewport. */
+        .module-media__window { overflow: hidden; border-radius: 12px; }
         .module-media [data-media-panel][hidden] { display: none; }
         .module-media .module-video, .module-media .module-gallery { margin: 0; }
         .module-media .module-video video { border: 0; border-radius: 0; box-shadow: none; }
         .module-media .module-video__controls { padding: 12px 14px 0; }
         .module-media .module-video figcaption { margin: 12px 14px 14px; }
+        /* Match the inset paper card in the Mood Diary mockup. */
+        .module-media__screenshot .bento-image-holder {
+            container-type: inline-size;
+            padding: 2% 2% 0;
+            background: #e9e3d8;
+        }
+        .module-media__paper {
+            overflow: hidden;
+            border-radius: 5cqw 5cqw 0 0;
+            box-shadow: 0 0 12px rgba(58, 50, 40, 0.35);
+            background: white;
+        }
+        .module-media .module-media__paper img {
+            width: 104.1667%;
+            max-width: none;
+            margin: -2.08333% -2.08333% 0;
+        }
         .module-media .bento-tab-btn:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
         @media (max-width: 760px) {
             .modules-content { width: 100%; }
@@ -3966,6 +3985,7 @@
                     </div>
 
                     <div class="module-media" data-module-media>
+                        <div class="module-media__window">
                         <div class="bento-mockup">
                         <div class="bento-browser-frame" aria-hidden="true">
                             <div class="bento-browser-dot"></div>
@@ -4006,7 +4026,9 @@
                                 <div class="module-media__screenshot">
                                     <div class="bento-image-holder lazy-wrapper">
                                         <div class="skeleton"></div>
+                                        <div class="module-media__paper">
                                         <img src="https://static.emotional-harbor.ru/Brightness_Dark-restaurant.webp" alt="Карточка впечатления «Ресторан в темноте» со статусом «Хочу попробовать» — раздел Яркость жизни в Notion-шаблоне Эмоциональная Гавань" width="1152" height="1060" loading="lazy" decoding="async">
+                                        </div>
                                     </div>
                                     <div class="bento-card-info"></div>
                                 </div>
@@ -4015,7 +4037,9 @@
                                 <div class="module-media__screenshot">
                                     <div class="bento-image-holder lazy-wrapper">
                                         <div class="skeleton"></div>
+                                        <div class="module-media__paper">
                                         <img src="https://static.emotional-harbor.ru/Brightness_Pottery.webp" alt="Карточка прожитого впечатления «Мастер-класс по гончарному кругу» — раздел Яркость жизни в Notion-шаблоне Эмоциональная Гавань" width="1152" height="1006" loading="lazy" decoding="async">
+                                        </div>
                                     </div>
                                     <div class="bento-card-info"></div>
                                 </div>
@@ -4025,6 +4049,7 @@
                     </div>
 
 
+                        </div>
                         </div>
                         <div class="slider-dots" data-media-panel="screenshots" hidden>
                             <button class="dot active" data-slide="0" aria-label="Скриншот галереи впечатлений"></button>
