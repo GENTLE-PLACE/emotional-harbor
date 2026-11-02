@@ -99,6 +99,16 @@
 
         .field { margin-bottom: 16px; }
 
+        .cover-crop { margin: 24px 0; }
+        .cover-crop__ends { display: flex; justify-content: space-between; font-size: 13px; color: var(--brown-mid); }
+        .cover-crop input { padding: 10px 0; accent-color: var(--brown-mid); cursor: pointer; }
+        .cover-crop input:focus-visible { outline: 2px solid var(--brown-mid); outline-offset: 3px; }
+        .cover-crop__label { margin: 14px 0 6px; font-size: 13px; color: var(--brown-mid); }
+        .cover-crop img { display: block; width: 100%; object-fit: cover; border: 2px solid var(--ink); border-radius: 16px; }
+        .cover-crop__wide { aspect-ratio: 732 / 190; }
+        .cover-crop .cover-crop__phone { width: min(100%, 340px); aspect-ratio: 340 / 150; }
+        .cover-crop__empty { font-size: 14px; line-height: 1.6; color: var(--brown-mid); }
+
         .row { display: flex; gap: 14px; flex-wrap: wrap; }
         .row > * { flex: 1 1 240px; }
 
@@ -443,6 +453,20 @@
             <textarea id="text" placeholder="Первый абзац станет вводным — он выделится сам."></textarea>
         </div>
 
+        <div class="cover-crop">
+            <label for="coverPosition">Положение обложки в списке статей</label>
+            <p class="cover-crop__empty hidden" id="coverEmpty">Добавьте картинку в текст — первая станет обложкой. Здесь можно будет выбрать, какая её часть видна в карточке.</p>
+            <div id="coverControls">
+                <input type="range" id="coverPosition" min="0" max="100" value="50" aria-describedby="coverHint" aria-valuetext="По центру">
+                <div class="cover-crop__ends"><span>Верх картинки</span><span>Низ картинки</span></div>
+                <p class="cover-crop__empty" id="coverHint">Передвигайте ползунок, чтобы выбрать кадр. В самой статье картинка останется целиком.</p>
+                <p class="cover-crop__label">На компьютере</p>
+                <img class="cover-crop__wide" id="coverWide" alt="Обложка в карточке на компьютере">
+                <p class="cover-crop__label">На телефоне</p>
+                <img class="cover-crop__phone" id="coverPhone" alt="Обложка в карточке на телефоне">
+            </div>
+        </div>
+
         <div class="buttons">
             <button type="button" class="btn--main" id="saveBtn">Опубликовать</button>
             <button type="button" id="draftBtn">В черновики</button>
@@ -603,6 +627,28 @@ function toLocalInput(iso) {
 
 const inFuture = () => el('publishAt').value && new Date(el('publishAt').value) > new Date();
 
+const cropPosition = (value) => typeof value === 'number' && Number.isFinite(value)
+    ? Math.max(0, Math.min(100, value)) : 50;
+
+function syncCover() {
+    const picture = el('text').value.match(/!\[[^\]]*\]\((\/[^\s)]*|https?:\/\/[^\s)]+)\)/);
+    el('coverEmpty').classList.toggle('hidden', !!picture);
+    el('coverControls').classList.toggle('hidden', !picture);
+    el('coverPosition').disabled = !picture;
+    const position = Number(el('coverPosition').value);
+    el('coverPosition').setAttribute('aria-valuetext', position === 50 ? 'По центру' : position + '% от верха');
+    for (const id of ['coverWide', 'coverPhone']) {
+        const img = el(id);
+        if (picture) {
+            if (img.getAttribute('src') !== picture[1]) img.setAttribute('src', picture[1]);
+        } else img.removeAttribute('src');
+        img.style.objectPosition = '50% ' + position + '%';
+    }
+}
+
+el('coverPosition').addEventListener('input', syncCover);
+el('text').addEventListener('input', syncCover);
+
 // Кнопка говорит, что случится на самом деле: «опубликовать» при дате
 // в будущем было бы неправдой.
 function syncSaveLabel() {
@@ -635,6 +681,7 @@ function draftBox() {
         text: el('text').value,
         status: el('status').value,
         category: el('category').value,
+        coverPosition: Number(el('coverPosition').value),
         publishAt: el('publishAt').value,
         savedAt: new Date().toISOString(),
     };
@@ -668,7 +715,7 @@ function dropDraft() {
     el('restore').classList.add('hidden');
 }
 
-['title', 'slug', 'excerpt', 'text', 'status', 'category', 'publishAt'].forEach((id) => {
+['title', 'slug', 'excerpt', 'text', 'status', 'category', 'publishAt', 'coverPosition'].forEach((id) => {
     el(id).addEventListener('input', () => {
         clearTimeout(draftTimer);
         draftTimer = setTimeout(saveDraft, 1000);
@@ -688,7 +735,8 @@ function offerRestore() {
     const mine = box && box.for === (editing ? editing.slug : '');
 
     // Предлагаем вернуть только то, что отличается от загруженного
-    if (!mine || (box.title === el('title').value && box.text === el('text').value)) {
+    if (!mine || (box.title === el('title').value && box.text === el('text').value &&
+        cropPosition(box.coverPosition) === Number(el('coverPosition').value))) {
         el('restore').classList.add('hidden');
         return;
     }
@@ -708,9 +756,11 @@ el('restoreYes').addEventListener('click', () => {
     // Старый черновик мог быть сохранён до того, как появились эти поля, —
     // тогда возвращать нечего, и трогать их нельзя: сотрём то, что уже есть.
     if ('category' in box) el('category').value = box.category || '';
+    if ('coverPosition' in box) el('coverPosition').value = cropPosition(box.coverPosition);
     if (box.excerpt) el('excerpt').value = box.excerpt;
     if (box.publishAt && !el('publishAt').disabled) el('publishAt').value = box.publishAt;
     syncSaveLabel();
+    syncCover();
     el('restore').classList.add('hidden');
 });
 
@@ -725,6 +775,8 @@ function openEditor(post) {
     el('text').value = post ? post.text : '';
     el('status').value = post && post.status === 'draft' ? 'draft' : 'published';
     el('category').value = post ? (post.category || '') : '';
+    el('coverPosition').value = cropPosition(post && post.coverPosition);
+    syncCover();
 
     // Дата вышедшей записи уже стоит в карте сайта, её не переносят.
     // Поле заполнено только у записи в очереди.
@@ -771,6 +823,7 @@ async function save(statusValue) {
         excerpt: el('excerpt').value.trim(),
         status: statusValue,
         category: el('category').value,
+        coverPosition: Number(el('coverPosition').value),
         newSlug: el('slug').value.trim(),
         // Местное время превращаем в точное: функция живёт в другом часовом поясе
         publishAt: inFuture() ? new Date(el('publishAt').value).toISOString() : '',
@@ -870,6 +923,7 @@ function insertAtCursor(textarea, block) {
     textarea.value = (before ? before + '\n\n' : '') + block + (after ? '\n\n' + after : '\n');
 
     textarea.focus();
+    syncCover();
     saveDraft();
 }
 
