@@ -2318,7 +2318,7 @@ function renderList(posts) {
     const cards = posts.length
         ? `<div class="cards">
 ${posts.map((p, i) => `            <a class="card${collectImages(p.text)[0] ? ' card--shot' : ''}" href="${SITE}/${OUT_DIR}/${p.slug}.html">${collectImages(p.text)[0] ? `
-                <img class="card__shot" src="${collectImages(p.text)[0].url}" alt="" loading="lazy" decoding="async">` : ''}
+                <img class="card__shot" src="${collectImages(p.text)[0].url}" style="object-position: 50% ${typeof p.coverPosition === 'number' && Number.isFinite(p.coverPosition) ? Math.max(0, Math.min(100, p.coverPosition)) : 50}%" alt="" loading="lazy" decoding="async">` : ''}
                 <div class="seal seal--${SEAL_TONES[(posts.length - 1 - i) % SEAL_TONES.length]}" title="Время чтения">
                     <span class="seal__num">${readingMinutes(p.text)} мин</span>
                     <span class="seal__unit">время чтения</span>
