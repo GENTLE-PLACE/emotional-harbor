@@ -21,7 +21,7 @@
 /* A personal sign-off, followed by the practical links. */
 .gift-footer{margin-top:56px;border-top:1px dashed var(--gold);padding-top:32px;color:var(--mid);font-size:13px}
 .gift-footer__main{display:flex;justify-content:space-between;align-items:center;gap:28px;padding-bottom:27px}
-.gift-footer__brand{display:inline-block;font-size:15px;line-height:1.55}
+.gift-footer__brand{display:inline-block;font-size:15px;line-height:1.15}
 .gift-footer__note{margin:12px 0 0;font:italic 15px/1.7 Lora,serif}
 .gift-footer__contact{display:flex;align-items:center;gap:17px;max-width:100%;padding:14px 19px;background:var(--paper);border:1px solid rgba(201,169,122,.6);border-radius:12px;box-shadow:4px 5px 0 rgba(120,80,40,.06);text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
 .gift-footer__telegram{width:24px;height:24px;flex:0 0 24px}
