@@ -2569,6 +2569,21 @@
             color: var(--brown-light);
         }
 
+
+.gift-cta{display:inline-flex;align-items:center;gap:17px;position:relative;margin-top:4px;padding:15px 20px 15px 17px;min-height:87px;max-width:100%;background:#fff8eb;border:1.5px solid var(--pink-soft);border-radius:15px;color:var(--brown-dark);text-decoration:none;box-shadow:4px 5px 0 rgba(232,122,156,.15),0 8px 22px -14px rgba(122,88,64,.23);transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,border-color .25s ease}
+.gift-cta__picture{display:block;position:relative;flex:0 0 59px;width:59px;height:47px;padding:3px;background:#fff8eb;border:1px solid rgba(201,169,122,.6);border-radius:4px;box-shadow:2px 3px 4px rgba(122,88,64,.12);transform:rotate(-8deg);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.gift-cta__picture img{display:block;width:100%;height:100%;object-fit:cover;object-position:75% 60%;border-radius:1px}
+.gift-cta__ribbon{position:absolute;width:9px;height:25px;right:8px;top:-2px;background:var(--pink);clip-path:polygon(0 0,100% 0,100% 100%,50% 79%,0 100%);box-shadow:0 1px 1px rgba(122,88,64,.1)}
+.gift-cta__words{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left}
+.gift-cta__title{font:700 12px/1.5 'Unbounded',sans-serif;letter-spacing:-.15px}
+.gift-cta__note{font:italic 13px/1.4 'Lora',serif;color:var(--brown-mid)}
+.gift-cta__arrow{width:20px;height:20px;flex:0 0 20px;margin-left:5px;color:var(--brown-mid);transition:transform .25s ease}
+.gift-cta:hover{transform:translate(-2px,-3px);border-color:var(--pink);box-shadow:6px 8px 0 rgba(232,122,156,.18),0 12px 24px -14px rgba(122,88,64,.23)}
+.gift-cta:hover .gift-cta__picture{transform:rotate(-3deg)}.gift-cta:hover .gift-cta__arrow{transform:translateX(3px)}
+.gift-cta:focus-visible{outline:2px solid var(--brown-dark);outline-offset:6px}
+@media(max-width:420px){.gift-cta{gap:12px;padding:14px 13px;min-height:82px}.gift-cta__picture{flex-basis:48px;width:48px;height:42px}.gift-cta__title{font-size:10px}.gift-cta__note{font-size:11px}.gift-cta__arrow{width:16px;height:16px;flex-basis:16px;margin-left:0}}
+@media(prefers-reduced-motion:reduce){.gift-cta,.gift-cta__picture,.gift-cta__arrow{transition:none}.gift-cta:hover,.gift-cta:hover .gift-cta__picture,.gift-cta:hover .gift-cta__arrow{transform:none}}
+
         /* ——— ФУТЕР ——— */
         .footer {
             width: 100%;
@@ -4432,14 +4447,14 @@
     <section id="buy" class="final-section fade-up">
         <div class="final-wave">🌊</div>
         <div class="final-title">Добро<br><span>пожаловать</span></div>
-        <div class="final-quote">«Если вам нужно пространство, чтобы поставить мир на паузу — дверь открыта. Ключи уже оставлены…»</div>
+        <div class="final-quote">«Если Вам нужно пространство, чтобы поставить мир на паузу — дверь открыта. Ключи уже оставлены…»</div>
         <div class="final-price-block">
             <div class="final-price-label">Цена</div>
             <div class="final-price">3 333<span>₽</span></div>
             <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
         </div>
         <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Получить ключи</span>
-        <div style="margin-top:30px"><a href="gift.html" style="font-family:Unbounded,sans-serif;font-size:12px;color:var(--brown-mid);text-underline-offset:6px">Подарить Гавань ↗</a></div>
+        <a class="gift-cta" href="/gift.html"><span class="gift-cta__picture" aria-hidden="true"><img src="/assets/gift/harbor.webp" alt="" width="64" height="48"><span class="gift-cta__ribbon"></span></span><span class="gift-cta__words"><span class="gift-cta__title">Подарить Гавань</span><span class="gift-cta__note">С личным поздравлением</span></span><svg class="gift-cta__arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </section>
 
     <!-- АВТОР + ФУТЕР -->
