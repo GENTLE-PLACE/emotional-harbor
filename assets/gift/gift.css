@@ -24,7 +24,7 @@
 .gift-footer__brand{display:inline-block;font-size:15px;line-height:1.55}
 .gift-footer__note{margin:12px 0 0;font:italic 15px/1.7 Lora,serif}
 .gift-footer__contact{display:flex;align-items:center;gap:17px;max-width:100%;padding:14px 19px;background:var(--paper);border:1px solid rgba(201,169,122,.6);border-radius:12px;box-shadow:4px 5px 0 rgba(120,80,40,.06);text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
-.gift-footer__envelope{width:32px;height:26px;flex:0 0 32px;transform:rotate(-7deg)}
+.gift-footer__telegram{width:24px;height:24px;flex:0 0 24px}
 .gift-footer__contact-note{display:block;font-size:13px;line-height:1.5;margin-bottom:4px}
 .gift-footer__contact-title{display:block;font:600 11px/1.7 Unbounded,sans-serif;color:var(--ink)}
 .gift-footer__arrow{width:18px;height:18px;flex:0 0 18px;margin-left:6px}
