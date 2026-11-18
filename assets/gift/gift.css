@@ -16,7 +16,36 @@
 @media(max-width:700px){.letter-art,.recipient-mode .letter-art{height:auto}.letter-art img{height:auto;aspect-ratio:3/2;object-position:center}.letter-art:after{background:linear-gradient(0deg,var(--paper),transparent 14%)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
-.checkout{border-top:1px dashed var(--gold);padding-top:24px;margin-top:25px}.checkout h3{font:700 16px/1.5 Unbounded,sans-serif;margin:0 0 12px}.checkline{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.6;margin:14px 0}.checkline input{width:17px;height:17px;flex:0 0 17px;margin:3px 0 0;accent-color:var(--pink)}.checkout .primary{width:100%;margin-top:15px}.notice{padding:16px 18px;border:1px solid var(--gold);border-radius:12px;background:var(--paper);font-size:14px;line-height:1.7;margin:18px 0}.error{color:var(--ink);border-color:var(--pink)}.manage-actions{display:grid;gap:15px;margin-top:24px}.manage-actions input{font-size:12px}.claim-form{max-width:450px;margin:25px auto;text-align:left}.claim-form input[type=email]{max-width:none}.claim-form .checkline{justify-content:flex-start}.claim-form .primary{width:100%;margin-top:18px}.claim-form input[type=checkbox]{display:inline-block;margin:3px 0 0}.gift-footer{margin-top:45px;display:flex;justify-content:center;flex-wrap:wrap;gap:12px 23px;color:var(--mid);font-size:13px}.recipient-mode .bottom-note{display:block}.recipient-mode .gift-footer{margin-bottom:25px}.hidden-copy{margin-top:12px}.verify-panel{max-width:620px;margin:65px auto;padding:38px;border:1px solid var(--gold);border-radius:24px;background:var(--paper)}.verify-panel h1{font:700 28px/1.35 Unbounded,sans-serif;margin:0 0 18px}.verify-panel .primary{margin-top:20px}.verify-panel p{line-height:1.8}.verify-mode .page-heading,.verify-mode .layout{display:none}.verify-mode .verify-panel{display:block}button:disabled{opacity:.6;cursor:default}.recipient-mode .local-note{display:none}@media(max-width:700px){.verify-panel{padding:27px 22px;margin-top:30px}.verify-panel h1{font-size:24px}.recipient-mode .letter h2{font-size:24px}.claim-form{margin-bottom:0}.gift-footer{font-size:12px}.recipient-mode .gift-footer{padding:0 15px}}
+.checkout{border-top:1px dashed var(--gold);padding-top:24px;margin-top:25px}.checkout h3{font:700 16px/1.5 Unbounded,sans-serif;margin:0 0 12px}.checkline{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.6;margin:14px 0}.checkline input{width:17px;height:17px;flex:0 0 17px;margin:3px 0 0;accent-color:var(--pink)}.checkout .primary{width:100%;margin-top:15px}.notice{padding:16px 18px;border:1px solid var(--gold);border-radius:12px;background:var(--paper);font-size:14px;line-height:1.7;margin:18px 0}.error{color:var(--ink);border-color:var(--pink)}.manage-actions{display:grid;gap:15px;margin-top:24px}.manage-actions input{font-size:12px}.claim-form{max-width:450px;margin:25px auto;text-align:left}.claim-form input[type=email]{max-width:none}.claim-form .checkline{justify-content:flex-start}.claim-form .primary{width:100%;margin-top:18px}.claim-form input[type=checkbox]{display:inline-block;margin:3px 0 0}.recipient-mode .bottom-note{display:block}.recipient-mode .gift-footer{margin-bottom:25px}.hidden-copy{margin-top:12px}.verify-panel{max-width:620px;margin:65px auto;padding:38px;border:1px solid var(--gold);border-radius:24px;background:var(--paper)}.verify-panel h1{font:700 28px/1.35 Unbounded,sans-serif;margin:0 0 18px}.verify-panel .primary{margin-top:20px}.verify-panel p{line-height:1.8}.verify-mode .page-heading,.verify-mode .layout{display:none}.verify-mode .verify-panel{display:block}button:disabled{opacity:.6;cursor:default}.recipient-mode .local-note{display:none}@media(max-width:700px){.verify-panel{padding:27px 22px;margin-top:30px}.verify-panel h1{font-size:24px}.recipient-mode .letter h2{font-size:24px}.claim-form{margin-bottom:0}}
+
+/* A personal sign-off, followed by the practical links. */
+.gift-footer{margin-top:56px;border-top:1px dashed var(--gold);padding-top:32px;color:var(--mid);font-size:13px}
+.gift-footer__main{display:flex;justify-content:space-between;align-items:center;gap:28px;padding-bottom:27px}
+.gift-footer__brand{display:inline-block;font-size:15px;line-height:1.55}
+.gift-footer__note{margin:12px 0 0;font:italic 15px/1.7 Lora,serif}
+.gift-footer__contact{display:flex;align-items:center;gap:17px;max-width:100%;padding:14px 19px;background:var(--paper);border:1px solid rgba(201,169,122,.6);border-radius:12px;box-shadow:4px 5px 0 rgba(120,80,40,.06);text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.gift-footer__envelope{width:32px;height:26px;flex:0 0 32px;transform:rotate(-7deg)}
+.gift-footer__contact-note{display:block;font-size:13px;line-height:1.5;margin-bottom:4px}
+.gift-footer__contact-title{display:block;font:600 11px/1.7 Unbounded,sans-serif;color:var(--ink)}
+.gift-footer__arrow{width:18px;height:18px;flex:0 0 18px;margin-left:6px}
+.gift-footer__contact:hover{border-color:var(--pink);transform:translate(-1px,-2px);box-shadow:5px 7px 0 rgba(120,80,40,.06)}
+.gift-footer__bottom{display:flex;justify-content:space-between;align-items:center;gap:16px 28px;border-top:1px solid rgba(201,169,122,.3);padding-top:16px}
+.gift-footer__links{display:flex;flex-wrap:wrap;gap:0 25px}
+.gift-footer__links a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;transition:color .2s ease}
+.gift-footer__links a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:2px}
+.gift-footer__signature{font:italic 14px/1.7 Lora,serif;white-space:nowrap}
+@media(max-width:700px){
+  .gift-footer{margin-top:38px;padding-top:27px}
+  .gift-footer__main{align-items:flex-start;flex-direction:column;gap:23px;padding-bottom:25px}
+  .gift-footer__brand{max-width:none;font-size:13px}
+  .gift-footer__note{font-size:14px;margin-top:10px}
+  .gift-footer__contact{padding:13px 16px;gap:14px}
+  .gift-footer__bottom{align-items:flex-start;flex-direction:column;gap:16px;padding-top:13px}
+  .gift-footer__links{column-gap:22px}
+  .gift-footer__signature{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.gift-footer__contact,.gift-footer__links a{transition:none}.gift-footer__contact:hover{transform:none}}
+
         .consent-modal {
             display: none;
             position: fixed;
