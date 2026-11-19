@@ -85,13 +85,6 @@
         "name": "Елена Патрикеева",
         "url": "https://t.me/e_lena_patrikeeva"
       },
-      "offers": {
-        "@type": "Offer",
-        "price": "3333",
-        "priceCurrency": "RUB",
-        "availability": "https://schema.org/InStock",
-        "url": "https://emotional-harbor.ru/"
-      },
       "image": "https://emotional-harbor.ru/preview-v2.jpg",
       "url": "https://emotional-harbor.ru/"
     }
@@ -3440,7 +3433,7 @@
         <button class="sticky-header__link sticky-header__link--hide-mobile" onclick="scrollToSection('science')">Наука</button>
         <a href="/blog.html" class="sticky-header__link sticky-header__link--hide-mobile">Блог</a>
         <button class="sticky-header__link" onclick="scrollToSection('faq')">FAQ</button>
-        <button class="sticky-header__cta" onclick="openConsentModal()">Войти · 3 333 ₽</button>
+        <button class="sticky-header__cta" onclick="openConsentModal()">Войти · <span data-harbor-price>…</span></button>
     </nav>
 </header>
 
@@ -4450,7 +4443,7 @@
         <div class="final-quote">«Если Вам нужно пространство, чтобы поставить мир на паузу — дверь открыта. Ключи уже оставлены…»</div>
         <div class="final-price-block">
             <div class="final-price-label">Цена</div>
-            <div class="final-price">3 333<span>₽</span></div>
+            <div class="final-price" data-harbor-price-main>…<span>₽</span></div>
             <div class="final-price-note">Единоразовая оплата · Бессрочный доступ</div>
         </div>
         <span class="cta-button pink" id="btn-pay-final" style="font-size:14px; padding:22px 48px;" onclick="openConsentModal()">Получить ключи</span>
@@ -4553,6 +4546,7 @@
             Создать свою Гавань
         </button>
         <div id="pay-error" class="consent-modal__error consent-modal__error--pay">
+            <span id="price-change-error" hidden>Цена изменилась. Проверьте новую сумму перед оплатой.<br></span>
             Что-то не сработало. Попробуйте ещё раз или напишите мне в <a href="https://t.me/e_lena_patrikeeva" target="_blank">Telegram</a> либо на почту <a href="mailto:emotional.harbor@gmail.com">emotional.harbor@gmail.com</a> — отвечу быстро.
         </div>
         <button onclick="closeConsentModal()" class="consent-modal__cancel">Отмена</button>
@@ -4596,11 +4590,12 @@
 <!-- ПЛАВАЮЩАЯ КНОПКА ПОКУПКИ -->
 <button class="floating-buy" id="floatingBuy" type="button"
         onclick="openConsentModal()"
-        aria-label="Получить ключи, 3 333 рубля">
+        aria-label="Получить ключи" data-harbor-price-label>
     <span>Получить ключи</span>
-    <span class="floating-buy__price">3 333 ₽</span>
+    <span class="floating-buy__price" data-harbor-price>…</span>
 </button>
 
+<script src="assets/pricing.js?v=20261119"></script>
 <script>
     // ===== STICKY HEADER =====
     (function() {
@@ -5383,6 +5378,7 @@
     const emailInput = document.getElementById('user-email');
     const emailError = document.getElementById('email-error');
     const payError = document.getElementById('pay-error');
+    let checkoutBusy = false;
 
     function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -5390,7 +5386,7 @@
 
     function updateButton() {
         const emailValid = isValidEmail(emailInput.value.trim());
-        if (agreeOffer.checked && agreePd.checked && emailValid) {
+        if (!checkoutBusy && agreeOffer.checked && agreePd.checked && emailValid && window.HarborPricing?.current) {
             payButton.disabled = false; emailError.style.display = 'none';
         } else {
             payButton.disabled = true;
@@ -5401,6 +5397,7 @@
     agreePd.addEventListener('change', updateButton);
     agreeMarketing.addEventListener('change', updateButton);
     emailInput.addEventListener('input', updateButton);
+    window.addEventListener('harbor:pricing', updateButton);
 
     function trackGoal(goalName) {
         if (typeof window.ym === 'function') {
@@ -5421,14 +5418,18 @@
         payButton.disabled = true;
         payButton.innerHTML = 'Создать свою Гавань';
         payError.style.display = 'none';
+        document.getElementById('price-change-error').hidden = true;
+        window.HarborPricing.load().then(updateButton).catch(() => { payError.style.display = 'block'; });
     };
 
     window.closeConsentModal = function() { modal.classList.remove('is-open'); };
 
     window.goToPayment = async function() {
+        if (!window.HarborPricing?.current || payButton.disabled) return;
         const email = emailInput.value.trim();
         if (!isValidEmail(email)) { emailError.style.display = 'block'; return; }
         trackGoal('start_payment');
+        checkoutBusy = true;
         emailError.style.display = 'none';
         payError.style.display = 'none';
         payButton.disabled = true;
@@ -5437,6 +5438,7 @@
             const response = await fetch('https://api.emotional-harbor.ru/create-payment', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
                     email,
+                    expected_price_kopecks: window.HarborPricing.current.price_kopecks,
                     client_id: capturedClientId,
                     consent_offer: agreeOffer.checked,
                     consent_pd: agreePd.checked,
@@ -5444,14 +5446,20 @@
                     policy_version: POLICY_VERSION
                 })
             });
-            if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
             const data = await response.json();
+            if (data.code === 'price_changed') {
+                await window.HarborPricing.load();
+                throw new Error('price_changed');
+            }
+            if (!response.ok) throw new Error(`Ошибка сервера: ${response.status}`);
             if (data.payment_url) {
                 window.open(data.payment_url, '_blank');
                 payButton.innerHTML = 'Страница оплаты открыта ✓';
             } else throw new Error('Нет ссылки на оплату');
         } catch (e) {
-            payButton.disabled = false;
+            checkoutBusy = false;
+            document.getElementById('price-change-error').hidden = e.message !== 'price_changed';
+            updateButton();
             payButton.innerHTML = 'Создать свою Гавань';
             payError.style.display = 'block';
         }
